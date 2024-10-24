@@ -1,0 +1,316 @@
+
+.App-loading
+{
+  height:100vh;
+  width:100vw;
+  background-color: black;
+  color: white;
+  text-align: center;
+  
+}
+.AppContainer
+{
+  height:100vh;
+  width:100vw;
+  
+  color: Black;
+  overflow:hidden
+}
+.App
+{
+  display:grid;
+  grid-template-columns: 5fr 4fr ;
+  grid-template-rows: auto 100%;
+
+  background-color: rgb(177, 167, 167);
+  height:90%;
+  max-height: 90%;
+  max-width:100%;
+    
+  position:relative;
+  box-sizing: border-box;
+}
+.AppHeader 
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+
+  width:100%;
+  
+  
+  margin:0;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  position:relative;
+  
+}
+
+.Print
+{
+  display:flex;
+  flex-direction: column;
+  height:100%;
+  margin-top: 0;
+  padding-top: 0;
+}
+.PrintTitle
+{
+  flex:5;
+  text-align:center;
+}
+.PrintCanvas
+{
+  flex:80;
+  text-align:center;
+  margin-top: 0;
+  padding-top: 0;
+  max-height:80%;
+}
+.App-Menu{
+  flex:1;
+  background-color:lightgray;
+  
+}
+
+.disable ul {
+  display:flex;
+  flex-direction: row;
+  
+}
+
+.disable li {
+  flex:1;
+  background:red;
+}
+
+.App-Work
+{
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  position:relative;
+}
+
+.App-function
+{
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  background-color: rgb(177, 167, 167);
+  
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  overflow-y:scroll;
+  box-sizing: border-box;
+  position:relative;
+  
+}
+#canvasid 
+{
+  margin-top: 0;
+  margin-left:0;
+  /*border:1px solid black;*/
+  /*
+  border-right: 1px solid black;
+  border-bottom: 1px solid red;
+  */
+  border:0px;
+  width:100%;
+  height:100%;
+  background-color: white ;
+  max-width: 100%;
+  max-height: 100%;
+  /*background-color: red;*/
+}
+#falsediv
+{
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+  background-color:  rgb(177, 167, 167);
+  /*background-color: green;*/
+  margin: 0;
+}
+#previewid
+{
+
+  /*border:1px solid black;*/
+  border: 1px solid black;
+  width:90%;
+  height:97%;
+  background-color: white ;
+  margin-top: 0;
+  padding-top: 0;
+  max-width: 90%;
+  max-height:97%;
+}
+
+.container
+{
+  
+ max-width: 100%;
+
+}
+fieldset > legend
+{
+  font-size: 1.1em;
+  font-weight: bolder;
+  color:black !important;
+}
+fieldset > p
+{
+  margin-left:8%;
+  margin-right:8%;
+}
+
+.Group
+{
+  flex:1;
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+.GroupColumn
+{
+  display:flex;
+  flex-direction: row;
+}
+
+
+
+.button-secondary {
+  color: white !important;
+  border-radius: 16px ! important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+  background: rgb(0, 120, 231) !important;
+  /* this is a light blue */
+}
+
+.pure-button-secondary,
+a.pure-button-secondary
+{
+    background-color: rgb(0, 120, 231) !important;
+    color: #0e0d0d;
+}
+
+.toolbar {
+  margin-right: 0.1rem;
+  margin-top:0.2rem;
+  margin-bottom:0.2rem;
+  
+  font-size: 1rem;
+}
+.toolbar_active {
+  color:rgb(143, 98, 98) !important;
+}
+
+.Home {
+  text-align:center;
+  background-color:rgb(177, 167, 167);
+  height:100%;
+}
+
+.menu_font {
+  font-size: 1.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.select_param
+{
+  font-size: 1em;
+  margin-left:1em;
+  margin-right:1em;
+  padding: 0em !important;
+  height: 100%;
+}
+
+.div_column
+{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+}
+
+.ModalView {
+  color: black;
+  background-color: white;
+  font-size: 2em;
+  font-weight: bolder;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  min-height: 100%;
+}
+
+.input {
+  color: black !important;
+  height: 100%;
+  margin: 0.2em ! important;
+}
+
+.h2home
+{
+  margin-top: 5rem;
+}
+
+.datatree ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#appLabel
+{
+  display: inline-block;
+  position:absolute;
+   top:5px;
+  left:25px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  text-shadow: 1px 1px 1px white;
+}
+
+.patternlist {
+  display: flex;
+  flex-direction: column;
+  width:80%; 
+  margin-top: 1em;
+}
+
+.patternitem select {
+  vertical-align: middle;
+  margin-left: 1rem;
+} 
+
+.patternitem
+{
+  display: flex;
+  flex-direction: row;
+  width:100%; 
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.patterncontainer label
+{
+  font-size: 1.2em;
+  font-weight: bolder;
+  margin-right:1rem;
+  margin-bottom:1rem;
+  
+}
+.patterncontainer input
+{
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  
+  vertical-align: middle;
+}

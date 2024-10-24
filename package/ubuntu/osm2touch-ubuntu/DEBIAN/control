@@ -1,0 +1,12 @@
+Package: osm2touch-ubuntu
+Version: 0.7.0
+Section: utils
+Priority: optional
+HomePage: https://www.braillerap.org
+Package-type: binary
+Depends: libc6 (>=2.39-0ubuntu8.0), libc6 (<<2.40), zlib1g
+Architecture: amd64
+Maintainer: Build with love by <contact@braillerap.org>
+Description: Osm data extraction tool to build tangible maps of urban area transportation.
+ Osm2Touch  allow you to extract data from OSM. The main idea is to build suitable data file
+ for Image2Touch or DesktopBrailleRAP.

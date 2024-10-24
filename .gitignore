@@ -1,0 +1,40 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+#python
+/venv
+/translatevenv
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+nsis/DesktopBrailleRAPSetup.exe
+nsis/DesktopBrailleRAP.exe
+nsis/_internal.zip
+sign.txt
+parameters.json
+package-lock.json
+package/debian/desktopbraillerap-debian/usr/bin/desktopbraillerap-debian
+package/debian/desktopbraillerap-debian/usr/share/doc/desktopbraillerap-debian/changelog
+package/debian/desktopbraillerap-debian/usr/share/doc/desktopbraillerap-debian/changelog.gz
+desktop_brap_parameters.json
+test_export_elements_output.csv
+images/zzz_metro.png

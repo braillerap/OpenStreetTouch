@@ -1,0 +1,30 @@
+{
+    "app.loading":"Chargement en cours…",
+
+    "app.wait":"Patientez…",
+
+    
+
+    "menu.home":"Accueil",
+    "menu.metro":"Subway",
+    "menu.param":"Paramètres",
+    
+    
+    "param.locale":"Langue de l'application",
+    
+    "param.formtitle":"Paramètres",
+    "param.form_aria":"Paramètres de l'application",
+    
+    
+    
+    
+    
+    
+
+    
+    "toolbar.confirm.deleteall": "Voulez allez effacer le document. Etes vous sure ?"
+
+    
+    
+}
+
