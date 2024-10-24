@@ -9,10 +9,16 @@ const Metro = () => {
     const [cityImage, setCityImage] = useState('')
     
     const goOsm = () => {
-        window.pywebview.api.getCityImage (cityName).then ((imgdata) => {
-            console.log (imgdata);
-            //setCityImage(imgdata);
-            setImagePreview(imgdata);
+        
+        setImagePreview('');
+        window.pywebview.api.getCityImage(cityName).then((imgdata) => {
+            if (imgdata) {
+                console.log(imgdata);
+                //setCityImage(imgdata);
+                setImagePreview(imgdata);
+            }
+            else
+                console.log("imgdata == null");
         }
         )
     }
@@ -34,8 +40,8 @@ const Metro = () => {
                 onChange={(e)=>{setCityName(e.target.value);}}
                 />
         </label>
-        <button onClick={goOsm()}>Go !</button>
-        {renderImage() }
+        <button onClick={goOsm}>Go !</button>
+        {/*renderImage() */}
     </div>
   );
 }
