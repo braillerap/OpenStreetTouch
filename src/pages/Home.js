@@ -32,7 +32,7 @@ class Home extends React.Component {
             <img src="./MHK.png" width='25%' alt="MyHumanKit logo"  />
           </a>
           
-          <h1>Osm2Touch</h1>
+          <h1>OpenStreetTouch</h1>
           <h2>Version:{`${process.env.REACT_APP_VERSION}`}</h2>
 
           <h2 className='h2home'></h2>

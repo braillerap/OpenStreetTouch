@@ -29,7 +29,7 @@ class Parameters extends React.Component {
     this.setState({ localedata: localedata });
 
     
-    this.context.ForceResize ();
+    
   }
   
   handleChangeLanguage(event) {

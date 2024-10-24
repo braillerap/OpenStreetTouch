@@ -30,7 +30,7 @@ class App extends Component {
 
   handleResize ()
   {
-    this.context.ForceResize ();
+    
   }
   
   async webviewloaded() {
