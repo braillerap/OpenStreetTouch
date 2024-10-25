@@ -25,8 +25,8 @@ from io import BytesIO
 import base64
 
 #~DATA 
-__version__ = "1.0 beta"
-__date__ = "02/08/2024"
+__version__ = "1.0"
+__date__ = "10/10/2024"
 __status__ = "ok"
 __authors__ = "François, Stéphane et Gabriel" 
 __organization__ = "My Human Kit - Rennes, France" 
@@ -163,7 +163,7 @@ def line_extraction(data):
                 # metro_line = element['tags'].get('ref', 'Unnamed')
                 element_type = element['tags']["type"] 
                 transport_type = element['tags']["route"]
-                line_name = element['tags']["name"]
+                line_name = element['tags'].get('name', 'Unamed')
                 from_station = element['tags']["from"]
                 to_station = element['tags']["to"]
                 
@@ -378,9 +378,7 @@ def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_c
     
     # plot configuration options 
     # plt.grid(False)
-    
-    #plt.show(block=False) 
-    
+    plt.show(block=False) 
     # end of loop for line tracing      """
     return fig 
     # end of function plot_network 
@@ -643,17 +641,17 @@ def main():
 # ////////////////////////////////////
 # main function flask IHM 
 # -------------
-def main_flask_IHM(city_name = "None"): 
-    """main function :
+def main_flask_IHM(city_name = "None", transport_type = "None"): 
+    """main function used with HTML version (flask) :
             * creates overpass query and request data on Open Street Map 
             * Extracts network data (line names, types, and stations positions) 
-            * plots lines network 
+            * plots 2D map lines network 
         """     
             
     metro_lines_info = list() 
     
     # répertoire de travail 
-    print("Répertoire de travail : ", os.getcwd()) 
+    # print("Répertoire de travail : ", os.getcwd()) 
 
     # nom du fichier d'export du résultat brut de la requete overpass  
     output_file = 'test_export_elements_output.csv'
@@ -667,7 +665,7 @@ def main_flask_IHM(city_name = "None"):
     # configuration file 
     input_config_file = "extraction_config.ini"
 
-    print("Lecture du fichier de configuration : ", input_config_file) 
+    # print("Lecture du fichier de configuration : ", input_config_file) 
     config_data_dict = read_configuration_file(input_config_file) 
 
     # Access to configuration data (sections and keys) 
@@ -676,7 +674,8 @@ def main_flask_IHM(city_name = "None"):
     # section_couleurs_image = config['couleurs image']
 
     # read specific data 
-    place_name = city_name # from text label field of HTML form 
+    place_name = city_name # function parameter : from text label field of HTML form 
+    transportation_type = transport_type # function parameter : from select combobox of HTML form 
     # place_name = config_data_dict["site name"]["place_name"]
     # place_names_str = section_site.get('place_name')
     # place_names = ast.literal_eval(place_names_str)  # Évaluation de la chaîne comme une liste Python
@@ -736,7 +735,8 @@ def main_flask_IHM(city_name = "None"):
 
     # type de transports
     # todo : ajouter dans le fichier de configuration .ini 
-    transportation_type = "subway"  # => test ok 
+    
+    # transportation_type = "subway"  # => test ok 
     # transportation_type = "bus"  # => some bugs to be analysed...  
     # transportation_type = "tram" # sur Nantes => extraction de 10 relations dans les 2 sens 
     # transportation_type = "rail" # sur Rennes => aucun résultat 
