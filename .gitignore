@@ -16,6 +16,7 @@
 /build
 /dist
 /__pycache__
+
 # misc
 .DS_Store
 .env.local
@@ -38,3 +39,4 @@ images/zzz_metro.png
 line_data_export.csv
 line_data_export.csv
 osm/__pycache__/application_OSM_extraction.cpython-311.pyc
+osm/__pycache__/__init__.cpython-311.pyc
