@@ -66,7 +66,7 @@ def read_configuration_file(input_config_file):
     return config_dict 
     
 # function for overpas request on Open Street Map database 
-def overpass_request(place_name, transportation_type = "subway"): 
+def overpass_request(place_name, transportation_type = "subway", place_iso639 = ":fr"): 
     """Fonction : overpass request data 
     
     Parameters :
@@ -83,18 +83,16 @@ def overpass_request(place_name, transportation_type = "subway"):
         status : status returned by request command 
         
     """
-    
+    #
     # URL 
     overpass_url = "http://overpass-api.de/api/interpreter"
     
-    # ajout d'une majuscule sur la première lettre de place_name 
-    place_name = place_name.capitalize()
     
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
     overpass_query = f"""
     [out:json][timeout:30];
     /* recherche des données avec .searcharea */ 
-    area["name"="{place_name}"]->.searcharea;
+    area["name{place_iso639}"="{place_name}"]->.searcharea;
     (
       relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
     );
@@ -102,7 +100,7 @@ def overpass_request(place_name, transportation_type = "subway"):
     >;
     out body qt ;
     """
-
+    print(overpass_query)
     # print("Requête pour la ville {}".format(place_name))
     
     # response = requests.get(overpass_url, params={'data': overpass_query})
@@ -757,7 +755,10 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
         sys.exit(1)
 
     # test of data content 
-    if not data or 'elements' not in data or not data['elements'] or len(data['elements']) == 0:
+    if ( not data or 
+        'elements' not in data or 
+        not data['elements'] or 
+        len(data['elements']) == 0 ):
         print("Data extraction ERROR !") 
         print("data is empty")
         print("or elements key is not define in data dict.") 
@@ -855,7 +856,9 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
 
     # network plotting 
     # ----------------
-        
+    print ("data extarcted :")    
+    print ("nb line", df_line_info)
+
     print("plot line network, 1 direction per line.") 
     fig = plot_network(df_line_info , fig_width_inches, fig_height_inches, background_color, dpi) 
     
@@ -868,6 +871,194 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     
     return image_base64_buf
     # end main function flask IHM
+
+def get_transport_data (city_name = "None", transport_type = "None"): 
+    """get_transport_data :
+            * creates overpass query and request data on Open Street Map 
+            * Extracts network data (line names, types, and stations positions) 
+            * return pandas dataframe with osm data about transport line
+        """     
+            
+    metro_lines_info = list() 
+    
+    # répertoire de travail 
+    # print("Répertoire de travail : ", os.getcwd()) 
+
+    # nom du fichier d'export du résultat brut de la requete overpass  
+    output_file = 'test_export_elements_output.csv'
+
+    # nom du fichier d'export des données relatives aux lignes extraites 
+    output_file_line_info = "line_data_export.csv" 
+
+    # read SCRIPT CONFIGURATION file 
+    # ------------------------------
+
+    # configuration file 
+    input_config_file = "extraction_config.ini"
+
+    # print("Lecture du fichier de configuration : ", input_config_file) 
+    config_data_dict = read_configuration_file(input_config_file) 
+
+    # Access to configuration data (sections and keys) 
+    # section_site = config['site name']
+    # section_image_2D = config['image 2D']
+    # section_couleurs_image = config['couleurs image']
+
+    # read specific data 
+    place_name = city_name # function parameter : from text label field of HTML form 
+    transportation_type = transport_type # function parameter : from select combobox of HTML form 
+    # place_name = config_data_dict["site name"]["place_name"]
+    # place_names_str = section_site.get('place_name')
+    # place_names = ast.literal_eval(place_names_str)  # Évaluation de la chaîne comme une liste Python
+
+    image_folder = config_data_dict["image 2D"]["image_folder"].strip('"')
+    output_image_file_name = config_data_dict["image 2D"]['output_image_file_name'].strip('"')
+    extension_file_format = config_data_dict["image 2D"]['extension_file_format'].strip('"')
+    file_size = int(config_data_dict["image 2D"]['file_size'])
+    dpi = int(config_data_dict["image 2D"]['dpi'])
+    fig_width_mm = int(config_data_dict["image 2D"]['fig_width_mm'])
+    fig_height_mm = int(config_data_dict["image 2D"]['fig_height_mm'])
+
+    background_color = eval(config_data_dict["couleurs image"]['background_color']) # Évaluation de la chaîne comme une expression Python
+    line_color = eval(config_data_dict["couleurs image"]['line_color'])
+    station_color = eval(config_data_dict["couleurs image"]['station_color'])
+
+    # show configuration data 
+    print("Configuration data :") 
+    print("----------------------------------")
+    print("[site]")
+
+    # on force la première lette du nom de la ville en majuscule pour les recherches dans OSM 
+    print("place name:", place_name)
+
+    print("\n[image 2D]")
+    print("image_folder:", image_folder)
+    print("Image file name : ", output_image_file_name) 
+    print("extension_file_format:", extension_file_format)
+    print("file_size:", file_size)
+    print("dpi:", dpi)
+    print("fig_width_mm:", fig_width_mm)
+    print("fig_height_mm:", fig_height_mm)
+
+    print("\n[couleurs image]")
+    print("background_color:", background_color)
+    print("line_color:", line_color)
+    print("station_color:", station_color)
+
+    # convert size in mm  
+    un_pouce_mm = 25.4 # mm
+    fig_width_inches = fig_width_mm / un_pouce_mm
+    fig_height_inches = fig_height_mm / un_pouce_mm 
+
+    # test image file folder exists and create it if necessary 
+    if not os.path.exists(image_folder):
+        # create sub-folder 
+        os.makedirs(image_folder)
+        print(f"sub-folder : {image_folder} created. ")
+    else:
+        print(f"sub-folder : {image_folder} already exists.")
+
+    # create full path name with file extension      
+    file_path = f"./{image_folder}/{output_image_file_name}.{extension_file_format}"
+
+    # Définir la zone d'étude 
+    # place_name = "Rennes"
+
+    # type de transports
+    # todo : ajouter dans le fichier de configuration .ini 
+    
+    # transportation_type = "subway"  # => test ok 
+    # transportation_type = "bus"  # => some bugs to be analysed...  
+    # transportation_type = "tram" # sur Nantes => extraction de 10 relations dans les 2 sens 
+    # transportation_type = "rail" # sur Rennes => aucun résultat 
+    # transportation_type = "railway" # => ne fonctionne pas dans dans ce cas la relation n'a pas de clé "from" (et "to")  
+
+    # create list to store line data 
+    metro_lines_info = []
+    
+    print("")
+    print("Sending overpass query.") 
+    # overpass query for data extraction   
+    try:
+        data = overpass_request(place_name, transportation_type)
+        # print(data)
+    except Exception as e:
+        print("Error") 
+        print(e)
+        sys.exit(1)
+
+    # test of data content 
+    if ( not data or 
+        'elements' not in data or 
+        not data['elements'] or 
+        len(data['elements']) == 0 ):
+        print("Data extraction ERROR !") 
+        print("data is empty")
+        print("or elements key is not define in data dict.") 
+        print("or data[""elements""] is empty.") 
+        print("Completd") 
+        sys.exit() 
+        
+    # convert data dict  in dataframe 
+    print("Convert data to dataframe format. ") 
+    df_raw_data = pd.DataFrame(data["elements"])
+       
+    # Export DataFrame to CSV file. delimiter = ";" 
+    print("Dataframe export into file : {}.".format(output_file)) 
+    df_raw_data.to_csv(output_file, sep=';', index=False)
+
+    # data analysis  
+    # ------------- 
+    # call function line_extraction 
+    # return to list : metro_lines_info  
+    metro_lines_info = line_extraction(data) 
+
+    # convert extracted data list to pandas DataFrame 
+    print("\`nCreate a pandas DataFrame...")
+    df_line_info = pd.DataFrame(metro_lines_info)
+
+    # identification des stations de corespondance 
+    # Identifier les stations communes entre les lignes
+    # Création d'une table croisée pour compter le nombre de lignes par station
+    # on traite pour chaque ligne, les 2 sens de circulation. 
+    # il faudra donc diviser par 2 les résultats pour ne considérer qu'une seule ligne 
+    # avec un seul sens de circulation 
+    df_station_counts = df_line_info.pivot_table(index="station_name", columns="line_label", aggfunc='size', fill_value=0)
+
+    # Identification des stations communes
+    # ATTENTION : la somme doit être supérieure à 2 
+    # car le dataframe contient pour chaque ligne, les 2 sens de circulation 
+    df_common_stations = df_station_counts[df_station_counts.sum(axis=1) > 2].index
+
+    # Ajouter la colonne "crossing"
+    df_line_info["crossing"] = df_line_info["station_name"].apply(lambda x: "yes" if x in df_common_stations else "no")
+
+    # create dataframe containing station with crossing lines 
+    df_crossing_lines_and_stations = df_line_info[df_line_info['crossing'] == 'yes'][['line_label', 'line_name', 'station_name', 'crossing']]
+    
+    # create dataframe containing for each crossing station, the list of lines 
+    df_station_crossing_line_list = df_crossing_lines_and_stations.groupby('station_name')['line_label'].apply(lambda x: list(x.unique())).reset_index()
+    
+    # rename column "line_label" to "crossing_lines" 
+    df_station_crossing_line_list.rename(columns={'line_label': 'crossing_lines'}, inplace=True)
+    
+    # Fusionner avec le DataFrame original
+    # df_crossing_lines = df_crossing_lines.merge(df_line_list, on='station_name', how='left')
+    df_line_info = df_line_info.merge(df_station_crossing_line_list, on='station_name', how='left')
+
+    return df_line_info
+
+def get_line_list (df_data):
+    # extract line list from dataframe
+
+    # line extraction frome df_data  
+    df_line_list = df_data.groupby([ 'line_label', 'line_name']).size().reset_index(name='counts')
+    nombre_de_ligne = df_line_list.shape[0]
+
+    print(f"\nExtraction of {nombre_de_ligne} lines.") 
+    print("line list : ") 
+    print(df_line_list)
+    return df_line_list
 
 # ----------
 #                
