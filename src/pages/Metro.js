@@ -34,7 +34,7 @@ const Metro = () => {
                 onChange={(e)=>{setCityName(e.target.value);}}
                 />
         </label>
-        <button onClick={goOsm()}>Go !</button>
+        <button onClick={goOsm}>Go !</button>
         {renderImage() }
     </div>
   );
