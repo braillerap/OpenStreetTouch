@@ -16,7 +16,8 @@
 /build
 /dist
 /__pycache__
-
+/osm/__pycache__
+/.vscode
 # misc
 .DS_Store
 .env.local
@@ -37,6 +38,8 @@ desktop_brap_parameters.json
 test_export_elements_output.csv
 images/zzz_metro.png
 line_data_export.csv
-line_data_export.csv
-osm/__pycache__/application_OSM_extraction.cpython-311.pyc
-osm/__pycache__/__init__.cpython-311.pyc
+
+osm/images/zzz_metro.png
+test.svg
+test.json
+

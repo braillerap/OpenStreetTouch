@@ -87,12 +87,16 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639 = 
     # URL 
     overpass_url = "http://overpass-api.de/api/interpreter"
     
-    
+    iso639param = place_iso639
+    if iso639param[0] != ":":
+        iso639param = ":" + place_iso639
+
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
     overpass_query = f"""
-    [out:json][timeout:30];
+    
+    [out:json][timeout:90];
     /* recherche des données avec .searcharea */ 
-    area["name{place_iso639}"="{place_name}"]->.searcharea;
+    area["name{iso639param}"="{place_name}"]->.searcharea;
     (
       relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
     );
@@ -349,12 +353,29 @@ def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_c
     # add axes 
     ax = fig.add_subplot(111)
 
+    stationlist = []
     # add lines  for only one direction on the same line 
     for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
         # print("add line : ", line)
         # line selection in df_line_info 
         filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
         
+        # sgn for test
+        print ("position ?", filtered_df)
+        linedata = filtered_df.to_dict()
+        
+        for keys in linedata['station_order'].keys():
+            stationlist.append ({
+                    "station_order": linedata['station_order'][keys], 
+                    "name": linedata['station_name'][keys],
+                    "lat": linedata['latitude [deg]'][keys],
+                    "long": linedata['longitude [deg]'][keys],
+                    "crossing": linedata['crossing'][keys]
+                                 
+            })
+        print (stationlist)
+        # sgn
+
         # add line 
         ax.plot(filtered_df['longitude [deg]'], filtered_df['latitude [deg]'], 
                  label = line,
@@ -410,6 +431,66 @@ def plot_to_buffer(fig):
         
     return image_base64
     # end of function plot to buffer 
+
+def plot_get_2d_data(df_line_info):
+    """Function to plot transportation network 
+    
+    Parameters :
+    ------------
+        df_line_info : dataframe describing station list and positions 
+            columns are : 
+            Index(['line_label', 'line_name', 'from_station', 'to_station',
+                   'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]',
+                   'crossing', 'crossing_lines'],
+                   dtype='object')
+        
+        fig_width_inches : 
+        
+        fig_height_inches :
+        
+        background_color :
+        
+        dpi :
+        
+    output :         
+    --------    
+        fig : figure object produced with matplotlib 
+    """
+    
+    transportlines_list = []
+
+    # filtering df_line_info to get only one direction for each metro line 
+    df_line_list = df_line_info.groupby([ 'line_label', 'line_name']).size().reset_index(name='counts')
+    df_one_line_every_two = df_line_list.iloc[::2] 
+    # build data from lines
+    
+    for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
+        # print("add line : ", line)
+        # line selection in df_line_info 
+        filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
+        
+        # sgn for test
+        print ("position ?", filtered_df)
+        linedata = filtered_df.to_dict()
+        
+        transportline=[]
+        for keys in linedata['station_order'].keys():
+            transportline.append ({
+                    "station_order": linedata['station_order'][keys], 
+                    "name": linedata['station_name'][keys],
+                    "lat": linedata['latitude [deg]'][keys],
+                    "long": linedata['longitude [deg]'][keys],
+                    "crossing": linedata['crossing'][keys]
+                                 
+            })
+        transportlines_list.append({"name":line, "stations":transportline})
+        
+        
+        # sgn
+    print (transportlines_list)    
+    # end of loop over lines 
+    # end of function plot_get_2d_data 
+    return transportlines_list
 
 # main function 
 # -------------
@@ -872,7 +953,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     return image_base64_buf
     # end main function flask IHM
 
-def get_transport_data (city_name = "None", transport_type = "None"): 
+def get_transport_data (city_name = "None", transport_type = "None", place_iso639_code = "fr"): 
     """get_transport_data :
             * creates overpass query and request data on Open Street Map 
             * Extracts network data (line names, types, and stations positions) 
@@ -980,7 +1061,7 @@ def get_transport_data (city_name = "None", transport_type = "None"):
     print("Sending overpass query.") 
     # overpass query for data extraction   
     try:
-        data = overpass_request(place_name, transportation_type)
+        data = overpass_request(place_name, transportation_type, place_iso639_code)
         # print(data)
     except Exception as e:
         print("Error") 

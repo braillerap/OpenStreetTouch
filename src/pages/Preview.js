@@ -9,6 +9,12 @@ const Preview = () => {
    
     const renderImage = () => {
         if (ImagePreview !== '') {
+          return (
+            <div>
+              <img src={`data:image/svg+xml;utf8,${encodeURIComponent(ImagePreview)}`} />
+            </div>
+        )
+
             console.log ("preview rendering image");
             const srcpat = "data:image/png;base64," + ImagePreview;
             return <img src={srcpat} alt="city image" width={"50%"} height={"50%"}/>

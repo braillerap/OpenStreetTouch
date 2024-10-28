@@ -19,7 +19,7 @@
 .App
 {
   display:grid;
-  grid-template-columns: 5fr 4fr ;
+  grid-template-columns: 4fr 4fr ;
   grid-template-rows: auto 100%;
 
   background-color: rgb(177, 167, 167);
@@ -92,6 +92,15 @@
   grid-row-start: 2;
   grid-row-end: 2;
   position:relative;
+}
+
+.App-Work img
+{
+  width:80%;
+  
+  max-width:80%;
+  max-height:80%;
+  
 }
 
 .App-function
@@ -313,4 +322,14 @@ a.pure-button-secondary
   margin-left: 0.5em;
   
   vertical-align: middle;
+}
+
+.CheckedList 
+{
+  display: block;
+}
+
+.CheckedList label
+{
+  display: block;
 }

@@ -9,6 +9,9 @@ import time
 from pathlib import Path
 
 from osm import application_OSM_extraction
+from osm import OSMprocess
+from osm import OSMutils
+from osm import OSMsvg
 
 rpi = False
 COM_TIMEOUT =   5  #Communication timeout with device controller (Marlin)
@@ -71,6 +74,9 @@ def load_parameters():
 
 
 class Api:
+    def __init__(self):
+        self.osmt = OSMprocess.Osmprocess()
+
     def fullscreen(self):
         """toggle main window fullscreen"""
         webview.windows[0].toggle_fullscreen()
@@ -237,9 +243,36 @@ class Api:
 
         return json.dumps(js)
     
+    def GetISO639_country_code (self):
+        list = OSMutils.omsutils_get_iso639_code ()
+        print(list)
+        return list
+    
+    def ReadTransportData (self, city, transport_type, iso639_city_code):
+        ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code)
+        print ("ReadTransportData", ret)
+        return ret
+    
+
+    def GetTransportLines (self):
+        ret = self.osmt.GetTransportLineList ()
+        print ("GetTransportLineList", ret)
+        
+        
+
+        return ret
+
+    def GetTransportSVG (self):
+        svg = self.osmt.get_svg ()
+        return svg
+    
+    def GetTransportSVGbase64 (self):
+        svg = self.osmt.get_svg ()
+        return svg
+
     def getCityImage (self, city):
         print ("call main_flask_IHM (city)")
-        val= application_OSM_extraction.main_flask_IHM (city)
+        val= application_OSM_extraction.main_flask_IHM (city, transport_type="subway")
         print ("return from main_flask_IHM (city)")
         return val
 
@@ -257,23 +290,6 @@ def get_entrypoint():
     raise Exception("No index.html found")
 
 
-# def set_interval(interval):
-#     def decorator(function):
-#         def wrapper(*args, **kwargs):
-#             stopped = threading.Event()
-
-#             def loop():  # executed in another thread
-#                 while not stopped.wait(interval):  # until stopped
-#                     function(*args, **kwargs)
-
-#             t = threading.Thread(target=loop)
-#             t.daemon = True  # stop if the program exits
-#             t.start()
-#             return stopped
-
-#         return wrapper
-
-#     return decorator
 
 
 def delete_splash(window):
