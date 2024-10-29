@@ -43,3 +43,5 @@ osm/images/zzz_metro.png
 test.svg
 test.json
 
+pytest/osmbasictest.py
+osm/OSMtest.py
