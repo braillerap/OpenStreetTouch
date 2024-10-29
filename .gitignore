@@ -38,3 +38,4 @@ package/debian/desktopbraillerap-debian/usr/share/doc/desktopbraillerap-debian/c
 desktop_brap_parameters.json
 test_export_elements_output.csv
 images/zzz_metro.png
+*.csv
