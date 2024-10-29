@@ -413,6 +413,127 @@ def plot_to_buffer(fig):
     return image_base64
     # end of function plot to buffer 
 
+# fuctnion to create text file for braille printing 
+# file contains list of lines and stations names 
+def create_line_files(df, file_name):
+    """
+    Creates text files listing metro lines and stops for braille printing.
+    
+    text file contains for each extrated line :
+       * line Id 
+       * line name 
+       * from station 
+       * to station 
+       * a table with following colums : Station Order,	Station Name, Crossing Lines 
+
+    Parameters:
+    -----------
+        df : Pandas DataFrame
+            DataFrame containing metro line and station details.
+        
+        file_name : str
+            Name of the output file.
+    """ 
+ 
+    # Obtenir les noms de lignes uniques
+    line_names = df['line_name'].unique()
+    
+    file_content = "" 
+    
+    # boucle sur les lignes 
+    for line_name in line_names:
+        print("line name : ", line_name) 
+        
+        # Filtrer le DataFrame pour la ligne actuelle
+        df_line = df[df['line_name'] == line_name]
+        
+        # Extraire les informations générales de la ligne
+        line_label = df_line['line_label'].iloc[0]
+        # vérfication du type des données de la colone "line_label" pour tri croissant 
+        type_numeric = bool(re.match(r'^\d+$', str(line_label)))
+        # ///////////////// 
+        # Fonction pour extraire la partie numérique et alphabétique
+        def extract_parts(label):
+            match = re.match(r"(\d+)([a-zA-Z]*)", label)
+            if match:
+                num_part = int(match.group(1)) if match.group(1) else None
+                alpha_part = match.group(2) if match.group(2) else ""
+                return num_part, alpha_part
+            else:
+                return None, label
+
+        # Appliquer la fonction d'extraction et créer deux nouvelles colonnes
+        df[['num_part', 'alpha_part']] = df['line_label'].apply(lambda x: pd.Series(extract_parts(x)))
+
+        # Trier en fonction des nouvelles colonnes
+        df_sorted = df.sort_values(by=['num_part', 'alpha_part'], na_position='last')
+        
+        # Réorganiser le dataframe pour ne garder que la colonne originale
+        df_sorted = df_sorted[['line_label']]
+
+        print(df_sorted)
+        # ////////////////////////////////
+
+        # Réinitialiser les index pour un DataFrame propre
+        df_sorted = df_sorted.reset_index(drop=True)
+
+        # ////////////////////////////////// 
+        from_station = df_line['from_station'].iloc[0]
+        to_station = df_line['to_station'].iloc[0]
+        
+        # correction du nom de la ligne 
+        # Étape 1 : Supprimer le mot "ligne" (avec ou sans majuscule)
+        line_name = re.sub(r'(?i)ligne', '', line_name)
+
+        # Étape 2 : Supprimer les nombres (un ou plusieurs chiffres)
+        line_name = re.sub(r'\d+', '', line_name)
+
+        # Étape 3 : Supprimer les signes ":"
+        line_name = re.sub(r':', '', line_name)
+
+        # Éliminer les espaces en trop au début ou à la fin
+        line_name = line_name.strip()
+
+        # Créer le contenu du fichier
+        file_content += f"Ligne : {line_label}\n"
+        file_content += f"Sens : {line_name}\n"
+        file_content += f"De: {from_station}\n"
+        file_content += f"Vers : {to_station}\n"
+        file_content += "\nStation Order\tStation Name\tCrossing Lines\n"
+        # file_content += "-"*50 + "\n"
+        
+        # Ajouter les informations des stations
+        for _, row in df_line.iterrows():
+            station_order = row['station_order']
+            station_name = row['station_name']
+            crossing_lines = row["crossing_lines"]
+            # crossing_lines_list = [line for line in row['crossing_lines'] if pd.notna(line)]
+            # Vérifier si crossing_lines est une liste et non NaN
+            if isinstance(crossing_lines, list):
+                crossing_lines = [line for line in crossing_lines if pd.notna(line)]
+                crossing_lines_str = ", ".join(crossing_lines)
+            else:
+                crossing_lines_str = ""
+            
+            # add to file content 
+            file_content += f"\t{station_order}\t{station_name}\t{crossing_lines_str}\n"
+        
+        # Déterminer le nom du fichier (en utilisant par exemple le line_label)
+        # file_name = f"{line_label}_line_info.txt"
+        file_content += f"\n"
+        
+    # fin de boucle sur les lignes 
+    print("file :")
+    print(file_content)
+
+    
+    # Sauvegarder le fichier
+    with open(file_name, "w", encoding='utf-8') as file:
+        file.write(file_content)
+    
+    return 
+# end of function 
+
 # main function 
 # -------------
 def main(): 
@@ -425,7 +546,7 @@ def main():
     metro_lines_info = list() 
     
     # répertoire de travail 
-    print("Répertoire de travail : ", os.getcwd()) 
+    # print("Répertoire de travail : ", os.getcwd()) 
 
     # nom du fichier d'export du résultat brut de la requete overpass  
     output_file = 'test_export_elements_output.csv'
@@ -481,10 +602,10 @@ def main():
     print("fig_width_mm:", fig_width_mm)
     print("fig_height_mm:", fig_height_mm)
 
-    print("\n[couleurs image]")
-    print("background_color:", background_color)
-    print("line_color:", line_color)
-    print("station_color:", station_color)
+    # print("\n[couleurs image]")
+    # print("background_color:", background_color)
+    # print("line_color:", line_color)
+    # print("station_color:", station_color)
 
     # convert size in mm  
     un_pouce_mm = 25.4 # mm
@@ -674,7 +795,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     # section_couleurs_image = config['couleurs image']
 
     # read specific data 
-    place_name = city_name # function parameter : from text label field of HTML form 
+    place_name = city_name.strip() # function parameter : from text label field of HTML form 
     transportation_type = transport_type # function parameter : from select combobox of HTML form 
     # place_name = config_data_dict["site name"]["place_name"]
     # place_names_str = section_site.get('place_name')
@@ -698,7 +819,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     print("[site]")
 
     # on force la première lette du nom de la ville en majuscule pour les recherches dans OSM 
-    print("place name:", place_name)
+    # print("place name:", place_name)
 
     print("\n[image 2D]")
     print("image_folder:", image_folder)
