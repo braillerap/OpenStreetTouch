@@ -433,7 +433,7 @@ def plot_to_buffer(fig):
     # end of function plot to buffer 
 
 def plot_get_2d_data(df_line_info):
-    """Function to plot transportation network 
+    """Function extract geometric data 
     
     Parameters :
     ------------
@@ -454,7 +454,7 @@ def plot_get_2d_data(df_line_info):
         
     output :         
     --------    
-        fig : figure object produced with matplotlib 
+        an array of dict
     """
     
     transportlines_list = []
@@ -465,12 +465,12 @@ def plot_get_2d_data(df_line_info):
     # build data from lines
     
     for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
-        # print("add line : ", line)
+        print("add line : ", line, df_one_line_every_two["line_label"])
         # line selection in df_line_info 
         filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
         
         # sgn for test
-        print ("position ?", filtered_df)
+        print ("position ?\n", filtered_df)
         linedata = filtered_df.to_dict()
         
         transportline=[]
