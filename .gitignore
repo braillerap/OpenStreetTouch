@@ -38,4 +38,9 @@ package/debian/desktopbraillerap-debian/usr/share/doc/desktopbraillerap-debian/c
 desktop_brap_parameters.json
 test_export_elements_output.csv
 images/zzz_metro.png
-*.csv
+test.json
+test.svg
+osm/line_data_export.csv
+.vscode/settings.json
+osm/images/zzz_metro.png
+/osm/__pycache__/
