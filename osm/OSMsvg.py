@@ -1,6 +1,6 @@
 import svg
 import utm
-
+import cartopy.crs as ccrs
 
 def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
     elm: list[svg.Element] = []
@@ -15,10 +15,15 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
                     "long": linedata['longitude [deg]'][keys],
                     "crossing": linedata['crossing'][keys]
     """
+    proj = ccrs.Orthographic(0, 0)
+    data_proj = ccrs.PlateCarree()
     for line in transport_2d_data:
         for station in line["stations"]:
             stat = station.copy()
-            pos = utm.from_latlon(station["lat"], station["long"])
+
+            
+            pos = proj.transform_point(station["long"], station["lat"], data_proj)
+            #pos = utm.from_latlon(station["lat"], station["long"])
             stat["x"] = pos[0]
             stat["y"] = pos[1]
             station_utm.append(stat)
@@ -47,11 +52,11 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
     ymin = miny
     ymax = maxy
     
-    print (minpos, maxpos)
-    print ("width ", sizex)  
-    print ("height", sizey)  
-    print ("xmin ymin", xmin, ymin)
-    print (width / sizex, height / sizey)
+    # print (minpos, maxpos)
+    # print ("width ", sizex)  
+    # print ("height", sizey)  
+    # print ("xmin ymin", xmin, ymin)
+    # print (width / sizex, height / sizey)
     ratio = min (width / sizex, height / sizey)
     print ("ratio", ratio)
 
@@ -61,10 +66,11 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
     for line in transport_2d_data:
         station_utm = []
         path : list[svg.element] = []
-        print("tracing line:", line["name"])
+        print("tracing line:", line["name"], line)
         for station in line["stations"]:
             stat = station.copy()
-            pos = utm.from_latlon(station["lat"], station["long"])
+            pos = proj.transform_point(station["long"], station["lat"], data_proj)
+            #pos = utm.from_latlon(station["lat"], station["long"])
             stat["x"] = pos[0]
             stat["y"] = pos[1]
             station_utm.append(stat)    
@@ -74,14 +80,15 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
         for station in station_utm:
             #pos = utm.from_latlon(station["lat"], station["long"])
             x = round((station['x'] - xmin) * ratio, 2)
-            y = round(height - ((station['y'] - ymin) * ratio), 2)
+            y = round((station['y'] - ymin) * ratio, 2)
             #print (x,y)
             position.append( (x,y) )
 
         if len(position) > 0:
             path.append (svg.M(position[0][0],position[0][1]))
 
-        for pos in position[1:]:        
+        for pos in position[1:]:    
+            #print (pos[0],pos[1])    
             path.append (svg.L(pos[0],pos[1]))
         
         elements.append(svg.Path(
