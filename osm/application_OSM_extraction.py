@@ -130,9 +130,9 @@ def overpass_request(place_name, transportation_type = "subway"):
     return data
     # fin fonction interrogation 
 
-# Fonction line_extraction 
-def line_extraction(data):
-    """lin extraction fonction 
+# Fonction line_extraction and stations 
+def line_extraction_and_stations(data):
+    """line extraction fonction to get a list of lines including stations and positions 
     
     parameter
     --------
@@ -140,7 +140,7 @@ def line_extraction(data):
         
         Returns 
         -------
-            metro_line_info : list  
+            metro_line_info : list of dictionnaries. each dict dict_keys(['line_label', 'line_name', 'from_station', 'to_station', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]'])  
         """ 
     
     metro_lines_info = list() 
@@ -299,6 +299,40 @@ def line_extraction(data):
     # fin if not data['elements']:
     return metro_lines_info
     # fin de fonction 
+
+# function to get a list of lines for synthetic description 
+def lines_list_extraction_from_data(data):
+    """
+    Extraction of list of transportation lines from data produced by overpass request.
+    
+    param : 
+        data : data extracted by overpass request 
+        
+    returns :
+    ---------
+        df_line_list : pandas dataframe containing relation["tag"] of each extracted line. 
+    """
+    
+    global df_line_list 
+    
+    # relations extraction from data 
+    relations = {element['id']: element for element in data['elements'] if element['type'] == 'relation'} 
+    
+    df_line_list = pd.DataFrame() 
+    
+    for relation_id, relation in relations.items():
+        # get line info 
+        df_new_row = pd.DataFrame([relation["tags"]])        
+        df_line_list = pd.concat([df_line_list, df_new_row], ignore_index=True)
+    
+    # columns : ['colour', 'description', 'from', 'interval', 'interval:peak', 'name',
+    #   'network', 'network:wikidata', 'note', 'opening_hours', 'operator',
+    #   'public_transport:version', 'ref', 'ref:FR:STAR', 'route',
+    #    'text_colour', 'text_colour:style', 'to', 'type', 'wheelchair',
+    #   'wikidata', 'wikipedia', 'twitter', 'source', 'start_date']
+    df_line_list = df_line_list.drop(columns=['wheelchair','wikidata', 'wikipedia', 'twitter', 'source', 'start_date'])     
+    
+    return df_line_list 
 
 # fonction plot_network (matplotlib) 
 def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_color, dpi):
@@ -667,9 +701,9 @@ def main():
 
     # data analysis  
     # ------------- 
-    # call function line_extraction 
+    # call function line_extraction and stations 
     # return to list : metro_lines_info  
-    metro_lines_info = line_extraction(data) 
+    metro_lines_info = line_extraction_and_stations(data) 
 
     # convert extracted data list to pandas DataFrame 
     print("\`nCreate a pandas DataFrame...")
@@ -898,7 +932,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     # ------------- 
     # call function line_extraction 
     # return to list : metro_lines_info  
-    metro_lines_info = line_extraction(data) 
+    metro_lines_info = line_extraction_and_stations(data) 
 
     # convert extracted data list to pandas DataFrame 
     print("\`nCreate a pandas DataFrame...")
