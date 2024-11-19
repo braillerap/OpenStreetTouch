@@ -334,6 +334,90 @@ def lines_list_extraction_from_data(data):
     
     return df_line_list 
 
+# lines ways extraction from data for lines plotting
+def lines_ways_extraction_from_datta(data): # => ok 
+    """
+    ways extraction of list of transportation lines from data produced by overpass request.
+    
+    this function extracts ways associated to each relation describing a transportation line. 
+    the returned dataframe permits to create a map of the network based on real wyas of the lines. 
+    this dataframe contains nodes latitudes and longitudes.
+    
+    param : 
+    -------
+        data : OSM data extracted with overpass request 
+        
+    returns :
+    ---------
+        df_line_tracks : pandas dataframe containing ways description of each extracted line relation.
+                         columns : ['line_name', 'way_id', 'public_transport', 'latitude', 'longitude']
+                         "latitude" and "longitude" are the coordonates of each node of the considered way
+                         
+                        Note : this function calls lines_list_extraction_from_data(data)  
+    """
+
+    #global relations, nodes, ways
+    #global relation, way, node  
+    #global dic_line_segments 
+    
+    # relations, ways, and nodes extraction from data 
+    relations = {element['id']: element for element in data['elements'] if element['type'] == 'relation'}
+    nodes = {element['id']: element for element in data['elements'] if element['type'] == 'node'}
+    ways = [element for element in data['elements'] if element['type'] == 'way']
+    
+    # group by relation (line id)
+    dic_line_segments = {}
+    
+    # get line list 
+    df_line_list = lines_list_extraction_from_data(data) 
+    
+    # loop on ways 
+    for way in ways:
+        # print("Way ID : ", way['id'], " - ", way.keys()) 
+        
+        # get line name in way attributes 
+        line_name = way.get('tags', {}).get('name', 'Unknown line')
+        way_id = way['id'] 
+        way_public_transport = way.get('tags', {}).get('public_transport', 'Unknown')
+        
+        # is it a new way ?
+        if way_id not in dic_line_segments:
+            dic_line_segments[way_id] = {
+                "line_name": line_name,
+                "way_id": way_id,
+                "public_transport": way_public_transport, 
+                "coordinates": []
+            }
+        
+        # get nodes coordonnates 
+        coordinates = []
+        # analysis of nodes list contained in the way 
+        for node_id in way.get('nodes', []):
+            # get node data from it's id  
+            node = nodes.get(node_id)
+            if node:
+                # add node coordinnates 
+                coordinates.append((node['lat'], node['lon']))
+        
+        # add to dictionnary 
+        dic_line_segments[way_id]["coordinates"].extend(coordinates)
+    
+    # convert dic to DataFrame
+    df_line_tracks = pd.DataFrame.from_records([
+        {"line_name": info["line_name"], "way_id": info["way_id"], "public_transport": info["public_transport"],  "coordinates": info["coordinates"]}
+        for info in dic_line_segments.values()
+    ])
+    
+    # create latitude and logitude columns from coordinaites 
+    # Extraction of nodes listes latitude and longitudes
+    df_line_tracks['latitude'] = df_line_tracks['coordinates'].apply(lambda coords: [point[0] for point in coords])
+    df_line_tracks['longitude'] = df_line_tracks['coordinates'].apply(lambda coords: [point[1] for point in coords])
+    
+    # delete coordinates column  
+    df_line_tracks = df_line_tracks.drop(columns=['coordinates'])
+    
+    return df_line_tracks 
+
 # fonction plot_network (matplotlib) 
 def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_color, dpi):
     """Function to plot transportation network 
