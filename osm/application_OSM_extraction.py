@@ -66,7 +66,7 @@ def read_configuration_file(input_config_file):
     return config_dict 
     
 # function for overpas request on Open Street Map database 
-def overpass_request(place_name, transportation_type = "subway", place_iso639 = ":fr"): 
+def overpass_request(place_name, transportation_type = "subway"): 
     """Fonction : overpass request data 
     
     Parameters :
@@ -83,20 +83,18 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639 = 
         status : status returned by request command 
         
     """
-    #
+    
     # URL 
     overpass_url = "http://overpass-api.de/api/interpreter"
     
-    iso639param = place_iso639
-    if iso639param[0] != ":":
-        iso639param = ":" + place_iso639
-
+    # ajout d'une majuscule sur la première lettre de place_name 
+    place_name = place_name.capitalize()
+    
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
     overpass_query = f"""
-    
-    [out:json][timeout:90];
+    [out:json][timeout:30];
     /* recherche des données avec .searcharea */ 
-    area["name{iso639param}"="{place_name}"]->.searcharea;
+    area["name"="{place_name}"]->.searcharea;
     (
       relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
     );
@@ -104,7 +102,7 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639 = 
     >;
     out body qt ;
     """
-    print(overpass_query)
+
     # print("Requête pour la ville {}".format(place_name))
     
     # response = requests.get(overpass_url, params={'data': overpass_query})
@@ -132,9 +130,9 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639 = 
     return data
     # fin fonction interrogation 
 
-# Fonction line_extraction 
-def line_extraction(data):
-    """lin extraction fonction 
+# Fonction line_extraction and stations 
+def line_extraction_and_stations(data):
+    """line extraction fonction to get a list of lines including stations and positions 
     
     parameter
     --------
@@ -142,7 +140,7 @@ def line_extraction(data):
         
         Returns 
         -------
-            metro_line_info : list  
+            metro_line_info : list of dictionnaries. each dict dict_keys(['line_label', 'line_name', 'from_station', 'to_station', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]'])  
         """ 
     
     metro_lines_info = list() 
@@ -302,6 +300,124 @@ def line_extraction(data):
     return metro_lines_info
     # fin de fonction 
 
+# function to get a list of lines for synthetic description 
+def lines_list_extraction_from_data(data):
+    """
+    Extraction of list of transportation lines from data produced by overpass request.
+    
+    param : 
+        data : data extracted by overpass request 
+        
+    returns :
+    ---------
+        df_line_list : pandas dataframe containing relation["tag"] of each extracted line. 
+    """
+    
+    global df_line_list 
+    
+    # relations extraction from data 
+    relations = {element['id']: element for element in data['elements'] if element['type'] == 'relation'} 
+    
+    df_line_list = pd.DataFrame() 
+    
+    for relation_id, relation in relations.items():
+        # get line info 
+        df_new_row = pd.DataFrame([relation["tags"]])        
+        df_line_list = pd.concat([df_line_list, df_new_row], ignore_index=True)
+    
+    # columns : ['colour', 'description', 'from', 'interval', 'interval:peak', 'name',
+    #   'network', 'network:wikidata', 'note', 'opening_hours', 'operator',
+    #   'public_transport:version', 'ref', 'ref:FR:STAR', 'route',
+    #    'text_colour', 'text_colour:style', 'to', 'type', 'wheelchair',
+    #   'wikidata', 'wikipedia', 'twitter', 'source', 'start_date']
+    df_line_list = df_line_list.drop(columns=['wheelchair','wikidata', 'wikipedia', 'twitter', 'source', 'start_date'])     
+    
+    return df_line_list 
+
+# lines ways extraction from data for lines plotting
+def lines_ways_extraction_from_datta(data): # => ok 
+    """
+    ways extraction of list of transportation lines from data produced by overpass request.
+    
+    this function extracts ways associated to each relation describing a transportation line. 
+    the returned dataframe permits to create a map of the network based on real wyas of the lines. 
+    this dataframe contains nodes latitudes and longitudes.
+    
+    param : 
+    -------
+        data : OSM data extracted with overpass request 
+        
+    returns :
+    ---------
+        df_line_tracks : pandas dataframe containing ways description of each extracted line relation.
+                         columns : ['line_name', 'way_id', 'public_transport', 'latitude', 'longitude']
+                         "latitude" and "longitude" are the coordonates of each node of the considered way
+                         
+                        Note : this function calls lines_list_extraction_from_data(data)  
+    """
+
+    #global relations, nodes, ways
+    #global relation, way, node  
+    #global dic_line_segments 
+    
+    # relations, ways, and nodes extraction from data 
+    relations = {element['id']: element for element in data['elements'] if element['type'] == 'relation'}
+    nodes = {element['id']: element for element in data['elements'] if element['type'] == 'node'}
+    ways = [element for element in data['elements'] if element['type'] == 'way']
+    
+    # group by relation (line id)
+    dic_line_segments = {}
+    
+    # get line list 
+    df_line_list = lines_list_extraction_from_data(data) 
+    
+    # loop on ways 
+    for way in ways:
+        # print("Way ID : ", way['id'], " - ", way.keys()) 
+        
+        # get line name in way attributes 
+        line_name = way.get('tags', {}).get('name', 'Unknown line')
+        way_id = way['id'] 
+        way_public_transport = way.get('tags', {}).get('public_transport', 'Unknown')
+        
+        # is it a new way ?
+        if way_id not in dic_line_segments:
+            dic_line_segments[way_id] = {
+                "line_name": line_name,
+                "way_id": way_id,
+                "public_transport": way_public_transport, 
+                "coordinates": []
+            }
+        
+        # get nodes coordonnates 
+        coordinates = []
+        # analysis of nodes list contained in the way 
+        for node_id in way.get('nodes', []):
+            # get node data from it's id  
+            node = nodes.get(node_id)
+            if node:
+                # add node coordinnates 
+                coordinates.append((node['lat'], node['lon']))
+        
+        # add to dictionnary 
+        dic_line_segments[way_id]["coordinates"].extend(coordinates)
+    
+    # convert dic to DataFrame
+    df_line_tracks = pd.DataFrame.from_records([
+        {"line_name": info["line_name"], "way_id": info["way_id"], "public_transport": info["public_transport"],  "coordinates": info["coordinates"]}
+        for info in dic_line_segments.values()
+    ])
+    
+    # create latitude and logitude columns from coordinaites 
+    # Extraction of nodes listes latitude and longitudes
+    df_line_tracks['latitude'] = df_line_tracks['coordinates'].apply(lambda coords: [point[0] for point in coords])
+    df_line_tracks['longitude'] = df_line_tracks['coordinates'].apply(lambda coords: [point[1] for point in coords])
+    
+    # delete coordinates column  
+    df_line_tracks = df_line_tracks.drop(columns=['coordinates'])
+    
+    return df_line_tracks 
+
 # fonction plot_network (matplotlib) 
 def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_color, dpi):
     """Function to plot transportation network 
@@ -353,29 +469,12 @@ def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_c
     # add axes 
     ax = fig.add_subplot(111)
 
-    stationlist = []
     # add lines  for only one direction on the same line 
     for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
         # print("add line : ", line)
         # line selection in df_line_info 
         filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
         
-        # sgn for test
-        print ("position ?", filtered_df)
-        linedata = filtered_df.to_dict()
-        
-        for keys in linedata['station_order'].keys():
-            stationlist.append ({
-                    "station_order": linedata['station_order'][keys], 
-                    "name": linedata['station_name'][keys],
-                    "lat": linedata['latitude [deg]'][keys],
-                    "long": linedata['longitude [deg]'][keys],
-                    "crossing": linedata['crossing'][keys]
-                                 
-            })
-        print (stationlist)
-        # sgn
-
         # add line 
         ax.plot(filtered_df['longitude [deg]'], filtered_df['latitude [deg]'], 
                  label = line,
@@ -432,65 +531,126 @@ def plot_to_buffer(fig):
     return image_base64
     # end of function plot to buffer 
 
-def plot_get_2d_data(df_line_info):
-    """Function extract geometric data 
-    
-    Parameters :
-    ------------
-        df_line_info : dataframe describing station list and positions 
-            columns are : 
-            Index(['line_label', 'line_name', 'from_station', 'to_station',
-                   'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]',
-                   'crossing', 'crossing_lines'],
-                   dtype='object')
-        
-        fig_width_inches : 
-        
-        fig_height_inches :
-        
-        background_color :
-        
-        dpi :
-        
-    output :         
-    --------    
-        an array of dict
+# fuctnion to create text file for braille printing 
+# file contains list of lines and stations names 
+def create_line_files(df, file_name):
     """
+    Creates text files listing metro lines and stops for braille printing.
     
-    transportlines_list = []
+    text file contains for each extrated line :
+       * line Id 
+       * line name 
+       * from station 
+       * to station 
+       * a table with following colums : Station Order,	Station Name, Crossing Lines 
 
-    # filtering df_line_info to get only one direction for each metro line 
-    df_line_list = df_line_info.groupby([ 'line_label', 'line_name']).size().reset_index(name='counts')
-    df_one_line_every_two = df_line_list.iloc[::2] 
-    # build data from lines
+    Parameters:
+    -----------
+        df : Pandas DataFrame
+            DataFrame containing metro line and station details.
+        
+        file_name : str
+            Name of the output file.
+    """ 
+ 
+    # Obtenir les noms de lignes uniques
+    line_names = df['line_name'].unique()
     
-    for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
-        print("add line : ", line, df_one_line_every_two["line_label"])
-        # line selection in df_line_info 
-        filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
+    file_content = "" 
+    
+    # boucle sur les lignes 
+    for line_name in line_names:
+        print("line name : ", line_name) 
         
-        # sgn for test
-        print ("position ?\n", filtered_df)
-        linedata = filtered_df.to_dict()
+        # Filtrer le DataFrame pour la ligne actuelle
+        df_line = df[df['line_name'] == line_name]
         
-        transportline=[]
-        for keys in linedata['station_order'].keys():
-            transportline.append ({
-                    "station_order": linedata['station_order'][keys], 
-                    "name": linedata['station_name'][keys],
-                    "lat": linedata['latitude [deg]'][keys],
-                    "long": linedata['longitude [deg]'][keys],
-                    "crossing": linedata['crossing'][keys]
-                                 
-            })
-        transportlines_list.append({"name":line, "stations":transportline})
+        # Extraire les informations générales de la ligne
+        line_label = df_line['line_label'].iloc[0]
+        # vérfication du type des données de la colone "line_label" pour tri croissant 
+        type_numeric = bool(re.match(r'^\d+$', str(line_label)))
+        # ///////////////// 
+        # Fonction pour extraire la partie numérique et alphabétique
+        def extract_parts(label):
+            match = re.match(r"(\d+)([a-zA-Z]*)", label)
+            if match:
+                num_part = int(match.group(1)) if match.group(1) else None
+                alpha_part = match.group(2) if match.group(2) else ""
+                return num_part, alpha_part
+            else:
+                return None, label
+
+        # Appliquer la fonction d'extraction et créer deux nouvelles colonnes
+        df[['num_part', 'alpha_part']] = df['line_label'].apply(lambda x: pd.Series(extract_parts(x)))
+
+        # Trier en fonction des nouvelles colonnes
+        df_sorted = df.sort_values(by=['num_part', 'alpha_part'], na_position='last')
         
+        # Réorganiser le dataframe pour ne garder que la colonne originale
+        df_sorted = df_sorted[['line_label']]
+
+        print(df_sorted)
+        # ////////////////////////////////
+
+        # Réinitialiser les index pour un DataFrame propre
+        df_sorted = df_sorted.reset_index(drop=True)
+
+        # ////////////////////////////////// 
+        from_station = df_line['from_station'].iloc[0]
+        to_station = df_line['to_station'].iloc[0]
         
-        # sgn
-    print (transportlines_list)    
-    # end of loop over lines 
-    # end of function plot_get_2d_data 
-    return transportlines_list
+        # correction du nom de la ligne 
+        # Étape 1 : Supprimer le mot "ligne" (avec ou sans majuscule)
+        line_name = re.sub(r'(?i)ligne', '', line_name)
+
+        # Étape 2 : Supprimer les nombres (un ou plusieurs chiffres)
+        line_name = re.sub(r'\d+', '', line_name)
+
+        # Étape 3 : Supprimer les signes ":"
+        line_name = re.sub(r':', '', line_name)
+
+        # Éliminer les espaces en trop au début ou à la fin
+        line_name = line_name.strip()
+
+        # Créer le contenu du fichier
+        file_content += f"Ligne : {line_label}\n"
+        file_content += f"Sens : {line_name}\n"
+        file_content += f"De: {from_station}\n"
+        file_content += f"Vers : {to_station}\n"
+        file_content += "\nStation Order\tStation Name\tCrossing Lines\n"
+        # file_content += "-"*50 + "\n"
+        
+        # Ajouter les informations des stations
+        for _, row in df_line.iterrows():
+            station_order = row['station_order']
+            station_name = row['station_name']
+            crossing_lines = row["crossing_lines"]
+            # crossing_lines_list = [line for line in row['crossing_lines'] if pd.notna(line)]
+            # Vérifier si crossing_lines est une liste et non NaN
+            if isinstance(crossing_lines, list):
+                crossing_lines = [line for line in crossing_lines if pd.notna(line)]
+                crossing_lines_str = ", ".join(crossing_lines)
+            else:
+                crossing_lines_str = ""
+            
+            # add to file content 
+            file_content += f"\t{station_order}\t{station_name}\t{crossing_lines_str}\n"
+        
+        # Déterminer le nom du fichier (en utilisant par exemple le line_label)
+        # file_name = f"{line_label}_line_info.txt"
+        file_content += f"\n"
+        
+    # fin de boucle sur les lignes 
+    print("file :")
+    print(file_content)
+
+    
+    # Sauvegarder le fichier
+    with open(file_name, "w", encoding='utf-8') as file:
+        file.write(file_content)
+    
+    return 
+# end of function 
 
 # main function 
 # -------------
@@ -504,7 +664,7 @@ def main():
     metro_lines_info = list() 
     
     # répertoire de travail 
-    print("Répertoire de travail : ", os.getcwd()) 
+    # print("Répertoire de travail : ", os.getcwd()) 
 
     # nom du fichier d'export du résultat brut de la requete overpass  
     output_file = 'test_export_elements_output.csv'
@@ -560,10 +720,10 @@ def main():
     print("fig_width_mm:", fig_width_mm)
     print("fig_height_mm:", fig_height_mm)
 
-    print("\n[couleurs image]")
-    print("background_color:", background_color)
-    print("line_color:", line_color)
-    print("station_color:", station_color)
+    # print("\n[couleurs image]")
+    # print("background_color:", background_color)
+    # print("line_color:", line_color)
+    # print("station_color:", station_color)
 
     # convert size in mm  
     un_pouce_mm = 25.4 # mm
@@ -625,9 +785,9 @@ def main():
 
     # data analysis  
     # ------------- 
-    # call function line_extraction 
+    # call function line_extraction and stations 
     # return to list : metro_lines_info  
-    metro_lines_info = line_extraction(data) 
+    metro_lines_info = line_extraction_and_stations(data) 
 
     # convert extracted data list to pandas DataFrame 
     print("\`nCreate a pandas DataFrame...")
@@ -753,7 +913,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     # section_couleurs_image = config['couleurs image']
 
     # read specific data 
-    place_name = city_name # function parameter : from text label field of HTML form 
+    place_name = city_name.strip() # function parameter : from text label field of HTML form 
     transportation_type = transport_type # function parameter : from select combobox of HTML form 
     # place_name = config_data_dict["site name"]["place_name"]
     # place_names_str = section_site.get('place_name')
@@ -777,7 +937,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     print("[site]")
 
     # on force la première lette du nom de la ville en majuscule pour les recherches dans OSM 
-    print("place name:", place_name)
+    # print("place name:", place_name)
 
     print("\n[image 2D]")
     print("image_folder:", image_folder)
@@ -836,10 +996,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
         sys.exit(1)
 
     # test of data content 
-    if ( not data or 
-        'elements' not in data or 
-        not data['elements'] or 
-        len(data['elements']) == 0 ):
+    if not data or 'elements' not in data or not data['elements'] or len(data['elements']) == 0:
         print("Data extraction ERROR !") 
         print("data is empty")
         print("or elements key is not define in data dict.") 
@@ -859,7 +1016,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     # ------------- 
     # call function line_extraction 
     # return to list : metro_lines_info  
-    metro_lines_info = line_extraction(data) 
+    metro_lines_info = line_extraction_and_stations(data) 
 
     # convert extracted data list to pandas DataFrame 
     print("\`nCreate a pandas DataFrame...")
@@ -937,9 +1094,7 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
 
     # network plotting 
     # ----------------
-    print ("data extarcted :")    
-    print ("nb line", df_line_info)
-
+        
     print("plot line network, 1 direction per line.") 
     fig = plot_network(df_line_info , fig_width_inches, fig_height_inches, background_color, dpi) 
     
@@ -952,194 +1107,6 @@ def main_flask_IHM(city_name = "None", transport_type = "None"):
     
     return image_base64_buf
     # end main function flask IHM
-
-def get_transport_data (city_name = "None", transport_type = "None", place_iso639_code = "fr"): 
-    """get_transport_data :
-            * creates overpass query and request data on Open Street Map 
-            * Extracts network data (line names, types, and stations positions) 
-            * return pandas dataframe with osm data about transport line
-        """     
-            
-    metro_lines_info = list() 
-    
-    # répertoire de travail 
-    # print("Répertoire de travail : ", os.getcwd()) 
-
-    # nom du fichier d'export du résultat brut de la requete overpass  
-    output_file = 'test_export_elements_output.csv'
-
-    # nom du fichier d'export des données relatives aux lignes extraites 
-    output_file_line_info = "line_data_export.csv" 
-
-    # read SCRIPT CONFIGURATION file 
-    # ------------------------------
-
-    # configuration file 
-    input_config_file = "extraction_config.ini"
-
-    # print("Lecture du fichier de configuration : ", input_config_file) 
-    config_data_dict = read_configuration_file(input_config_file) 
-
-    # Access to configuration data (sections and keys) 
-    # section_site = config['site name']
-    # section_image_2D = config['image 2D']
-    # section_couleurs_image = config['couleurs image']
-
-    # read specific data 
-    place_name = city_name # function parameter : from text label field of HTML form 
-    transportation_type = transport_type # function parameter : from select combobox of HTML form 
-    # place_name = config_data_dict["site name"]["place_name"]
-    # place_names_str = section_site.get('place_name')
-    # place_names = ast.literal_eval(place_names_str)  # Évaluation de la chaîne comme une liste Python
-
-    image_folder = config_data_dict["image 2D"]["image_folder"].strip('"')
-    output_image_file_name = config_data_dict["image 2D"]['output_image_file_name'].strip('"')
-    extension_file_format = config_data_dict["image 2D"]['extension_file_format'].strip('"')
-    file_size = int(config_data_dict["image 2D"]['file_size'])
-    dpi = int(config_data_dict["image 2D"]['dpi'])
-    fig_width_mm = int(config_data_dict["image 2D"]['fig_width_mm'])
-    fig_height_mm = int(config_data_dict["image 2D"]['fig_height_mm'])
-
-    background_color = eval(config_data_dict["couleurs image"]['background_color']) # Évaluation de la chaîne comme une expression Python
-    line_color = eval(config_data_dict["couleurs image"]['line_color'])
-    station_color = eval(config_data_dict["couleurs image"]['station_color'])
-
-    # show configuration data 
-    print("Configuration data :") 
-    print("----------------------------------")
-    print("[site]")
-
-    # on force la première lette du nom de la ville en majuscule pour les recherches dans OSM 
-    print("place name:", place_name)
-
-    print("\n[image 2D]")
-    print("image_folder:", image_folder)
-    print("Image file name : ", output_image_file_name) 
-    print("extension_file_format:", extension_file_format)
-    print("file_size:", file_size)
-    print("dpi:", dpi)
-    print("fig_width_mm:", fig_width_mm)
-    print("fig_height_mm:", fig_height_mm)
-
-    print("\n[couleurs image]")
-    print("background_color:", background_color)
-    print("line_color:", line_color)
-    print("station_color:", station_color)
-
-    # convert size in mm  
-    un_pouce_mm = 25.4 # mm
-    fig_width_inches = fig_width_mm / un_pouce_mm
-    fig_height_inches = fig_height_mm / un_pouce_mm 
-
-    # test image file folder exists and create it if necessary 
-    if not os.path.exists(image_folder):
-        # create sub-folder 
-        os.makedirs(image_folder)
-        print(f"sub-folder : {image_folder} created. ")
-    else:
-        print(f"sub-folder : {image_folder} already exists.")
-
-    # create full path name with file extension      
-    file_path = f"./{image_folder}/{output_image_file_name}.{extension_file_format}"
-
-    # Définir la zone d'étude 
-    # place_name = "Rennes"
-
-    # type de transports
-    # todo : ajouter dans le fichier de configuration .ini 
-    
-    # transportation_type = "subway"  # => test ok 
-    # transportation_type = "bus"  # => some bugs to be analysed...  
-    # transportation_type = "tram" # sur Nantes => extraction de 10 relations dans les 2 sens 
-    # transportation_type = "rail" # sur Rennes => aucun résultat 
-    # transportation_type = "railway" # => ne fonctionne pas dans dans ce cas la relation n'a pas de clé "from" (et "to")  
-
-    # create list to store line data 
-    metro_lines_info = []
-    
-    print("")
-    print("Sending overpass query.") 
-    # overpass query for data extraction   
-    try:
-        data = overpass_request(place_name, transportation_type, place_iso639_code)
-        # print(data)
-    except Exception as e:
-        print("Error") 
-        print(e)
-        sys.exit(1)
-
-    # test of data content 
-    if ( not data or 
-        'elements' not in data or 
-        not data['elements'] or 
-        len(data['elements']) == 0 ):
-        print("Data extraction ERROR !") 
-        print("data is empty")
-        print("or elements key is not define in data dict.") 
-        print("or data[""elements""] is empty.") 
-        print("Completd") 
-        sys.exit() 
-        
-    # convert data dict  in dataframe 
-    print("Convert data to dataframe format. ") 
-    df_raw_data = pd.DataFrame(data["elements"])
-       
-    # Export DataFrame to CSV file. delimiter = ";" 
-    print("Dataframe export into file : {}.".format(output_file)) 
-    df_raw_data.to_csv(output_file, sep=';', index=False)
-
-    # data analysis  
-    # ------------- 
-    # call function line_extraction 
-    # return to list : metro_lines_info  
-    metro_lines_info = line_extraction(data) 
-
-    # convert extracted data list to pandas DataFrame 
-    print("\`nCreate a pandas DataFrame...")
-    df_line_info = pd.DataFrame(metro_lines_info)
-
-    # identification des stations de corespondance 
-    # Identifier les stations communes entre les lignes
-    # Création d'une table croisée pour compter le nombre de lignes par station
-    # on traite pour chaque ligne, les 2 sens de circulation. 
-    # il faudra donc diviser par 2 les résultats pour ne considérer qu'une seule ligne 
-    # avec un seul sens de circulation 
-    df_station_counts = df_line_info.pivot_table(index="station_name", columns="line_label", aggfunc='size', fill_value=0)
-
-    # Identification des stations communes
-    # ATTENTION : la somme doit être supérieure à 2 
-    # car le dataframe contient pour chaque ligne, les 2 sens de circulation 
-    df_common_stations = df_station_counts[df_station_counts.sum(axis=1) > 2].index
-
-    # Ajouter la colonne "crossing"
-    df_line_info["crossing"] = df_line_info["station_name"].apply(lambda x: "yes" if x in df_common_stations else "no")
-
-    # create dataframe containing station with crossing lines 
-    df_crossing_lines_and_stations = df_line_info[df_line_info['crossing'] == 'yes'][['line_label', 'line_name', 'station_name', 'crossing']]
-    
-    # create dataframe containing for each crossing station, the list of lines 
-    df_station_crossing_line_list = df_crossing_lines_and_stations.groupby('station_name')['line_label'].apply(lambda x: list(x.unique())).reset_index()
-    
-    # rename column "line_label" to "crossing_lines" 
-    df_station_crossing_line_list.rename(columns={'line_label': 'crossing_lines'}, inplace=True)
-    
-    # Fusionner avec le DataFrame original
-    # df_crossing_lines = df_crossing_lines.merge(df_line_list, on='station_name', how='left')
-    df_line_info = df_line_info.merge(df_station_crossing_line_list, on='station_name', how='left')
-
-    return df_line_info
-
-def get_line_list (df_data):
-    # extract line list from dataframe
-
-    # line extraction frome df_data  
-    df_line_list = df_data.groupby([ 'line_label', 'line_name']).size().reset_index(name='counts')
-    nombre_de_ligne = df_line_list.shape[0]
-
-    print(f"\nExtraction of {nombre_de_ligne} lines.") 
-    print("line list : ") 
-    print(df_line_list)
-    return df_line_list
 
 # ----------
 #                
