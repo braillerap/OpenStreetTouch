@@ -81,7 +81,7 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
             #pos = utm.from_latlon(station["lat"], station["long"])
             x = round((station['x'] - xmin) * ratio, 2)
             y = round((station['y'] - ymin) * ratio, 2)
-            #print (x,y)
+            print (x,y)
             position.append( (x,y) )
 
         if len(position) > 0:
@@ -93,7 +93,7 @@ def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
         
         elements.append(svg.Path(
                     stroke="#ff0000",
-                    stroke_width=1,
+                    stroke_width=4,
                     stroke_linecap="round",
                     fill="none",
                     d=path,
