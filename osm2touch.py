@@ -272,7 +272,9 @@ class Api:
 
     def getCityImage (self, city):
         print ("call main_flask_IHM (city)")
+
         val= application_OSM_extraction.main_flask_IHM (city, transport_type="subway")
+
         print ("return from main_flask_IHM (city)")
         return val
 

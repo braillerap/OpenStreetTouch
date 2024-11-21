@@ -133,6 +133,7 @@ const Metro = () => {
                 onChange={(e)=>{setCityName(e.target.value);}}
                 />
         </label>
+
         {renderIso639()}
         <button onClick={goOsm}>Go !</button>
         {/*renderImage() */}
@@ -141,6 +142,7 @@ const Metro = () => {
             <p>{realCityName}</p>
             {renderTransportLines ()}
         </div>
+
     </div>
   );
 }

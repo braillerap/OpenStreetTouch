@@ -38,10 +38,13 @@ desktop_brap_parameters.json
 test_export_elements_output.csv
 images/zzz_metro.png
 line_data_export.csv
-
 osm/images/zzz_metro.png
 test.svg
 test.json
-
 pytest/osmbasictest.py
 osm/OSMtest.py
+osm/line_data_export.csv
+.vscode/settings.json
+
+
+
