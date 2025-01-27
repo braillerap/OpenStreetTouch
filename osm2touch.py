@@ -257,13 +257,12 @@ class Api:
     def GetTransportLines (self):
         ret = self.osmt.GetTransportLineList ()
         print ("GetTransportLineList", ret)
-        
-        
-
         return ret
 
-    def GetTransportSVG (self):
-        svg = self.osmt.get_svg ()
+    def GetTransportSVG (self, linelist):
+        print ("GetTransportSVG", linelist)
+        svg = self.osmt.get_svg (linelist)
+        print ("GetTransportSVG", svg)
         return svg
     
     def GetTransportSVGbase64 (self):

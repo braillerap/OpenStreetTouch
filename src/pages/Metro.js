@@ -37,6 +37,13 @@ const Metro = () => {
         );
     }
 
+    const goRender = () => {
+        console.log ("call GetTransportSVG" + transportLines);
+        window.pywebview.api.GetTransportSVG(transportLines).then ((svg) => {
+            setImagePreview (svg);
+        });
+    }
+
     const goOsm = () => {
         
         setImagePreview('');
@@ -47,21 +54,24 @@ const Metro = () => {
                 setRealCityName (datadic.city);
 
                 console.log (datadic.lines);
-                console.log (datadic.lines.line_name);
+                
                 let sline = [];
-                if ("line_name" in datadic.lines)
+                if ("lines" in datadic)
                 {
-                    for (let line in datadic.lines.line_name) 
+                    for (let line in datadic.lines) 
                     {
+                        console.log ("line " +line);
                         {
-                            sline.push ({id:line, name:datadic.lines.line_name[line], select:false});
+                            sline.push ({id:line, name:datadic.lines[line], select:false});
                         }
                     }
                 }   
                 setTransportLines(sline);
+                /*
                 window.pywebview.api.GetTransportSVG().then ((svg) => {
                     setImagePreview (svg);
                 });
+                */
             });
 
             
@@ -69,18 +79,7 @@ const Metro = () => {
 
        
 
-        /*
-        window.pywebview.api.getCityImage(cityName).then((imgdata) => {
-            if (imgdata) {
-                console.log(imgdata);
-                //setCityImage(imgdata);
-                setImagePreview(imgdata);
-            }
-            else
-                console.log("imgdata == null");
-        }
-        )
-        */
+       
     }
     const onSelectLine = (e) => {
         console.log(e.target.id);
@@ -94,7 +93,7 @@ const Metro = () => {
 
     const renderTransportLines = () => {
         if (transportLines.length === 0  )
-            return (<></>);
+            return (<>empty</>);
         
         return (
             
@@ -122,9 +121,16 @@ const Metro = () => {
         }
         return (<></>);
     }
+
+    const renderTransportAction = () => {
+        if (transportLines.length > 0  )
+        {
+            return (<><button onClick={goRender}>Render Transport line(s)</button></>);
+        }    
+    }
   return (
     <div>
-        <h1>Extraction OSM</h1>
+        <h1>Extraction Transport</h1>
 
         <label>City name:
             <input type="text" 
@@ -139,8 +145,9 @@ const Metro = () => {
         {/*renderImage() */}
 
         <div className='CheckedList'>
-            <p>{realCityName}</p>
+            <p>OSM city name : {realCityName}</p>
             {renderTransportLines ()}
+            {renderTransportAction ()}
         </div>
 
     </div>
