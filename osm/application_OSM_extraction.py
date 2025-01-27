@@ -66,7 +66,7 @@ def read_configuration_file(input_config_file):
     return config_dict 
     
 # function for overpas request on Open Street Map database 
-def overpass_request(place_name, transportation_type = "subway"): 
+def overpass_request(place_name, transportation_type = "subway", place_iso639_code = "fr"): 
     """Fonction : overpass request data 
     
     Parameters :
@@ -90,11 +90,12 @@ def overpass_request(place_name, transportation_type = "subway"):
     # ajout d'une majuscule sur la première lettre de place_name 
     place_name = place_name.capitalize()
     
+    
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
     overpass_query = f"""
     [out:json][timeout:30];
     /* recherche des données avec .searcharea */ 
-    area["name"="{place_name}"]->.searcharea;
+    area["name:{place_iso639_code}"="{place_name}"]->.searcharea;
     (
       relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
     );
@@ -164,10 +165,16 @@ def line_extraction_and_stations(data):
                 element_type = element['tags']["type"] 
                 transport_type = element['tags']["route"]
                 line_name = element['tags'].get('name', 'Unamed')
-                from_station = element['tags']["from"]
-                to_station = element['tags']["to"]
+                if "from" in element['tags']:
+                    from_station = element['tags']["from"]
+                else:
+                    from_station = "???"
+                if "to" in element['tags']:
+                    to_station = element['tags']["to"]
+                else:
+                    to_station = "???"
                 
-                print("nom de la liigne : ", line_name) 
+                print("nom de la ligne : ", line_name) 
                 line_label = element['tags']["ref"]
                 # type de réseau de transport 
                 # element['tags']["type"] = "route" 
