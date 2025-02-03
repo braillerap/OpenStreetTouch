@@ -8,9 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-macros": "^3.1.0",
     "dotenv": "^16.4.5",
-    
     "npm-run-all": "^4.1.5",
-    
     "purecss": "^3.0.0",
     "react": "^18.2.0",
     "react-accessible-treeview": "^2.9.1",
@@ -31,20 +29,12 @@
     "buildview": "npm-run-all clean build package",
     "builddebian": "npm-run-all clean build packagedebian build-deb-debian",
     "buildubuntu": "npm-run-all clean build packageubuntu build-deb-ubuntu",
-    
     "packagedebian": "pyinstaller DebianOsm2Touch.spec",
     "packageubuntu": "pyinstaller LinuxOsm2Touch.spec",
-    
     "build-deb-debian": "npm-run-all mkdirdebian cpdebian clogdebian dpkg-debian checkdebian",
     "build-deb-ubuntu": "npm-run-all mkdirubuntu cpubuntu clogubuntu dpkg-ubuntu checkubuntu",
-    
-    
     "mkdirdebian": "mkdir -p ./package/debian/osm2touch-debian/usr/bin/",
     "mkdirubuntu": "mkdir -p ./package/ubuntu/osm2touch-ubuntu/usr/bin/",
-    
-    
-    
-    
     "clogdebian": "git-changelog -x -s v0.6.0 -f `git tag | tail -n 1` | gzip > ./package/debian/osm2touch-debian/usr/share/doc/osm2touch-debian/changelog.gz",
     "cpdebian": "cp ./dist/osm2touch-debian ./package/debian/osm2touch-debian/usr/bin/",
     "dpkg-debian": "dpkg-deb -v --root-owner-group --build ./package/debian/osm2touch-debian ./dist/osm2touch-debian-${npm_package_version}.deb",

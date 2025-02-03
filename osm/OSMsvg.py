@@ -2,11 +2,15 @@ import svg
 import utm
 import cartopy.crs as ccrs
 
+
+def transport_data_to_svg2 (transport_2d_data, width=1000, height=1000):
+    print (transport_2d_data)
+
+    return ""
+
 def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
     elm: list[svg.Element] = []
 
-    
-    
     station_utm = []
     """
                     "station_order": linedata['station_order'][keys], 
