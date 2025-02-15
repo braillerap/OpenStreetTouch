@@ -51,3 +51,5 @@ osm/line_data_export.csv
 pytest/osm_extraction.json
 pytest/osm_request.json
 line_extraction.csv
+pytest/data.json
+osm/bup_application_OSM_extraction.py
