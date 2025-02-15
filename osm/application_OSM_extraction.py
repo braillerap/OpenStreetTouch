@@ -20,6 +20,7 @@ import time
 # module lecture fichier de configuration
 import configparser 
 import ast 
+import json
 
 from io import BytesIO
 import base64
@@ -131,6 +132,136 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     return data
     # fin fonction interrogation 
 
+# Fonction line_extraction 
+def osm_extraction(data, place_name, transport_type):
+    """line extraction fonction to get a list of lines including stations and positions 
+    
+    parameter
+    --------
+        data : data dictionnary (result of overpass query preformed on Open street Map 
+        
+        Returns 
+        -------
+            metro_info : dictionnaries of data. ({"relations":{},"ways":{}, "nodes":{}})  
+    """
+
+    transport_info = {"relations":{},"ways":{}, "nodes":{}} 
+
+    if not data['elements']:
+        print("Aucune donnée récupérée pour la ville {}".format(place_name))
+    else:
+        # Parcourir les éléments de données pour obtenir les informations des lignes de métro dans le dictionnaire data
+        # element.keys()
+        #  dict_keys(['type', 'id', 'nodes', 'tags']) 
+        for element in data['elements']:
+            # test : pour trouver une relation qui correspond à une ligne de métro 
+            # 1 : la varialbe element est de type dictionnaire 
+            # 2 : et element['type'] == "relation" 
+            if isinstance(element, dict):
+                print("Element : ", element['type'])
+                if element['type'] == 'relation':
+                    if element['id'] in transport_info['relations']:
+                        print("\Duplicated element : ", element['type'], element['id'], element['tags']['name'])
+                    else:
+                        transport_info['relations'][element['id']] = element
+
+                elif element['type'] == 'way':
+                    if element['id'] in transport_info['ways']:
+                        print("\Duplicated element way: ", element['type'], element['id'])
+                    else:
+                        transport_info['ways'][element['id']] = element
+
+                elif element['type'] == 'node':
+                    if element['id'] in transport_info['nodes']:
+                        print("\Duplicated element node: ", element['type'], element['id'])
+                    else:
+                        transport_info['nodes'][element['id']] = element
+
+    print ("relations:", len(transport_info['relations']))
+    print ("ways:", len(transport_info['ways']))
+    print ("nodes:", len(transport_info['nodes']))
+    return transport_info
+
+def osm_get_indirect_node (transport_info, node_id):
+    return transport_info['nodes'][node_id]
+
+def osm_get_indirect_element (transport_info, element):  
+    type = element["type"]
+    if type == "way":
+        return transport_info['ways'][element["ref"]]
+    elif type == "node":
+        return transport_info['nodes'][element["ref"]]
+    
+def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
+    print (desiredline)
+    transport_lines = []
+    for line in transport_info['relations'].values():
+        print ("*" * 40)
+        print (line['tags']['name'])
+        if line['tags']['name'] in desiredline:
+            positions = []
+            stations = []
+            print ("analyzing ", line['tags']['name'])
+            for element in line["members"]:
+                ref = element.get("ref","")
+                role = element.get("role","??")
+                
+                if element["type"] == "way":
+                    way = osm_get_indirect_element (transport_info, element)
+                    if role == "":
+                        if "nodes" in way:
+                            for node in way["nodes"]:
+                                node = osm_get_indirect_node (transport_info, node)
+                                if "lat" in node and "lon" in node:
+                                    positions.append ([node["lat"], node["lon"]])
+                    elif role == "stop":
+                        pass
+
+                elif element["type"] == "node":   
+                    node = osm_get_indirect_element (transport_info, element)
+                    print ("indirect node ", node, element)
+                    if role == "":
+                        pass
+                    elif role == "stop":
+                        print (node, element)
+                        station = {
+                            "name": node["tags"].get("name", ""),
+                            "id": node["id"],
+                            "lat": node["lat"],
+                            "lon": node["lon"]
+                                   
+                                   }
+                        stations.append(station)
+
+            line_info = {
+                "name": line['tags']['name'],
+                "id": line['id'],
+                "positions": positions,
+                "stations": stations
+            }
+            transport_lines.append(line_info)
+
+    return transport_lines
+
+
+def osm_get_transport_lines (transport_info, transport_type):
+    transport_lines = []
+
+    for line in transport_info['relations'].values():
+        if line['tags']['type'] == 'route' and line['tags']['route'] == transport_type:
+            line_info = {
+                "name": line['tags']['name'],
+                "id": line['id'],
+                "ref": line['tags'].get('ref', ''),
+                "route": line['tags'].get('route', ''),
+                "from": line['tags'].get('from', ''),
+                "to": line['tags'].get('to', '')
+            }
+            transport_lines.append(line_info)
+
+    return transport_lines
+
+
 # Fonction line_extraction and stations 
 def line_extraction_and_stations(data):
     """line extraction fonction to get a list of lines including stations and positions 
@@ -141,10 +272,10 @@ def line_extraction_and_stations(data):
         
         Returns 
         -------
-            metro_line_info : list of dictionnaries. each dict dict_keys(['line_label', 'line_name', 'from_station', 'to_station', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]'])  
+            metro_info : list of dictionnaries. each dict dict_keys(['line_label', 'line_name', 'from_station', 'to_station', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]'])  
         """ 
     
-    metro_lines_info = list() 
+    metro_lines_info = list()
     
     if not data['elements']:
         print("Aucune donnée récupérée pour la ville {}".format(place_name))
@@ -209,6 +340,7 @@ def line_extraction_and_stations(data):
                     if isinstance(member, dict) and member['type'] == 'node':
                         # print(">>> Membre avec rôle 'stop'")
                         node_id = member['ref']
+                        
                         # print(">>> Node Id : ", node_id)
                         # recherche de ce noeud dans la lisste des noeuds qui composent la relation  
                         # --------------------------------------------------------------------------
@@ -251,9 +383,9 @@ def line_extraction_and_stations(data):
                                     if metro_station["name"] == "Gares": 
                                         print("gare ") 
                                         gare = node_element
-                                        print("")
-                                        print(node_element) 
-                                        print("") 
+                                        #print("")
+                                        #print(node_element) 
+                                        #print("") 
                                          
                                     # print("ajouter : ", metro_station) 
                                     # ajout du nom de la station à la liste de la ligne 
@@ -320,7 +452,7 @@ def lines_list_extraction_from_data(data):
         df_line_list : pandas dataframe containing relation["tag"] of each extracted line. 
     """
     
-    global df_line_list 
+    #global df_line_list 
     
     # relations extraction from data 
     relations = {element['id']: element for element in data['elements'] if element['type'] == 'relation'} 
@@ -375,6 +507,7 @@ def lines_ways_extraction_from_datta(data): # => ok
     # group by relation (line id)
     dic_line_segments = {}
     
+    json.dump (data, open("data.json", "w"), indent=4)
     # get line list 
     df_line_list = lines_list_extraction_from_data(data) 
     
