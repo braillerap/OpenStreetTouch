@@ -255,10 +255,18 @@ class Api:
     
 
     def GetTransportLines (self):
-        ret = self.osmt.GetTransportLineList ()
+        #ret = self.osmt.GetTransportLineList ()
+        ret = self.osmt.GetTransportDataLineList ()
+        
         print ("GetTransportLineList", ret)
         return ret
 
+    def GetTransportDataSvg (self, linelist):
+        print ("GetTransportSVG", linelist)
+        svg = self.osmt.GetTransportDataSvg (linelist)
+        print ("GetTransportSVG", svg)
+        return svg
+    
     def GetTransportSVG (self, linelist):
         print ("GetTransportSVG", linelist)
         svg = self.osmt.get_svg (linelist)
