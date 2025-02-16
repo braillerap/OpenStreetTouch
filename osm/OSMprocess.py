@@ -39,11 +39,13 @@ class Osmprocess:
         desired_line = [line["name"] for line in linelist if line["select"] == True]
         transport_graph_data = application_OSM_extraction.osm_get_transport_lines_data (self.transport_data, desired_line, self.transport_type)
         
+        json.dump (transport_graph_data, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
         return transport_graph_data
     
-    def GetTransportDataSvg (self, graphdata):
-        pass
-
+    def GetTransportDataSvg (self, linelist):
+        graph_data = self.GetTransportDataGraphInfo (linelist)
+        svg = OSMsvg.transport_data_to_svg2 (graph_data)
+        return str(svg)
 
     def GetTransportLineList (self):
         if (len(self.osm_data) == 0):

@@ -183,9 +183,29 @@ def osm_extraction(data, place_name, transport_type):
     return transport_info
 
 def osm_get_indirect_node (transport_info, node_id):
+    """
+    Retrieve an indirect node from the transport information dictionary.
+
+    Args:
+        transport_info (dict): A dictionary containing osm transport information, including nodes.
+        node_id (int): The ID of the node to retrieve.
+
+    Returns:
+        dict: The node information corresponding to the given node ID.
+    """
     return transport_info['nodes'][node_id]
 
 def osm_get_indirect_element (transport_info, element):  
+    """
+    Retrieves the indirect element from the transport_info dictionary based on the type and reference of the element.
+
+    Parameters:
+    transport_info (dict): A dictionary containing transport information, including ways and nodes.
+    element (dict): A dictionary representing an element with a type and reference.
+
+    Returns:
+    dict: The indirect osm element from the transport_info dictionary, either a way or a node.
+    """
     type = element["type"]
     if type == "way":
         return transport_info['ways'][element["ref"]]
@@ -193,35 +213,61 @@ def osm_get_indirect_element (transport_info, element):
         return transport_info['nodes'][element["ref"]]
     
 def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
+    """
+    Extracts transport line data from OpenStreetMap (OSM) data for a given transport type and desired lines.
+
+    Parameters:
+    transport_info (dict): A dictionary containing OSM data, including relations and members.
+    desiredline (list): A list of desired transport line names.
+    transport_type (str): The type of transport (e.g., "bus", "train").
+
+    Returns:
+    list: A list of dictionaries containing information about each transport line that matches the desired line.
+    """
+
     print (desiredline)
     transport_lines = []
     for line in transport_info['relations'].values():
-        print ("*" * 40)
-        print (line['tags']['name'])
+        
+        # Check if the line's name is in the desired lines list
         if line['tags']['name'] in desiredline:
             positions = []
+            debug_nodes = []
+            debug_ways = []
             stations = []
             print ("analyzing ", line['tags']['name'])
             for element in line["members"]:
                 ref = element.get("ref","")
                 role = element.get("role","??")
                 
+                # Check if the element is a way
                 if element["type"] == "way":
                     way = osm_get_indirect_element (transport_info, element)
+                    # Check if the role is empty
                     if role == "":
+                        # Check if the way has nodes
                         if "nodes" in way:
+                            # Loop through the nodes
                             for node in way["nodes"]:
                                 node = osm_get_indirect_node (transport_info, node)
+                                # Check if the node has lat and lon
                                 if "lat" in node and "lon" in node:
-                                    positions.append ([node["lat"], node["lon"]])
+                                    if "tags" not in node:
+                                        positions.append ([node["lat"], node["lon"]])
+                                        debug_nodes.append (node)
+                                        debug_ways.append(way)
+                    # Check if the role is stop
                     elif role == "stop":
                         pass
 
+                # Check if the element is a node
                 elif element["type"] == "node":   
                     node = osm_get_indirect_element (transport_info, element)
                     print ("indirect node ", node, element)
+                    # Check if the role is empty
                     if role == "":
                         pass
+                    # Check if the role is stop
                     elif role == "stop":
                         print (node, element)
                         station = {
@@ -237,18 +283,36 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                 "name": line['tags']['name'],
                 "id": line['id'],
                 "positions": positions,
-                "stations": stations
+                "stations": stations,
+                'debug_nodes': debug_nodes,
+                'debug_ways': debug_ways
             }
             transport_lines.append(line_info)
 
     return transport_lines
 
 
+# Define a function to get transport lines from OSM data
 def osm_get_transport_lines (transport_info, transport_type):
+    """
+    Extracts and returns a list of transport lines from the structured transport information dictionary.
+
+    Parameters:
+    transport_info (dict): A dictionary containing transport information, including relations.
+    transport_type (str): The type of transport to filter by (e.g., 'subway', 'bus', 'train', 'tram').
+
+    Returns:
+    list: A list of dictionaries, each representing a transport line with its relevant information.
+    """
+
+    # Initialize an empty list to store transport lines
     transport_lines = []
 
+    # Loop through the relations in the transport_info dictionary
     for line in transport_info['relations'].values():
+        # Check if the type of the relation is 'route' and the route is of the specified transport type
         if line['tags']['type'] == 'route' and line['tags']['route'] == transport_type:
+            # Create a dictionary to store the information of the transport line
             line_info = {
                 "name": line['tags']['name'],
                 "id": line['id'],
@@ -257,8 +321,10 @@ def osm_get_transport_lines (transport_info, transport_type):
                 "from": line['tags'].get('from', ''),
                 "to": line['tags'].get('to', '')
             }
+            # Add the transport line information to the list
             transport_lines.append(line_info)
 
+    # Return the list of transport lines
     return transport_lines
 
 
