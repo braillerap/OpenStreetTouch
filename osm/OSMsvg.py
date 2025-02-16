@@ -4,9 +4,83 @@ import cartopy.crs as ccrs
 
 
 def transport_data_to_svg2 (transport_2d_data, width=1000, height=1000):
-    print (transport_2d_data)
+    
 
-    return ""
+    proj = ccrs.Orthographic(0, 0)
+    data_proj = ccrs.PlateCarree()
+
+    # build the square area for offset and ration
+    minx = 100000000
+    miny = 100000000
+    maxx = -100000000
+    maxy = -100000000
+    min_lat = 100000000
+    max_lat = -100000000
+    min_lon = 100000000
+    max_lon = -100000000
+    
+    for line in transport_2d_data:
+        print ("line", line["name"])
+        for position in line["positions"]:
+                      
+            pos = proj.transform_point(position[1], position[0], data_proj)
+            #pos = utm.from_latlon(station["lat"], station["long"])
+            minx = min ([minx, pos[0]])
+            miny = min ([miny, pos[1]])
+            maxx = max ([maxx, pos[0]])
+            maxy = max ([maxy, pos[1]])
+
+            min_lat = min([min_lat, position[0]])
+            max_lat = max([max_lat, position[0]])
+            min_lon = min([min_lon, position[1]])
+            max_lon = max([max_lon, position[1]])
+
+    sizex = maxx - minx
+    sizey = maxy - miny
+    print ("min lat", min_lat, "max lat", max_lat, "min lon", min_lon, "max lon", max_lon)
+    print ("minx", minx, "miny", miny, "maxx", maxx, "maxy", maxy)
+    
+    ratio = min (width / sizex, height / sizey)
+    print ("ratio", ratio)
+    
+    # build dvg graph
+    elements: list[svg.Element] = []
+
+    for line in transport_2d_data:
+        print ("line", line["name"])
+        transport_line_pos = []
+        for position in line["positions"]:
+            pos = proj.transform_point(position[1], position[0], data_proj)
+            #print (pos)
+            x = round((pos[0] - minx) * ratio, 2)
+            y = round((pos[1] - miny) * ratio, 2)
+            print (x,y)
+            transport_line_pos.append( (x,y) )
+        path : list[svg.element] = []
+        if len(transport_line_pos) > 0:
+            path.append (svg.M(transport_line_pos[0][0],transport_line_pos[0][1]))
+
+        for pos in transport_line_pos[1:]:    
+            #print (pos[0],pos[1])    
+            path.append (svg.L(pos[0],pos[1]))
+        
+        elements.append(svg.Path(
+                    stroke="#ff0000",
+                    stroke_width=1,
+                    stroke_linecap="round",
+                    fill="none",
+                    d=path,
+                ))
+        
+    fig = svg.SVG(
+                viewBox=svg.ViewBoxSpec(0, 0, width, height),
+                width=svg.mm(width),
+                height=svg.mm(height),
+                elements=elements
+                )
+    with open('test.svg', 'w') as f:
+        f.write(str(fig))
+    return fig
 
 def transport_data_to_svg (transport_2d_data, width=1000, height=1000):
     elm: list[svg.Element] = []
