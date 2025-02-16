@@ -12,7 +12,7 @@ if __name__ == '__main__':
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     print (SCRIPT_DIR)
     sys.path.append(os.path.dirname(SCRIPT_DIR))
-    city = "rennes"
+    city = "amsterdam"
     transport = "subway"
     from osm import OSMprocess
     
@@ -49,5 +49,7 @@ if __name__ == '__main__':
         print ('#' * 20)
         for station in line["stations"]:
             print (line["name"],":",station)
-
+        print (line)
     
+    svg = osm.GetTransportDataSvg(selected)
+    print (svg)
