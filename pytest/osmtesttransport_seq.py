@@ -31,7 +31,7 @@ def build_city_svg (city, transport, iso639_code = "fr"):
         print (line)
         selected.append({"id": id, "name": line, "select":True})
         id +=1
-    selected[3]["select"] = True
+    
     print (selected)
 
     graph_data = osm.GetTransportDataGraphInfo (selected)
@@ -60,16 +60,17 @@ if __name__ == '__main__':
     from osm import OSMprocess
     
     test_data = [
-        {"city": "amsterdam", "transport": "subway"},
-        {"city": "londres", "transport": "subway"},
-        
-        {"city": "rennes", "transport": "subway"},
-        {"city": "lyon", "transport": "subway"},
-        {"city": "marseille", "transport": "subway"},
-        {"city": "paris", "transport": "subway"},
-        {"city": "berlin", "transport": "subway"},
-        {"city": "rennes", "transport": "bus"},
-        {"city": "paris", "transport": "bus"},
+        {"city": "amsterdam",   "transport": "subway"},
+        {"city": "londres",     "transport": "subway"},
+        {"city": "rennes",      "transport": "subway"},
+        {"city": "lyon",        "transport": "subway"},
+        {"city": "marseille",   "transport": "subway"},
+        {"city": "paris",       "transport": "subway"},
+        {"city": "berlin",      "transport": "subway"},
+        {"city": "lyon",        "transport": "funicular"},
+        {"city": "paris",       "transport": "funicular"},
+        {"city": "rennes",      "transport": "bus"},
+        {"city": "paris",       "transport": "bus"},
     ]
     for data in test_data:
         build_city_svg (data["city"], data["transport"])

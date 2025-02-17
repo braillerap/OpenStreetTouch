@@ -16,7 +16,7 @@ def reorder_path_for_nearest (pos, path):
 def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
     
     draw_labels = False
-    drawmiddle = True
+    drawmiddle = False
     proj = ccrs.Orthographic(0, 0)
     data_proj = ccrs.PlateCarree()
 
