@@ -232,9 +232,12 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
         # Check if the line's name is in the desired lines list
         if line['tags']['name'] in desiredline:
             positions = []
+            position_dic = []
+            positions_ways = []
             debug_nodes = []
             debug_ways = []
             stations = []
+            labels = []
             print ("analyzing ", line['tags']['name'])
             for element in line["members"]:
                 ref = element.get("ref","")
@@ -248,14 +251,24 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                         # Check if the way has nodes
                         if "nodes" in way:
                             # Loop through the nodes
+                            ways_node = []
                             for node in way["nodes"]:
                                 node = osm_get_indirect_node (transport_info, node)
                                 # Check if the node has lat and lon
                                 if "lat" in node and "lon" in node:
                                     if "tags" not in node:
                                         positions.append ([node["lat"], node["lon"]])
-                                        debug_nodes.append (node)
-                                        debug_ways.append(way)
+                                        anoted_node = {
+                                            "lat": node["lat"],
+                                            "lon": node["lon"],
+                                            "id": node["id"],
+                                            "way_id": way["id"],
+                                            "route" : element.get("route", "?")
+                                        }
+                                        position_dic.append (anoted_node)
+                                        ways_node.append (anoted_node)
+
+                            positions_ways.append ({"way_id": way.get("id", "??"), "nodes":ways_node})
                     # Check if the role is stop
                     elif role == "stop":
                         pass
@@ -284,8 +297,10 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                 "id": line['id'],
                 "positions": positions,
                 "stations": stations,
-                'debug_nodes': debug_nodes,
-                'debug_ways': debug_ways
+                "positions_dic": position_dic,
+                "positions_ways": positions_ways,
+                #'debug_nodes': debug_nodes,
+                #'debug_ways': debug_ways
             }
             transport_lines.append(line_info)
 
