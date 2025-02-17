@@ -32,7 +32,8 @@ class Osmprocess:
         
         # sort data
         transport_lines.sort(key=lambda x: x["name"])
-        return transport_lines
+        result = {"city":self.CityName, "lines":[line["name"] for line in transport_lines]} 
+        return result
     
 
     def GetTransportDataGraphInfo (self, linelist):
@@ -44,7 +45,9 @@ class Osmprocess:
     
     def GetTransportDataSvg (self, linelist):
         graph_data = self.GetTransportDataGraphInfo (linelist)
-        svg = OSMsvg.transport_data_to_svg2 (graph_data)
+        #svg = OSMsvg.transport_data_to_svg2 (graph_data)
+        #svg = OSMsvg.transport_data_to_svg_from_dic (graph_data)
+        svg = OSMsvg.transport_data_to_svg_from_dicways (graph_data)
         return str(svg)
 
     def GetTransportLineList (self):

@@ -28,7 +28,7 @@ if __name__ == '__main__':
     end = time.time ()
     linelistdelay = end - start
 
-    for line in transport_lines:
+    for line in transport_lines["lines"]:
         print (line)
     
     print ("timing")
@@ -36,10 +36,12 @@ if __name__ == '__main__':
     print ("linelist delay", linelistdelay)
     
     selected = []
- 
-    for line in transport_lines:
-        selected.append({"id": line["id"], "name": line["name"], "select":True})
-
+    id = 0
+    for line in transport_lines["lines"]:
+        print (line)
+        selected.append({"id": id, "name": line, "select":False})
+        id +=1
+    selected[-1]["select"] = True
     print (selected)
 
     graph_data = osm.GetTransportDataGraphInfo (selected)
