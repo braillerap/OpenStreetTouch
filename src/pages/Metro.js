@@ -38,8 +38,8 @@ const Metro = () => {
     }
 
     const goRender = () => {
-        console.log ("call GetTransportSVG" + transportLines);
-        window.pywebview.api.GetTransportSVG(transportLines).then ((svg) => {
+        console.log ("call GetTransportDataSvg" + transportLines);
+        window.pywebview.api.GetTransportDataSvg(transportLines).then ((svg) => {
             setImagePreview (svg);
         });
     }
@@ -65,10 +65,12 @@ const Metro = () => {
                             sline.push ({id:line, name:datadic.lines[line], select:false});
                         }
                     }
-                }   
+                }  
+                console.log (sline) ;
                 setTransportLines(sline);
+                
                 /*
-                window.pywebview.api.GetTransportSVG().then ((svg) => {
+                window.pywebview.api.GetTransportDataSvg(sline).then ((svg) => {
                     setImagePreview (svg);
                 });
                 */
