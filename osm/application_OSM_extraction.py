@@ -283,14 +283,15 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                     # Check if the role is stop
                     elif role == "stop":
                         print (node, element)
-                        station = {
-                            "name": node["tags"].get("name", ""),
-                            "id": node["id"],
-                            "lat": node["lat"],
-                            "lon": node["lon"]
-                                   
-                                   }
-                        stations.append(station)
+                        if "tags" in node:
+                            station = {
+                                "name": node["tags"].get("name", ""),
+                                "id": node["id"],
+                                "lat": node["lat"],
+                                "lon": node["lon"]
+                                    
+                                    }
+                            stations.append(station)
 
             line_info = {
                 "name": line['tags']['name'],
