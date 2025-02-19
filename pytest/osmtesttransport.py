@@ -41,7 +41,9 @@ if __name__ == '__main__':
         print (line)
         selected.append({"id": id, "name": line, "select":False})
         id +=1
-    selected[-1]["select"] = True
+    selected[-5]["select"] = True
+    selected[-2]["select"] = True
+    
     print (selected)
 
     graph_data = osm.GetTransportDataGraphInfo (selected)
@@ -53,5 +55,8 @@ if __name__ == '__main__':
             print (line["name"],":",station)
         print (line)
     
+    print ("*" * 50)
+    print ("*" * 10, "Build SVG")
+    print ("*" * 50)
     svg = osm.GetTransportDataSvg(selected)
-    print (svg)
+   

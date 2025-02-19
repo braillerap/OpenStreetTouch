@@ -69,8 +69,7 @@ if __name__ == '__main__':
         {"city": "berlin",      "transport": "subway"},
         {"city": "lyon",        "transport": "funicular"},
         {"city": "paris",       "transport": "funicular"},
-        {"city": "rennes",      "transport": "bus"},
-        {"city": "paris",       "transport": "bus"},
+       
     ]
     for data in test_data:
         build_city_svg (data["city"], data["transport"])
