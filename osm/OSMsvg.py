@@ -2,10 +2,48 @@ import svg
 from textwrap import dedent
 import utm
 import cartopy.crs as ccrs
-
+import json
+from . import OSMsvgFile
 
 def square_dist (pt1, pt2):
     return ((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
+
+
+
+def reorder_nodesway_for_nearest_middle (way, testway):
+    xm =0
+    ym =0
+    if len(testway) > 0 and len(way) > 0:
+        for node in testway:
+            xm += node['pos_ortho'][0]
+            ym += node['pos_ortho'][1]
+        xm /= len(testway)
+        ym /= len(testway)
+
+        diststart = square_dist ((xm, ym), way[0]["pos_ortho"])
+        distend = square_dist ((xm, ym), way[-1]["pos_ortho"])
+        #if diststart > distend:
+        #    way.reverse()
+        
+        
+def reorder_path_for_nearest_middle (path, testpath):
+    if len(path) > 1 and len(testpath) > 0:
+        xm =0
+        ym =0
+        for pos in testpath:
+            xm += pos[0]
+            ym += pos[1]
+        xm /= len(testpath)
+        ym /= len(testpath)
+        diststart = square_dist ((xm, ym), path[0])
+        distend = square_dist ((xm, ym), path[-1])
+        if diststart > distend:
+            path.reverse()
+        
+        return path
+
+
+
 def reorder_path_for_nearest (pos, path):
     if len(path) > 1:
         diststart = square_dist (pos, path[0])
@@ -13,10 +51,209 @@ def reorder_path_for_nearest (pos, path):
         if diststart > distend:
             path.reverse()
     return path
+
+class OrthoArea:
+    def __init__ (self):
+        self.minx = 10000000
+        self.miny = 10000000
+        self.maxx = -10000000
+        self.maxy = -10000000
+        self.width = 0
+        self.height = 0
+        self.marginx = 50
+        self.marginy = 50
+        self.ratio = 1
+        self.min_lat = 10000000
+        self.max_lat = -10000000
+        self.min_lon = 10000000
+        self.max_lon = -10000000
+
+def build_projected_transport_data (transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+    proj = ccrs.Orthographic(0, 0)
+    data_proj = ccrs.PlateCarree()
+
+    # compute minx, miny, maxx, maxy
+    area = OrthoArea ()
+    for line in transport_2d_data:
+        
+        for way in line["positions_ways"]:
+            for node in way["nodes"]:
+                pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                
+                area.minx = min ([area.minx, float(pos[0])])
+                area.miny = min ([area.miny, float (pos[1])])
+                area.maxx = max ([area.maxx, float (pos[0])])
+                area.maxy = max ([area.maxy, float (pos[1])])
+                
+                area.min_lat = min([area.min_lat, node["lat"]])
+                area.max_lat = max([area.max_lat, node["lat"]])
+                area.min_lon = min([area.min_lon, node["lon"]])
+                area.max_lon = max([area.max_lon, node["lon"]])
+                
+                node["pos_ortho"] = (pos[0], pos[1])
+                
+        
+
+    area.width = area.maxx - area.minx
+    area.height = area.maxy - area.miny
+    print ("min lat", area.min_lat, "max lat",area. max_lat, "min lon", area.min_lon, "max lon", area.max_lon)
+    print ("minx", area.minx, "miny", area.miny, "maxx", area.maxx, "maxy", area.maxy)
+    print ("width", area.width, "height", area.height)
+    area.ratio = min ((width - 2 * marginx) / area.width, (height - 2 * marginy) / area.height)
+    print ("ratio", area.ratio)
+    
+    return area
 def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
     
     draw_labels = False
     drawmiddle = False
+    draw_filled_path = True
+    proj = ccrs.Orthographic(0, 0)
+    data_proj = ccrs.PlateCarree()
+
+    # build the square area for offset and ration
+    colors = ("red","black","blue")
+    color_id = 0
+    
+    # build svg graph
+    fsvg = OSMsvgFile.OSMsvgFile() 
+    fsvg.open()
+
+    area = build_projected_transport_data (transport_2d_data, width, height, marginx, marginy)
+    
+    
+    for line in transport_2d_data:
+        print ("svg drawing line", line["name"])
+        cnt = 0
+        previous_pos = None
+        lastway_position = None
+        
+        total_pos = []
+        
+        #reorder_nodesway_for_nearest_middle (line["positions_ways"][0]["nodes"], line["positions_ways"][1]["nodes"])
+
+        for way in line["positions_ways"]:
+            transport_line_pos = []
+            
+
+            for position in way["nodes"]:
+                pos = position["pos_ortho"]
+                #print (pos)
+                x = round((pos[0] - area.minx) * area.ratio, 2) + marginx
+                y = height - round((pos[1] - area.miny) * area.ratio, 2) - marginy
+                
+                transport_line_pos.append( (x,y) )
+                
+                lastway_position = (x,y)
+            
+            if len (transport_line_pos) > 1:
+                fsvg.addsvg(svg.Text(x=transport_line_pos[0][0], y=transport_line_pos[0][1], class_=["small"], text="start"))
+                fsvg.addsvg(svg.Text(x=transport_line_pos[-1][0], y=transport_line_pos[-1][1] -10, class_=["small"], text="end"))
+            if previous_pos:
+                #reorder_path_for_nearest (previous_pos, transport_line_pos)
+            
+                previous_pos = lastway_position
+            
+            for tpos in transport_line_pos:
+                total_pos.append ( tpos)
+            
+            path : list[svg.element] = []
+            if len(transport_line_pos) > 0:
+                path.append (svg.M(transport_line_pos[0][0],transport_line_pos[0][1]))
+
+            for pos in transport_line_pos[1:]:    
+                #print (pos[0],pos[1])    
+                path.append (svg.L(pos[0],pos[1]))
+            
+            fsvg.addsvg(svg.Path(
+                        stroke=colors[color_id],
+                        stroke_width=1,
+                        stroke_linecap="round",
+                        fill="none",
+                        d=path,
+                    ))
+
+            # find way middle
+            if drawmiddle and len (way["nodes"]) > 1:
+                pos = proj.transform_point(way["nodes"][0]["lon"], way["nodes"][0]["lat"], data_proj)
+                x1 = round((pos[0] - area.minx) * area.ratio, 2) + marginx
+                y1 = height - round((pos[1] - area.miny) * area.ratio, 2) - marginy
+                pos = proj.transform_point(way["nodes"][-1]["lon"], way["nodes"][-1]["lat"], data_proj)
+                x2 = round((pos[0] - area.minx) * area.ratio, 2) + marginx
+                y2 = height - round((pos[1] - area.miny) * area.ratio, 2) - marginy
+                path : list[svg.element] = []
+                x = (x1 + x2) / 2
+                y = (y1 + y2) / 2
+                path.append (svg.M(x,y))
+                path.append (svg.L(x+10, y -10))
+                fsvg.addsvg(svg.Path(
+                        stroke="pink",
+                        stroke_width=1,
+                        stroke_linecap="round",
+                        fill="none",
+                        d=path,
+                    ))
+                fsvg.addsvg(
+                    svg.Text(x=x+10, y=y -10, class_=["smallred"], text=str(cnt) + " " + str(way.get("way_id", "??")))
+                    )
+                cnt += 1
+            color_id += 1
+            if color_id >= len(colors):
+                color_id = 0
+        if draw_filled_path:
+            path : list[svg.element] = []
+            if len(total_pos) > 0:
+                path.append (svg.M(total_pos[0][0],total_pos[0][1]))
+
+            for pos in total_pos[1:]:    
+                #print (pos[0],pos[1])    
+                path.append (svg.L(pos[0],pos[1]))
+            
+            fsvg.addsvg(svg.Path(
+                        stroke="#ff000080",
+                        stroke_width=4,
+                        stroke_linecap="round",
+                        fill="none",
+                        d=path,
+                    ))
+        
+
+    # build labels
+    if draw_labels:
+        label =""
+        for line in transport_2d_data:
+            for position in line["positions_dic"]:
+                if str(position["way_id"]) != label:
+                    label = str(position["way_id"])
+                    pos = proj.transform_point(position["lon"], position["lat"], data_proj)
+                    #print (pos)
+                    x = round((pos[0] - area.minx) * area.ratio, 2) + marginx
+                    y = height - round((pos[1] - area.miny) * area.ratio, 2) - marginy
+                    xl = x + 20
+                    yl = y
+                    #print (x,y, label)
+                    path : list[svg.element] = []
+                    path.append (svg.M(x,y))
+                    path.append (svg.L(xl,yl))
+                    fsvg.addsvg(svg.Path(
+                        stroke="#00ff00",
+                        stroke_width=1,
+                        stroke_linecap="round",
+                        fill="none",
+                        d=path,
+                    ))
+                    fsvg.addsvg(
+                        svg.Text(x=xl, y=yl, class_=["small"], text=label + " " + str(position["route"]) + " " + str(position["id"]))
+                    )
+
+    fig = fsvg.close()
+    fsvg.writeToFile ("test2.svg")
+    return fig
+
+def transport_data_to_svg_from_dicways_old (transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+    
+    draw_labels = False
+    drawmiddle = True
     proj = ccrs.Orthographic(0, 0)
     data_proj = ccrs.PlateCarree()
 
@@ -32,8 +269,8 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
     colors = ("red","black","blue")
     color_id = 0
     
+    # compute minx, miny, maxx, maxy
     for line in transport_2d_data:
-        print ("line", line["name"])
         for position in line["positions_dic"]:
                       
             pos = proj.transform_point(position["lon"], position["lat"], data_proj)
@@ -81,6 +318,8 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
         total_pos = []
         for way in line["positions_ways"]:
             transport_line_pos = []
+            
+
             for position in way["nodes"]:
                 pos = proj.transform_point(position["lon"], position["lat"], data_proj)
                 #print (pos)
@@ -90,10 +329,12 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
                 transport_line_pos.append( (x,y) )
                 
                 lastway_position = (x,y)
-
+            
+            
             if previous_pos:
                 reorder_path_for_nearest (previous_pos, transport_line_pos)
-            previous_pos = lastway_position
+            
+                previous_pos = lastway_position
             
             for tpos in transport_line_pos:
                 total_pos.append ( tpos)
@@ -135,7 +376,7 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
                         d=path,
                     ))
                 elements.append(
-                    svg.Text(x=x+10, y=y -10, class_=["smallred"], text=str(cnt))
+                    svg.Text(x=x+10, y=y -10, class_=["smallred"], text=str(cnt) + " " + str(way.get("way_id", "??")))
                     )
                 cnt += 1
             color_id += 1
@@ -157,6 +398,8 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
                     fill="none",
                     d=path,
                 ))
+        json.dump (total_pos, open("way.json", "w"), indent=4)
+
     # build labels
     if draw_labels:
         label =""
@@ -170,7 +413,7 @@ def transport_data_to_svg_from_dicways (transport_2d_data, width=1000, height=10
                     y = height - round((pos[1] - miny) * ratio, 2) - marginy
                     xl = x + 20
                     yl = y
-                    print (x,y, label)
+                    #print (x,y, label)
                     path : list[svg.element] = []
                     path.append (svg.M(x,y))
                     path.append (svg.L(xl,yl))

@@ -47,7 +47,9 @@ class Osmprocess:
         graph_data = self.GetTransportDataGraphInfo (linelist)
         #svg = OSMsvg.transport_data_to_svg2 (graph_data)
         #svg = OSMsvg.transport_data_to_svg_from_dic (graph_data)
+        OSMsvg.transport_data_to_svg_from_dicways_old (graph_data)
         svg = OSMsvg.transport_data_to_svg_from_dicways (graph_data)
+
         return str(svg)
 
     def GetTransportLineList (self):

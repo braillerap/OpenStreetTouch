@@ -147,7 +147,7 @@ def osm_extraction(data, place_name, transport_type):
 
     transport_info = {"relations":{},"ways":{}, "nodes":{}} 
 
-    if not data['elements']:
+    if 'elements' not in data:
         print("Aucune donnée récupérée pour la ville {}".format(place_name))
     else:
         # Parcourir les éléments de données pour obtenir les informations des lignes de métro dans le dictionnaire data
@@ -158,7 +158,7 @@ def osm_extraction(data, place_name, transport_type):
             # 1 : la varialbe element est de type dictionnaire 
             # 2 : et element['type'] == "relation" 
             if isinstance(element, dict):
-                print("Element : ", element['type'])
+                #print("Element : ", element['type'])
                 if element['type'] == 'relation':
                     if element['id'] in transport_info['relations']:
                         print("\Duplicated element : ", element['type'], element['id'], element['tags']['name'])
@@ -225,7 +225,7 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
     list: A list of dictionaries containing information about each transport line that matches the desired line.
     """
 
-    print (desiredline)
+    
     transport_lines = []
     for line in transport_info['relations'].values():
         
@@ -238,7 +238,8 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
             debug_ways = []
             stations = []
             labels = []
-            print ("analyzing ", line['tags']['name'])
+            #print ("analyzing ", line['tags']['name'])
+            #print ("#" * 10)
             for element in line["members"]:
                 ref = element.get("ref","")
                 role = element.get("role","??")
@@ -276,13 +277,12 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                 # Check if the element is a node
                 elif element["type"] == "node":   
                     node = osm_get_indirect_element (transport_info, element)
-                    print ("indirect node ", node, element)
                     # Check if the role is empty
                     if role == "":
                         pass
                     # Check if the role is stop
                     elif role == "stop":
-                        print (node, element)
+                        #print (node, element)
                         if "tags" in node:
                             station = {
                                 "name": node["tags"].get("name", ""),
