@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from './Layout';
 import Home from './pages/Home';
-import Metro from './pages/Metro';
+import Transport from './pages/Transport';
 import Parameter from './pages/Parameter';
 import logo2 from './833.gif'
 import AppOption from "./components/AppOption";
@@ -71,7 +71,7 @@ class App extends Component {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home  params={this.context.Params} />} />
               <Route path="/parameter" element={<Parameter params={this.context.Params} />} />
-              <Route path="/metro"  element={<Metro  />}/>
+              <Route path="/transport"  element={<Transport  />}/>
               <Route path="*" element={<Home />} />
             </Route>
           </Routes>

@@ -26,7 +26,7 @@ const Layout = () => {
                                 </li>
 
                                 <li className="pure-menu-item">
-                                    <Link to="/metro" className="pure-menu-link">{GetLocaleString("menu.metro")} </Link>
+                                    <Link to="/transport" className="pure-menu-link">{GetLocaleString("menu.transport")} </Link>
                                 </li>
                                 <li className="pure-menu-item">
                                     <Link to="/parameter" className="pure-menu-link">{GetLocaleString("menu.param")}</Link>

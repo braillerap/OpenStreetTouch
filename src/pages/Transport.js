@@ -3,7 +3,7 @@ import AppContext from "../components/AppContext";
 
 
 
-const Metro = () => {
+const Transport = () => {
     const { setImagePreview } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [cityImage, setCityImage] = useState('');
@@ -47,7 +47,7 @@ const Metro = () => {
     const goOsm = () => {
         
         setImagePreview('');
-        
+        setTransportLines([]);
         window.pywebview.api.ReadTransportData(cityName, "subway", iso639code).then ((size) => {
             console.log (size);
             window.pywebview.api.GetTransportLines().then ((datadic) => {
@@ -156,4 +156,4 @@ const Metro = () => {
   );
 }
 
-export default Metro;
+export default Transport;
