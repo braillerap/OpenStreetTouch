@@ -71,3 +71,6 @@ rennes_subway_test.svg
 transport_graph_data.json
 osm/extraction_config.ini
 osm/extraction_config.ini
+osm/svgtest.svg
+test2.svg
+.gitignore
