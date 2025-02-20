@@ -2,7 +2,7 @@
 
 import svg
 from textwrap import dedent    
-        
+
 
 
 class OSMsvgFile:

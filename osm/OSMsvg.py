@@ -4,6 +4,8 @@ import utm
 import cartopy.crs as ccrs
 import json
 from . import OSMsvgFile
+from . import OSMOrthoArea
+
 
 def square_dist (pt1, pt2):
     return ((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
@@ -52,28 +54,14 @@ def reorder_path_for_nearest (pos, path):
             path.reverse()
     return path
 
-class OrthoArea:
-    def __init__ (self):
-        self.minx = 10000000
-        self.miny = 10000000
-        self.maxx = -10000000
-        self.maxy = -10000000
-        self.width = 0
-        self.height = 0
-        self.marginx = 50
-        self.marginy = 50
-        self.ratio = 1
-        self.min_lat = 10000000
-        self.max_lat = -10000000
-        self.min_lon = 10000000
-        self.max_lon = -10000000
+
 
 def build_projected_transport_data (transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
     proj = ccrs.Orthographic(0, 0)
     data_proj = ccrs.PlateCarree()
 
     # compute minx, miny, maxx, maxy
-    area = OrthoArea ()
+    area = OSMOrthoArea.OrthoArea ()
     for line in transport_2d_data:
         
         for way in line["positions_ways"]:

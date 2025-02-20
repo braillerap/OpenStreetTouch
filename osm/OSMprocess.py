@@ -1,5 +1,6 @@
 from . import application_OSM_extraction 
 from . import OSMsvg
+from . import OSMGeometry
 import pandas as pd
 import json
 
@@ -47,8 +48,13 @@ class Osmprocess:
         graph_data = self.GetTransportDataGraphInfo (linelist)
         #svg = OSMsvg.transport_data_to_svg2 (graph_data)
         #svg = OSMsvg.transport_data_to_svg_from_dic (graph_data)
-        OSMsvg.transport_data_to_svg_from_dicways_old (graph_data)
-        svg = OSMsvg.transport_data_to_svg_from_dicways (graph_data)
+        
+        #OSMsvg.transport_data_to_svg_from_dicways_old (graph_data)
+        
+        svg = OSMGeometry.build_poly_from_ways (graph_data, width=1000, height=1000, marginx= 50, marginy=50)
+
+
+        #svg = OSMsvg.transport_data_to_svg_from_dicways (graph_data)
 
         return str(svg)
 

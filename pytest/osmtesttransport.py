@@ -13,7 +13,7 @@ if __name__ == '__main__':
     print (SCRIPT_DIR)
     sys.path.append(os.path.dirname(SCRIPT_DIR))
     city = "paris"
-    transport = "subway"
+    transport = "funicular"
     from osm import OSMprocess
     
     osm = OSMprocess.Osmprocess()
@@ -39,10 +39,10 @@ if __name__ == '__main__':
     id = 0
     for line in transport_lines["lines"]:
         print (line)
-        selected.append({"id": id, "name": line, "select":False})
+        selected.append({"id": id, "name": line, "select":True})
         id +=1
-    selected[-5]["select"] = True
-    selected[-2]["select"] = True
+    #selected[-3]["select"] = True
+    #selected[-2]["select"] = True
     
     print (selected)
 
