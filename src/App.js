@@ -6,6 +6,7 @@ import Layout from './Layout';
 import Home from './pages/Home';
 import Transport from './pages/Transport';
 import Parameter from './pages/Parameter';
+import CityMap from './pages/CityMap';
 import logo2 from './833.gif'
 import AppOption from "./components/AppOption";
 import AppContext from "./components/AppContext";
@@ -72,6 +73,7 @@ class App extends Component {
               <Route index element={<Home  params={this.context.Params} />} />
               <Route path="/parameter" element={<Parameter params={this.context.Params} />} />
               <Route path="/transport"  element={<Transport  />}/>
+              <Route path="/cmap"  element={<CityMap  params={this.context.Params} />} />
               <Route path="*" element={<Home />} />
             </Route>
           </Routes>

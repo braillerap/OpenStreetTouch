@@ -7,6 +7,7 @@
 
     "menu.home":"Home",
     "menu.transport":"Transport",
+    "menu.citymap":"Map",
     "menu.param":"Parameters",
     
     "transport.renderimg":"Draw Transport Line",

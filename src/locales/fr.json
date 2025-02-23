@@ -7,6 +7,7 @@
 
     "menu.home":"Accueil",
     "menu.transport":"Transport",
+    "menu.citymap":"Carte",
     "menu.param":"Paramètres",
     
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
