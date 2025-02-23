@@ -149,6 +149,7 @@ def osm_extraction(data, place_name, transport_type):
 
     if 'elements' not in data:
         print("Aucune donnée récupérée pour la ville {}".format(place_name))
+        return transport_info
     else:
         # Parcourir les éléments de données pour obtenir les informations des lignes de métro dans le dictionnaire data
         # element.keys()
@@ -212,7 +213,7 @@ def osm_get_indirect_element (transport_info, element):
     elif type == "node":
         return transport_info['nodes'][element["ref"]]
     
-def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
+def osm_extract_data (transport_info, transport_type):  
     """
     Extracts transport line data from OpenStreetMap (OSM) data for a given transport type and desired lines.
 
@@ -228,9 +229,8 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
     
     transport_lines = []
     for line in transport_info['relations'].values():
-        
-        # Check if the line's name is in the desired lines list
-        if line['tags']['name'] in desiredline:
+   
+        if 'name' in line['tags']:
             positions = []
             position_dic = []
             positions_ways = []
@@ -238,8 +238,7 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
             debug_ways = []
             stations = []
             labels = []
-            #print ("analyzing ", line['tags']['name'])
-            #print ("#" * 10)
+           
             for element in line["members"]:
                 ref = element.get("ref","")
                 role = element.get("role","??")
@@ -288,8 +287,8 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
                                 "name": node["tags"].get("name", ""),
                                 "id": node["id"],
                                 "lat": node["lat"],
-                                "lon": node["lon"]
-                                    
+                                "lon": node["lon"],
+                                "transit":False    
                                     }
                             stations.append(station)
 
@@ -305,9 +304,44 @@ def osm_get_transport_lines_data (transport_info, desiredline, transport_type):
             }
             transport_lines.append(line_info)
 
+    
     return transport_lines
 
+def osm_filter_transport_lines_data (transport_info, desiredline):
+    """
+    Extracts transport line data from OpenStreetMap (OSM) data for a given transport type and desired lines.
 
+    Parameters:
+    transport_info (dict): A dictionary containing OSM data, including relations and members.
+    desiredline (list): A list of desired transport line names.
+    transport_type (str): The type of transport (e.g., "bus", "train").
+
+    Returns:
+    list: A list of dictionaries containing information about each transport line that matches the desired line.
+    """
+
+    
+
+    transport_lines = []
+    for line in transport_info:
+
+        # Check if the line's name is in the desired lines list
+        if line['name'] in desiredline:
+            transport_lines.append(line)
+
+    
+    return transport_lines
+
+def osm_build_transit_table (transport_info):
+    stations = {}
+    for line in transport_info:
+        for station in line['stations']:
+            if (station['name'] not in stations):
+                stations[station['name']] = 1
+            else:
+                stations[station['name']] += 1
+    return (stations)
+          
 # Define a function to get transport lines from OSM data
 def osm_get_transport_lines (transport_info, transport_type):
     """
@@ -330,7 +364,7 @@ def osm_get_transport_lines (transport_info, transport_type):
         if line['tags']['type'] == 'route' and line['tags']['route'] == transport_type:
             # Create a dictionary to store the information of the transport line
             line_info = {
-                "name": line['tags']['name'],
+                "name": line['tags'].get("name", "????"),
                 "id": line['id'],
                 "ref": line['tags'].get('ref', ''),
                 "route": line['tags'].get('route', ''),

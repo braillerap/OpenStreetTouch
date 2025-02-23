@@ -1,9 +1,30 @@
 import { useContext, useState, useEffect} from 'react'
 import AppContext from "../components/AppContext";
 
+const transport_type = [
+    {"Metro":"subway"},
+    {"Funiculaire": "funicular"},
+    {"Car/Bus": "bus"},
+    {"Tramway": "tram"},
+    {"Train": "train"},
+    {"Train interurbain":"light_rail"},
+    {"Monorail":"monorail"},
+    {"Ferry":"ferry"}
+];
 
+const transport_type2 = [
+    "subway",
+    "funicular",
+    "bus",
+    "tram",
+    "train",
+    "light_rail",
+    "monorail",
+    "ferry"
+];
 
 const Transport = () => {
+    const {GetLocaleString} = useContext(AppContext);
     const { setImagePreview } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [cityImage, setCityImage] = useState('');
@@ -11,7 +32,9 @@ const Transport = () => {
     const [iso639codeList, setIso639CodeList] = useState([]);
     const [iso639code, setIso639Code] = useState();
     const [realCityName, setRealCityName] = useState('');
+    const [transportType, setTransportType] = useState('subway');
 
+    
     useEffect(() => {
         window.pywebview.api.GetISO639_country_code().then ((isolist) => {
             console.log (isolist);
@@ -36,7 +59,21 @@ const Transport = () => {
             </select>
         );
     }
-
+    const renderTransportType =  () => {
+        return (
+            <label>
+            <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
+            {
+                transport_type2.map((trans) => {
+                        return (
+                            <option>{trans}</option>
+                    )
+                })
+            }
+            </select>
+            </label>
+        )
+    }
     const goRender = () => {
         console.log ("call GetTransportDataSvg" + transportLines);
         window.pywebview.api.GetTransportDataSvg(transportLines).then ((svg) => {
@@ -48,7 +85,8 @@ const Transport = () => {
         
         setImagePreview('');
         setTransportLines([]);
-        window.pywebview.api.ReadTransportData(cityName, "subway", iso639code).then ((size) => {
+        console.log ("tansport type", transportType);
+        window.pywebview.api.ReadTransportData(cityName, transportType, iso639code).then ((size) => {
             console.log (size);
             window.pywebview.api.GetTransportLines().then ((datadic) => {
                 setRealCityName (datadic.city);
@@ -93,6 +131,7 @@ const Transport = () => {
         setTransportLines(lines);
     }
 
+    
     const renderTransportLines = () => {
         if (transportLines.length === 0  )
             return (<>empty</>);
@@ -103,10 +142,10 @@ const Transport = () => {
                 transportLines.map((line) => {
                         return (
                             <label>
-                            <input type="checkbox" 
-                                id={line.id} 
-                                name={line.name} 
-                                onChange={onSelectLine}/>
+                                <input type="checkbox" 
+                                    id={line.id} 
+                                    name={line.name} 
+                                    onChange={onSelectLine}/>
                                 {line.name} 
                             </label>
                         )
@@ -143,6 +182,7 @@ const Transport = () => {
         </label>
 
         {renderIso639()}
+        {renderTransportType()}
         <button onClick={goOsm}>Go !</button>
         {/*renderImage() */}
 

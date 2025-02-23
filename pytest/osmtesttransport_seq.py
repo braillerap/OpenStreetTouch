@@ -28,23 +28,19 @@ def build_city_svg (city, transport, iso639_code = "fr"):
     selected = []
     id = 0
     for line in transport_lines["lines"]:
-        print (line)
+        #print (line)
         selected.append({"id": id, "name": line, "select":True})
         id +=1
     
-    print (selected)
-
+    # print (selected)
+    
     graph_data = osm.GetTransportDataGraphInfo (selected)
-    
-    for line in graph_data:
-        print (line["name"])
-        print ('#' * 20)
-        for station in line["stations"]:
-            print (line["name"],":",station)
-        print (line)
-    
-    svg = osm.GetTransportDataSvg(selected)
-    with open(city + "_" + transport +'_test.svg', 'w') as f:
+    svg = osm.GetTransportDataSvg(selected, True, True)
+    with open(city + "_" + transport +'_station_test.svg', 'w') as f:
+        f.write(str(svg))
+    graph_data = osm.GetTransportDataGraphInfo (selected)
+    svg = osm.GetTransportDataSvg(selected, True, False)
+    with open(city + "_" + transport +'_ways_test.svg', 'w') as f:
         f.write(str(svg))
     
 
@@ -67,9 +63,12 @@ if __name__ == '__main__':
         {"city": "marseille",   "transport": "subway"},
         {"city": "paris",       "transport": "subway"},
         {"city": "berlin",      "transport": "subway"},
+        {"city": "barcelone",    "transport": "subway"},
         {"city": "lyon",        "transport": "funicular"},
         {"city": "paris",       "transport": "funicular"},
-       
+        {"city": "paris",       "transport": "tram"},
+        {"city": "nantes",       "transport": "tram"},
+        {"city": "rennes",       "transport": "bus"},
     ]
     for data in test_data:
         build_city_svg (data["city"], data["transport"])

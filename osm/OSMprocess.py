@@ -1,6 +1,8 @@
 from . import application_OSM_extraction 
 from . import OSMsvg
 from . import OSMGeometry
+from . import OSMTransitInfo
+from . import OSMsvgFile
 import pandas as pd
 import json
 
@@ -10,6 +12,7 @@ class Osmprocess:
         self.CityName = ""
         self.transport_type = "subway"
         self.iso639_code = "fr"
+        self.transit_info = OSMTransitInfo.OSMTransitInfo()
 
     def ReadTransportData (self, city, transport_type, iso639_code = "fr"):
         self.CityName = city.title()
@@ -18,13 +21,13 @@ class Osmprocess:
         
         # extract osm data with overpass request
         self.osm_data = application_OSM_extraction.overpass_request(self.CityName, transport_type, iso639_code)
-        json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
+        #json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
         
         # data structuration for future usage
         self.transport_data = application_OSM_extraction.osm_extraction (self.osm_data, self.CityName, self.transport_type)
-        json.dump (self.transport_data, open("osm_extraction.json", "w"), indent=4, sort_keys=False)
+        #json.dump (self.transport_data, open("osm_extraction.json", "w"), indent=4, sort_keys=False)
         
-        return len(self.transport_data)
+        return len(self.transport_data["relations"])
         
     def GetTransportDataLineList (self):
         
@@ -39,24 +42,42 @@ class Osmprocess:
 
     def GetTransportDataGraphInfo (self, linelist):
         desired_line = [line["name"] for line in linelist if line["select"] == True]
-        transport_graph_data = application_OSM_extraction.osm_get_transport_lines_data (self.transport_data, desired_line, self.transport_type)
         
-        json.dump (transport_graph_data, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
-        return transport_graph_data
+        transport_graph_data = application_OSM_extraction.osm_extract_data (self.transport_data, self.transport_type)
+        
+        transit = application_OSM_extraction.osm_build_transit_table(transport_graph_data)
+        self.transit_info.SetStationInfos (transit)
+
+        transport_graph_data_filtered = application_OSM_extraction.osm_filter_transport_lines_data (transport_graph_data, desired_line)
+        
+        json.dump (transit, open("transit_data.json", "w"), indent=4, sort_keys=False)
+        json.dump (transport_graph_data_filtered, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
+        return transport_graph_data_filtered
     
-    def GetTransportDataSvg (self, linelist):
+    def GetTransportDataSvg (self, linelist, drawstations, linefromstation):
         graph_data = self.GetTransportDataGraphInfo (linelist)
-        #svg = OSMsvg.transport_data_to_svg2 (graph_data)
-        #svg = OSMsvg.transport_data_to_svg_from_dic (graph_data)
+        width = 1500
+        height = 1000
+        marginx = 50
+        marginy = 50
         
-        #OSMsvg.transport_data_to_svg_from_dicways_old (graph_data)
+        fsvg = OSMsvgFile.OSMsvgFile ()
+        fsvg.open (widthmm=width, heightmm=height)
         
-        svg = OSMGeometry.build_poly_from_ways (graph_data, width=1000, height=1000, marginx= 50, marginy=50)
+        engine = OSMGeometry.OsmTransportDrawing ()
+        engine.build_projected_data (graph_data, width=width, height=height, marginx=marginx, marginy=marginy)
+        
+        if linefromstation:
+            engine.build_poly_from_stations (fsvg, width, height, marginx, marginy)
+        else:    
+            engine.build_poly_from_ways (fsvg, width, height, marginx, marginy)
+        
+        if drawstations:
+            engine.build_stations (fsvg, width, height, marginx, marginy)
 
-
-        #svg = OSMsvg.transport_data_to_svg_from_dicways (graph_data)
-
-        return str(svg)
+        fsvg.close ()
+        
+        return str(fsvg.getSVGString())
 
     def GetTransportLineList (self):
         if (len(self.osm_data) == 0):
