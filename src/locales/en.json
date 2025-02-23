@@ -1,19 +1,26 @@
 {
-    "app.loading":"Chargement en cours…",
+    "app.loading":"Loading in progress…",
 
-    "app.wait":"Patientez…",
+    "app.wait":"Wait…",
 
     
 
-    "menu.home":"Accueil",
+    "menu.home":"Home",
     "menu.transport":"Transport",
-    "menu.param":"Paramètres",
+    "menu.param":"Parameters",
     
+    "transport.renderimg":"Draw Transport Line",
+    "transport.renderstation":"Draw stations",
+    "transport.renderfill":"Path drawing use stations",
+    "transport.sectionplan":"Transport Line(s) rendering",
+    "transport.strategyways":"Path from OSM data",
+    "transport.strategywayscorreted":"OSM data corrected",
+    "transport.strategystation":"Stations position",
+
+    "param.locale":"Application language",
     
-    "param.locale":"Langue de l'application",
-    
-    "param.formtitle":"Paramètres",
-    "param.form_aria":"Paramètres de l'application",
+    "param.formtitle":"Parameters",
+    "param.form_aria":"Application parameters",
     
     
     

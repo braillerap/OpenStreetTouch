@@ -41,11 +41,12 @@ const Layout = () => {
                     <Toolbar />
                 </div>
                 
-                <div className="App-Work">
-                    <Preview/>
-                </div>    
                 <div className="App-function">
                     <Outlet />
+                </div>    
+                <div className="App-Work">
+                    <Preview/>
+                    
                 </div>
                 
                 

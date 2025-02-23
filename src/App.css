@@ -87,8 +87,8 @@
 
 .App-Work
 {
-  grid-column-start: 1;
-  grid-column-end: 1;
+  grid-column-start: 2;
+  grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 2;
   position:relative;
@@ -105,8 +105,8 @@
 
 .App-function
 {
-  grid-column-start: 2;
-  grid-column-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 1;
   grid-row-start: 2;
   grid-row-end: 2;
   background-color: rgb(177, 167, 167);
@@ -327,9 +327,21 @@ a.pure-button-secondary
 .CheckedList 
 {
   display: block;
+  max-height: 20rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  overflow:auto
 }
 
 .CheckedList label
 {
   display: block;
+}
+
+.TransportAction
+{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  
 }

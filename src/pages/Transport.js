@@ -1,16 +1,7 @@
 import { useContext, useState, useEffect} from 'react'
 import AppContext from "../components/AppContext";
 
-const transport_type = [
-    {"Metro":"subway"},
-    {"Funiculaire": "funicular"},
-    {"Car/Bus": "bus"},
-    {"Tramway": "tram"},
-    {"Train": "train"},
-    {"Train interurbain":"light_rail"},
-    {"Monorail":"monorail"},
-    {"Ferry":"ferry"}
-];
+
 
 const transport_type2 = [
     "subway",
@@ -28,19 +19,26 @@ const Transport = () => {
     const { setImagePreview } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [cityImage, setCityImage] = useState('');
+    const [drawStation, setDrawStation] = useState(true);
     const [transportLines, setTransportLines] = useState([]);
     const [iso639codeList, setIso639CodeList] = useState([]);
     const [iso639code, setIso639Code] = useState();
     const [realCityName, setRealCityName] = useState('');
     const [transportType, setTransportType] = useState('subway');
-
+    const [transportStrategyList, setTransportStrategyList] = useState([]);
+    const [transportStrategy, setTransportStrategy] = useState(0);
     
     useEffect(() => {
         window.pywebview.api.GetISO639_country_code().then ((isolist) => {
-            console.log (isolist);
-            setIso639CodeList(isolist);
+           setIso639CodeList(isolist);
         });
         setIso639Code ('fr');
+        let list = [
+            GetLocaleString("transport.strategyways"),
+            GetLocaleString("transport.strategywayscorreted"),
+            GetLocaleString("transport.strategystation")
+        ];
+        setTransportStrategyList(list);
       }, []);
       
     
@@ -76,7 +74,7 @@ const Transport = () => {
     }
     const goRender = () => {
         console.log ("call GetTransportDataSvg" + transportLines);
-        window.pywebview.api.GetTransportDataSvg(transportLines).then ((svg) => {
+        window.pywebview.api.GetTransportDataSvg(transportLines, drawStation, transportStrategy).then ((svg) => {
             setImagePreview (svg);
         });
     }
@@ -131,6 +129,13 @@ const Transport = () => {
         setTransportLines(lines);
     }
 
+    const onSelectStations = (e) => {
+        console.log(e.target.checked);
+        setDrawStation(e.target.checked);
+    }
+    const onSelectFill = (e) => {
+        console.log(e.target.value);
+    }
     
     const renderTransportLines = () => {
         if (transportLines.length === 0  )
@@ -166,7 +171,42 @@ const Transport = () => {
     const renderTransportAction = () => {
         if (transportLines.length > 0  )
         {
-            return (<><button onClick={goRender}>Render Transport line(s)</button></>);
+            return (
+                <fieldset >
+
+                <legend>{GetLocaleString("transport.sectionplan")}</legend>
+                    <div className='TransportAction'>
+                    <label>
+                        <input 
+                            type='checkbox' 
+                            id='stations' 
+                            name='stations' 
+                            checked={drawStation} 
+                            onChange={onSelectStations} />
+                        {GetLocaleString("transport.renderstation")}
+
+                    </label>
+                    <label>Stratégie
+                    <select value={transportStrategy} onChange={(event) => {setTransportStrategy(event.target.value)}} >
+                    {
+                        transportStrategyList.map((trans, index) => {
+                                return (
+                                    <option value={index}>{trans}</option>
+                            )
+                        })
+                    }
+                    </select>
+                    </label>
+                    <label>
+                        <input type='checkbox' id='fill' name='fill' onChange={onSelectFill} />
+                        {GetLocaleString("transport.renderfill")}
+                    </label>
+                    <button onClick={goRender}>
+                        {GetLocaleString("transport.renderimg")}
+                    </button>
+                    </div>
+                </fieldset>
+                );
         }    
     }
   return (
@@ -189,9 +229,10 @@ const Transport = () => {
         <div className='CheckedList'>
             <p>OSM city name : {realCityName}</p>
             {renderTransportLines ()}
-            {renderTransportAction ()}
+            
         </div>
 
+        {renderTransportAction ()}
     </div>
   );
 }

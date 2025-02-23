@@ -9,7 +9,14 @@
     "menu.transport":"Transport",
     "menu.param":"Paramètres",
     
-    
+    "transport.renderimg":"Dessiner la/les ligne(s) de transport",
+    "transport.renderstation":"Dessiner les stations",
+    "transport.renderfill":"Le tracé utilise les stations",
+    "transport.sectionplan":"Affichage des lignes de transports",
+    "transport.strategyways":"Données de tracé OSM",
+    "transport.strategywayscorreted":"Données OSM corrigées",
+    "transport.strategystation":"Position des stations",
+
     "param.locale":"Langue de l'application",
     
     "param.formtitle":"Paramètres",

@@ -54,7 +54,7 @@ class Osmprocess:
         json.dump (transport_graph_data_filtered, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
         return transport_graph_data_filtered
     
-    def GetTransportDataSvg (self, linelist, drawstations, linefromstation):
+    def GetTransportDataSvg (self, linelist, drawstations, linestrategy):
         graph_data = self.GetTransportDataGraphInfo (linelist)
         width = 1500
         height = 1000
@@ -67,10 +67,14 @@ class Osmprocess:
         engine = OSMGeometry.OsmTransportDrawing ()
         engine.build_projected_data (graph_data, width=width, height=height, marginx=marginx, marginy=marginy)
         
-        if linefromstation:
-            engine.build_poly_from_stations (fsvg, width, height, marginx, marginy)
-        else:    
+        if linestrategy == 0:
+            engine.fill_hole = False  
             engine.build_poly_from_ways (fsvg, width, height, marginx, marginy)
+        elif linestrategy == 1:  
+            engine.fill_hole = True  
+            engine.build_poly_from_ways (fsvg, width, height, marginx, marginy)
+        elif linestrategy == 2:
+            engine.build_poly_from_stations (fsvg, width, height, marginx, marginy)
         
         if drawstations:
             engine.build_stations (fsvg, width, height, marginx, marginy)
