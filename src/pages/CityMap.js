@@ -1,7 +1,10 @@
 import { useContext, useState, useEffect} from 'react'
 import AppContext from "../components/AppContext";
-import { MapContainer , TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
+import { MapContainer , TileLayer, Circle,  useMapEvents} from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
+
+const redOptions = { color: 'red' }
+const greenOptions = { color: 'green' }
 
 const CityMap = () => {
     const {GetLocaleString} = useContext(AppContext);
@@ -52,6 +55,20 @@ const CityMap = () => {
             }
     
         }
+        const renderMapRadius = () => {
+            if (position)
+            {
+                return (
+                <Circle center={position} pathOptions={redOptions} radius={radius}>
+        
+                </Circle>
+                );
+            }
+            else
+            {
+                return (<></>)
+            }
+        }
         const renderAction = () => {
             if (position  )
             {
@@ -76,7 +93,7 @@ const CityMap = () => {
             <label>radius
             <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} />
             </label>
-            <MapContainer center={MapPosition()} zoom={13} scrollWheelZoom={false}
+            <MapContainer center={MapPosition()} zoom={1} scrollWheelZoom={true}
             
             style={{ width: '99%', position: 'relative', zIndex: '9', height: '50vh' }}
             attributionControl={false}
@@ -87,6 +104,8 @@ const CityMap = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                  <LocationFinder />
+                 {renderMapRadius()}
+                 
             </MapContainer>
             {renderAction()}
         </>

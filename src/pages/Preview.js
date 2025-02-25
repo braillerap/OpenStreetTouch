@@ -3,16 +3,28 @@ import AppContext from "../components/AppContext";
 
 const Preview = () => {
     const { ImagePreview } = useContext(AppContext);
+    const {GetLocaleString} = useContext(AppContext);
     const [cityName, setCityName] = useState('')
     const [cityImage, setCityImage] = useState('')
     
-   
+    const saveImage = () => {
+      let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+      let filter = [
+          GetLocaleString("file.svgfile"), //"Fichier svg",
+          GetLocaleString("file.all") //"Tous"
+      ]
+
+      window.pywebview.api.saveas_file(ImagePreview, dialogtitle, filter);
+    }
     const renderImage = () => {
         if (ImagePreview !== '') {
           return (
+            <>
             <div>
               <img src={`data:image/svg+xml;utf8,${encodeURIComponent(ImagePreview)}`} />
             </div>
+            <button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>
+            </>
         )
 
             console.log ("preview rendering image");

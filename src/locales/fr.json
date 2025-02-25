@@ -3,7 +3,13 @@
 
     "app.wait":"Patientez…",
 
-    
+    "file.open":"Ouvrir",
+    "file.save":"Enregistrer",
+    "file.saveas":"Enregistrer sous",
+    "file.desktopfile":"Fichier DesktopBrailleRAP",
+    "file.svgfile":"Fichier SVG",
+    "file.gcodefile":"Fichier GCODE",
+    "file.all":"Tous",
 
     "menu.home":"Accueil",
     "menu.transport":"Transport",
@@ -20,6 +26,8 @@
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",
+
+    "preview.savesvg":"Enregistrer le SVG",
 
     "param.locale":"Langue de l'application",
     

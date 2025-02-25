@@ -3,7 +3,13 @@
 
     "app.wait":"Wait…",
 
-    
+    "file.open": "Open",
+    "file.save": "Save",
+    "file.saveas": "Save as",
+    "file.desktopfile": "DesktopBrailleRAP File",
+    "file.gcodefile": "GCODE file",
+    "file.svgfile": "SVG File",
+    "file.all": "All",
 
     "menu.home":"Home",
     "menu.transport":"Transport",
@@ -20,6 +26,8 @@
 
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",
+
+    "preview.savesvg":"Save as SVG",
 
     "param.locale":"Application language",
     
