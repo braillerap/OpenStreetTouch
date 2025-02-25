@@ -234,3 +234,143 @@ class OsmTransportDrawing:
                             ))
             colorid += 1
         
+class OSMStreetDrawing:
+    def __init__(self):
+        self.area = None
+        self.color = "#ff0000"
+        self.stroke_width = 2
+        self.fill = "none"
+
+    def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+        proj = ccrs.Orthographic(0, 0)
+        data_proj = ccrs.PlateCarree()
+
+        json.dump (street_2d_data, open ("street_2d_data.json", "w"), indent=4)
+
+        # compute minx, miny, maxx, maxy
+        self.area = OSMOrthoArea.OrthoArea ()
+        
+        
+        streets = []
+        buildings = []
+        unclassified = []
+        for way in street_2d_data["street"]:
+            nodes = []
+            for node in way["nodes"]:
+                print (node)
+                pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                
+                self.area.minx = min ([self.area.minx, float(pos[0])])
+                self.area.miny = min ([self.area.miny, float (pos[1])])
+                self.area.maxx = max ([self.area.maxx, float (pos[0])])
+                self.area.maxy = max ([self.area.maxy, float (pos[1])])
+                
+                self.area.min_lat = min([self.area.min_lat, node["lat"]])
+                self.area.max_lat = max([self.area.max_lat, node["lat"]])
+                self.area.min_lon = min([self.area.min_lon, node["lon"]])
+                self.area.max_lon = max([self.area.max_lon, node["lon"]])
+                
+                nodes.append ( (float(pos[0]), float(pos[1]) ) )
+            streets.append ({"way_id": way.get("id", "??"), "nodes":nodes})
+        
+        for way in street_2d_data["building"]:
+            nodes = []
+            for node in way["nodes"]:
+                print (node)
+                pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                
+                self.area.minx = min ([self.area.minx, float(pos[0])])
+                self.area.miny = min ([self.area.miny, float (pos[1])])
+                self.area.maxx = max ([self.area.maxx, float (pos[0])])
+                self.area.maxy = max ([self.area.maxy, float (pos[1])])
+                
+                self.area.min_lat = min([self.area.min_lat, node["lat"]])
+                self.area.max_lat = max([self.area.max_lat, node["lat"]])
+                self.area.min_lon = min([self.area.min_lon, node["lon"]])
+                self.area.max_lon = max([self.area.max_lon, node["lon"]])
+                
+                nodes.append ( (float(pos[0]), float(pos[1]) ) )
+            buildings.append ({"way_id": way.get("id", "??"), "nodes":nodes})                        
+        
+        for way in street_2d_data["unclassified"]:
+            nodes = []
+            for node in way["nodes"]:
+                print (node)
+                pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                
+                self.area.minx = min ([self.area.minx, float(pos[0])])
+                self.area.miny = min ([self.area.miny, float (pos[1])])
+                self.area.maxx = max ([self.area.maxx, float (pos[0])])
+                self.area.maxy = max ([self.area.maxy, float (pos[1])])
+                
+                self.area.min_lat = min([self.area.min_lat, node["lat"]])
+                self.area.max_lat = max([self.area.max_lat, node["lat"]])
+                self.area.min_lon = min([self.area.min_lon, node["lon"]])
+                self.area.max_lon = max([self.area.max_lon, node["lon"]])
+                
+                nodes.append ( (float(pos[0]), float(pos[1]) ) )
+            unclassified.append ({"way_id": way.get("id", "??"), "nodes":nodes})    
+            
+            
+
+        self.area.width = self.area.maxx - self.area.minx
+        self.area.height = self.area.maxy - self.area.miny
+        print ("min lat", self.area.min_lat, "max lat", self.area.max_lat, 
+            "min lon", self.area.min_lon, "max lon", self.area.max_lon)
+        print ("minx", self.area.minx, "miny", self.area.miny, "maxx", self.area.maxx, "maxy", self.area.maxy)
+        print ("width", self.area.width, "height", self.area.height)
+        self.area.ratio = min ((width - 2 * marginx) / self.area.width, (height - 2 * marginy) / self.area.height)
+        print ("ratio", self.area.ratio)
+        
+        return {"streets": streets, "buildings": buildings, "unclassified": unclassified}
+    
+    def draw_ways (self, fsvg, waysnode, width, height, marginx, marginy):
+        for ways in waysnode:
+            path : list[svg.Element] = []
+            if len (ways["nodes"]) > 1:
+                node = ways["nodes"][0]
+                x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                path.append (svg.M (x, y))
+                for node in ways["nodes"][1:]:
+                    x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                    y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                    path.append (svg.L (x, y))
+
+                fsvg.addsvg(
+                    svg.Path(
+                        stroke=self.color,
+                        stroke_width=self.stroke_width,
+                        stroke_linecap="round",
+                        fill=self.fill,
+                        d=path,
+                ))
+    def build_projected_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+        self.street2d_data = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy)
+
+    def DrawingStreetMap (self, fsvg, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+        
+        
+        waysnode = self.build_projected_area_data (street_2d_data, width, height, marginx, marginy)
+        #print (waysnode)
+        # Draw the ways using the fsvg, waysnode, width, height, marginx, and marginy parameters
+        
+        print (len(waysnode["buildings"]), len(waysnode["streets"]), len(waysnode["unclassified"]))
+        
+        self.color = "blue"
+        self.stroke_width = 1
+        self.fill = "lightblue"
+        self.draw_ways (fsvg, waysnode["buildings"], width, height, marginx, marginy)
+
+        self.color = "green"
+        self.stroke_width = 3
+        self.fill = "none"
+        self.draw_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
+        
+        
+        self.color = "red"
+        self.stroke_width = 3
+        self.fill = "none"
+        self.draw_ways (fsvg, waysnode["unclassified"], width, height, marginx, marginy)
+        
+        

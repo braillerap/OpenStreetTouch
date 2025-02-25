@@ -187,7 +187,7 @@ def overpass_request_location_and_radius(latitude, longitude, radius):
 
 if __name__ == "__main__": 
     # Paramètres pour la requête Overpass
-    radius = 250  # rayon en mètres
+    radius = 100  # rayon en mètres
     # Rennes 
     # latitude = 48.117266  # Exemple : Rennes
     # longitude = -1.677792
@@ -197,7 +197,7 @@ if __name__ == "__main__":
 
     print(f"Radius : {radius} m ") 
     print(f"Latitude : {latitude} ° ")
-    print(r"Longitude : {longitude} ° ") 
+    print(f"Longitude : {longitude} ° ") 
 
     # data request 
     data = overpass_request_location_and_radius(latitude, longitude, radius) 
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     # Légende et titre
     plt.legend()
     plt.title("Plan multicouche avec Cartopy")
-    plt.show(block=False)
+    plt.show(block=True)
 
     print("Terminé")
 

@@ -18,6 +18,9 @@
     "transport.strategywayscorreted":"Données OSM corrigées",
     "transport.strategystation":"Position des stations",
 
+    "citymap.sectionplan":"Construction de plan",
+    "citymap.rendermap":"Extraction de la zone de carte",
+
     "param.locale":"Langue de l'application",
     
     "param.formtitle":"Paramètres",

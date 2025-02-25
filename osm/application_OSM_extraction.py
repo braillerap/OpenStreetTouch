@@ -252,8 +252,8 @@ def osm_extract_data (transport_info, transport_type):
                         if "nodes" in way:
                             # Loop through the nodes
                             ways_node = []
-                            for node in way["nodes"]:
-                                node = osm_get_indirect_node (transport_info, node)
+                            for nodeid in way["nodes"]:
+                                node = osm_get_indirect_node (transport_info, nodeid)
                                 # Check if the node has lat and lon
                                 if "lat" in node and "lon" in node:
                                     if "tags" not in node:

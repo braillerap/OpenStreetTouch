@@ -3,6 +3,8 @@ from . import OSMsvg
 from . import OSMGeometry
 from . import OSMTransitInfo
 from . import OSMsvgFile
+from . import OSMStreetMap
+
 import pandas as pd
 import json
 
@@ -13,6 +15,8 @@ class Osmprocess:
         self.transport_type = "subway"
         self.iso639_code = "fr"
         self.transit_info = OSMTransitInfo.OSMTransitInfo()
+
+        self.streetmap_data = None
 
     def ReadTransportData (self, city, transport_type, iso639_code = "fr"):
         self.CityName = city.title()
@@ -102,33 +106,9 @@ class Osmprocess:
         return result
     
     
-    def get_svg (self, linelist):
-        svg="<svg></svg>"
-        if len (self.osm_data) == 0:
-            return None
-        print ("get_svg", linelist) 
-        
-        # build selected lines list
-        desired_lines = [trline["name"] for trline in linelist if trline["select"] == True]
+    
 
-        print ("desired lines :" , desired_lines)                
-        #data = application_OSM_extraction.plot_get_2d_data (self.osm_data, linelist)
-        data = application_OSM_extraction.lines_ways_extraction_from_datta (self.osm_data)
-        
-        #data = self.line_extraction (self.osm_data)
-        data.to_csv("line_extraction.csv", sep=';', index=False)
-        # naive filtering panda dataframe
-        #df = data.copy ()
-        #df = df[df["line_name"].isin(desired_lines)]
-        
-        print ("#" * 25)
-        print(data)
-        print (type(data))
-        #svg = OSMsvg.transport_data_to_svg (data)
-
-        return str(svg)
-
-
+    
     
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ from osm import application_OSM_extraction
 from osm import OSMprocess
 from osm import OSMutils
 from osm import OSMsvg
+from osm import OSMprocessStreet
 
 rpi = False
 COM_TIMEOUT =   5  #Communication timeout with device controller (Marlin)
@@ -76,6 +77,7 @@ def load_parameters():
 class Api:
     def __init__(self):
         self.osmt = OSMprocess.Osmprocess()
+        self.osms = OSMprocessStreet.OSMprocessStreet()
 
     def fullscreen(self):
         """toggle main window fullscreen"""
@@ -268,25 +270,19 @@ class Api:
         print ("GetTransportSVG svg size", len(svg))
         return svg
     
-    def GetTransportSVG (self, linelist):
-        print ("GetTransportSVG", linelist)
-        svg = self.osmt.get_svg (linelist)
-        print ("GetTransportSVG", svg)
-        return svg
+   
     
     def GetTransportSVGbase64 (self):
         svg = self.osmt.get_svg ()
         return svg
 
-    def getCityImage (self, city):
-        print ("call main_flask_IHM (city)")
+    
 
-        val= application_OSM_extraction.main_flask_IHM (city, transport_type="subway")
-
-        print ("return from main_flask_IHM (city)")
-        return val
-
-
+    def ReadStreetMapData (self, latitude, longitude, radius):
+        street_data = self.osms.ReadStreetMapData (latitude, longitude, radius)
+        svg = self.osms.GetStreetMapSVG (street_data)
+        print ("ReadStreetMapData svg size", len(svg))
+        return svg
     
 def get_entrypoint():
     def exists(path):
