@@ -107,3 +107,8 @@ rennes_subway_station_test.svg
 rennes_subway_ways_test.svg
 svgtest.svg
 transit_data.json
+overpass_street.json
+.gitignore
+street.svg
+osm/carte_interactive.html
+street_2d_data.json
