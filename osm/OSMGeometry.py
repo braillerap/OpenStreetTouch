@@ -240,7 +240,18 @@ class OSMStreetDrawing:
         self.color = "#ff0000"
         self.stroke_width = 2
         self.fill = "none"
-
+    def EstimateStreetWidth (self, tags):
+        categories = {"primary":9, "secondary":7, "tertiary":4, "residential":2}
+        
+        if 'highway' in tags:
+            
+            if tags['highway'] in categories:
+                
+                return categories[tags['highway']]
+            else:
+                print (tags["highway"], "not classified")
+        return 1
+    
     def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
         proj = ccrs.Orthographic(0, 0)
         data_proj = ccrs.PlateCarree()
@@ -255,9 +266,10 @@ class OSMStreetDrawing:
         buildings = []
         unclassified = []
         for way in street_2d_data["street"]:
+            swidth = self.EstimateStreetWidth (way['tags'])
             nodes = []
             for node in way["nodes"]:
-                print (node)
+                #print (node)
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
                 self.area.minx = min ([self.area.minx, float(pos[0])])
@@ -271,12 +283,12 @@ class OSMStreetDrawing:
                 self.area.max_lon = max([self.area.max_lon, node["lon"]])
                 
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
-            streets.append ({"way_id": way.get("id", "??"), "nodes":nodes})
+            streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes})
         
         for way in street_2d_data["building"]:
             nodes = []
             for node in way["nodes"]:
-                print (node)
+                
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
                 self.area.minx = min ([self.area.minx, float(pos[0])])
@@ -295,7 +307,7 @@ class OSMStreetDrawing:
         for way in street_2d_data["unclassified"]:
             nodes = []
             for node in way["nodes"]:
-                print (node)
+                
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
                 self.area.minx = min ([self.area.minx, float(pos[0])])
@@ -324,6 +336,35 @@ class OSMStreetDrawing:
         
         return {"streets": streets, "buildings": buildings, "unclassified": unclassified}
     
+    def draw_width_ways (self, fsvg, waysnode, width, height, marginx, marginy):
+        for way in waysnode:
+            path : list[svg.Element] = []
+            
+            swidth = way.get ("street_width", 1)
+            realwidth = swidth * self.area.ratio
+
+            
+
+
+            if len (way["nodes"]) > 1:
+                node = way["nodes"][0]
+                x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                path.append (svg.M (x, y))
+                for node in way["nodes"][1:]:
+                    x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                    y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                    path.append (svg.L (x, y))
+
+                fsvg.addsvg(
+                    svg.Path(
+                        stroke=self.color,
+                        stroke_width=realwidth,
+                        stroke_linecap="round",
+                        fill=self.fill,
+                        d=path,
+                ))
+
     def draw_ways (self, fsvg, waysnode, width, height, marginx, marginy):
         for ways in waysnode:
             path : list[svg.Element] = []
@@ -365,7 +406,7 @@ class OSMStreetDrawing:
         self.color = "green"
         self.stroke_width = 3
         self.fill = "none"
-        self.draw_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
+        self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
         
         
         self.color = "red"

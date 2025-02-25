@@ -3,6 +3,7 @@ import os
 import time
 
 london = [51.51340370316125, -0.08893059482409707]
+askoria = [48.12468951355539, -1.7029650969878054]
 
 if __name__ == '__main__':
     
@@ -14,9 +15,9 @@ if __name__ == '__main__':
     from osm import OSMprocessStreet
     
     osm = OSMprocessStreet.OSMprocessStreet()
-    print ("running on ", london)
+    print ("running on ", askoria)
     start = time.time ()
-    map = osm.ReadStreetMapData(london[0], london[1], 80) 
+    map = osm.ReadStreetMapData(askoria[0], askoria[1], 200) 
     end = time.time()
     osmdelay = end - start
     
