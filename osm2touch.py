@@ -120,6 +120,25 @@ class Api:
 
     
 
+    def saveas_svgfile(self, data, dialogtitle, filterstring):
+        global filename
+
+        fname = window.create_file_dialog(
+            webview.SAVE_DIALOG,
+            allow_multiple=False,
+            file_types=(filterstring[0] + " (*.svg)", filterstring[1] + " (*.*)"),
+        )
+      
+        if fname:
+            if detected_os == KnownOS.Windows:
+                filename = fname
+            else:
+                filename = fname[0]
+        else:
+            return
+        
+        with open(filename, "w", encoding="utf8") as inf:
+            inf.writelines(data)
     def saveas_file(self, data, dialogtitle, filterstring):
         global filename
 

@@ -34,10 +34,12 @@ def overpass_request(latitude, longitude, radius):
     overpass_url = "https://overpass-api.de/api/interpreter"
     
     # Requête Overpass
+    #way["highway"~"^(trunk|primary|secondary|tertiary|unclassified|residential)$"](around:{radius}, {latitude}, {longitude});
     query = f"""
     [out:json];
     (
-    way["highway"~"^(trunk|primary|secondary|tertiary|unclassified|residential)$"](around:{radius}, {latitude}, {longitude});
+    
+    way["highway"](around:{radius}, {latitude}, {longitude});
     wr["building"](around:{radius}, {latitude}, {longitude});
       
     );
@@ -179,8 +181,6 @@ def osm_extract_data (streetmap_data):
                         # Check if the node has lat and lon
                         
                         if "lat" in node and "lon" in node:
-                            if "tags" not in node:
-                                
                                 anoted_node = {
                                     "lat": node["lat"],
                                     "lon": node["lon"],
@@ -192,7 +192,7 @@ def osm_extract_data (streetmap_data):
                         
                     unclassified = {
                         "id": way['id'],
-                        "building": way['tags']['building'],
+                        "tags": way.get ("tags", []),
                         "nodes":ways_node
                     }
                     streetmap_2d_data["unclassified"].append (unclassified)

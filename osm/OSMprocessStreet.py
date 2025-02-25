@@ -24,7 +24,7 @@ class OSMprocessStreet:
         street_2d_data = OSMStreetMap.osm_extract_data (map)
         return (street_2d_data)
     
-    def GetStreetMapSVG (self, street_data):
+    def GetStreetMapSVG (self, street_data, lat=0, lon=0):
         width = 1000
         height = 1000
         marginx = 50
@@ -34,7 +34,7 @@ class OSMprocessStreet:
         fsvg.open (widthmm=width, heightmm=height)
         
         engine = OSMGeometry.OSMStreetDrawing ()
-        
+        engine.geoposition = [lat, lon]
         engine.DrawingStreetMap (fsvg, street_data, width, height, marginx, marginy)
 
         fsvg.close ()

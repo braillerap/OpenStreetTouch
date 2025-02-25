@@ -240,9 +240,29 @@ class OSMStreetDrawing:
         self.color = "#ff0000"
         self.stroke_width = 2
         self.fill = "none"
+        self.geoposition = (0,0)
     def EstimateStreetWidth (self, tags):
-        categories = {"primary":9, "secondary":7, "tertiary":4, "residential":2}
-        
+        categories = {
+            "motorway":9, 
+            "motorway-link":7, 
+            "trunk":9,
+            "trunk-link":7,
+            "primary":9, 
+            "primary-link":7,
+            "secondary":7, 
+            "secondary-link":5, 
+            "tertiary":4, 
+            "tertiary-link":4, 
+            "residential":4,
+            "living-street":4,
+            "pedestrian":4,
+            "road":6,
+            "service":6,
+            "minor-service":4,
+            "footway":2,
+            "cycleway":2,
+            
+            }
         if 'highway' in tags:
             
             if tags['highway'] in categories:
@@ -253,9 +273,10 @@ class OSMStreetDrawing:
         return 1
     
     def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
-        proj = ccrs.Orthographic(0, 0)
+        #proj = ccrs.Orthographic(self.geoposition[0], self.geoposition[1])
+        proj = ccrs.Miller()
         data_proj = ccrs.PlateCarree()
-
+        #data_proj = ccrs.Miller()
         json.dump (street_2d_data, open ("street_2d_data.json", "w"), indent=4)
 
         # compute minx, miny, maxx, maxy
@@ -404,7 +425,7 @@ class OSMStreetDrawing:
         self.draw_ways (fsvg, waysnode["buildings"], width, height, marginx, marginy)
 
         self.color = "green"
-        self.stroke_width = 3
+        #self.stroke_width = 3
         self.fill = "none"
         self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
         
@@ -412,6 +433,6 @@ class OSMStreetDrawing:
         self.color = "red"
         self.stroke_width = 3
         self.fill = "none"
-        self.draw_ways (fsvg, waysnode["unclassified"], width, height, marginx, marginy)
+        #self.draw_ways (fsvg, waysnode["unclassified"], width, height, marginx, marginy)
         
         
