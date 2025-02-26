@@ -1,9 +1,10 @@
-import utm
 import cartopy.crs as ccrs
+import shapely
 import json
 import svg
 from . import OSMsvgFile
 from . import OSMOrthoArea
+
 
 class OsmTransportDrawing:
 
@@ -387,6 +388,49 @@ class OSMStreetDrawing:
         
         return {"streets": streets, "buildings": buildings, "unclassified": unclassified}
     
+    def draw_poly_ways (self, fsvg, waysnode, width, height, marginx, marginy):
+        for way in waysnode:
+            path : list[svg.Element] = []
+            
+            swidth = way.get ("street_width", 1)
+            realwidth = swidth * self.area.ratio
+            color = self.GetColorCategory (way["tags"])
+            fill = "none"
+
+
+            if len (way["nodes"]) > 1:
+                line = shapely.LineString(way["nodes"])
+                
+                offseted = shapely.buffer(line, realwidth, cap_style='square', join_style='bevel')
+                polypts = shapely.get_coordinates(offseted)
+            
+                
+                if len (polypts) > 0:
+                    node = polypts[0]
+                    x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                    y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                    path.append (svg.M (x, y))
+                    
+                    for node in polypts[1:]:
+                        x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                        y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                        path.append (svg.L (x, y))
+                    
+                    # add first node to close the path
+                    node = polypts[0]
+                    x = round((node[0] - self.area.minx) * self.area.ratio, 2) + marginx
+                    y = height - round((node[1] - self.area.miny) * self.area.ratio, 2) - marginy
+                    path.append (svg.L (x, y))
+
+                    fsvg.addsvg(
+                        svg.Path(
+                            stroke=color,
+                            stroke_width=0.1,
+                            stroke_linecap="round",
+                            fill=color,
+                            d=path,
+                    ))
+
     def draw_width_ways (self, fsvg, waysnode, width, height, marginx, marginy):
         for way in waysnode:
             path : list[svg.Element] = []
@@ -462,9 +506,15 @@ class OSMStreetDrawing:
         self.fill = "none"
         if footpath:
             footpath = self.filter_footpath (waysnode["streets"])
-            self.draw_width_ways (fsvg, footpath, width, height, marginx, marginy)
+            if polygon:
+                self.draw_poly_ways (fsvg, footpath, width, height, marginx, marginy)
+            else:    
+                self.draw_width_ways (fsvg, footpath, width, height, marginx, marginy)
         else:    
-            self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
+            if polygon:
+                self.draw_poly_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)  
+            else:  
+                self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
         
         
         self.color = "red"
