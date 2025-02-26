@@ -14,7 +14,7 @@ const Preview = () => {
           GetLocaleString("file.all") //"Tous"
       ]
 
-      window.pywebview.api.saveas_file(ImagePreview, dialogtitle, filter);
+      window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
     }
     const renderImage = () => {
         if (ImagePreview !== '') {
