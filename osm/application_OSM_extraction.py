@@ -10,7 +10,7 @@
 
 # modules 
 import datetime
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os 
 import pandas as pd
 import re
@@ -674,118 +674,6 @@ def lines_ways_extraction_from_datta(data): # => ok
     
     return df_line_tracks 
 
-# fonction plot_network (matplotlib) 
-def plot_network(df_line_info, fig_width_inches, fig_height_inches, background_color, dpi):
-    """Function to plot transportation network 
-    
-    Parameters :
-    ------------
-        df_line_info : dataframe describing station list and positions 
-            columns are : 
-            Index(['line_label', 'line_name', 'from_station', 'to_station',
-                   'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]',
-                   'crossing', 'crossing_lines'],
-                   dtype='object')
-        
-        fig_width_inches : 
-        
-        fig_height_inches :
-        
-        background_color :
-        
-        dpi :
-        
-    output :         
-    --------    
-        fig : figure object produced with matplotlib 
-    """
-    
-    # Défine lines and markers styles 
-    line_styles = ['-', '--', '-.', ':']
-    markers_styles = ['o', 's', 'D', '^', 'v', '<', '>', 'p', '+', 'x']
-    marker_size = 10 
-    crossing_marker_size = 12 
-    crossing_marker = '*'
-    crossing_color = "black" 
-    color_list = ["green", "blue", "cyan", "magenta", "yellow", "orange", "gray", "olive", "purple",  "pink", "brown", "lime"]
-    
-    # print("fig_width_inches : ", fig_width_inches) 
-    # print("fig_height_inches : ", fig_height_inches) 
-    # print("background_color : ", background_color ) 
-    # print("dpi : ", dpi)
-
-    # filtering df_line_info to get only one direction for each metro line 
-    df_line_list = df_line_info.groupby([ 'line_label', 'line_name']).size().reset_index(name='counts')
-    df_one_line_every_two = df_line_list.iloc[::2] 
-    
-    # create figure 
-    fig = plt.figure(figsize=(fig_width_inches, fig_height_inches), facecolor = background_color, dpi=dpi)
-    fig.subplots_adjust(wspace=0.5, hspace=0.5)
-
-    # add axes 
-    ax = fig.add_subplot(111)
-
-    # add lines  for only one direction on the same line 
-    for idx, line in enumerate(df_one_line_every_two["line_label"].replace(":"," : ")):
-        # print("add line : ", line)
-        # line selection in df_line_info 
-        filtered_df = df_line_info[df_line_info['line_label'] == line][['line_label', 'station_order', 'station_name', 'longitude [deg]', 'latitude [deg]', "crossing"]]
-        
-        # add line 
-        ax.plot(filtered_df['longitude [deg]'], filtered_df['latitude [deg]'], 
-                 label = line,
-                 linestyle=line_styles[idx % len(line_styles)],
-                 marker=None,
-                 markersize=0,
-                 linewidth = 2)    
-        # plot station position with various markers versus crossing flag 
-        for index, row in filtered_df.iterrows():
-            marker = crossing_marker if row['crossing'] == 'yes' else markers_styles[idx % len(markers_styles)]
-            station_color = crossing_color if row['crossing'] == 'yes' else color_list[idx % len(color_list)]
-            station_marker_size = crossing_marker_size if row['crossing'] == 'yes' else marker_size
-            # print("Marker : ", idx, marker)
-            plt.plot(row['longitude [deg]'], row['latitude [deg]'], color = station_color,
-                      marker = marker, markersize = station_marker_size, linewidth = 0)
-        # end loop on station markers 
-        
-    # end of loop over lines 
-    
-    # plot configuration options 
-    # plt.grid(False)
-    plt.show(block=False) 
-    # end of loop for line tracing      """
-    return fig 
-    # end of function plot_network 
-
-# function to copy figure in buffer to update html file 
-def plot_to_buffer(fig):
-    """function to send matplotlib figure to BytesIO buffer 
-    
-    Parameters :
-    ------------
-    
-        figure : matplotlib figure object 
-        
-    Returns :
-    ---------
-    
-        BytesIO buffer object 
-    """
-
-    buf = BytesIO()
-    fig.savefig(buf, format='png')
-    
-    # Déplacement du curseur au début du buffer
-    buf.seek(0)
-    
-    # convert buffer content to base64 
-    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
-   
-    # Fermer la figure pour libérer de la mémoire
-    plt.close(fig)
-        
-    return image_base64
-    # end of function plot to buffer 
 
 # fuctnion to create text file for braille printing 
 # file contains list of lines and stations names 

@@ -348,7 +348,7 @@ entry = get_entrypoint()
 if __name__ == "__main__":
     app = "Osm2Touch"
     api = Api()
-    debugihm = False
+    debugihm = True
 
     #print(sys.argv)
     dir, script = os.path.splitext(sys.argv[0])

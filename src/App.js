@@ -22,6 +22,7 @@ class App extends Component {
         params:AppOption
       }
     );
+    this.componentDidMount = this.componentDidMount.bind(this);
     this.webviewloaded = this.webviewloaded.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
@@ -37,7 +38,8 @@ class App extends Component {
   async webviewloaded() {
     //alert("webview loaded");
     //this.setState({ webviewready: true });
-    window.pywebview.state = {};
+    //window.pywebview.state = {};
+    this.setState({ webviewready: true });
     let option = await window.pywebview.api.gcode_get_parameters();
     console.log ("pywebview ready :");
     console.log (option);
@@ -55,16 +57,20 @@ class App extends Component {
     console.log ("webviewloaded end");
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     //this.LouisInit();
+    console.log ("Registering event");
     window.addEventListener('pywebviewready', this.webviewloaded);
     //this.webviewloaded();
-    window.addEventListener('resize', this.handleResize)
-    
+    //window.addEventListener('resize', this.handleResize)
+    console.log ("componentDidMount");
   }
 
   render() {
-   
+    
+    if ( !this.state.webviewready) {
+      return (<h1>Loading</h1>);
+    }
     return (
       
         <BrowserRouter>
