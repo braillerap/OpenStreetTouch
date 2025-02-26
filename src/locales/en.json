@@ -26,6 +26,10 @@
 
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",
+    "citymap.building": "Include buildings",
+    "citymap.streetpolygon": "Render road/streets as polygons",
+    "citymap.footpathonly": "Include only footpath",
+    "citymap.maptitle": "City Map",
 
     "preview.savesvg":"Save as SVG",
 

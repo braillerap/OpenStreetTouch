@@ -27,7 +27,7 @@ import base64
 
 #~DATA 
 __version__ = "1.0"
-__date__ = "10/10/2024"
+__date__ = "26/02/2025"
 __status__ = "ok"
 __authors__ = "François, Stéphane et Gabriel" 
 __organization__ = "My Human Kit - Rennes, France" 
@@ -108,6 +108,7 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     # print("Requête pour la ville {}".format(place_name))
     
     # response = requests.get(overpass_url, params={'data': overpass_query})
+    print (overpass_query)
     try:
         response = requests.post(overpass_url, data={'data': overpass_query})
     except Exception as e:

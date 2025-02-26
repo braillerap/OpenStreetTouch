@@ -241,28 +241,50 @@ class OSMStreetDrawing:
         self.stroke_width = 2
         self.fill = "none"
         self.geoposition = (0,0)
+        self.roadcolor = "#408040"
+        self.footcolor = "#00ff00"
+        self.footway_tags = ["footway","path", "cycleway"]
+
+    def GetColorCategory (self, tags):
+        if 'highway' in tags:
+            if tags['highway'] in self.footway_tags:
+                return   self.footcolor
+            else:
+                return self.roadcolor
+        return self.color
+    
     def EstimateStreetWidth (self, tags):
         categories = {
             "motorway":9, 
             "motorway-link":7, 
+            "motorway_link":7, 
             "trunk":9,
             "trunk-link":7,
+            "trunk_link":7,
             "primary":9, 
             "primary-link":7,
+            "primary_link":7,
             "secondary":7, 
             "secondary-link":5, 
+            "secondary_link":5, 
             "tertiary":4, 
             "tertiary-link":4, 
+            "tertiary_link":4, 
             "residential":4,
             "living-street":4,
+            "living_street":4,
             "pedestrian":4,
             "road":6,
             "service":6,
             "minor-service":4,
+            "minor_service":4,
             "footway":2,
+            "path":2,
             "cycleway":2,
-            
+            "steps":2.5,
             }
+        if 'footpath' in tags:
+            print ("detected footpath")
         if 'highway' in tags:
             
             if tags['highway'] in categories:
@@ -270,7 +292,15 @@ class OSMStreetDrawing:
                 return categories[tags['highway']]
             else:
                 print (tags["highway"], "not classified")
-        return 1
+        return 4
+    
+    def filter_footpath (self, ways):
+        footways = []
+        for way in ways:
+            if 'highway' in way['tags']:
+                if way['tags']['highway'] in self.footway_tags:
+                    footways.append (way)
+        return footways
     
     def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
         #proj = ccrs.Orthographic(self.geoposition[0], self.geoposition[1])
@@ -304,7 +334,7 @@ class OSMStreetDrawing:
                 self.area.max_lon = max([self.area.max_lon, node["lon"]])
                 
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
-            streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes})
+            streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes, "tags": way['tags']})
         
         for way in street_2d_data["building"]:
             nodes = []
@@ -363,8 +393,8 @@ class OSMStreetDrawing:
             
             swidth = way.get ("street_width", 1)
             realwidth = swidth * self.area.ratio
-
-            
+            color = self.GetColorCategory (way["tags"])
+            fill = "none"
 
 
             if len (way["nodes"]) > 1:
@@ -379,10 +409,10 @@ class OSMStreetDrawing:
 
                 fsvg.addsvg(
                     svg.Path(
-                        stroke=self.color,
+                        stroke=color,
                         stroke_width=realwidth,
                         stroke_linecap="round",
-                        fill=self.fill,
+                        fill=fill,
                         d=path,
                 ))
 
@@ -410,24 +440,31 @@ class OSMStreetDrawing:
     def build_projected_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
         self.street2d_data = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy)
 
-    def DrawingStreetMap (self, fsvg, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+    def DrawingStreetMap (self, fsvg, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50, building=True, footpath=False, polygon=False):
         
         
         waysnode = self.build_projected_area_data (street_2d_data, width, height, marginx, marginy)
+        
         #print (waysnode)
         # Draw the ways using the fsvg, waysnode, width, height, marginx, and marginy parameters
         
         print (len(waysnode["buildings"]), len(waysnode["streets"]), len(waysnode["unclassified"]))
-        
-        self.color = "blue"
-        self.stroke_width = 1
-        self.fill = "lightblue"
-        self.draw_ways (fsvg, waysnode["buildings"], width, height, marginx, marginy)
+        print ("building", building, "footpath", footpath, "polygon", polygon)
+
+        if building:
+            self.color = "blue"
+            self.stroke_width = 0.1
+            self.fill = "lightblue"
+            self.draw_ways (fsvg, waysnode["buildings"], width, height, marginx, marginy)
 
         self.color = "green"
         #self.stroke_width = 3
         self.fill = "none"
-        self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
+        if footpath:
+            footpath = self.filter_footpath (waysnode["streets"])
+            self.draw_width_ways (fsvg, footpath, width, height, marginx, marginy)
+        else:    
+            self.draw_width_ways (fsvg, waysnode["streets"], width, height, marginx, marginy)
         
         
         self.color = "red"

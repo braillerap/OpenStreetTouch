@@ -1,6 +1,16 @@
-
 import requests
 import json
+
+
+#~DATA 
+__version__ = "1.0"
+__date__ = "26/02/2025"
+__status__ = "ok"
+__authors__ = "François, Stéphane et Gabriel" 
+__organization__ = "My Human Kit - Rennes, France" 
+__licence__ = "CeCILL v2.1 / CC by SA"
+
+
 def osm_get_indirect_node (streetmap_data, node_id):
     """
     Retrieve an indirect node from the street information dictionary.
@@ -85,6 +95,7 @@ def osm_extraction (streetmap_data):
             else:
                 print ("Type de données non géré : ", element['type'])
     return street_info
+
 
 def osm_extract_data (streetmap_data):
     streetmap_2d_data = {"street":[],"building":[], "unclassified":[]}

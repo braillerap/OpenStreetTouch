@@ -26,6 +26,9 @@
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",
+    "citymap.streetpolygon": "Polygones pour les routes/chemins",
+    "citymap.footpathonly": "Pieton seulement",
+    "citymap.maptitle": "Plan de ville",
 
     "preview.savesvg":"Enregistrer le SVG",
 
