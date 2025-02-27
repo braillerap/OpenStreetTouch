@@ -244,7 +244,7 @@ class OSMStreetDrawing:
         self.geoposition = (0,0)
         self.roadcolor = "#408040"
         self.footcolor = "#00ff00"
-        self.footway_tags = ["footway","path", "cycleway"]
+        self.footway_tags = ["footway","path", "cycleway", "steps"]
 
     def GetColorCategory (self, tags):
         if 'highway' in tags:
@@ -256,29 +256,29 @@ class OSMStreetDrawing:
     
     def EstimateStreetWidth (self, tags):
         categories = {
-            "motorway":9, 
-            "motorway-link":7, 
-            "motorway_link":7, 
-            "trunk":9,
-            "trunk-link":7,
-            "trunk_link":7,
-            "primary":9, 
-            "primary-link":7,
-            "primary_link":7,
-            "secondary":7, 
-            "secondary-link":5, 
-            "secondary_link":5, 
-            "tertiary":4, 
-            "tertiary-link":4, 
-            "tertiary_link":4, 
-            "residential":4,
-            "living-street":4,
-            "living_street":4,
+            "motorway":11, 
+            "motorway-link":9, 
+            "motorway_link":9, 
+            "trunk":11,
+            "trunk-link":9,
+            "trunk_link":9,
+            "primary":11, 
+            "primary-link":9,
+            "primary_link":9,
+            "secondary":9, 
+            "secondary-link":7, 
+            "secondary_link":7, 
+            "tertiary":7, 
+            "tertiary-link":5, 
+            "tertiary_link":5, 
+            "residential":5,
+            "living-street":5,
+            "living_street":5,
             "pedestrian":4,
-            "road":6,
-            "service":6,
-            "minor-service":4,
-            "minor_service":4,
+            "road":7,
+            "service":7,
+            "minor-service":5,
+            "minor_service":5,
             "footway":2,
             "path":2,
             "cycleway":2,
@@ -393,7 +393,7 @@ class OSMStreetDrawing:
             path : list[svg.Element] = []
             
             swidth = way.get ("street_width", 1)
-            realwidth = swidth * self.area.ratio
+            realwidth = swidth 
             color = self.GetColorCategory (way["tags"])
             fill = "none"
 
@@ -401,7 +401,7 @@ class OSMStreetDrawing:
             if len (way["nodes"]) > 1:
                 line = shapely.LineString(way["nodes"])
                 
-                offseted = shapely.buffer(line, realwidth, cap_style='square', join_style='bevel')
+                offseted = shapely.buffer(line, realwidth/2, cap_style='square', join_style='bevel')
                 polypts = shapely.get_coordinates(offseted)
             
                 
