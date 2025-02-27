@@ -89,9 +89,10 @@ class OsmTransportDrawing:
     
 
     def build_projected_area_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
-        proj = ccrs.Orthographic(0, 0)
+        #proj = ccrs.Orthographic(0, 0)
+        #data_proj = ccrs.PlateCarree()
+        proj = ccrs.Miller()
         data_proj = ccrs.PlateCarree()
-
         # compute minx, miny, maxx, maxy
         self.area = OSMOrthoArea.OrthoArea ()
         lines = []
