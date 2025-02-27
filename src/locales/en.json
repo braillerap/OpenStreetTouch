@@ -30,6 +30,9 @@
     "citymap.streetpolygon": "Render road/streets as polygons",
     "citymap.footpathonly": "Include only footpath",
     "citymap.maptitle": "City Map",
+    "citymap.latitude": "Latitude",
+    "citymap.longitude": "Longitude",
+    "citymap.radius": "Radius (meters)",
 
     "preview.savesvg":"Save as SVG",
 

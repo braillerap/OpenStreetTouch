@@ -29,7 +29,9 @@
     "citymap.streetpolygon": "Polygones pour les routes/chemins",
     "citymap.footpathonly": "Pieton seulement",
     "citymap.maptitle": "Plan de ville",
-
+    "citymap.latitude": "Latitude",
+    "citymap.longitude": "Longitude",
+    "citymap.radius": "Rayon (mètre)",
     "preview.savesvg":"Enregistrer le SVG",
 
     "param.locale":"Langue de l'application",
