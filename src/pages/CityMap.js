@@ -197,7 +197,7 @@ const CityMap = () => {
                 
                 <h2>Click on the map to get the position</h2>
             </div>
-            <MapContainer center={position} zoom={20} scrollWheelZoom={true}
+            <MapContainer center={position} zoom={2} scrollWheelZoom={true}
             ref={mapref}
             style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
             attributionControl={false}
