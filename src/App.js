@@ -80,6 +80,7 @@ class App extends Component {
               <Route path="/parameter" element={<Parameter params={this.context.Params} />} />
               <Route path="/transport"  element={<Transport  />}/>
               <Route path="/cmap"  element={<CityMap  params={this.context.Params} />} />
+              
               <Route path="*" element={<Home />} />
             </Route>
           </Routes>

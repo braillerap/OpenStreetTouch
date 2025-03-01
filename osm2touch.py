@@ -78,12 +78,20 @@ class Api:
     def __init__(self):
         self.osmt = OSMprocess.Osmprocess()
         self.osms = OSMprocessStreet.OSMprocessStreet()
+        self._window = None
 
     def fullscreen(self):
         """toggle main window fullscreen"""
         webview.windows[0].toggle_fullscreen()
 
-    
+       
+
+    def set_window(self, window):
+        self._window = window
+
+    def quit(self):
+        print ("quit request")
+        self._window.destroy()
     
     def gcode_get_parameters(self):
         """Get parameters value"""
@@ -379,6 +387,8 @@ if __name__ == "__main__":
         window = webview.create_window(
             app, entry, js_api=api, focus=True, maximized=True,
         )
+    
+    api.set_window (window)
 
     if detected_os == KnownOS.Windows:
         print ("starting Windows GUI")

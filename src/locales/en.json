@@ -15,6 +15,7 @@
     "menu.transport":"Transport",
     "menu.citymap":"Map",
     "menu.param":"Parameters",
+    "menu.exit":"Exit",
     
     "transport.renderimg":"Draw Transport Line",
     "transport.renderstation":"Draw stations",

@@ -11,7 +11,12 @@ import Toolbar from "./pages/Toolbar";
 const Layout = () => {
     const {GetLocaleString, GetLocaleDir} = useContext(AppContext);
     
-    
+    const exitrequest = (e) => {
+        console.log ("askexit");
+        e.preventDefault();
+        window.pywebview.api.quit();
+
+    }
    
 
     return (
@@ -34,7 +39,9 @@ const Layout = () => {
                                 <li className="pure-menu-item">
                                     <Link to="/parameter" className="pure-menu-link">{GetLocaleString("menu.param")}</Link>
                                 </li>
-                                
+                                <li className="pure-menu-item">
+                                    <Link onClick={exitrequest} className="pure-menu-link">{GetLocaleString("menu.exit")} </Link>
+                                </li>
                             </ul>
                             {/*<button className="pure-menu-heading" onClick={() => {ForceResize()}}>FR</button>*/}
 

@@ -15,7 +15,8 @@
     "menu.transport":"Transport",
     "menu.citymap":"Carte",
     "menu.param":"Paramètres",
-    
+    "menu.exit":"Exit",
+        
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
     "transport.search":"Rechercher",
