@@ -9,7 +9,7 @@ from . import OSMOrthoArea
 class OsmTransportDrawing:
 
     def __init__(self):
-        self.colors = ["#ff0000","#00ff00","#0000ff", "#ff00ff", "#00ffff", "#ffff00", "#000000"]
+        self.colors = ["#ff0000","#00ff00","#0000ff", "#ff00ff", "#00ffff", "#ffff00", "#000000", "#ff0080", "#ff8000", "#80ff00", "#00ff80", "#0080ff", "#8000ff"]
         self.colorsid = 0
         self.fill_hole = False
         self.stroke_width = 3
@@ -24,7 +24,7 @@ class OsmTransportDrawing:
     
         
         stroke_width=self.stroke_width
-        colorid = 0
+        
         #print ("len lines", len(lines))
         for line in lines:
             if len(line["ways"]) == 0:
@@ -61,7 +61,7 @@ class OsmTransportDrawing:
                     total_line.append ((x, y))
                 if not self.fill_hole:
                     svg_file.addsvg(svg.Path(
-                                stroke=self.colors[colorid % len(self.colors)],
+                                stroke=self.colors[self.colorsid % len(self.colors)],
                                 stroke_width=self.stroke_width,
                                 stroke_linecap="round",
                                 fill="none",
@@ -77,14 +77,14 @@ class OsmTransportDrawing:
                     path.append (svg.L (node[0], node[1]))
                 
                 if self.fill_hole:
-                    svg_file.addsvg(svg.Path(stroke=self.colors[colorid % len(self.colors)],
+                    svg_file.addsvg(svg.Path(stroke=self.colors[self.colorsid % len(self.colors)],
                                 stroke_width=self.stroke_width,
                                 stroke_linecap="round",
                                 fill="none",
                                 d=path,
                             ))
                     
-            colorid = colorid + 1
+            self.colorsid = self.colorsid + 1
 
     
 
@@ -137,6 +137,18 @@ class OsmTransportDrawing:
         return lines
 
     def get_way_square_dist (self, way1, way2, way1pos, way2pos):
+        """
+        Compute the square distance between two nodes on two different ways.
+
+        Args:
+            way1 (dict): The first OSM way, with a nodes list in "nodes" key.
+            way2 (dict): The second way, with a nodes list in "nodes" key..
+            way1pos (int): The position of the node on the first way.
+            way2pos (int): The position of the node on the second way.
+
+        Returns:
+            float: The square distance between the two nodes.
+        """
         if (len (way1["nodes"]) > 1):
             way1nodes = [way1["nodes"][0], way1["nodes"][-1]]
         else:
@@ -149,7 +161,17 @@ class OsmTransportDrawing:
 
         return self.square_dist (way1nodes[way1pos], way2nodes[way2pos])
 
-    def test_swap (self, line):
+    def swap_transport_way (self, line):
+        """
+        Test and potentially swap ways given by osm in a transport line (relation).
+
+        Args:
+            line (dict): A dictionary representing a line with a list of ways.
+
+        Returns:
+            None
+
+        """
         swap_conf = [(-1,0),(0,-1),(0,0),(-1,-1)]
         #print ("swap line", line["name"])
         if len (line["ways"]) > 1:
@@ -196,23 +218,23 @@ class OsmTransportDrawing:
         self.transport_lines = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy)
 
     def build_stations (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
-        colorid = 0
+        #colorid = 0
         for line in self.transport_lines:
             for station in line["stations"]:
                 pos = station["pos"]
                 x = round((pos[0] - self.area.minx) * self.area.ratio, 2) + marginx
                 y = height - round((pos[1] - self.area.miny) * self.area.ratio, 2) - marginy
                 
-                fsvg.addsvg (svg.Circle(cx=x, cy=y, r=10, fill=self.colors[colorid % len(self.colors)]))
-            colorid += 1
+                fsvg.addsvg (svg.Circle(cx=x, cy=y, r=10, fill=self.colors[self.colorsid % len(self.colors)]))
+            self.colorsid += 1
 
     def build_poly_from_ways (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
         for line in self.transport_lines:
-            self.test_swap (line)
+            self.swap_transport_way (line)
         self.draw_way (fsvg, self.transport_lines, self.area, width, height, marginx, marginy)
         
     def build_poly_from_stations (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
-        colorid = 0
+        self.colorsid = 0
         
         for line in self.transport_lines:
             positions = []
@@ -228,13 +250,13 @@ class OsmTransportDrawing:
                 for pos in positions[1:]:
                     path.append (svg.L (pos[0], pos[1]))
                 fsvg.addsvg(svg.Path(
-                                stroke=self.colors[colorid % len(self.colors)],
+                                stroke=self.colors[self.colorsid % len(self.colors)],
                                 stroke_width=self.stroke_width,
                                 stroke_linecap="round",
                                 fill="none",
                                 d=path,
                             ))
-            colorid += 1
+            self.colorsid += 1
         
 class OSMStreetDrawing:
     def __init__(self):
