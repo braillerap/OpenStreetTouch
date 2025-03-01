@@ -18,12 +18,14 @@
     
     "transport.renderimg":"Draw Transport Line",
     "transport.renderstation":"Draw stations",
-    
+    "transport.search":"Search",
     "transport.sectionplan":"Transport Line(s) rendering",
     "transport.strategyways":"Path from OSM data",
     "transport.strategywayscorreted":"OSM data corrected",
     "transport.strategystation":"Stations position",
     "transport.renderstrategy":"Transport line drawing strategy",
+    "transport.type":"Transport type (osm)",
+    "transport.iso639":"City name language",
 
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",

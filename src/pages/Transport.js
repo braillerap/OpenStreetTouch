@@ -46,6 +46,7 @@ const Transport = () => {
     const renderIso639 = () => {
         
         return (
+            <label>{GetLocaleString("transport.iso639")}
             <select value={iso639code} onChange={(event) => {setIso639Code(event.target.value)}} >
             {
                 iso639codeList.map((code) => {
@@ -55,11 +56,12 @@ const Transport = () => {
                 })
             }
             </select>
+            </label>
         );
     }
     const renderTransportType =  () => {
         return (
-            <label>
+            <label>{GetLocaleString("transport.type")}
             <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
             {
                 transport_type2.map((trans) => {
@@ -204,7 +206,7 @@ const Transport = () => {
 
         {renderIso639()}
         {renderTransportType()}
-        <button onClick={goOsm}>Go !</button>
+        <button onClick={goOsm}>{GetLocaleString("transport.search")}</button>
         {/*renderImage() */}
 
         <div className='CheckedList'>

@@ -18,12 +18,14 @@
     
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
-    
+    "transport.search":"Rechercher",
     "transport.sectionplan":"Affichage des lignes de transports",
     "transport.strategyways":"Données de tracé OSM",
     "transport.strategywayscorreted":"Données OSM corrigées",
     "transport.strategystation":"Position des stations",
     "transport.renderstrategy":"Strategie de rendu de la ligne de transport",
+    "transport.type":"Type transport (OSM)",
+    "transport.iso639":"Langue de la ville",
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",
