@@ -5,7 +5,6 @@ from . import OSMTransitInfo
 from . import OSMsvgFile
 from . import OSMStreetMap
 
-import pandas as pd
 import json
 
 class OSMprocessStreet:

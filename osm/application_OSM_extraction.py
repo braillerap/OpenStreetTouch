@@ -12,7 +12,7 @@
 import datetime
 #import matplotlib.pyplot as plt
 import os 
-import pandas as pd
+#import pandas as pd
 import re
 import requests
 import sys 
