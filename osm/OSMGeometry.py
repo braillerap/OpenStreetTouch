@@ -4,7 +4,7 @@ import json
 import svg
 from . import OSMsvgFile
 from . import OSMOrthoArea
-
+from . import OSMSymbol
 
 class OsmTransportDrawing:
 
@@ -15,8 +15,20 @@ class OsmTransportDrawing:
         self.stroke_width = 3
         self.area = None
         self.transport_lines = []
+        self.showstartstation = False
+        self.symbolsize = 30
 
     def square_dist (self, pt1, pt2):
+        """
+        Calculate the squared distance between two points.
+
+        Parameters:
+        pt1 (tuple): A tuple representing the coordinates of the first point (x1, y1).
+        pt2 (tuple): A tuple representing the coordinates of the second point (x2, y2).
+
+        Returns:
+        float: The squared Euclidean distance between the two points.
+        """
         return ((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
 
 
@@ -217,16 +229,35 @@ class OsmTransportDrawing:
     def build_projected_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
         self.transport_lines = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy)
 
+    def build_station (self, fsvg, position, symbol, strokecolor, fillcolor, width, height, marginx, marginy):
+        symbolengine = OSMSymbol.OSMSymbol ()
+        x = round((position[0] - self.area.minx) * self.area.ratio, 2) + marginx
+        y = height - round((position[1] - self.area.miny) * self.area.ratio, 2) - marginy
+        print (x,y)                
+        symbolengine.DrawSymbol (fsvg, symbol, x, y, self.symbolsize, fillcolor, strokecolor)                        
+        
     def build_stations (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
-        #colorid = 0
+        
         for line in self.transport_lines:
-            for station in line["stations"]:
-                pos = station["pos"]
-                x = round((pos[0] - self.area.minx) * self.area.ratio, 2) + marginx
-                y = height - round((pos[1] - self.area.miny) * self.area.ratio, 2) - marginy
-                
-                fsvg.addsvg (svg.Circle(cx=x, cy=y, r=10, fill=self.colors[self.colorsid % len(self.colors)]))
-            self.colorsid += 1
+            if "stations" in line:
+                stations = line["stations"]
+                print ("drawing stations")
+                if len (stations) > 2:
+                    start = stations[0]
+                    end = stations[-1]
+
+                    self.build_station (fsvg, start["pos"], OSMSymbol.OSMSymbolType.Square, self.colors[self.colorsid % len(self.colors)], self.colors[self.colorsid % len(self.colors)], width, height, marginx, marginy)
+                    self.build_station (fsvg, end["pos"], OSMSymbol.OSMSymbolType.Triangle, self.colors[self.colorsid % len(self.colors)], self.colors[self.colorsid % len(self.colors)], width, height, marginx, marginy)
+
+                    for station in stations[1:-1]:
+                        print (station)
+                        self.build_station (fsvg, station["pos"], OSMSymbol.OSMSymbolType.Circle, self.colors[self.colorsid % len(self.colors)], self.colors[self.colorsid % len(self.colors)], width, height, marginx, marginy)    
+                else:   
+                    for station in stations:
+                        self.build_station (fsvg, station["pos"], OSMSymbol.OSMSymbolType.Circle, self.colors[self.colorsid % len(self.colors)], self.colors[self.colorsid % len(self.colors)], width, height, marginx, marginy)
+                        
+
+                self.colorsid += 1
 
     def build_poly_from_ways (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
         for line in self.transport_lines:
