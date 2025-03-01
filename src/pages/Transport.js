@@ -83,14 +83,15 @@ const Transport = () => {
         
         setImagePreview('');
         setTransportLines([]);
-        console.log ("tansport type", transportType);
+        
+        // read OSM data for city and transport type
+        // iso639code is used to specified the language name of the city for OSM
         window.pywebview.api.ReadTransportData(cityName, transportType, iso639code).then ((size) => {
-            console.log (size);
+            
             window.pywebview.api.GetTransportLines().then ((datadic) => {
                 setRealCityName (datadic.city);
 
-                console.log (datadic.lines);
-                
+                // update result for suitable checkbox display
                 let sline = [];
                 if ("lines" in datadic)
                 {
@@ -102,14 +103,10 @@ const Transport = () => {
                         }
                     }
                 }  
-                console.log (sline) ;
+                
                 setTransportLines(sline);
                 
-                /*
-                window.pywebview.api.GetTransportDataSvg(sline).then ((svg) => {
-                    setImagePreview (svg);
-                });
-                */
+                
             });
 
             
@@ -120,10 +117,7 @@ const Transport = () => {
        
     }
     const onSelectLine = (e) => {
-        console.log(e.target.id);
-        console.log(e.target.name);
-        console.log(e.target.checked);
-
+        
         let lines = transportLines;
         lines[e.target.id].select = e.target.checked;
         setTransportLines(lines);
@@ -133,17 +127,13 @@ const Transport = () => {
         console.log(e.target.checked);
         setDrawStation(e.target.checked);
     }
-    const onSelectFill = (e) => {
-        console.log(e.target.value);
-    }
-    
+        
     const renderTransportLines = () => {
         if (transportLines.length === 0  )
             return (<>empty</>);
         
         return (
             
-               
                 transportLines.map((line) => {
                         return (
                             <label>
@@ -160,13 +150,7 @@ const Transport = () => {
             
         );
     }
-    const renderImage = () => {
-        if (cityImage !== '') {
-            const srcpat = "data:image/png;base64," + cityImage;
-            return <img src={srcpat} alt="city image" />
-        }
-        return (<></>);
-    }
+    
 
     const renderTransportAction = () => {
         if (transportLines.length > 0  )
@@ -186,7 +170,7 @@ const Transport = () => {
                         {GetLocaleString("transport.renderstation")}
 
                     </label>
-                    <label>Stratégie
+                    <label>{GetLocaleString("transport.renderstrategy")}
                     <select value={transportStrategy} onChange={(event) => {setTransportStrategy(event.target.value)}} >
                     {
                         transportStrategyList.map((trans, index) => {
@@ -197,10 +181,7 @@ const Transport = () => {
                     }
                     </select>
                     </label>
-                    <label>
-                        <input type='checkbox' id='fill' name='fill' onChange={onSelectFill} />
-                        {GetLocaleString("transport.renderfill")}
-                    </label>
+                    
                     <button onClick={goRender}>
                         {GetLocaleString("transport.renderimg")}
                     </button>
