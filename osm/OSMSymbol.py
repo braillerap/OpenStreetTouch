@@ -16,10 +16,10 @@ class OSMSymbol:
         pass
 
     def DrawSymbol (self, svgfile, symbol, x, y, size, fillcolor, strokecolor):
-        print ("Drawsymbol", symbol)
+        
         match (symbol):
             case OSMSymbolType.Circle:
-                print ("draw circle")
+                
                 svgfile.addsvg (svg.Circle(cx=x, cy=y, r=size/2, fill=fillcolor, stroke=strokecolor, stroke_width=1))
             case OSMSymbolType.Star:
                 

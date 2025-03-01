@@ -277,6 +277,26 @@ def osm_extract_data (transport_info, transport_type):
                 # Check if the element is a node
                 elif element["type"] == "node":   
                     node = osm_get_indirect_element (transport_info, element)
+                    if "tags" in node:
+                        station_stop = False
+                        if "public_transport" in node['tags']:
+                            if (node['tags']["public_transport"] == "stop_position"):
+                                station_stop = True
+                            if node['tags']["public_transport"] == "platform":
+                                if "highway" in node['tags']:
+                                    if node['tags']["highway"] == "bus_stop":
+                                        station_stop = True
+
+                        if station_stop:    
+                            station = {
+                                "name": node["tags"].get("name", ""),
+                                "id": node["id"],
+                                "lat": node["lat"],
+                                "lon": node["lon"],
+                                "transit":False    
+                                    }
+                            stations.append(station)
+                            
                     # Check if the role is empty
                     if role == "":
                         pass

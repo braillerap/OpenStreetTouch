@@ -233,7 +233,7 @@ class OsmTransportDrawing:
         symbolengine = OSMSymbol.OSMSymbol ()
         x = round((position[0] - self.area.minx) * self.area.ratio, 2) + marginx
         y = height - round((position[1] - self.area.miny) * self.area.ratio, 2) - marginy
-        print (x,y)                
+                    
         symbolengine.DrawSymbol (fsvg, symbol, x, y, self.symbolsize, fillcolor, strokecolor)                        
         
     def build_stations (self, fsvg, width=1000, height=1000, marginx= 50, marginy=50):
@@ -241,7 +241,7 @@ class OsmTransportDrawing:
         for line in self.transport_lines:
             if "stations" in line:
                 stations = line["stations"]
-                print ("drawing stations")
+                
                 if len (stations) > 2:
                     start = stations[0]
                     end = stations[-1]

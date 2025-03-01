@@ -25,7 +25,7 @@ class Osmprocess:
         
         # extract osm data with overpass request
         self.osm_data = application_OSM_extraction.overpass_request(self.CityName, transport_type, iso639_code)
-        #json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
+        json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
         
         # data structuration for future usage
         self.transport_data = application_OSM_extraction.osm_extraction (self.osm_data, self.CityName, self.transport_type)
