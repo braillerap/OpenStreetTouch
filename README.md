@@ -2,7 +2,14 @@
 
 A tool to extract geodata from openstreetmap and create suitable file for image2touch or DesktopBrailleRAP. The main goal is to extract openstreetmap data to build tangible maps.
 
-In many cities, public transport map are not available in Braille nor in suitable format to build accessible description. Most of the needed data is available in [openstreetmap](https://www.openstreetmap.org/) in open source licence. OpenStreetTouch aim to extract these data to build accessible transport map.
+In many cities, public transport map are not available in Braille nor in suitable format to build accessible description. Most of the needed data is available in [openstreetmap](https://www.openstreetmap.org/) in open database licence. OpenStreetTouch aim to extract these data to build accessible transport map.
+
+Here is an exemple with BrailleRAP on a residential area in France.
+
+![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/petiteferme.jpg)
+
+Another Exemple of the Askoria campus in Rennes - France
+![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/askoria.jpg)
 
 ## Features
 - Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a3d printer or a BrailleRAP with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
