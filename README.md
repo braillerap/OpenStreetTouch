@@ -4,11 +4,11 @@ A tool to extract geodata from openstreetmap and create suitable file for image2
 
 In many cities, public transport map are not available in Braille nor in suitable format to build accessible description. Most of the needed data is available in [openstreetmap](https://www.openstreetmap.org/) in open database licence. OpenStreetTouch aim to extract these data to build accessible transport map.
 
-Here is an exemple with BrailleRAP on a residential area in France.
+Here is an exemple with DesktopBrailleRAP on a residential area in France.
 
 ![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/petiteferme.jpg)
 
-Another Exemple of the Askoria campus in Rennes - France
+Another exemple with the Askoria campus in Rennes - France
 ![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/askoria.jpg)
 
 ## Features
