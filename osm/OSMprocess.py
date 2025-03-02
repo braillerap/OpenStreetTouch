@@ -58,7 +58,7 @@ class Osmprocess:
         json.dump (transport_graph_data_filtered, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
         return transport_graph_data_filtered
     
-    def GetTransportDataSvg (self, linelist, drawstations, linestrategy):
+    def GetTransportDataSvg (self, linelist, drawstations, linestrategy, polygon):
         graph_data = self.GetTransportDataGraphInfo (linelist)
         width = 1500
         height = 1000

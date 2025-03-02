@@ -27,7 +27,10 @@ const Transport = () => {
     const [transportType, setTransportType] = useState('subway');
     const [transportStrategyList, setTransportStrategyList] = useState([]);
     const [transportStrategy, setTransportStrategy] = useState(0);
-    
+    const [drawPolygon, setDrawPolygon] = useState(false);
+
+    const [osmPending, setOsmPending] = useState(false);
+
     useEffect(() => {
         window.pywebview.api.GetISO639_country_code().then ((isolist) => {
            setIso639CodeList(isolist);
@@ -76,7 +79,7 @@ const Transport = () => {
     }
     const goRender = () => {
         console.log ("call GetTransportDataSvg" + transportLines);
-        window.pywebview.api.GetTransportDataSvg(transportLines, drawStation, transportStrategy).then ((svg) => {
+        window.pywebview.api.GetTransportDataSvg(transportLines, drawStation, transportStrategy, drawPolygon).then ((svg) => {
             setImagePreview (svg);
         });
     }
@@ -85,7 +88,8 @@ const Transport = () => {
         
         setImagePreview('');
         setTransportLines([]);
-        
+        setOsmPending(true);
+
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
         window.pywebview.api.ReadTransportData(cityName, transportType, iso639code).then ((size) => {
@@ -107,7 +111,7 @@ const Transport = () => {
                 }  
                 
                 setTransportLines(sline);
-                
+                setOsmPending(false);
                 
             });
 
@@ -131,12 +135,16 @@ const Transport = () => {
     }
         
     const renderTransportLines = () => {
+        if (osmPending)
+            return (<>{GetLocaleString("transport.osmpending")}</>);
+
         if (transportLines.length === 0  )
-            return (<>empty</>);
+            return (<>{GetLocaleString("transport.nodata")}</>);
         
         return (
-            
-                transportLines.map((line) => {
+                <>
+                <p>{GetLocaleString("transport.osmcityname")} : {realCityName}</p>
+                {transportLines.map((line) => {
                         return (
                             <label>
                                 <input type="checkbox" 
@@ -146,8 +154,8 @@ const Transport = () => {
                                 {line.name} 
                             </label>
                         )
-                    })
-                
+                    })}
+                </>
             
             
         );
@@ -170,6 +178,16 @@ const Transport = () => {
                             checked={drawStation} 
                             onChange={onSelectStations} />
                         {GetLocaleString("transport.renderstation")}
+
+                    </label>
+                    <label>
+                        <input 
+                            type='checkbox' 
+                            id='polygons' 
+                            name='polygons' 
+                            checked={drawPolygon} 
+                            onChange={(e)=>{setDrawPolygon(e.target.checked)}} />
+                        {GetLocaleString("transport.polygon")}
 
                     </label>
                     <label>{GetLocaleString("transport.renderstrategy")}
@@ -206,11 +224,11 @@ const Transport = () => {
 
         {renderIso639()}
         {renderTransportType()}
-        <button onClick={goOsm}>{GetLocaleString("transport.search")}</button>
+        <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>
         {/*renderImage() */}
 
         <div className='CheckedList'>
-            <p>OSM city name : {realCityName}</p>
+            
             {renderTransportLines ()}
             
         </div>

@@ -11,6 +11,7 @@
     "file.svgfile": "SVG File",
     "file.all": "All",
 
+    "home.openstreetmap":"This software make heavy use of OpenStreetMap data. All these data are subjected to ODbL license. See OpenStreetMap web site for more information.",
     "menu.home":"Home",
     "menu.transport":"Transport",
     "menu.citymap":"Map",
@@ -27,6 +28,10 @@
     "transport.renderstrategy":"Transport line drawing strategy",
     "transport.type":"Transport type (osm)",
     "transport.iso639":"City name language",
+    "transport.osmcityname":"City name in OSM",
+    "transport.nodata":"No data",
+    "transport.osmpending":"Search in progress …",
+    "transport.polygon": "Line paths as polygons",
 
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",

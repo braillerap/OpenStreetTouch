@@ -16,7 +16,9 @@
     "menu.citymap":"Carte",
     "menu.param":"Paramètres",
     "menu.exit":"Exit",
-        
+     
+    "home.openstreetmap":"Ce logiciel utilise des données issue du project OpenStreetMap. Voir le site d'OpenStreetMap pour plus d'informations.",
+
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
     "transport.search":"Rechercher",
@@ -27,6 +29,10 @@
     "transport.renderstrategy":"Strategie de rendu de la ligne de transport",
     "transport.type":"Type transport (OSM)",
     "transport.iso639":"Langue de la ville",
+    "transport.osmcityname":"Nom de la ville dans OSM",
+    "transport.nodata":"Aucune donnée",
+    "transport.osmpending":"Recherche en cours …",
+    "transport.polygon": "Polygones pour tracés de lignes",
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",

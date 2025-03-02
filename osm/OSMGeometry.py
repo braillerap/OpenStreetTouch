@@ -45,6 +45,7 @@ class OsmTransportDrawing:
                 continue
             total_line = []
             start = line["ways"][0]["nodes"][0]
+            
             x = round((start[0] - area.minx) * area.ratio, 2) + marginx
             y = height - round((start[1] - area.miny) * area.ratio, 2) - marginy
             cnt = 1
@@ -54,17 +55,16 @@ class OsmTransportDrawing:
                 if len (ways["nodes"]) == 0:
                     continue
                 
+                # first point in path
                 start = ways["nodes"][0]
                 x = round((start[0] - area.minx) * area.ratio, 2) + marginx
                 y = height - round((start[1] - area.miny) * area.ratio, 2) - marginy
-                
-                # svg_file.addsvg (svg.Circle(cx=x, cy=y, r=10, fill="#00ff0040"))
-                # svg_file.addsvg(
-                #        svg.Text(x=x, y=y -10 -cnt / 2, class_=["small"], text=str(cnt))
-                #        )
+                      
                 cnt = cnt +1
                 path.append (svg.M (x, y))
                 total_line.append ((x, y))
+
+                # next points in path                    
                 for node in ways["nodes"][1:]:
                     
                     x = round((node[0] - area.minx) * area.ratio, 2) + marginx
@@ -119,7 +119,7 @@ class OsmTransportDrawing:
                     self.area.AddLatLon (node["lat"], node["lon"])
 
                     nodes.append ( (float(pos[0]), float(pos[1]) ) )
-                    
+
                 ways.append ({"way_id": way.get("id", "??"), "nodes":nodes})
            
             stations = []
