@@ -301,7 +301,7 @@ class Api:
         svg = self.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
         liststation = self.osmt.GetTransportDataStations (linelist)
 
-        return {"svg": svg, "stations": liststation}
+        return json.dumps({"svg": svg, "stations": liststation})
     
     def GetTransportSVGbase64 (self):
         svg = self.osmt.get_svg ()

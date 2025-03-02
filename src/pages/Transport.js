@@ -17,6 +17,7 @@ const transport_type2 = [
 const Transport = () => {
     const {GetLocaleString} = useContext(AppContext);
     const { setImagePreview } = useContext(AppContext);
+    const { setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [cityImage, setCityImage] = useState('');
     const [drawStation, setDrawStation] = useState(true);
@@ -78,15 +79,21 @@ const Transport = () => {
         )
     }
     const goRender = () => {
-        console.log ("call GetTransportDataSvg" + transportLines);
-        window.pywebview.api.GetTransportDataSvg(transportLines, drawStation, transportStrategy, drawPolygon).then ((svg) => {
-            setImagePreview (svg);
+        console.log ("call GetTransportData" + transportLines);
+        window.pywebview.api.GetTransportData(transportLines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
+            console.log (datastr);
+            let data = JSON.parse(datastr);
+            console.log (data);
+            setImagePreview (data.svg);
+            console.log (data.stations);
+            setTransportGuide (data.stations);
         });
     }
 
     const goOsm = () => {
         
         setImagePreview('');
+        setTransportGuide ('');
         setTransportLines([]);
         setOsmPending(true);
 

@@ -61,8 +61,17 @@ class Osmprocess:
     def GetTransportDataStations (self, linelist):
         desired_line = [line["name"] for line in linelist if line["select"] == True]
         strstation = ""
-        for line in self.transport_graph_data_filtered["lines"]:
-            strstation = strstation + line["name"] + " : " + ", ".join(line["stations"]) + "\n"
+        json.dump (self.transport_graph_data_filtered, open("transport_graph_data_filtered.json", "w"), indent=4, sort_keys=False)
+        for line in self.transport_graph_data_filtered:
+            strstation = strstation + line["name"] + " :\n"
+            
+            for station in line["stations"]:
+                if self.transit_info.IsStationTransit (station["name"]):
+                    strstation = strstation + "  *  " + station["name"] + "\n"
+                else:
+                    strstation = strstation + "     " + station["name"] + "\n"
+            strstation = strstation + "\n\f"
+        strstation = strstation + "\n" * 3
         return strstation
     
     def GetTransportDataSvg (self, linelist, drawstations, linestrategy, polygon):

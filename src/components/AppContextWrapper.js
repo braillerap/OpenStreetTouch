@@ -13,7 +13,8 @@ const AppContextWrapper = (props) => {
     const [PyWebViewReady, setPyWebViewReady] = useState(pywebviewready);
     const [Locale, setLocale] = useState(locale);
     const [ImagePreview, setImagePreview] = useState('');
-
+    const [TransportGuide, setTransportGuide] = useState('');
+    
     function getLocaleData ()
     {
         console.log ("localedata in context:" + localedata);
@@ -57,7 +58,8 @@ const AppContextWrapper = (props) => {
             Params, setParams,
             PyWebViewReady, setPyWebViewReady,
             Locale, setLocale,
-            ImagePreview, setImagePreview
+            ImagePreview, setImagePreview,
+            TransportGuide, setTransportGuide
         }} >
             {props.children}
         </AppContext.Provider>

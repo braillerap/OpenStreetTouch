@@ -63,4 +63,6 @@ if __name__ == '__main__':
         
         with open ("test.svg", "w") as f:
             f.write (svg)
-   
+
+        txt = osm.GetTransportDataStations (selected);
+        print (txt)

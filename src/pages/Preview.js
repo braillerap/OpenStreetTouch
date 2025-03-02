@@ -3,6 +3,7 @@ import AppContext from "../components/AppContext";
 
 const Preview = () => {
     const { ImagePreview } = useContext(AppContext);
+    const { TransportGuide } = useContext(AppContext);
     const {GetLocaleString} = useContext(AppContext);
     const [cityName, setCityName] = useState('')
     const [cityImage, setCityImage] = useState('')
@@ -23,20 +24,32 @@ const Preview = () => {
             <div>
               <img src={`data:image/svg+xml;utf8,${encodeURIComponent(ImagePreview)}`} />
             </div>
-            <button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>
+              <button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>
             </>
-        )
-
+          )
+            /*
             console.log ("preview rendering image");
             const srcpat = "data:image/png;base64," + ImagePreview;
             return <img src={srcpat} alt="city image" width={"50%"} height={"50%"}/>
+            */
         }
         return (<></>);
+    }
+    const renderGuide = () => {
+        if (TransportGuide !== '') {
+          return (
+            <pre className='transportguide'>
+            {TransportGuide}
+            </pre>
+
+          )
+        }
     }
   return (
     <div>
       
         {renderImage() }
+        {renderGuide()}
     </div>
   );
 }
