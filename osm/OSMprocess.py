@@ -15,7 +15,7 @@ class Osmprocess:
         self.transport_type = "subway"
         self.iso639_code = "fr"
         self.transit_info = OSMTransitInfo.OSMTransitInfo()
-
+        self.transport_graph_data_filtered = None
         self.streetmap_data = None
 
     def ReadTransportData (self, city, transport_type, iso639_code = "fr"):
@@ -52,11 +52,18 @@ class Osmprocess:
         transit = application_OSM_extraction.osm_build_transit_table(transport_graph_data)
         self.transit_info.SetStationInfos (transit)
 
-        transport_graph_data_filtered = application_OSM_extraction.osm_filter_transport_lines_data (transport_graph_data, desired_line)
+        self.transport_graph_data_filtered = application_OSM_extraction.osm_filter_transport_lines_data (transport_graph_data, desired_line)
         
-        json.dump (transit, open("transit_data.json", "w"), indent=4, sort_keys=False)
-        json.dump (transport_graph_data_filtered, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
-        return transport_graph_data_filtered
+        #json.dump (transit, open("transit_data.json", "w"), indent=4, sort_keys=False)
+        #json.dump (transport_graph_data_filtered, open("transport_graph_data.json", "w"), indent=4, sort_keys=False)
+        return self.transport_graph_data_filtered
+    
+    def GetTransportDataStations (self, linelist):
+        desired_line = [line["name"] for line in linelist if line["select"] == True]
+        strstation = ""
+        for line in self.transport_graph_data_filtered["lines"]:
+            strstation = strstation + line["name"] + " : " + ", ".join(line["stations"]) + "\n"
+        return strstation
     
     def GetTransportDataSvg (self, linelist, drawstations, linestrategy, polygon):
         graph_data = self.GetTransportDataGraphInfo (linelist)
@@ -71,6 +78,7 @@ class Osmprocess:
         engine = OSMGeometry.OsmTransportDrawing ()
         engine.build_projected_data (graph_data, width=width, height=height, marginx=marginx, marginy=marginy)
         
+        engine.polygons = polygon
         if linestrategy == 0:
             engine.fill_hole = False  
             engine.build_poly_from_ways (fsvg, width, height, marginx, marginy)

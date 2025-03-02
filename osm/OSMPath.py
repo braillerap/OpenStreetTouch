@@ -42,13 +42,13 @@ class OSMPath:
                             d=path,
                     ))
 
-    def DrawPath (self, fsvg, color, width, aspolygon=False):
+    def DrawPath (self, fsvg, color, width, fillcolor, aspolygon=False):
         if aspolygon:
             line = shapely.LineString (self.points)
             offseted = shapely.buffer (line, width / 2)
             coords = shapely.get_coordinates(offseted)
 
-            self.DrawSVGPath (fsvg, coords, color, 0.1, color)
+            self.DrawSVGPath (fsvg, coords, color, 0.1, fillcolor)
         else:
-            self.DrawSVGPath (fsvg, self.points, color, width, "none")
             
+            self.DrawSVGPath (fsvg, self.points, color, width, fillcolor)

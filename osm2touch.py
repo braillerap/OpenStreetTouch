@@ -297,7 +297,11 @@ class Api:
         print ("GetTransportSVG svg size", len(svg))
         return svg
     
-   
+    def GetTransportData (self, linelist, drawstation, linestrategy, polygon):
+        svg = self.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
+        liststation = self.osmt.GetTransportDataStations (linelist)
+
+        return {"svg": svg, "stations": liststation}
     
     def GetTransportSVGbase64 (self):
         svg = self.osmt.get_svg ()

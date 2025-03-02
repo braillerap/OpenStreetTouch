@@ -12,8 +12,8 @@ if __name__ == '__main__':
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     print (SCRIPT_DIR)
     sys.path.append(os.path.dirname(SCRIPT_DIR))
-    city = "Lorient"
-    transport = "ferry"
+    city = "Rennes"
+    transport = "subway"
     from osm import OSMprocess
     
     osm = OSMprocess.Osmprocess()
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         print ("*" * 50)
         print ("*" * 10, "Build SVG")
         print ("*" * 50)
-        svg = osm.GetTransportDataSvg(selected, True, False)
+        svg = osm.GetTransportDataSvg(selected, True, False, True)
         
         with open ("test.svg", "w") as f:
             f.write (svg)

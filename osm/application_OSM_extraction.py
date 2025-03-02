@@ -309,7 +309,7 @@ def osm_extract_data (transport_info, transport_type):
                         pass
                     # Check if the role is stop
                     elif role == "stop":
-                        print (node)
+                        #print (node)
                         if "tags" in node:
                             station = {
                                 "name": node["tags"].get("name", ""),
@@ -318,6 +318,9 @@ def osm_extract_data (transport_info, transport_type):
                                 "lon": node["lon"],
                                 "transit":False    
                                     }
+                            if node["id"] not in station_doublon:
+                                stations.append(station)
+                                station_doublon[node["id"]] = True
                             #stations.append(station)
 
             line_info = {
