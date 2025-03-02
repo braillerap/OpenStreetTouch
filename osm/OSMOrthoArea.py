@@ -18,3 +18,18 @@ class OrthoArea:
         self.min_lon = 100000000
         
         self.max_lon = -100000000
+
+
+    def AddPoint (self, x, y):
+        # Update the minimum and maximum x and y coordinates
+        self.minx = min ([self.minx, x])
+        self.miny = min ([self.miny, y])
+        self.maxx = max ([self.maxx, x])
+        self.maxy = max ([self.maxy, y])
+
+    def AddLatLon (self, lat, lon):
+        # Update the minimum and maximum latitude and longitude
+        self.min_lat = min([self.min_lat, lat])
+        self.max_lat = max([self.max_lat, lat])
+        self.min_lon = min([self.min_lon, lon])
+        self.max_lon = max([self.max_lon, lon])

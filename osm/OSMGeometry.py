@@ -115,21 +115,20 @@ class OsmTransportDrawing:
                 for node in way["nodes"]:
                     pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                     
-                    self.area.minx = min ([self.area.minx, float(pos[0])])
-                    self.area.miny = min ([self.area.miny, float (pos[1])])
-                    self.area.maxx = max ([self.area.maxx, float (pos[0])])
-                    self.area.maxy = max ([self.area.maxy, float (pos[1])])
-                    
-                    self.area.min_lat = min([self.area.min_lat, node["lat"]])
-                    self.area.max_lat = max([self.area.max_lat, node["lat"]])
-                    self.area.min_lon = min([self.area.min_lon, node["lon"]])
-                    self.area.max_lon = max([self.area.max_lon, node["lon"]])
-                    
+                    self.area.AddPoint (float(pos[0]), float(pos[1]))
+                    self.area.AddLatLon (node["lat"], node["lon"])
+
                     nodes.append ( (float(pos[0]), float(pos[1]) ) )
+                    
                 ways.append ({"way_id": way.get("id", "??"), "nodes":nodes})
+           
             stations = []
             for station in line["stations"]:
                 pos = proj.transform_point(station["lon"], station["lat"], data_proj)
+                
+                self.area.AddPoint (float(pos[0]), float(pos[1]))
+                self.area.AddLatLon (station["lat"], station["lon"])
+
                 stations.append({"id":station["id"], "name":station["name"], "pos":pos})
                                     
             lines.append ({"name":line["name"], "id":line["id"], "ways":ways, "stations":stations})

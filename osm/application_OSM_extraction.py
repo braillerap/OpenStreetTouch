@@ -89,7 +89,7 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     overpass_url = "http://overpass-api.de/api/interpreter"
     
     # ajout d'une majuscule sur la première lettre de place_name 
-    place_name = place_name.capitalize()
+    place_name = place_name.title()
     
     
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
@@ -213,6 +213,8 @@ def osm_get_indirect_element (transport_info, element):
         return transport_info['ways'][element["ref"]]
     elif type == "node":
         return transport_info['nodes'][element["ref"]]
+
+    return None
     
 def osm_extract_data (transport_info, transport_type):  
     """
@@ -283,10 +285,12 @@ def osm_extract_data (transport_info, transport_type):
                         if "public_transport" in node['tags']:
                             if (node['tags']["public_transport"] == "stop_position"):
                                 station_stop = True
-                            if node['tags']["public_transport"] == "platform":
+                            elif node['tags']["public_transport"] == "platform":
                                 if "highway" in node['tags']:
                                     if node['tags']["highway"] == "bus_stop":
                                         station_stop = True
+                            elif node['tags']["public_transport"] == "station":
+                                station_stop = True
 
                         if station_stop:    
                             station = {
@@ -296,7 +300,9 @@ def osm_extract_data (transport_info, transport_type):
                                 "lon": node["lon"],
                                 "transit":False    
                                     }
-                            stations.append(station)
+                            if node["id"] not in station_doublon:
+                                stations.append(station)
+                                station_doublon[node["id"]] = True
                             
                     # Check if the role is empty
                     if role == "":
