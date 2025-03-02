@@ -239,7 +239,8 @@ def osm_extract_data (transport_info, transport_type):
             debug_ways = []
             stations = []
             labels = []
-           
+            station_doublon = {}
+
             for element in line["members"]:
                 ref = element.get("ref","")
                 role = element.get("role","??")
@@ -302,7 +303,7 @@ def osm_extract_data (transport_info, transport_type):
                         pass
                     # Check if the role is stop
                     elif role == "stop":
-                        #print (node, element)
+                        print (node)
                         if "tags" in node:
                             station = {
                                 "name": node["tags"].get("name", ""),
@@ -311,7 +312,7 @@ def osm_extract_data (transport_info, transport_type):
                                 "lon": node["lon"],
                                 "transit":False    
                                     }
-                            stations.append(station)
+                            #stations.append(station)
 
             line_info = {
                 "name": line['tags']['name'],
