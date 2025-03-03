@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500mm" height="1000mm"><style >
+
+.small { font: 10px sans-serif; fill:black}
+svg {background-color: white;}
+.smallevidence { font: 10px sans-serif; fill:red}
+.heavy { font: bold 30px sans-serif; }
+.heavyevidence { font: bold 30px sans-serif; fill:red}
+
+.title { font: italic 40px sans-serif; fill:red; }
+
+</style><path stroke="#ff0000" stroke-width="15" d="M 179.16 887.83 L 108.7 87.16999999999996" stroke-linecap="round" fill="none"/><path stroke="#00ff00" stroke-width="15" d="M 123.85 891.64 L 53.39 90.88999999999999" stroke-linecap="round" fill="none"/><rect stroke="#0000ff" stroke-width="1" x="169.35" y="931.65" width="30" height="30" fill="#0000ff"/><polygon stroke="#0000ff" stroke-width="1" points="80.28999999999999 36.66999999999996 95.28999999999999 66.66999999999996 65.28999999999999 66.66999999999996" fill="#0000ff"/><circle stroke="#0000ff" stroke-width="1" cx="159.25" cy="949.26" r="15.0" fill="#0000ff"/><circle stroke="#0000ff" stroke-width="1" cx="105.46000000000001" cy="50.0" r="15.0" fill="#0000ff"/><rect stroke="#ff00ff" stroke-width="1" x="35.0" y="37.23000000000002" width="30" height="30" fill="#ff00ff"/><polygon stroke="#ff00ff" stroke-width="1" points="159.25 934.26 174.25 964.26 144.25 964.26" fill="#ff00ff"/><circle stroke="#ff00ff" stroke-width="1" cx="80.28999999999999" cy="51.66999999999996" r="15.0" fill="#ff00ff"/><circle stroke="#ff00ff" stroke-width="1" cx="129.04000000000002" cy="950.0" r="15.0" fill="#ff00ff"/></svg>
