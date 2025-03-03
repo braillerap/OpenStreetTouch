@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=OpenStreetTouch
+Comment=OpenStreetMap data extraction to build tangible documents
+Exec=/usr/bin/openstreettouch-debian
+Terminal=false
+Icon=/usr/share/icons/openstreettouch-icon.png
+Keywords=braillerap

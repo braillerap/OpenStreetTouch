@@ -1,16 +1,16 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://github.com/braillerap/DesktopBrailleRAP
-Upstream-Name: osm2touch-debian
+Upstream-Name: openstreettouch-debian
 
 
 Files: *
-Copyright: 2024 BrailleRAP team <contact@braillerap.org>
+Copyright: 2025 BrailleRAP team <contact@braillerap.org>
 License: GPL 3
- osm2touch-debian is free software; you can redistribute it
+ openstreettouch-debian is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public
  License version 3 as published by the Free Software Foundation.
  .
- osm2touch-debian is distributed in the hope that it will be
+ openstreettouch-debian is distributed in the hope that it will be
  useful, but WITHOUT ANY WARRANTY; without even the implied
  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
  PURPOSE.  See the GNU General Public License for more

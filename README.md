@@ -82,13 +82,13 @@ npm run startview
 ```
 npm run buildview
 ```
-check Osm2Touch.exe in dist folder
+check OpenStreetTouch.exe in dist folder
 
 
 # Building on Linux
 
 ## Prerequisites
-We need several development tools to build Osm2Touch, python, nodejs and gcc to build some python dependencies.
+We need several development tools to build OpenStreetTouch, python, nodejs and gcc to build some python dependencies.
 Depending on your system, you will also need a desktop environment installed on the build machine.
 
 
@@ -116,7 +116,7 @@ General Nodejs
     apt install -y nodejs
     npm i npm@latest -g
 
-Install Osm2Touch nodejs dependencies
+Install OpenStreetTouch nodejs dependencies
 
     npm install
 
@@ -130,11 +130,11 @@ Activate python3 virtual environment
 
     source ./venv/bin/activate
 
-Install python3 Osm2Touch dependencies
+Install python3 OpenStreetTouch dependencies
 
     pip install -r requirement_linux.txt
 
-## Build Osm2Touch
+## Build OpenStreetTouch
 
 Activate python virtual env 
 
@@ -144,13 +144,13 @@ Activate python virtual env
 
     npm run startview
 
-### Build Osm2Touch
+### Build OpenStreetTouch
 
     npm run builddebian
 
-Check the ./dist folder for the osm2touch-debian executable. You can install the .deb package with:
+Check the ./dist folder for the openstreettouch-debian executable. You can install the .deb package with:
 
-    sudo dpkg -i osm2touch-debian-x.x.x.deb
+    sudo dpkg -i openstreettouch-debian-x.x.x.deb
 
 
 
