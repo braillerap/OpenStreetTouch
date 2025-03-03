@@ -35,12 +35,12 @@ def build_city_svg (city, transport, iso639_code = "fr"):
     # print (selected)
     
     graph_data = osm.GetTransportDataGraphInfo (selected)
-    svg = osm.GetTransportDataSvg(selected, True, True)
-    with open(city + "_" + transport +'_station_test.svg', 'w') as f:
+    svg = osm.GetTransportDataSvg(selected, True, 2, False)
+    with open("./examples/" + city + "_" + transport +'_station_test.svg', 'w') as f:
         f.write(str(svg))
     graph_data = osm.GetTransportDataGraphInfo (selected)
-    svg = osm.GetTransportDataSvg(selected, True, False)
-    with open(city + "_" + transport +'_ways_test.svg', 'w') as f:
+    svg = osm.GetTransportDataSvg(selected, True, 1, False)
+    with open("./examples/" + city + "_" + transport +'_ways_test.svg', 'w') as f:
         f.write(str(svg))
     
 
@@ -51,8 +51,8 @@ if __name__ == '__main__':
     print (SCRIPT_DIR)
     sys.path.append(os.path.dirname(SCRIPT_DIR))
     
-    city = "amsterdam"
-    transport = "subway"
+    city = ""
+    transport = ""
     from osm import OSMprocess
     
     test_data = [
@@ -69,8 +69,11 @@ if __name__ == '__main__':
         {"city": "paris",       "transport": "tram"},
         {"city": "nantes",       "transport": "tram"},
         {"city": "rennes",       "transport": "bus"},
-        {"city": "pragues",       "transport": "tram"},
+        {"city": "prague",       "transport": "tram"},
         {"city": "milan",       "transport": "tram"},
+        {"city": "los angeles",       "transport": "light_rail"},
+        {"city": "bruxelles",       "transport": "tram"},
+        {"city": "bruxelles",       "transport": "subway"},
     ]
     for data in test_data:
         build_city_svg (data["city"], data["transport"])
