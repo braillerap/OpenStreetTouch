@@ -25,7 +25,7 @@ class Osmprocess:
         
         # extract osm data with overpass request
         self.osm_data = application_OSM_extraction.overpass_request(self.CityName, transport_type, iso639_code)
-        json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
+        #json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
         
         # data structuration for future usage
         self.transport_data = application_OSM_extraction.osm_extraction (self.osm_data, self.CityName, self.transport_type)
@@ -61,7 +61,7 @@ class Osmprocess:
     def GetTransportDataStations (self, linelist):
         desired_line = [line["name"] for line in linelist if line["select"] == True]
         strstation = ""
-        json.dump (self.transport_graph_data_filtered, open("transport_graph_data_filtered.json", "w"), indent=4, sort_keys=False)
+        #json.dump (self.transport_graph_data_filtered, open("transport_graph_data_filtered.json", "w"), indent=4, sort_keys=False)
         for line in self.transport_graph_data_filtered:
             strstation = strstation + line["name"] + " :\n"
             
@@ -110,8 +110,8 @@ class Osmprocess:
         ret = application_OSM_extraction.line_extraction_and_stations (self.osm_data)
         #ret = application_OSM_extraction.line_extraction (self.osm_data)
         
-        print ("line_extraction_and_stations")
-        print (json.dumps(ret, indent=4, ensure_ascii=False))
+        #print ("line_extraction_and_stations")
+        #print (json.dumps(ret, indent=4, ensure_ascii=False))
         #print (type(ret))
         
         list = []

@@ -376,7 +376,7 @@ class OSMStreetDrawing:
         proj = ccrs.Miller()
         data_proj = ccrs.PlateCarree()
         #data_proj = ccrs.Miller()
-        json.dump (street_2d_data, open ("street_2d_data.json", "w"), indent=4)
+        #json.dump (street_2d_data, open ("street_2d_data.json", "w"), indent=4)
 
         # compute minx, miny, maxx, maxy
         self.area = OSMOrthoArea.OrthoArea ()

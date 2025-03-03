@@ -386,7 +386,7 @@ def transport_data_to_svg_from_dicways_old (transport_2d_data, width=1000, heigh
                     fill="none",
                     d=path,
                 ))
-        json.dump (total_pos, open("way.json", "w"), indent=4)
+        #json.dump (total_pos, open("way.json", "w"), indent=4)
 
     # build labels
     if draw_labels:

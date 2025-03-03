@@ -73,7 +73,7 @@ def overpass_request(latitude, longitude, radius):
 
     data = response.json()
     
-    json.dump (data, open ("overpass_street.json", "w"))
+    #json.dump (data, open ("overpass_street.json", "w"))
     return data 
 
 def osm_extraction (streetmap_data):
