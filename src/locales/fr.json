@@ -10,6 +10,8 @@
     "file.svgfile":"Fichier SVG",
     "file.gcodefile":"Fichier GCODE",
     "file.all":"Tous",
+    "file.pngfile":"Fichier PNG",
+    "file.txtfile":"Fichier TXT",
 
     "menu.home":"Accueil",
     "menu.transport":"Transport",
@@ -33,6 +35,10 @@
     "transport.nodata":"Aucune donnée",
     "transport.osmpending":"Recherche en cours …",
     "transport.polygon": "Polygones pour tracés de lignes",
+    "transport.downloadsvg":"Enregistrer l'image en SVG",
+    "transport.downloadpng":"Enregistrer l'image en PNG",
+    "transport.downloadtxt":"Enregistrer les stations en TXT",
+    "transport.titleresult":"Enregistrer les résultats",
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",

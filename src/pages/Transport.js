@@ -16,8 +16,8 @@ const transport_type2 = [
 
 const Transport = () => {
     const {GetLocaleString} = useContext(AppContext);
-    const { setImagePreview } = useContext(AppContext);
-    const { setTransportGuide } = useContext(AppContext);
+    const { ImagePreview, setImagePreview } = useContext(AppContext);
+    const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [cityImage, setCityImage] = useState('');
     const [drawStation, setDrawStation] = useState(true);
@@ -217,6 +217,48 @@ const Transport = () => {
                 );
         }    
     }
+    const goDownloadPNG = () => {
+        /*
+        let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+        let filter = [
+            GetLocaleString("file.svgfile"), //"Fichier svg",
+            GetLocaleString("file.all") //"Tous"
+        ]
+
+        window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
+        */
+    }
+    const goDownloadSVG = () => {
+        let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+        let filter = [
+            GetLocaleString("file.svgfile"), //"Fichier svg",
+            GetLocaleString("file.all") //"Tous"
+        ]
+
+        window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
+    }
+    const goDownloadTXT = () => {
+        let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+        let filter = [
+            GetLocaleString("file.txtfile"), //"Fichier txt",
+            GetLocaleString("file.all") //"Tous"
+        ]
+
+        window.pywebview.api.saveas_file(TransportGuide, dialogtitle, filter);
+    }
+    const renderResultAction = () => {
+        if (ImagePreview == '')
+            return (<></>);
+        return (
+            <div className='TransportResultAction'>
+                <fieldset title={GetLocaleString("transport.titleresult")}>
+                <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
+                <button onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
+                </fieldset>
+            </div>
+        );
+    }
   return (
     <div>
         <h1>Extraction Transport</h1>
@@ -241,6 +283,7 @@ const Transport = () => {
         </div>
 
         {renderTransportAction ()}
+        {renderResultAction ()}
     </div>
   );
 }

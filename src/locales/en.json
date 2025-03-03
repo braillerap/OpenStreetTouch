@@ -10,6 +10,8 @@
     "file.gcodefile": "GCODE file",
     "file.svgfile": "SVG File",
     "file.all": "All",
+    "file.txtfile":"Text file",
+    "file.pngfile":"PNG file",
 
     "home.openstreetmap":"This software make heavy use of OpenStreetMap data. All these data are subjected to ODbL license. See OpenStreetMap web site for more information.",
     "menu.home":"Home",
@@ -32,6 +34,10 @@
     "transport.nodata":"No data",
     "transport.osmpending":"Search in progress …",
     "transport.polygon": "Line paths as polygons",
+    "transport.downloadsvg":"Save image as SVG",
+    "transport.downloadpng":"Save image as PNG",
+    "transport.downloadtxt":"Save stations as TXT",
+    "transport.titleresult":"Save result",
 
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",
