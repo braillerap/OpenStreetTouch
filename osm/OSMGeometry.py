@@ -392,15 +392,8 @@ class OSMStreetDrawing:
                 #print (node)
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
-                self.area.minx = min ([self.area.minx, float(pos[0])])
-                self.area.miny = min ([self.area.miny, float (pos[1])])
-                self.area.maxx = max ([self.area.maxx, float (pos[0])])
-                self.area.maxy = max ([self.area.maxy, float (pos[1])])
-                
-                self.area.min_lat = min([self.area.min_lat, node["lat"]])
-                self.area.max_lat = max([self.area.max_lat, node["lat"]])
-                self.area.min_lon = min([self.area.min_lon, node["lon"]])
-                self.area.max_lon = max([self.area.max_lon, node["lon"]])
+                self.area.AddPoint (float(pos[0]), float(pos[1]))
+                self.area.AddLatLon (node["lat"], node["lon"])
                 
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
             streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes, "tags": way['tags']})
@@ -411,17 +404,11 @@ class OSMStreetDrawing:
                 
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
-                self.area.minx = min ([self.area.minx, float(pos[0])])
-                self.area.miny = min ([self.area.miny, float (pos[1])])
-                self.area.maxx = max ([self.area.maxx, float (pos[0])])
-                self.area.maxy = max ([self.area.maxy, float (pos[1])])
-                
-                self.area.min_lat = min([self.area.min_lat, node["lat"]])
-                self.area.max_lat = max([self.area.max_lat, node["lat"]])
-                self.area.min_lon = min([self.area.min_lon, node["lon"]])
-                self.area.max_lon = max([self.area.max_lon, node["lon"]])
-                
+                self.area.AddPoint (float(pos[0]), float(pos[1]))
+                self.area.AddLatLon (node["lat"], node["lon"])
+
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
+
             buildings.append ({"way_id": way.get("id", "??"), "nodes":nodes})                        
         
         for way in street_2d_data["unclassified"]:
@@ -430,17 +417,11 @@ class OSMStreetDrawing:
                 
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
                 
-                self.area.minx = min ([self.area.minx, float(pos[0])])
-                self.area.miny = min ([self.area.miny, float (pos[1])])
-                self.area.maxx = max ([self.area.maxx, float (pos[0])])
-                self.area.maxy = max ([self.area.maxy, float (pos[1])])
-                
-                self.area.min_lat = min([self.area.min_lat, node["lat"]])
-                self.area.max_lat = max([self.area.max_lat, node["lat"]])
-                self.area.min_lon = min([self.area.min_lon, node["lon"]])
-                self.area.max_lon = max([self.area.max_lon, node["lon"]])
-                
+                self.area.AddPoint (float(pos[0]), float(pos[1]))
+                self.area.AddLatLon (node["lat"], node["lon"])
+
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
+
             unclassified.append ({"way_id": way.get("id", "??"), "nodes":nodes})    
             
             
@@ -478,7 +459,7 @@ class OSMStreetDrawing:
                     path.append ( (x, y) )
                 
                 tool = OSMPath.OSMPath (path)
-                tool.DrawPath (fsvg, color, self.stroke_width, color, True)
+                tool.DrawPath (fsvg, color, realwidth, color, True)
                     
                 
                 # if len (polypts) > 0:
