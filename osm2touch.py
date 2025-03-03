@@ -7,12 +7,10 @@ import platform
 import sys
 import time
 from pathlib import Path
-
-from osm import application_OSM_extraction
 from osm import OSMprocess
-from osm import OSMutils
-from osm import OSMsvg
 from osm import OSMprocessStreet
+from osm import OSMutils
+
 
 rpi = False
 COM_TIMEOUT =   5  #Communication timeout with device controller (Marlin)
@@ -127,6 +125,25 @@ class Api:
             print(e)
 
     
+    def saveas_svg_aspngfile (self, svgdata, dialogtitle, filterstring):
+        pass
+        # global filename
+
+        # fname = window.create_file_dialog(
+        #     webview.SAVE_DIALOG,
+        #     allow_multiple=False,
+        #     file_types=(filterstring[0] + " (*.svg)", filterstring[1] + " (*.*)"),
+        # )
+      
+        # if fname:
+        #     if detected_os == KnownOS.Windows:
+        #         filename = fname
+        #     else:
+        #         filename = fname[0]
+        # else:
+        #     return
+        
+        # svg2png(bytestring=svgdata,write_to=filename)
 
     def saveas_svgfile(self, data, dialogtitle, filterstring):
         global filename
@@ -153,7 +170,7 @@ class Api:
         fname = window.create_file_dialog(
             webview.SAVE_DIALOG,
             allow_multiple=False,
-            file_types=(filterstring[0] + " (*.brp)", filterstring[1] + " (*.*)"),
+            file_types=(filterstring[0] + " (*.txt)", filterstring[1] + " (*.*)"),
         )
       
         if fname:
