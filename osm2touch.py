@@ -17,7 +17,7 @@ try:
     cairosvg_available = True
 except:
     print ("cairosvg not available")
-    
+
 rpi = False
 COM_TIMEOUT =   5  #Communication timeout with device controller (Marlin)
 
@@ -115,6 +115,9 @@ class Api:
             print(e)
         self.save_parameters()
 
+    def get_cairosvg_available(self):
+        return cairosvg_available
+    
     def confirm_dialog (self, title, message):
         return window.create_confirmation_dialog(title, message)
     
