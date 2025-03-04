@@ -11,7 +11,13 @@ from osm import OSMprocess
 from osm import OSMprocessStreet
 from osm import OSMutils
 
-
+cairosvg_available = False
+try:
+    from cairosvg import svg2png
+    cairosvg_available = True
+except:
+    print ("cairosvg not available")
+    
 rpi = False
 COM_TIMEOUT =   5  #Communication timeout with device controller (Marlin)
 
