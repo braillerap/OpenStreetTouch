@@ -17,23 +17,23 @@
 ;--------------------------------
 
 ; The name of the installer
-Name "Osm2Touch"
+Name "OpenStreetTouch"
 
 ; The file to write
-OutFile "Osm2TouchSetup.exe"
+OutFile "OpenStreetTouch_Windows_setup.exe"
 
 ; Build Unicode installer
 Unicode True
 
 ; The default installation directory
-InstallDir $PROGRAMFILES\Osm2Touch
+InstallDir $PROGRAMFILES\OpenStreetTouch
 
 ; Request application privileges for Windows Vista and higher
 RequestExecutionLevel admin
 
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\Osm2Touch" "Install_Dir"
+InstallDirRegKey HKLM "Software\OpenStreetTouch" "Install_Dir"
 
 ;--------------------------------
 ; Pages configuration
@@ -42,7 +42,7 @@ InstallDirRegKey HKLM "Software\Osm2Touch" "Install_Dir"
 ;!define MUI_BRANDING
 ;!define MUI_BRANDING_BITMAP "InstallerLogo.bmp"
 ;!define MUI_HEADERIMAGE_RIGHT
-!define MUI_ICON "Osm2Touch.ico"
+!define MUI_ICON "OpenStreetTouch.ico"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Header\win.bmp" ; optional
 ;!define MUI_ABORTWARNING
@@ -65,7 +65,7 @@ InstallDirRegKey HKLM "Software\Osm2Touch" "Install_Dir"
 ;--------------------------------
 
 ; The stuff to install
-Section "Osm2Touch (required)"
+Section "OpenStreetTouch (required)"
   InitPluginsDir
   SectionIn RO
   
@@ -73,21 +73,23 @@ Section "Osm2Touch (required)"
     SetOutPath $INSTDIR
     
     ; Put file there
-    File "Osm2Touch.exe"
-    
+    File "OpenStreetTouch.exe"
+    File "osm2touch_parameters.json"
     File "_internal.zip"
    
-  
+    AccessControl::GrantOnFile \
+    "$INSTDIR\osm2touch_parameters.json" "(BU)" "GenericRead + GenericWrite"
+    Pop $0 ; "error" on errors
   
    
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\Osm2Touch "Install_Dir" "$INSTDIR"
   
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Osm2Touch" "DisplayName" "Osm2Touch"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Osm2Touch" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Osm2Touch" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Osm2Touch" "NoRepair" 1
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenStreetTouch" "DisplayName" "OpenStreetTouch"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenStreetTouch" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenStreetTouch" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenStreetTouch" "NoRepair" 1
   WriteUninstaller "$INSTDIR\uninstall.exe"
   
   RMDir /r $INSTDIR\_internal
@@ -104,15 +106,15 @@ ok:
 ; Optional section (can be disabled by the user)
 Section "Start Menu Shortcuts"
 
-  CreateDirectory "$SMPROGRAMS\Osm2Touch"
-  CreateShortcut "$SMPROGRAMS\Osm2Touch\Uninstall.lnk" "$INSTDIR\uninstall.exe"
-  CreateShortcut "$SMPROGRAMS\Osm2Touch\AccessBrailleRAP.lnk" "$INSTDIR\AccessBrailleRAP.exe"
+  CreateDirectory "$SMPROGRAMS\OpenStreetTouch"
+  CreateShortcut "$SMPROGRAMS\OpenStreetTouch\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+  CreateShortcut "$SMPROGRAMS\OpenStreetTouch\OpenStreetTouch.lnk" "$INSTDIR\OpenStreetTouch.exe"
 
 SectionEnd
 
 Section "Desktop Shortcuts"
   SetShellVarContext current
-  CreateShortCut "$DESKTOP\Osm2Touch.lnk" "$INSTDIR\Osm2Touch.exe"
+  CreateShortCut "$DESKTOP\OpenStreetTouch.lnk" "$INSTDIR\OpenStreetTouch.exe"
   
 SectionEnd
 
@@ -136,11 +138,11 @@ SectionEnd
 Section "Uninstall"
   
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Osm2Touch"
-  DeleteRegKey HKLM SOFTWARE\DesktopBrailleRAP
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenStreetTouch"
+  DeleteRegKey HKLM SOFTWARE\OpenStreetTouch
 
   ; Remove files and uninstaller
-  Delete $INSTDIR\Osm2Touch.exe
+  Delete $INSTDIR\OpenStreetTouch.exe
   
   
   Delete $INSTDIR\uninstall.exe
@@ -150,14 +152,14 @@ Section "Uninstall"
   RMDir $INSTDIR\_internal
 
   ; Remove shortcuts, if any
-  Delete "$SMPROGRAMS\Osm2Touch\*.lnk"
+  Delete "$SMPROGRAMS\OpenStreetTouch\*.lnk"
     
   ; Remove directories
-  RMDir "$SMPROGRAMS\Osm2Touch"
+  RMDir "$SMPROGRAMS\OpenStreetTouch"
   RMDir /r $INSTDIR\_internal
   RMDir "$INSTDIR"
 
   SetShellVarContext current
-  Delete "$DESKTOP\Osm2Touch.lnk" 
+  Delete "$DESKTOP\OpenStreetTouch.lnk" 
 
 SectionEnd
