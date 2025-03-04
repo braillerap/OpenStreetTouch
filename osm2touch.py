@@ -385,9 +385,9 @@ def delete_splash(window):
 entry = get_entrypoint()
 
 if __name__ == "__main__":
-    app = "Osm2Touch"
+    app = "OpenStreetTouch"
     api = Api()
-    debugihm = True
+    debugihm = False
 
     #print(sys.argv)
     dir, script = os.path.splitext(sys.argv[0])
