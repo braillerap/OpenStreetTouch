@@ -20,6 +20,8 @@
     "menu.param":"Parameters",
     "menu.exit":"Exit",
     
+    "transport.title":"Transport line extraction",
+    "transport.city":"City name",
     "transport.renderimg":"Draw Transport Line",
     "transport.renderstation":"Draw stations",
     "transport.search":"Search",

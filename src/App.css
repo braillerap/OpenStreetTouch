@@ -353,6 +353,18 @@ a.pure-button-secondary
    margin-right: 0.3rem;
  }
 
+ .TransportParam label
+ {
+  font-size: 1.1em;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+ }
+ .TransportParam input
+ {
+  font-size: 1.1em;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+ }
  .CityMapParam input[type="number"]
  {
   width:7em;

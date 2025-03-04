@@ -21,6 +21,8 @@
      
     "home.openstreetmap":"Ce logiciel utilise des données issue du project OpenStreetMap. Voir le site d'OpenStreetMap pour plus d'informations.",
 
+    "transport.title":"Extraction ligne de transport",
+    "transport.city":"Nom de ville",
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
     "transport.search":"Rechercher",

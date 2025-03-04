@@ -52,7 +52,7 @@ const Transport = () => {
     const renderIso639 = () => {
         
         return (
-            <label>{GetLocaleString("transport.iso639")}
+            <label>{GetLocaleString("transport.iso639")}:
             <select value={iso639code} onChange={(event) => {setIso639Code(event.target.value)}} >
             {
                 iso639codeList.map((code) => {
@@ -67,7 +67,7 @@ const Transport = () => {
     }
     const renderTransportType =  () => {
         return (
-            <label>{GetLocaleString("transport.type")}
+            <label>{GetLocaleString("transport.type")}:
             <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
             {
                 transport_type2.map((trans) => {
@@ -253,30 +253,33 @@ const Transport = () => {
             return (<></>);
         return (
             <div className='TransportResultAction'>
-                <fieldset title={GetLocaleString("transport.titleresult")}>
-                <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
-                {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
-                <button onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
+                <fieldset>
+                    <legend>{GetLocaleString("transport.titleresult")}</legend>
+                    <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                    {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
+                    <button onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
                 </fieldset>
             </div>
         );
     }
   return (
     <div>
-        <h1>Extraction Transport</h1>
+        <div className='TransportParam'>
+            <h1>{GetLocaleString("transport.title")}</h1>
 
-        <label>City name:
-            <input type="text" 
-                name="city" 
-                value={cityName} 
-                onChange={(e)=>{setCityName(e.target.value);}}
-                />
-        </label>
+            <label>{GetLocaleString("transport.city")}:
+                <input type="text" 
+                    name="city" 
+                    value={cityName} 
+                    onChange={(e)=>{setCityName(e.target.value);}}
+                    />
+            </label>
 
-        {renderIso639()}
-        {renderTransportType()}
-        <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>
-        {/*renderImage() */}
+            {renderIso639()}
+            {renderTransportType()}
+            <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>
+        </div>
+        
 
         <div className='CheckedList'>
             
