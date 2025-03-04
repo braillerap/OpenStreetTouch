@@ -8,7 +8,8 @@ const greenOptions = { color: 'green' }
 
 const CityMap = () => {
     const {GetLocaleString} = useContext(AppContext);
-    const { setImagePreview } = useContext(AppContext);
+    const { ImagePreview, setImagePreview } = useContext(AppContext);
+    const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const mapref = useRef (null);
     const [position, setPosition] = useState([51.505, -0.09]);
     const [radius, setRadius] = useState(200);
@@ -163,6 +164,29 @@ const CityMap = () => {
                 return (<></>)
             }
         }
+        const goDownloadSVG = () => {
+            let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+            let filter = [
+                GetLocaleString("file.svgfile"), //"Fichier svg",
+                GetLocaleString("file.all") //"Tous"
+            ]
+    
+            window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
+        }
+        const renderResultAction = () => {
+            if (ImagePreview == '')
+                return (<></>);
+            return (
+                <div className='TransportResultAction'>
+                    <fieldset>
+                        <legend>{GetLocaleString("transport.titleresult")}</legend>
+                        <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                        {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
+                        
+                    </fieldset>
+                </div>
+            );
+        }
         const renderAction = () => {
             if (position  )
             {
@@ -230,6 +254,7 @@ const CityMap = () => {
                  
             </MapContainer>
             {renderAction()}
+            {renderResultAction ()}
         </>
     );
 }

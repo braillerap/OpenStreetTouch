@@ -2,26 +2,11 @@ import { useContext, useState, useEffect} from 'react'
 import AppContext from "../components/AppContext";
 
 
-
-const transport_type2 = [
-    "subway",
-    "funicular",
-    "bus",
-    "tram",
-    "train",
-    "light_rail",
-    "monorail",
-    "ferry"
-];
-
-
-
 const Transport = () => {
     const {GetLocaleString} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
-    const [cityImage, setCityImage] = useState('');
     const [drawStation, setDrawStation] = useState(true);
     const [transportLines, setTransportLines] = useState([]);
     const [iso639codeList, setIso639CodeList] = useState([]);

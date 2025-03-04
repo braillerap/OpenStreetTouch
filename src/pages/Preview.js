@@ -24,7 +24,7 @@ const Preview = () => {
             <div>
               <img src={`data:image/svg+xml;utf8,${encodeURIComponent(ImagePreview)}`} />
             </div>
-              <button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>
+              {/*<button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>*/}
             </>
           )
             /*
