@@ -353,6 +353,14 @@ a.pure-button-secondary
    margin-right: 0.3rem;
  }
 
+ .TransportParam button
+ {
+  font-size: 1.1em;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  padding: 1em;
+ }
+
  .TransportParam label
  {
   font-size: 1.1em;

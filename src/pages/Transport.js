@@ -309,10 +309,14 @@ const Transport = () => {
                     onChange={(e)=>{setCityName(e.target.value);}}
                     />
             </label>
+        </div>    
+        <div className='TransportParam'>
             {renderIso639()}
             {renderTransportType()}
+            </div>
+            <div className='TransportParam'>    
             <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>
-        </div>
+                    </div>
         
 
         <div className='CheckedList'>
