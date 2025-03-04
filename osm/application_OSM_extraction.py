@@ -334,7 +334,7 @@ def osm_extract_data (transport_info, transport_type):
                                 "lon": node["lon"],
                                 "transit":False    
                                     }
-                            if node["id"] not in station_doublon:
+                            if node["id"] not in station_doublon and station["name"] != "":
                                 stations.append(station)
                                 station_doublon[node["id"]] = True
                             #stations.append(station)
