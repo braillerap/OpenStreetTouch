@@ -48,7 +48,7 @@ const Layout = () => {
                         </nav>
 
                     </div>
-                    <Toolbar />
+                    {/*<Toolbar />*/}
                 </div>
                 
                 <div className="App-function">
