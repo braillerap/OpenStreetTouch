@@ -14,6 +14,8 @@ const transport_type2 = [
     "ferry"
 ];
 
+
+
 const Transport = () => {
     const {GetLocaleString} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
@@ -48,6 +50,17 @@ const Transport = () => {
       }, []);
       
     
+    const transport_type_dic = {
+        "subway":GetLocaleString("transport.type.subway"),
+        "funicular":GetLocaleString("transport.type.funicular"),
+        "bus":GetLocaleString("transport.type.bus"),
+        "tram":GetLocaleString("transport.type.tram"),
+        "train":GetLocaleString("transport.type.train"),
+        "light_rail":GetLocaleString("transport.type.light_rail"),
+        "monorail":GetLocaleString("transport.type.monorail"),
+        "ferry":GetLocaleString("transport.type.ferry"),
+    
+    }
 
     const renderIso639 = () => {
         
@@ -70,11 +83,20 @@ const Transport = () => {
             <label>{GetLocaleString("transport.type")}:
             <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
             {
+                /*
                 transport_type2.map((trans) => {
                         return (
                             <option>{trans}</option>
                     )
                 })
+                    */
+                Object.entries(transport_type_dic).map ((key) => {
+                    
+                    return (
+                            <option value={key[0]}>{key[1]}</option>
+                        );
+                    }
+                )   
             }
             </select>
             </label>
@@ -98,7 +120,7 @@ const Transport = () => {
         setTransportGuide ('');
         setTransportLines([]);
         setOsmPending(true);
-
+        console.log (transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
         window.pywebview.api.ReadTransportData(cityName, transportType, iso639code).then ((size) => {

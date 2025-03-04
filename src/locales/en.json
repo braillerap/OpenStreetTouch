@@ -41,6 +41,16 @@
     "transport.downloadtxt":"Save stations as TXT",
     "transport.titleresult":"Save result",
 
+    "transport.type.subway":"Subway",
+    "transport.type.funicular":"Funicular",
+    "transport.type.bus":"Bus/Car",
+    "transport.type.tram":"Tramway",
+    "transport.type.train":"Train",
+    "transport.type.light_rail":"Light Train",
+    "transport.type.monorail":"Monorail",
+    "transport.type.ferry":"Ferry",
+
+
     "citymap.sectionplan":"Street Map rendering",
     "citymap.rendermap":"Draw extracted Map",
     "citymap.building": "Include buildings",

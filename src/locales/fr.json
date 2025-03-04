@@ -42,6 +42,17 @@
     "transport.downloadtxt":"Enregistrer les stations en TXT",
     "transport.titleresult":"Enregistrer les résultats",
 
+    
+    "transport.type.subway":"Métro",
+    "transport.type.funicular":"Funiculaire",
+    "transport.type.bus":"Bus/Car",
+    "transport.type.tram":"Tramway",
+    "transport.type.train":"Train",
+    "transport.type.light_rail":"Train interurbain",
+    "transport.type.monorail":"Monorail",
+    "transport.type.ferry":"Ferry",
+
+
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",
     "citymap.streetpolygon": "Polygones pour les routes/chemins",
