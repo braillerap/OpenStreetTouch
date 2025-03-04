@@ -18,14 +18,8 @@ const CityMap = () => {
     const [request, setRequest] = useState (false);
     const [editLatitude, setEditLatitude] = useState (51);
     const [editLongitude, setEditLongitude] = useState (0);
+    const [mapClicked, setMapClicked] = useState (false);
     
-    
-    const getLatitude = () => {
-        return (editLatitude);
-    }
-    const getLongitude = () => {
-        return (editLongitude);
-    }
     
     const setLatitude = (elat) => {
         setEditLatitude(elat);
@@ -39,16 +33,20 @@ const CityMap = () => {
                 {
                     if (position.lng)
                     {
-                        setPosition([lat, position.lng]);
-                        if (mapref)
-                            mapref.current.setView([lat, position.lng], mapref.current.getZoom());
+                        setPosition([lat, editLongitude]);
+                        mapref.setView([lat, editLongitude], mapref.getZoom())
                     }
                     else
-                        setPosition([lat, 0]);
+                    {
+                        setPosition([lat, editLongitude]);
+                        mapref.setView([lat,editLongitude], mapref.getZoom())
+                    }
+                        
                 }
                 else
                 {
-                    setPosition([lat, 0]);
+                    setPosition([lat, editLongitude]);
+                    mapref.setView([lat, editLongitude], mapref.getZoom())
                 }
             }
         }
@@ -65,22 +63,31 @@ const CityMap = () => {
                 if (position)
                 {
                     if (position.lat){
-                        setPosition([position.lat, lon]);
-                        if (mapref)
-                            mapref.current.setView([position.lat, lon], mapref.current.getZoom());
+                        console.log ("position.lat exist");
+                        setPosition([editLatitude, lon]);
+                        mapref.setView([position.lat, lon], mapref.getZoom())
                     }
                     else
-                        setPosition([0, lon]);
-
+                    {
+                        console.log ("position.lat not exist");
+                        console.log (position);
+                        setPosition([editLatitude, lon]);
+                        mapref.setView([editLatitude, lon], mapref.getZoom());
+                    }
                 }
                 else
                 {
-                    setPosition([0, lon]);
+                    console.log ("position  not exist");
+                    setPosition([editLatitude, lon]);
+                    mapref.setView([editLatitude, lon], mapref.getZoom())
+
                 }
             }
         }
     }
+    
     const LocationFinder= () => {
+        
         const map = useMapEvents({
             click(e) {
                 console.log(e.latlng);
@@ -89,8 +96,9 @@ const CityMap = () => {
                 
                 // center map on click position
                 map.setView(e.latlng, map.getZoom())
-                
+                setMapClicked (true);
                 // report value in edit
+                console.log ("typeof (e.latlng")
                 console.log (typeof (e.latlng));
                 
                 setEditLatitude(e.latlng.lat);
@@ -121,9 +129,18 @@ const CityMap = () => {
         {
             if (position)
             {
+                console.log (position);
+                console.log (editLatitude);
+                console.log (editLongitude);
                 setRequest(true);
-
-                window.pywebview.api.ReadStreetMapData(position.lat, position.lng, radius, building, footpath, polygon).then ((svg) => {
+                let lat = editLatitude;
+                let lon = editLongitude;
+                if (position.lat && position.lng)
+                {
+                    lat = position.lat;
+                    lon = position.lng;
+                }
+                window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon).then ((svg) => {
                    
                     setImagePreview (svg);
                     setRequest(false);
@@ -198,10 +215,11 @@ const CityMap = () => {
                 <h2>Click on the map to get the position</h2>
             </div>
             <MapContainer center={position} zoom={2} scrollWheelZoom={true}
-            ref={mapref}
-            style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
-            attributionControl={false}
-            >
+                ref={mapref}
+                style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
+                attributionControl={false}
+
+                >
 
                 <TileLayer
                     attribution='&copy; "https://www.openstreetmap.org/copyright" OpenStreetMap contributors'
