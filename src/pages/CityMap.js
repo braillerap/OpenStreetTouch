@@ -1,4 +1,4 @@
-import { useContext, useState, useRef} from 'react'
+import { useContext, useState, useRef, useEffect} from 'react'
 import AppContext from "../components/AppContext";
 import { MapContainer , TileLayer, Circle,  useMapEvents} from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
@@ -21,6 +21,11 @@ const CityMap = () => {
     const [editLongitude, setEditLongitude] = useState (0);
     const [mapClicked, setMapClicked] = useState (false);
     
+    useEffect(() => {
+            
+            setImagePreview ('');
+            setTransportGuide('');
+          }, []);
     
     const setLatitude = (elat) => {
         setEditLatitude(elat);
