@@ -67,7 +67,7 @@ def read_configuration_file(input_config_file):
     return config_dict 
     
 # function for overpas request on Open Street Map database 
-def overpass_request(place_name, transportation_type = "subway", place_iso639_code = "fr"): 
+def overpass_request(place_name, transportation_type = "subway", place_iso639_code = "fr", place_id=0): 
     """Fonction : overpass request data 
     
     Parameters :
@@ -104,13 +104,26 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     >;
     out body qt ;
     """
-
+    overpass_query_wikidata = f"""
+    [out:json][timeout:30];
+    /* recherche des données avec .searcharea */ 
+    area["wikidata"="{place_name}"]->.searcharea;
+    (
+      relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
+    );
+    out ;
+    >;
+    out body qt ;
+    """
     # print("Requête pour la ville {}".format(place_name))
     
     # response = requests.get(overpass_url, params={'data': overpass_query})
-    print (overpass_query)
+    query = overpass_query
+    if place_id != 0:
+        query = overpass_query_wikidata
+    print (query)
     try:
-        response = requests.post(overpass_url, data={'data': overpass_query})
+        response = requests.post(overpass_url, data={'data': query})
     except Exception as e:
         print("Request error")
         print(e) 
@@ -300,7 +313,10 @@ def osm_extract_data (transport_info, transport_type):
                                 "lon": node["lon"],
                                 "transit":False    
                                     }
-                            if node["id"] not in station_doublon:
+                            # check duplicate station and ensure there is a name
+                            if node["id"] not in station_doublon and station["name"] != "":
+                                print ("station:", station["id"], station["name"])
+                                print (node)
                                 stations.append(station)
                                 station_doublon[node["id"]] = True
                             
@@ -323,11 +339,20 @@ def osm_extract_data (transport_info, transport_type):
                                 station_doublon[node["id"]] = True
                             #stations.append(station)
 
+            # recheck dupicate station
+            stations_name = []
+            filtered_stations = []
+            for station in stations:
+                if not station["name"] in stations_name:
+                    stations_name.append(station["name"])
+                    filtered_stations.append(station)
+
+
             line_info = {
                 "name": line['tags']['name'],
                 "id": line['id'],
                 "positions": positions,
-                "stations": stations,
+                "stations": filtered_stations,
                 "positions_dic": position_dic,
                 "positions_ways": positions_ways,
                 #'debug_nodes': debug_nodes,

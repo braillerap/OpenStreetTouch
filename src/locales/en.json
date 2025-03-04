@@ -22,6 +22,8 @@
     
     "transport.title":"Transport line extraction",
     "transport.city":"City name",
+    "transport.wikidata":"Wikidata id",
+    "transport.place_id":"Place id",
     "transport.renderimg":"Draw Transport Line",
     "transport.renderstation":"Draw stations",
     "transport.search":"Search",

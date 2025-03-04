@@ -31,6 +31,7 @@ const Transport = () => {
     const [transportStrategyList, setTransportStrategyList] = useState([]);
     const [transportStrategy, setTransportStrategy] = useState(0);
     const [drawPolygon, setDrawPolygon] = useState(false);
+    const [placeid, setPlaceid] = useState(0);
 
     const [osmPending, setOsmPending] = useState(false);
 
@@ -49,7 +50,10 @@ const Transport = () => {
         setTransportGuide('');
       }, []);
       
-    
+    const place_id = [
+        GetLocaleString("transport.city"),
+        GetLocaleString("transport.wikidata")
+    ];
     const transport_type_dic = {
         "subway":GetLocaleString("transport.type.subway"),
         "funicular":GetLocaleString("transport.type.funicular"),
@@ -123,7 +127,7 @@ const Transport = () => {
         console.log (transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
-        window.pywebview.api.ReadTransportData(cityName, transportType, iso639code).then ((size) => {
+        window.pywebview.api.ReadTransportData(cityName, transportType, iso639code, placeid).then ((size) => {
             
             window.pywebview.api.GetTransportLines().then ((datadic) => {
                 setRealCityName (datadic.city);
@@ -289,14 +293,22 @@ const Transport = () => {
         <div className='TransportParam'>
             <h1>{GetLocaleString("transport.title")}</h1>
 
-            <label>{GetLocaleString("transport.city")}:
+            <label>{GetLocaleString("transport.place_id")} :
+                    <select value={placeid} onChange={(event) => {setPlaceid(event.target.value)}} >
+                    {
+                        place_id.map((id, index) => {
+                                return (
+                                    <option value={index}>{id}</option>
+                            )
+                        })
+                    }
+                </select>
                 <input type="text" 
                     name="city" 
                     value={cityName} 
                     onChange={(e)=>{setCityName(e.target.value);}}
                     />
             </label>
-
             {renderIso639()}
             {renderTransportType()}
             <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>

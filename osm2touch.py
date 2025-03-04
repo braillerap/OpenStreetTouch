@@ -294,8 +294,8 @@ class Api:
         print(list)
         return list
     
-    def ReadTransportData (self, city, transport_type, iso639_city_code):
-        ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code)
+    def ReadTransportData (self, city, transport_type, iso639_city_code, place_id):
+        ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code, place_id)
         print ("ReadTransportData", ret)
         return ret
     

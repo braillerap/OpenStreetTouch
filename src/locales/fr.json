@@ -23,6 +23,8 @@
 
     "transport.title":"Extraction ligne de transport",
     "transport.city":"Nom de ville",
+    "transport.wikidata":"Id Wikidata",
+    "transport.place_id":"Type Emplacement",
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
     "transport.search":"Rechercher",
