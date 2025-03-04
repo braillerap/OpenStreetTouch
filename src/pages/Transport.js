@@ -43,6 +43,8 @@ const Transport = () => {
             GetLocaleString("transport.strategystation")
         ];
         setTransportStrategyList(list);
+        setImagePreview ('');
+        setTransportGuide('');
       }, []);
       
     
