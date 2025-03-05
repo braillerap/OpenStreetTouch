@@ -238,7 +238,7 @@ const CityMap = () => {
                 onChange={(e) => setLongitude(e.target.value)} />
                 </label>
                 <label>{GetLocaleString("citymap.radius")}
-                <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} />
+                <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
                 </label>
                 
                 <h2>Click on the map to get the position</h2>
