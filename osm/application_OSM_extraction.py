@@ -316,7 +316,7 @@ def osm_extract_data (transport_info, transport_type):
                             # check duplicate station and ensure there is a name
                             if node["id"] not in station_doublon and station["name"] != "":
                                 print ("station:", station["id"], station["name"])
-                                print (node)
+                                #print (node)
                                 stations.append(station)
                                 station_doublon[node["id"]] = True
                             
@@ -679,7 +679,7 @@ def lines_ways_extraction_from_datta(data): # => ok
     # group by relation (line id)
     dic_line_segments = {}
     
-    json.dump (data, open("data.json", "w"), indent=4)
+    #json.dump (data, open("data.json", "w"), indent=4)
     # get line list 
     df_line_list = lines_list_extraction_from_data(data) 
     

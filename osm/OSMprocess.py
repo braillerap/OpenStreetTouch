@@ -41,6 +41,7 @@ class Osmprocess:
         # sort data
         transport_lines.sort(key=lambda x: x["name"])
         result = {"city":self.CityName, "lines":[line["name"] for line in transport_lines]} 
+        
         return result
     
 

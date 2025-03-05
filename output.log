@@ -1,0 +1,434 @@
+start html= ./build/index.html
+{'lang': 'fr'}
+starting Windows GUI
+delete splash **************************************************
+backend get parameters:  {"lang": "fr"}
+
+    [out:json][timeout:30];
+    /* recherche des donnÈes avec .searcharea */ 
+    area["name:fr"="Berlin"]->.searcharea;
+    (
+      relation["type"="route"]["route"="subway"](area.searcharea);  
+    );
+    out ;
+    >;
+    out body qt ;
+    
+relations: 18
+ways: 802
+nodes: 8790
+ReadTransportData 18
+ret {'city': 'Berlin', 'lines': ['U1: S+U Warschauer Straﬂe => U Uhlandstraﬂe', 'U1: U Uhlandstraﬂe => S+U Warschauer Straﬂe', 'U2: S+U Pankow => U Ruhleben', 'U2: U Ruhleben => S+U Pankow', 'U3: S+U Warschauer Straﬂe => U Krumme Lanke', 'U3: U Krumme Lanke => S+U Warschauer Straﬂe', 'U4: S+U Innsbrucker Platz => U Nollendorfplatz', 'U4: U Nollendorfplatz => S+U Innsbrucker Platz', 'U5: U Hauptbahnhof => U Hˆnow', 'U5: U Hˆnow => U Hauptbahnhof', 'U6: U Alt-Mariendorf => U Alt-Tegel', 'U6: U Alt-Tegel => U Alt-Mariendorf', 'U7: S+U Rathaus Spandau => U Rudow', 'U7: U Rudow => S+U Rathaus Spandau', 'U8: S+U Hermannstraﬂe => S+U Wittenau', 'U8: S+U Wittenau => S+U Hermannstraﬂe', 'U9: S+U Rathaus Steglitz => U Osloer Straﬂe', 'U9: U Osloer Straﬂe => S+U Rathaus Steglitz']} <class 'dict'>
+GetTransportLineList {"city": "Berlin", "lines": ["U1: S+U Warschauer Straﬂe => U Uhlandstraﬂe", "U1: U Uhlandstraﬂe => S+U Warschauer Straﬂe", "U2: S+U Pankow => U Ruhleben", "U2: U Ruhleben => S+U Pankow", "U3: S+U Warschauer Straﬂe => U Krumme Lanke", "U3: U Krumme Lanke => S+U Warschauer Straﬂe", "U4: S+U Innsbrucker Platz => U Nollendorfplatz", "U4: U Nollendorfplatz => S+U Innsbrucker Platz", "U5: U Hauptbahnhof => U Hˆnow", "U5: U Hˆnow => U Hauptbahnhof", "U6: U Alt-Mariendorf => U Alt-Tegel", "U6: U Alt-Tegel => U Alt-Mariendorf", "U7: S+U Rathaus Spandau => U Rudow", "U7: U Rudow => S+U Rathaus Spandau", "U8: S+U Hermannstraﬂe => S+U Wittenau", "U8: S+U Wittenau => S+U Hermannstraﬂe", "U9: S+U Rathaus Steglitz => U Osloer Straﬂe", "U9: U Osloer Straﬂe => S+U Rathaus Steglitz"]}
+GetTransportSVG [{'id': '0', 'name': 'U1: S+U Warschauer Straﬂe => U Uhlandstraﬂe', 'select': True}, {'id': '1', 'name': 'U1: U Uhlandstraﬂe => S+U Warschauer Straﬂe', 'select': False}, {'id': '2', 'name': 'U2: S+U Pankow => U Ruhleben', 'select': True}, {'id': '3', 'name': 'U2: U Ruhleben => S+U Pankow', 'select': False}, {'id': '4', 'name': 'U3: S+U Warschauer Straﬂe => U Krumme Lanke', 'select': False}, {'id': '5', 'name': 'U3: U Krumme Lanke => S+U Warschauer Straﬂe', 'select': False}, {'id': '6', 'name': 'U4: S+U Innsbrucker Platz => U Nollendorfplatz', 'select': False}, {'id': '7', 'name': 'U4: U Nollendorfplatz => S+U Innsbrucker Platz', 'select': False}, {'id': '8', 'name': 'U5: U Hauptbahnhof => U Hˆnow', 'select': False}, {'id': '9', 'name': 'U5: U Hˆnow => U Hauptbahnhof', 'select': False}, {'id': '10', 'name': 'U6: U Alt-Mariendorf => U Alt-Tegel', 'select': False}, {'id': '11', 'name': 'U6: U Alt-Tegel => U Alt-Mariendorf', 'select': False}, {'id': '12', 'name': 'U7: S+U Rathaus Spandau => U Rudow', 'select': False}, {'id': '13', 'name': 'U7: U Rudow => S+U Rathaus Spandau', 'select': False}, {'id': '14', 'name': 'U8: S+U Hermannstraﬂe => S+U Wittenau', 'select': False}, {'id': '15', 'name': 'U8: S+U Wittenau => S+U Hermannstraﬂe', 'select': False}, {'id': '16', 'name': 'U9: S+U Rathaus Steglitz => U Osloer Straﬂe', 'select': False}, {'id': '17', 'name': 'U9: U Osloer Straﬂe => S+U Rathaus Steglitz', 'select': False}] True 0 <class 'int'>
+station: 3856100107 Hauptbahnhof
+station: 7057285551 Bundestag
+station: 7057285550 Brandenburger Tor
+station: 8087330616 Unter den Linden
+station: 7974955393 Museumsinsel
+station: 8196661136 Rotes Rathaus
+station: 2094266776 Alexanderplatz
+station: 55189765 Schillingstraﬂe
+station: 3846589196 Strausberger Platz
+station: 3169023533 Weberwiese
+station: 3876349057 Frankfurter Tor
+station: 3935369910 Samariterstraﬂe
+station: 710904931 Frankfurter Allee
+station: 3933477400 Magdalenenstraﬂe
+station: 1784905015 Lichtenberg
+station: 3926745600 Friedrichsfelde
+station: 4635829120 Tierpark
+station: 557841454 Biesdorf-S¸d
+station: 557827057 Elsterwerdaer Platz
+station: 1117011601 Wuhletal
+station: 53274722 Kaulsdorf-Nord
+station: 53274725 Kienberg (G‰rten der Welt)
+station: 52692783 Cottbusser Platz
+station: 4635829119 Hellersdorf
+station: 4635829118 Louis-Lewin-Straﬂe
+station: 52684988 Hˆnow
+station: 1929560934 Hˆnow
+station: 1929560940 Louis-Lewin-Straﬂe
+station: 1929560927 Hellersdorf
+station: 1423916630 Cottbusser Platz
+station: 560117042 Kienberg (G‰rten der Welt)
+station: 560115840 Kaulsdorf-Nord
+station: 427669846 Wuhletal
+station: 1929541432 Elsterwerdaer Platz
+station: 29880185 Biesdorf-S¸d
+station: 4635829117 Tierpark
+station: 3951294989 Friedrichsfelde
+station: 2445663203 Lichtenberg
+station: 3933477402 Magdalenenstraﬂe
+station: 3880774070 Frankfurter Allee
+station: 55189254 Samariterstraﬂe
+station: 107020135 Frankfurter Tor
+station: 2774974735 Weberwiese
+station: 3846589199 Strausberger Platz
+station: 3876218078 Schillingstraﬂe
+station: 2094266777 Alexanderplatz
+station: 8196661137 Rotes Rathaus
+station: 7974928190 Museumsinsel
+station: 8090274121 Unter den Linden
+station: 253846340 Brandenburger Tor
+station: 253845582 Bundestag
+station: 446289301 Hauptbahnhof
+station: 4961059646 Pankow
+station: 2095742351 Vinetastraﬂe
+station: 2098207705 Schˆnhauser Allee
+station: 3842674725 Eberswalder Straﬂe
+station: 2094266784 Senefelderplatz
+station: 2094266782 Rosa-Luxemburg-Platz
+station: 2094266778 Alexanderplatz
+station: 2094266781 Klosterstraﬂe
+station: 2098267288 M‰rkisches Museum
+station: 3352479251 Spittelmarkt
+station: 2098466936 Hausvogteiplatz
+station: 2182805355 Stadtmitte
+station: 2098622298 Mohrenstraﬂe
+station: 2098466340 Potsdamer Platz
+station: 1868541945 Mendelssohn-Bartholdy-Park
+station: 2097661751 Gleisdreieck
+station: 2098629915 B¸lowstraﬂe
+station: 2095431134 Nollendorfplatz
+station: 2088402713 Wittenbergplatz
+station: 2095401149 Zoologischer Garten
+station: 5216322208 Ernst-Reuter-Platz
+station: 3951565151 Deutsche Oper
+station: 3951565147 Bismarckstraﬂe
+station: 29123762 Sophie-Charlotte-Platz
+station: 3951565156 Kaiserdamm
+station: 3792273998 Theodor-Heuss-Platz
+station: 4961299239 Neu-Westend
+station: 566675008 Olympia-Stadion
+station: 566674963 Ruhleben
+station: 566674963 Ruhleben
+station: 3768485365 Olympia-Stadion
+station: 4961299238 Neu-Westend
+station: 3792273997 Theodor-Heuss-Platz
+station: 3792334291 Kaiserdamm
+station: 3793761677 Sophie-Charlotte-Platz
+station: 3951565146 Bismarckstraﬂe
+station: 3951565150 Deutsche Oper
+station: 4961299240 Ernst-Reuter-Platz
+station: 371531008 Zoologischer Garten
+station: 2088402712 Wittenbergplatz
+station: 2095400901 Nollendorfplatz
+station: 29495891 B¸lowstraﬂe
+station: 2097661754 Gleisdreieck
+station: 29324017 Mendelssohn-Bartholdy-Park
+station: 29495049 Potsdamer Platz
+station: 29495047 Mohrenstraﬂe
+station: 524657889 Stadtmitte
+station: 29495041 Hausvogteiplatz
+station: 323203892 Spittelmarkt
+station: 29495034 M‰rkisches Museum
+station: 29495029 Klosterstraﬂe
+station: 2094266780 Alexanderplatz
+station: 4961125734 Rosa-Luxemburg-Platz
+station: 196758117 Senefelderplatz
+station: 29494563 Eberswalder Straﬂe
+station: 91711807 Schˆnhauser Allee
+station: 247360444 Vinetastraﬂe
+station: 4961059647 Pankow
+station: 270165592 Uhlandstraﬂe
+station: 2100605071 Kurf¸rstendamm
+station: 2088402710 Wittenbergplatz
+station: 2095400905 Nollendorfplatz
+station: 29318897 Kurf¸rstenstraﬂe
+station: 2097661752 Gleisdreieck
+station: 234808146 Mˆckernbr¸cke
+station: 2098710710 Hallesches Tor
+station: 2098707385 Prinzenstraﬂe
+station: 2097818462 Kottbusser Tor
+station: 2098183561 Gˆrlitzer Bahnhof
+station: 2098183565 Schlesisches Tor
+station: 3826367034 Warschauer Straﬂe
+station: 3826367034 Warschauer Straﬂe
+station: 29787634 Schlesisches Tor
+station: 29787639 Gˆrlitzer Bahnhof
+station: 3854468165 Kottbusser Tor
+station: 31729333 Prinzenstraﬂe
+station: 321948497 Hallesches Tor
+station: 1960671962 Mˆckernbr¸cke
+station: 2097661753 Gleisdreieck
+station: 2098834606 Kurf¸rstenstraﬂe
+station: 2098827454 Nollendorfplatz
+station: 2088402714 Wittenbergplatz
+station: 2100605070 Kurf¸rstendamm
+station: 2098684204 Uhlandstraﬂe
+station: 3872477457 Krumme Lanke
+station: 3955368089 Onkel Toms H¸tte
+station: 26925638 Oskar-Helene-Heim
+station: 26925644 Freie Universit‰t (Thielplatz)
+station: 3846748388 Dahlem-Dorf
+station: 29786332 Podbielskiallee
+station: 29786335 Breitenbachplatz
+station: 5149261181 R¸desheimer Platz
+station: 3783145806 Heidelberger Platz
+station: 2060787840 Fehrbelliner Platz
+station: 5162689158 Hohenzollernplatz
+station: 5162689161 Spichernstraﬂe
+station: 5162689165 Augsburger Straﬂe
+station: 2088402711 Wittenbergplatz
+station: 2095400905 Nollendorfplatz
+station: 29318897 Kurf¸rstenstraﬂe
+station: 2097661752 Gleisdreieck
+station: 234808146 Mˆckernbr¸cke
+station: 2098710710 Hallesches Tor
+station: 2098707385 Prinzenstraﬂe
+station: 2097818462 Kottbusser Tor
+station: 2098183561 Gˆrlitzer Bahnhof
+station: 2098183565 Schlesisches Tor
+station: 3826367033 Warschauer Straﬂe
+station: 3826367033 Warschauer Straﬂe
+station: 29787634 Schlesisches Tor
+station: 29787639 Gˆrlitzer Bahnhof
+station: 3854468165 Kottbusser Tor
+station: 31729333 Prinzenstraﬂe
+station: 321948497 Hallesches Tor
+station: 1960671962 Mˆckernbr¸cke
+station: 2097661753 Gleisdreieck
+station: 2098834606 Kurf¸rstenstraﬂe
+station: 2098827454 Nollendorfplatz
+station: 2088402714 Wittenbergplatz
+station: 5162689164 Augsburger Straﬂe
+station: 5162689160 Spichernstraﬂe
+station: 5162689159 Hohenzollernplatz
+station: 5133139702 Fehrbelliner Platz
+station: 3783145807 Heidelberger Platz
+station: 5149261180 R¸desheimer Platz
+station: 3959895204 Breitenbachplatz
+station: 617183516 Podbielskiallee
+station: 1262255697 Dahlem-Dorf
+station: 3955368094 Freie Universit‰t (Thielplatz)
+station: 617174560 Oskar-Helene-Heim
+station: 3955368087 Onkel Toms H¸tte
+station: 3872477457 Krumme Lanke
+station: 310377165 Innsbrucker Platz
+station: 3901824980 Rathaus Schˆneberg
+station: 1560194072 Bayerischer Platz
+station: 254096277 Viktoria-Luise-Platz
+station: 2097309445 Nollendorfplatz
+station: 2097309445 Nollendorfplatz
+station: 5134718475 Viktoria-Luise-Platz
+station: 3901824898 Bayerischer Platz
+station: 4651729967 Rathaus Schˆneberg
+station: 310377165 Innsbrucker Platz
+station: 3856551773 Rudow
+station: 3856551778 Zwickauer Damm
+station: 3856551775 Wutzkyallee
+station: 3856551770 Lipschitzallee
+station: 3856551768 Johannisthaler Chaussee
+station: 3856551766 Britz-S¸d
+station: 4542910743 Parchimer Allee
+station: 3959389212 Blaschkoallee
+station: 3851450061 Grenzallee
+station: 3865616068 Neukˆlln
+station: 3918711723 Karl-Marx-Straﬂe
+station: 3354594358 Rathaus Neukˆlln
+station: 4614136671 Hermannplatz
+station: 5171026780 S¸dstern
+station: 5171026772 Gneisenaustraﬂe
+station: 1144890464 Mehringdamm
+station: 3933855824 Mˆckernbr¸cke
+station: 5174466146 Yorckstraﬂe
+station: 4652806687 Kleistpark
+station: 4340070542 Eisenacher Straﬂe
+station: 4652810789 Bayerischer Platz
+station: 4652801464 Berliner Straﬂe
+station: 4652801459 Blissestraﬂe
+station: 4652801461 Fehrbelliner Platz
+station: 3918542045 Konstanzer Straﬂe
+station: 29833491 Adenauerplatz
+station: 4340070744 Wilmersdorfer Straﬂe
+station: 3793761670 Bismarckstraﬂe
+station: 4337566756 Richard-Wagner-Platz
+station: 4389131686 Mierendorffplatz
+station: 4389131685 Jungfernheide
+station: 3958030526 Jakob-Kaiser-Platz
+station: 4389131683 Halemweg
+station: 4389131689 Siemensdamm
+station: 4389131691 Rohrdamm
+station: 4389131687 Paulsternstraﬂe
+station: 4389131684 Haselhorst
+station: 4389131690 Zitadelle
+station: 4389131682 Altstadt Spandau
+station: 4389131688 Rathaus Spandau
+station: 38902451 Rathaus Spandau
+station: 38902443 Altstadt Spandau
+station: 282768191 Zitadelle
+station: 38902433 Haselhorst
+station: 38902430 Paulsternstraﬂe
+station: 38902377 Rohrdamm
+station: 38901944 Siemensdamm
+station: 38901942 Halemweg
+station: 3958030520 Jakob-Kaiser-Platz
+station: 4330752281 Jungfernheide
+station: 38901946 Mierendorffplatz
+station: 5190604298 Richard-Wagner-Platz
+station: 3793760599 Bismarckstraﬂe
+station: 31207786 Wilmersdorfer Straﬂe
+station: 3931918486 Adenauerplatz
+station: 29833425 Konstanzer Straﬂe
+station: 4652801462 Fehrbelliner Platz
+station: 4652801463 Blissestraﬂe
+station: 4652801460 Berliner Straﬂe
+station: 4652806688 Bayerischer Platz
+station: 4340070549 Eisenacher Straﬂe
+station: 5099982987 Kleistpark
+station: 5174466143 Yorckstraﬂe
+station: 3933855821 Mˆckernbr¸cke
+station: 3949521961 Mehringdamm
+station: 5171026771 Gneisenaustraﬂe
+station: 5171026779 S¸dstern
+station: 4614136672 Hermannplatz
+station: 263577639 Rathaus Neukˆlln
+station: 129730706 Karl-Marx-Straﬂe
+station: 3865616066 Neukˆlln
+station: 3851450059 Grenzallee
+station: 283209107 Blaschkoallee
+station: 1429171039 Parchimer Allee
+station: 129730610 Britz-S¸d
+station: 129730605 Johannisthaler Chaussee
+station: 129730418 Lipschitzallee
+station: 129730396 Wutzkyallee
+station: 3856551776 Zwickauer Damm
+station: 3856551772 Rudow
+station: 4655299661 Hermannstraﬂe
+station: 29494306 Leinestraﬂe
+station: 29494305 Boddinstraﬂe
+station: 4325276198 Hermannplatz
+station: 29494292 Schˆnleinstraﬂe
+station: 5217808581 Kottbusser Tor
+station: 3844466963 Moritzplatz
+station: 3352479240 Heinrich-Heine-Straﬂe
+station: 3824719830 Jannowitzbr¸cke
+station: 2094266983 Alexanderplatz
+station: 4655287361 Weinmeisterstraﬂe
+station: 5227235607 Rosenthaler Platz
+station: 29190909 Bernauer Straﬂe
+station: 29190908 Voltastraﬂe
+station: 29190907 Gesundbrunnen
+station: 3933855830 Pankstraﬂe
+station: 5219721337 Osloer Straﬂe
+station: 3895235286 Franz-Neumann-Platz
+station: 3895051280 Residenzstraﬂe
+station: 29190895 Paracelsus-Bad
+station: 4340070989 Lindauer Allee
+station: 4655264249 Karl-Bonhoeffer-Nervenklinik
+station: 4655218851 Rathaus Reinickendorf
+station: 4655218848 Wittenau
+station: 4655218847 Wittenau
+station: 4655218849 Rathaus Reinickendorf
+station: 4655264250 Karl-Bonhoeffer-Nervenklinik
+station: 4340070988 Lindauer Allee
+station: 3894910455 Paracelsus-Bad
+station: 1498939785 Residenzstraﬂe
+station: 29190890 Franz-Neumann-Platz
+station: 1498939795 Osloer Straﬂe
+station: 3933855828 Pankstraﬂe
+station: 2376345714 Gesundbrunnen
+station: 3844356465 Voltastraﬂe
+station: 3844287331 Bernauer Straﬂe
+station: 5227235608 Rosenthaler Platz
+station: 4655287360 Weinmeisterstraﬂe
+station: 2094266775 Alexanderplatz
+station: 3834324122 Jannowitzbr¸cke
+station: 29494288 Heinrich-Heine-Straﬂe
+station: 29494289 Moritzplatz
+station: 4606652446 Kottbusser Tor
+station: 3844501288 Schˆnleinstraﬂe
+station: 4614136628 Hermannplatz
+station: 3356361111 Boddinstraﬂe
+station: 3846470936 Leinestraﬂe
+station: 4655299660 Hermannstraﬂe
+station: 4337566838 Osloer Straﬂe
+station: 3933564609 Nauener Platz
+station: 3932145083 Leopoldplatz
+station: 29045597 Amrumer Straﬂe
+station: 29045594 Westhafen
+station: 29045592 Birkenstraﬂe
+station: 4337566853 Turmstraﬂe
+station: 29046446 Hansaplatz
+station: 2790337972 Zoologischer Garten
+station: 3162501790 Kurf¸rstendamm
+station: 4337566655 Spichernstraﬂe
+station: 4337566650 G¸ntzelstraﬂe
+station: 3973880151 Berliner Straﬂe
+station: 29046990 Bundesplatz
+station: 29047042 Friedrich-Wilhelm-Platz
+station: 5149926932 Walther-Schreiber-Platz
+station: 4337566852 Schloﬂstraﬂe
+station: 4337566849 Rathaus Steglitz
+station: 4337566848 Rathaus Steglitz
+station: 4337566850 Schloﬂstraﬂe
+station: 5149926931 Walther-Schreiber-Platz
+station: 4337566847 Friedrich-Wilhelm-Platz
+station: 3783026394 Bundesplatz
+station: 4337566639 Berliner Straﬂe
+station: 4337566649 G¸ntzelstraﬂe
+station: 5200995417 Spichernstraﬂe
+station: 3162501789 Kurf¸rstendamm
+station: 2790337979 Zoologischer Garten
+station: 3957897518 Hansaplatz
+station: 29046444 Turmstraﬂe
+station: 3959201551 Birkenstraﬂe
+station: 3842566131 Westhafen
+station: 3842723688 Amrumer Straﬂe
+station: 3932145082 Leopoldplatz
+station: 29046165 Nauener Platz
+station: 29046167 Osloer Straﬂe
+station: 3043920508 Alt-Mariendorf
+station: 31034999 Westphalweg
+station: 31034998 Ullsteinstraﬂe
+station: 1641970590 Kaiserin-Augusta-Straﬂe
+station: 29058344 Alt-Tempelhof
+station: 29058343 Tempelhof
+station: 391337194 Paradestraﬂe
+station: 1312931277 Platz der Luftbr¸cke
+station: 1144890484 Mehringdamm
+station: 3854590999 Hallesches Tor
+station: 3904484932 Kochstraﬂe/Checkpoint Charlie
+station: 4940781828 Stadtmitte
+station: 8170794617 Unter den Linden
+station: 3869306769 Friedrichstraﬂe
+station: 3043709616 Oranienburger Tor
+station: 3043810257 Naturkundemuseum
+station: 2990822797 Schwartzkopffstraﬂe
+station: 2501078843 Reinickendorfer Straﬂe
+station: 3772933442 Wedding
+station: 3043782439 Leopoldplatz
+station: 2097212226 Seestraﬂe
+station: 2097222422 Rehberge
+station: 2097219411 Afrikanische Straﬂe
+station: 2097222421 Kurt-Schumacher-Platz
+station: 29690313 Kurt-Schumacher-Platz
+station: 29057786 Afrikanische Straﬂe
+station: 1748796356 Rehberge
+station: 3772787172 Seestraﬂe
+station: 3932143042 Leopoldplatz
+station: 2924245391 Wedding
+station: 5198810678 Reinickendorfer Straﬂe
+station: 244487808 Schwartzkopffstraﬂe
+station: 3820796421 Naturkundemuseum
+station: 29058100 Oranienburger Tor
+station: 2792364395 Friedrichstraﬂe
+station: 8170769020 Unter den Linden
+station: 2182805353 Stadtmitte
+station: 3904484898 Kochstraﬂe/Checkpoint Charlie
+station: 3043833853 Hallesches Tor
+station: 29058263 Mehringdamm
+station: 3045884371 Platz der Luftbr¸cke
+station: 3045559647 Paradestraﬂe
+station: 3045559653 Tempelhof
+station: 3045559658 Alt-Tempelhof
+station: 3045559667 Kaiserin-Augusta-Straﬂe
+station: 3045559677 Ullsteinstraﬂe
+station: 3045559684 Westphalweg
+station: 3045559693 Alt-Mariendorf
+min lat 52.4969698 max lat 52.5667564 min lon 13.2412234 max lon 13.4490382
+minx 1474006.2463679842 miny 6450770.4044435965 maxx 1497140.0840832903 maxy 6461228.290050623
+width 23133.837715306086 height 10457.885607026517
+ratio 0.060517412511877144
+GetTransportSVG svg size 25621

@@ -30,5 +30,5 @@ if __name__ == '__main__':
     
     svg = osm.GetStreetMapSVG(map)
     
-    with open ("street.svg", "w") as f:
+    with open ("./examples/street.svg", "w") as f:
         f.write (svg)

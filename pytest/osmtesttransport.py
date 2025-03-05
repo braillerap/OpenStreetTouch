@@ -61,8 +61,8 @@ if __name__ == '__main__':
         print ("*" * 50)
         svg = osm.GetTransportDataSvg(selected, True, False, True)
         
-        with open ("test.svg", "w") as f:
+        with open ("./examples/test.svg", "w") as f:
             f.write (svg)
 
-        txt = osm.GetTransportDataStations (selected);
+        txt = osm.GetTransportDataStations (selected)
         print (txt)

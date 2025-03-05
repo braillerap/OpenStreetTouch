@@ -300,7 +300,7 @@ class Api:
     
     def GetISO639_country_code (self):
         list = OSMutils.omsutils_get_iso639_code ()
-        print(list)
+        
         return list
     
     def ReadTransportData (self, city, transport_type, iso639_city_code, place_id):
@@ -312,9 +312,10 @@ class Api:
     def GetTransportLines (self):
         #ret = self.osmt.GetTransportLineList ()
         ret = self.osmt.GetTransportDataLineList ()
-        
-        print ("GetTransportLineList", ret)
-        return ret
+        print ("ret", ret, type(ret))
+        resstr = json.dumps (ret,  ensure_ascii=False)
+        print ("GetTransportLineList", resstr)
+        return resstr
 
     def GetTransportDataSvg (self, linelist, drawstation, linestrategy, polygon):
         print ("GetTransportSVG", linelist, drawstation, int(linestrategy), type(linestrategy))
@@ -324,10 +325,13 @@ class Api:
         return svg
     
     def GetTransportData (self, linelist, drawstation, linestrategy, polygon):
-        svg = self.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
-        liststation = self.osmt.GetTransportDataStations (linelist)
+        linearray = json.loads (linelist)
+        #print ("json decoded", linearray )
+        svg = self.GetTransportDataSvg (linearray, drawstation, linestrategy, polygon)
+        liststation = self.osmt.GetTransportDataStations (linearray)
 
-        return json.dumps({"svg": svg, "stations": liststation})
+        str = json.dumps({"svg": svg, "stations": liststation}, ensure_ascii=False)
+        return str
     
     def GetTransportSVGbase64 (self):
         svg = self.osmt.get_svg ()
@@ -389,9 +393,15 @@ if __name__ == "__main__":
     api = Api()
     debugihm = False
 
+    # redirect stdout to file for debug purpose
+    #f = open("output.log", 'w')
+    f = open(os.devnull, 'w')
+    sys.stdout = f
+
     #print(sys.argv)
     dir, script = os.path.splitext(sys.argv[0])
-    if len(sys.argv) > 1 and script == ".py":
+    #if len(sys.argv) > 1 and script == ".py":
+    if len(sys.argv) > 1:
         if sys.argv[1] == "--debug":
             debugihm = True
 

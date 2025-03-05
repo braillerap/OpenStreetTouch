@@ -93,7 +93,19 @@ const Transport = () => {
     }
     const goRender = () => {
         console.log ("call GetTransportData" + transportLines);
-        window.pywebview.api.GetTransportData(transportLines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
+        let jslines = '';
+        try
+        {
+            jslines = JSON.stringify(transportLines);
+            console.log ("json encoded");
+        }
+        catch (e)
+        {
+            console.log (e);
+            console.log ("jslines error")
+            //console.log (transportLines);
+        }
+        window.pywebview.api.GetTransportData(jslines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
             console.log (datastr);
             let data = JSON.parse(datastr);
             console.log (data);
@@ -114,7 +126,8 @@ const Transport = () => {
         // iso639code is used to specified the language name of the city for OSM
         window.pywebview.api.ReadTransportData(cityName, transportType, iso639code, placeid).then ((size) => {
             
-            window.pywebview.api.GetTransportLines().then ((datadic) => {
+            window.pywebview.api.GetTransportLines().then ((jsondata) => {
+                let datadic = JSON.parse(jsondata);
                 setRealCityName (datadic.city);
 
                 // update result for suitable checkbox display
