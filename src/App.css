@@ -353,6 +353,11 @@ a.pure-button-secondary
    margin-right: 0.3rem;
  }
 
+ .TransportParam
+ {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+ }
  .TransportParam button
  {
   font-size: 1.1em;
@@ -366,6 +371,7 @@ a.pure-button-secondary
   font-size: 1.1em;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+  
  }
  .TransportParam input
  {
