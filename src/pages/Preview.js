@@ -5,8 +5,6 @@ const Preview = () => {
     const { ImagePreview } = useContext(AppContext);
     const { TransportGuide } = useContext(AppContext);
     const {GetLocaleString} = useContext(AppContext);
-    const [cityName, setCityName] = useState('')
-    const [cityImage, setCityImage] = useState('')
     
     const saveImage = () => {
       let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
@@ -27,11 +25,7 @@ const Preview = () => {
               {/*<button onClick={saveImage}>{GetLocaleString("preview.savesvg")}</button>*/}
             </>
           )
-            /*
-            console.log ("preview rendering image");
-            const srcpat = "data:image/png;base64," + ImagePreview;
-            return <img src={srcpat} alt="city image" width={"50%"} height={"50%"}/>
-            */
+           
         }
         return (<></>);
     }
