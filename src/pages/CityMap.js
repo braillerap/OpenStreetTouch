@@ -20,12 +20,17 @@ const CityMap = () => {
     const [editLatitude, setEditLatitude] = useState (51);
     const [editLongitude, setEditLongitude] = useState (0);
     const [mapClicked, setMapClicked] = useState (false);
-    
+    const [pngavailable, setPngAvailable] = useState(false);
+
     useEffect(() => {
-            
+            window.pywebview.api.get_cairosvg_available().then ((enable) => {
+                setPngAvailable(enable);
+            });
+
             setImagePreview ('');
             setTransportGuide('');
           }, []);
+    
     
     const setLatitude = (elat) => {
         setEditLatitude(elat);
@@ -169,6 +174,7 @@ const CityMap = () => {
                 return (<></>)
             }
         }
+        
         const goDownloadSVG = () => {
             let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
             let filter = [
@@ -178,6 +184,24 @@ const CityMap = () => {
     
             window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
         }
+        const renderPNGcommand = () => {
+            if (pngavailable)
+                return (<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
+            return (<></>);
+        }
+        const goDownloadPNG = () => {
+            if (pngavailable)
+            {
+                let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+                let filter = [
+                    GetLocaleString("file.pngfile"), //"Fichier svg",
+                    GetLocaleString("file.all") //"Tous"
+                ]
+    
+                window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
+                
+            }
+        }
         const renderResultAction = () => {
             if (ImagePreview == '')
                 return (<></>);
@@ -186,7 +210,7 @@ const CityMap = () => {
                     <fieldset>
                         <legend>{GetLocaleString("transport.titleresult")}</legend>
                         <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
-                        {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
+                        {renderPNGcommand()}
                         
                     </fieldset>
                 </div>

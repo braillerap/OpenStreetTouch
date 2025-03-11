@@ -25,6 +25,7 @@ const Transport = () => {
            setIso639CodeList(isolist);
         });
         window.pywebview.api.get_cairosvg_available().then ((enable) => {
+            
             setPngAvailable(enable);
          });
 
