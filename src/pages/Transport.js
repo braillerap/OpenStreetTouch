@@ -76,13 +76,7 @@ const Transport = () => {
             <label>{GetLocaleString("transport.type")}:
             <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
             {
-                /*
-                transport_type2.map((trans) => {
-                        return (
-                            <option>{trans}</option>
-                    )
-                })
-                    */
+                
                 Object.entries(transport_type_dic).map ((key) => {
                     
                     return (
@@ -146,18 +140,10 @@ const Transport = () => {
                         }
                     }
                 }  
-                
                 setTransportLines(sline);
                 setOsmPending(false);
-                
             });
-
-            
         });
-
-       
-
-       
     }
     const onSelectLine = (e) => {
         
@@ -280,7 +266,7 @@ const Transport = () => {
     }
     const renderPNGcommand = () => {
         if (pngavailable)
-            return (<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
+            return (<button disabled={osmPending} onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
         return (<></>);
     }
     const renderResultAction = () => {
@@ -290,9 +276,9 @@ const Transport = () => {
             <div className='TransportResultAction'>
                 <fieldset>
                     <legend>{GetLocaleString("transport.titleresult")}</legend>
-                    <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                    <button disabled={osmPending} onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
                     {renderPNGcommand()}
-                    <button onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
+                    <button disabled={osmPending} onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
                 </fieldset>
             </div>
         );

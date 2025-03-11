@@ -35,14 +35,15 @@ class Home extends React.Component {
           <h1>OpenStreetTouch</h1>
           <h2>Version:{`${process.env.REACT_APP_VERSION}`}</h2>
 
-          <h2 className='h2home'></h2>
+          <div className='logohome'>
           <a href="https://www.nlnet.nl" target="_blank" rel="noreferrer">
             <img src="./logo-sh.svg" width='20%' alt="NLnet fundation logo"  />
           </a>
-          <h2 className='h2home'></h2>
+          
           <a href="https://www.braillerap.org" target="_blank" rel="noreferrer">
             <img src="./braillerap_logo.svg" width='20%' alt="BrailleRAP logo"  />
           </a>
+          </div>
           <p>{this.context.GetLocaleString("home.openstreetmap")} 
             <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>
           </p>

@@ -222,6 +222,15 @@ a.pure-button-secondary
   background-color:rgb(177, 167, 167);
   height:100%;
 }
+.logohome
+{
+  display:flex;
+  flex-direction: column;
+}
+.logohome img{
+  margin-top: 1rem;
+  
+}
 
 .menu_font {
   font-size: 1.1rem;
