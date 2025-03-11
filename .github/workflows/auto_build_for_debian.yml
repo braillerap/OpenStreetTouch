@@ -28,7 +28,7 @@ jobs:
           docker run \
             -u root:root \
             -e BOARD \
-            -e BRANCH_BUILD=main\
+            -e BRANCH_BUILD=linux\
             -v $(pwd)/dist/:/home/builduser/dist \
             sgngodin/buildopenstreettouch:latest
 
