@@ -31,7 +31,7 @@ exe = EXE(
     splash,
     splash.binaries,
     [],
-    name='osm2touch-ubuntu',
+    name='openstreettouch-ubuntu',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
