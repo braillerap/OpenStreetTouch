@@ -85,3 +85,5 @@ transport_graph_data_filtered.json
 nsis/OpenStreetTouch_Windows_setup.exe
 nsis/OpenStreetTouch.exe
 output.log
+package/debian/openstreettouch-debian/usr/share/doc/openstreettouch-debian/changelog.gz
+package/debian/openstreettouch-debian/usr/bin/openstreettouch-debian

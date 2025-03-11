@@ -16,7 +16,7 @@ a = Analysis(
 )
 pyz = PYZ(a.pure)
 splash = Splash(
-    'brap.png',
+    'osm2touch.png',
     binaries=a.binaries,
     datas=a.datas,
     text_pos=None,
@@ -33,7 +33,7 @@ exe = EXE(
     splash,
     splash.binaries,
     [],
-    name='osm2touch-debian',
+    name='openstreettouch-debian',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

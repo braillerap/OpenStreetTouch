@@ -9,5 +9,4 @@ Architecture: amd64
 Maintainer: Build with love by <contact@braillerap.org>
 Description: Osm data extraction tool to build tangible maps of urban area transportation.
  Osm2Touch  allow you to extract data from OSM. The main idea is to build suitable data file
- for Image2Touch or DesktopBrailleRAP.
- 
+ for Image2Touch or DesktopBrailleRAP. 
