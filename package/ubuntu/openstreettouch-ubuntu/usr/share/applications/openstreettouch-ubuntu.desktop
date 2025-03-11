@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=Name=OpenStreetTouch
+Name=OpenStreetTouch
 Comment=OpenStreetMap data extraction to build tangible documents
 Exec=/usr/bin/openstreettouch-ubuntu
 Terminal=false
