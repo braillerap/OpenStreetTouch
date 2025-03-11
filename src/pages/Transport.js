@@ -17,13 +17,17 @@ const Transport = () => {
     const [transportStrategy, setTransportStrategy] = useState(0);
     const [drawPolygon, setDrawPolygon] = useState(false);
     const [placeid, setPlaceid] = useState(0);
-
+    const [pngavailable, setPngAvailable] = useState(false);
     const [osmPending, setOsmPending] = useState(false);
 
     useEffect(() => {
         window.pywebview.api.GetISO639_country_code().then ((isolist) => {
            setIso639CodeList(isolist);
         });
+        window.pywebview.api.get_cairosvg_available().then ((enable) => {
+            setPngAvailable(enable);
+         });
+
         setIso639Code ('fr');
         let list = [
             GetLocaleString("transport.strategyways"),
@@ -244,15 +248,17 @@ const Transport = () => {
         }    
     }
     const goDownloadPNG = () => {
-        /*
-        let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
-        let filter = [
-            GetLocaleString("file.svgfile"), //"Fichier svg",
-            GetLocaleString("file.all") //"Tous"
-        ]
+        if (pngavailable)
+        {
+            let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
+            let filter = [
+                GetLocaleString("file.pngfile"), //"Fichier svg",
+                GetLocaleString("file.all") //"Tous"
+            ]
 
-        window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
-        */
+            window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
+            
+        }
     }
     const goDownloadSVG = () => {
         let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
@@ -272,6 +278,11 @@ const Transport = () => {
 
         window.pywebview.api.saveas_file(TransportGuide, dialogtitle, filter);
     }
+    const renderPNGcommand = () => {
+        if (pngavailable)
+            return (<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
+        return (<></>);
+    }
     const renderResultAction = () => {
         if (ImagePreview == '')
             return (<></>);
@@ -280,7 +291,7 @@ const Transport = () => {
                 <fieldset>
                     <legend>{GetLocaleString("transport.titleresult")}</legend>
                     <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
-                    {/*<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>*/}
+                    {renderPNGcommand()}
                     <button onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
                 </fieldset>
             </div>

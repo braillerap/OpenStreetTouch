@@ -30,7 +30,7 @@ if getattr(sys, "frozen", False):
 app_options = {
     
     "lang": "en",
-    
+    "osmiso639": "fr"
 }
 
 
@@ -116,9 +116,12 @@ class Api:
         self.save_parameters()
 
     def get_cairosvg_available(self):
+        
         return cairosvg_available
     
+    # This function creates a confirmation dialog with a given title and message
     def confirm_dialog (self, title, message):
+        # Create a confirmation dialog with the given title and message
         return window.create_confirmation_dialog(title, message)
     
     def save_parameters(self):
@@ -135,24 +138,26 @@ class Api:
 
     
     def saveas_svg_aspngfile (self, svgdata, dialogtitle, filterstring):
-        pass
-        # global filename
-
-        # fname = window.create_file_dialog(
-        #     webview.SAVE_DIALOG,
-        #     allow_multiple=False,
-        #     file_types=(filterstring[0] + " (*.svg)", filterstring[1] + " (*.*)"),
-        # )
-      
-        # if fname:
-        #     if detected_os == KnownOS.Windows:
-        #         filename = fname
-        #     else:
-        #         filename = fname[0]
-        # else:
-        #     return
+        if cairosvg_available != True:
+            return
         
-        # svg2png(bytestring=svgdata,write_to=filename)
+        filename = ''
+
+        fname = window.create_file_dialog(
+             webview.SAVE_DIALOG,
+             allow_multiple=False,
+             file_types=(filterstring[0] + " (*.png)", filterstring[1] + " (*.*)"),
+         )
+      
+        if fname:
+            if detected_os == KnownOS.Windows:
+                filename = fname
+            else:
+                filename = fname[0]
+        else:
+             return
+        
+        svg2png(bytestring=svgdata,write_to=filename)
 
     def saveas_svgfile(self, data, dialogtitle, filterstring):
         global filename
