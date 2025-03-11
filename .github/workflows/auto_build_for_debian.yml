@@ -30,7 +30,7 @@ jobs:
             -e BOARD \
             -e BRANCH_BUILD=linux\
             -v $(pwd)/dist/:/home/builduser/dist \
-            sgngodin/buildopenstreettouch:latest
+            sgngodin/buildopenstreettouchdebian:latest
 
      - name: check result files
        run: |
