@@ -3,14 +3,14 @@ import AppContext from "../components/AppContext";
 
 
 const Transport = () => {
-    const {GetLocaleString} = useContext(AppContext);
+    const {GetLocaleString, Params, SetOption} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [drawStation, setDrawStation] = useState(true);
     const [transportLines, setTransportLines] = useState([]);
     const [iso639codeList, setIso639CodeList] = useState([]);
-    const [iso639code, setIso639Code] = useState();
+    
     const [realCityName, setRealCityName] = useState('');
     const [transportType, setTransportType] = useState('subway');
     const [transportStrategyList, setTransportStrategyList] = useState([]);
@@ -29,7 +29,7 @@ const Transport = () => {
             setPngAvailable(enable);
          });
 
-        setIso639Code ('fr');
+        
         let list = [
             GetLocaleString("transport.strategyways"),
             GetLocaleString("transport.strategywayscorreted"),
@@ -55,12 +55,21 @@ const Transport = () => {
         "ferry":GetLocaleString("transport.type.ferry"),
     
     }
-
+    const setOsmIso639Code = (code) => {
+        
+        let option = {
+            ...Params
+            
+          };
+        option["osmiso639"] = code;
+        SetOption(option);
+        console.log ("context set option");
+    }
     const renderIso639 = () => {
         
         return (
             <label>{GetLocaleString("transport.iso639")}:
-            <select value={iso639code} onChange={(event) => {setIso639Code(event.target.value)}} >
+            <select value={Params["osmiso639"]} onChange={(event) => {setOsmIso639Code(event.target.value)}} >
             {
                 iso639codeList.map((code) => {
                     return (
@@ -123,7 +132,7 @@ const Transport = () => {
         console.log (transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
-        window.pywebview.api.ReadTransportData(cityName, transportType, iso639code, placeid).then ((size) => {
+        window.pywebview.api.ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then ((size) => {
             
             window.pywebview.api.GetTransportLines().then ((jsondata) => {
                 let datadic = JSON.parse(jsondata);
