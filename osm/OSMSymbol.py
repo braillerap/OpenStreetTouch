@@ -12,17 +12,30 @@ class OSMSymbolType(Enum):
     Cross = 4
 
 class OSMSymbol:
-    def __init__(self):
-        pass
-
     def DrawSymbol (self, svgfile, symbol, x, y, size, fillcolor, strokecolor):
+        """
+        Draws the specified symbol at a given position with a specified size and color.
+
+        Parameters:
+        svgfile (svg.SVGFile): The SVG file to which the symbol will be added.
+        symbol (OSMSymbolType): The type of symbol to draw.
+        x (float): The x-coordinate of the symbol's center.
+        y (float): The y-coordinate of the symbol's center.
+        size (float): The size of the symbol.
+        fillcolor (str): The fill color of the symbol.
+        strokecolor (str): The stroke color of the symbol.
+        """
         
         match (symbol):
             case OSMSymbolType.Circle:
-                
+                """
+                Draws a circle symbol.
+                """
                 svgfile.addsvg (svg.Circle(cx=x, cy=y, r=size/2, fill=fillcolor, stroke=strokecolor, stroke_width=1))
             case OSMSymbolType.Star:
-                
+                """
+                Draws a star symbol.
+                """
                 points = []
                 angle_step = math.pi / 5  # 
 
@@ -47,12 +60,21 @@ class OSMSymbol:
                                 d=path,
                             ))
             case OSMSymbolType.Square:
+                """
+                Draws a square symbol.
+                """
                 svgfile.addsvg (svg.Rect(x=x-size/2, y=y-size/2, width=size, height=size, fill=fillcolor, stroke=strokecolor, stroke_width=1))
 
             case OSMSymbolType.Triangle:    
+                """
+                Draws a triangle symbol.
+                """
                 svgfile.addsvg (svg.Polygon(points=[(x, y-size/2), (x+size/2, y+size/2), (x-size/2, y+size/2)], fill=fillcolor, stroke=strokecolor, stroke_width=1))
 
             case OSMSymbolType.Cross:   
+                """
+                Draws a cross symbol.
+                """
                 points = [
                         (x-size/4, y-size/2), (x+size/4, y-size/2), 
                         (x+size/4, y-size/4), (x+size/4, y-size/2), 
