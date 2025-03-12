@@ -21,6 +21,8 @@ const CityMap = () => {
     const [editLongitude, setEditLongitude] = useState (0);
     const [mapClicked, setMapClicked] = useState (false);
     const [pngavailable, setPngAvailable] = useState(false);
+    const [includeWater, setIncludeWater] = useState(false);
+    const [cliping, setCliping] = useState(false);
 
     useEffect(() => {
             window.pywebview.api.get_cairosvg_available().then ((enable) => {
@@ -151,7 +153,7 @@ const CityMap = () => {
                     lat = position.lat;
                     lon = position.lng;
                 }
-                window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon).then ((svg) => {
+                window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping).then ((svg) => {
                    
                     setImagePreview (svg);
                     setRequest(false);
@@ -239,7 +241,18 @@ const CityMap = () => {
                                 onChange={(e) => setPolygon(e.target.checked)} />
                                 {GetLocaleString("citymap.streetpolygon")}
                                 </label>
-
+                                
+                                
+                            <label>
+                                <input type='checkbox' checked={includeWater} 
+                                onChange={(e) => setIncludeWater(e.target.checked)} />
+                                {GetLocaleString("citymap.water")}
+                                </label>
+                            <label>
+                                <input type='checkbox' checked={cliping} 
+                                onChange={(e) => setCliping(e.target.checked)} />
+                                {GetLocaleString("citymap.cliping")}
+                                </label>
                             <button disabled={request} onClick={goRender}>
                                 {GetLocaleString("citymap.rendermap")}
                             </button>

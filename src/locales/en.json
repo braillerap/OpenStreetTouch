@@ -62,6 +62,8 @@
     "citymap.latitude": "Latitude",
     "citymap.longitude": "Longitude",
     "citymap.radius": "Radius (meters)",
+    "citymap.water": "Include water area",
+    "citymap.cliping": "Clip map",
 
     "preview.savesvg":"Save as SVG",
 

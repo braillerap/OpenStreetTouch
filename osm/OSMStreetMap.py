@@ -51,7 +51,8 @@ def overpass_request(latitude, longitude, radius):
     
     way["highway"](around:{radius}, {latitude}, {longitude});
     wr["building"](around:{radius}, {latitude}, {longitude});
-      
+    wr["water"](around:{radius}, {latitude}, {longitude});
+    wr["natural"="water"](around:{radius}, {latitude}, {longitude});
     );
     (._;>;);
     
@@ -73,7 +74,7 @@ def overpass_request(latitude, longitude, radius):
 
     data = response.json()
     
-    #json.dump (data, open ("overpass_street.json", "w"))
+    json.dump (data, open ("overpass_street.json", "w"))
     return data 
 
 def osm_extraction (streetmap_data):
@@ -96,38 +97,64 @@ def osm_extraction (streetmap_data):
                 print ("Type de données non géré : ", element['type'])
     return street_info
 
-
+def extract_node_from_osmwaynodes (streetmap_data, way):
+    nodes = []
+    for nodeid in way["nodes"]:
+        node = osm_get_indirect_node (streetmap_data, nodeid)
+        if "lat" in node and "lon" in node:
+            anoted_node = {
+                "lat": node["lat"],
+                "lon": node["lon"],
+                "id": node["id"],
+                "way_id": way["id"],
+                
+            }
+            nodes.append (anoted_node)
+    return (nodes)       
+ 
 def osm_extract_data (streetmap_data):
-    streetmap_2d_data = {"street":[],"building":[], "unclassified":[]}
+    streetmap_2d_data = {"street":[],"building":[], "unclassified":[], "water":[]}
     ways = []
     for relation in streetmap_data['relations'].values():
-        if 'members' in relation:
-            for member in relation['members']:
-                if 'type' in member:
-                    if member['type'] == 'way':
-                        if 'role' in member:
-                            if member['role'] == 'outer':
-                                way = osm_get_indirect_way (streetmap_data, member['ref'])
-                                ways_node = []
-                                if "nodes" in way:
-                                    for nodeid in way["nodes"]:
-                                        node = osm_get_indirect_node (streetmap_data, nodeid)
-                                        if "lat" in node and "lon" in node:
-                                        
-                                            anoted_node = {
-                                                "lat": node["lat"],
-                                                "lon": node["lon"],
-                                                "id": node["id"],
-                                                "way_id": way["id"],
-                                                
+        if "tags" in relation:
+            if "natural" in relation["tags"]:
+                print ("water polygon detected")
+                if relation["tags"]["natural"] == "water":
+                    for member in relation['members']:
+                        if 'type' in member:
+                            if member['type'] == 'way':
+                                if 'role' in member:
+                                    if member['role'] == 'outer':
+                                        way = osm_get_indirect_way (streetmap_data, member['ref'])
+                                        ways_node = []
+                                        if "nodes" in way:
+                                            ways_node = extract_node_from_osmwaynodes (streetmap_data, way)
+                                            
+                                            water = {
+                                                "id": way['id'],
+                                                "water": "polygon",
+                                                "nodes":ways_node
                                             }
-                                            ways_node.append (anoted_node)
-                                    building = {
-                                        "id": way['id'],
-                                        "building": "polygon",
-                                        "nodes":ways_node
-                                    }
-                                    streetmap_2d_data["building"].append (building)
+                                            streetmap_2d_data["water"].append (water)
+                                    
+            elif "building" in relation["tags"]:
+                if 'members' in relation:
+                    for member in relation['members']:
+                        if 'type' in member:
+                            if member['type'] == 'way':
+                                if 'role' in member:
+                                    if member['role'] == 'outer':
+                                        way = osm_get_indirect_way (streetmap_data, member['ref'])
+                                        ways_node = []
+                                        if "nodes" in way:
+                                            ways_node = extract_node_from_osmwaynodes (streetmap_data, way)
+                                            
+                                            building = {
+                                                "id": way['id'],
+                                                "building": "polygon",
+                                                "nodes":ways_node
+                                            }
+                                            streetmap_2d_data["building"].append (building)
 
     for way in streetmap_data['ways'].values():
         ways_node = []
@@ -167,8 +194,29 @@ def osm_extract_data (streetmap_data):
                         # Check if the node has lat and lon
                         
                         if "lat" in node and "lon" in node:
-                            if "tags" not in node:
-                                
+                            anoted_node = {
+                                    "lat": node["lat"],
+                                    "lon": node["lon"],
+                                    "id": node["id"],
+                                    "way_id": way["id"],
+                                    
+                                }
+                            ways_node.append (anoted_node)
+                        
+                    building = {
+                        "id": way['id'],
+                        "building": way['tags']['building'],
+                        "nodes":ways_node
+                    }
+                    streetmap_2d_data["building"].append (building)
+
+            elif "water" in way['tags']:
+                if 'nodes' in way:
+                    for nodeid in way["nodes"]:
+                        node = osm_get_indirect_node (streetmap_data, nodeid)
+                        # Check if the node has lat and lon
+                        
+                        if "lat" in node and "lon" in node:
                                 anoted_node = {
                                     "lat": node["lat"],
                                     "lon": node["lon"],
@@ -178,13 +226,12 @@ def osm_extract_data (streetmap_data):
                                 }
                                 ways_node.append (anoted_node)
                         
-                    building = {
+                    water = {
                         "id": way['id'],
-                        "building": way['tags']['building'],
+                        "water": way['tags']['water'],
                         "nodes":ways_node
                     }
-                    streetmap_2d_data["building"].append (building)
-
+                    streetmap_2d_data["water"].append (water)
             else:
                 if 'nodes' in way:
                     for nodeid in way["nodes"]:

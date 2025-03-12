@@ -10,7 +10,8 @@ import json
 class OSMprocessStreet:
     def __init__(self):
         self.streetmap_data = None
-
+        self.radius = 0
+        self.geoposition = (0, 0)
     
 
     def ReadStreetMapData (self, lat, lon, radius):
@@ -21,9 +22,12 @@ class OSMprocessStreet:
         map = OSMStreetMap.osm_extraction (self.streetmap_data)
 
         street_2d_data = OSMStreetMap.osm_extract_data (map)
+        self.radius = int(radius)
+        self.geoposition = (lat, lon)
+
         return (street_2d_data)
     
-    def GetStreetMapSVG (self, street_data, lat=0, lon=0, building=True, footpath=False, polygon=False):
+    def GetStreetMapSVG (self, street_data, lat=0, lon=0, building=True, footpath=False, polygon=False, includeWater=False, cliping=False):
         width = 1000
         height = 1000
         marginx = 50
@@ -33,8 +37,10 @@ class OSMprocessStreet:
         fsvg.open (widthmm=width, heightmm=height)
         
         engine = OSMGeometry.OSMStreetDrawing ()
-        engine.geoposition = [lat, lon]
-        engine.DrawingStreetMap (fsvg, street_data, width, height, marginx, marginy, building, footpath, polygon)
+        engine.radius = self.radius
+        engine.geoposition = self.geoposition
+        engine.clipdata = cliping
+        engine.DrawingStreetMap (fsvg, street_data, width, height, marginx, marginy, building, footpath, polygon, includeWater)
 
         fsvg.close ()
         return (fsvg.getSVGString())

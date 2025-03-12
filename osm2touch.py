@@ -344,10 +344,10 @@ class Api:
 
     
 
-    def ReadStreetMapData (self, latitude, longitude, radius, building, footpath, polygon):
+    def ReadStreetMapData (self, latitude, longitude, radius, building, footpath, polygon, includeWater, cliping):
         street_data = self.osms.ReadStreetMapData (latitude, longitude, radius)
         print ("building", building, "footpath", footpath, "polygon", polygon)
-        svg = self.osms.GetStreetMapSVG (street_data, latitude, longitude, building, footpath, polygon)
+        svg = self.osms.GetStreetMapSVG (street_data, latitude, longitude, building, footpath, polygon,includeWater, cliping)
         print ("ReadStreetMapData svg size", len(svg))
         return svg
     

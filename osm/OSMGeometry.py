@@ -1,11 +1,11 @@
 import cartopy.crs as ccrs
-import shapely
-import json
 import svg
-from . import OSMsvgFile
+import shapely
+
 from . import OSMOrthoArea
 from . import OSMSymbol
 from . import OSMPath
+from . import OSMutils
 
 class OsmTransportDrawing:
 
@@ -19,18 +19,7 @@ class OsmTransportDrawing:
         self.showstartstation = False
         self.symbolsize = 30
         self.polygons = False
-    def square_dist (self, pt1, pt2):
-        """
-        Calculate the squared distance between two points.
-
-        Parameters:
-        pt1 (tuple): A tuple representing the coordinates of the first point (x1, y1).
-        pt2 (tuple): A tuple representing the coordinates of the second point (x2, y2).
-
-        Returns:
-        float: The squared Euclidean distance between the two points.
-        """
-        return ((pt1[0] - pt2[0]) ** 2 + (pt1[1] - pt2[1]) ** 2)
+        
 
 
     def draw_way (self, svg_file, lines, area, width, height, marginx, marginy):
@@ -185,7 +174,7 @@ class OsmTransportDrawing:
         else:
             way2nodes = [way2["nodes"][0], way2["nodes"][0]]
 
-        return self.square_dist (way1nodes[way1pos], way2nodes[way2pos])
+        return OSMutils.square_dist (way1nodes[way1pos], way2nodes[way2pos])
 
     def swap_transport_way (self, line):
         """
@@ -310,6 +299,8 @@ class OSMStreetDrawing:
         self.stroke_width = 2
         self.fill = "none"
         self.geoposition = (0,0)
+        self.radius = 0
+        self.clipdata = False
         self.roadcolor = "#408040"
         self.footcolor = "#00ff00"
         self.footway_tags = ["footway","path", "cycleway", "steps"]
@@ -371,7 +362,8 @@ class OSMStreetDrawing:
                     footways.append (way)
         return footways
     
-    def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
+    def build_projected_area_data (self, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50, building=False, water=False):
+        
         #proj = ccrs.Orthographic(self.geoposition[0], self.geoposition[1])
         proj = ccrs.Miller()
         data_proj = ccrs.PlateCarree()
@@ -381,51 +373,123 @@ class OSMStreetDrawing:
         # compute minx, miny, maxx, maxy
         self.area = OSMOrthoArea.OrthoArea ()
         
-        
+        center = proj.transform_point(self.geoposition[1], self.geoposition[0], data_proj)
         streets = []
         buildings = []
+        waters=[]
         unclassified = []
         for way in street_2d_data["street"]:
             swidth = self.EstimateStreetWidth (way['tags'])
             nodes = []
+            outside = True
             for node in way["nodes"]:
                 #print (node)
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
-                
-                self.area.AddPoint (float(pos[0]), float(pos[1]))
-                self.area.AddLatLon (node["lat"], node["lon"])
-                
+                if OSMutils.square_dist (pos, center ) < (self.radius*1.1) * (self.radius*1.1):
+                    outside = False
+                    self.area.AddLatLon (node["lat"], node["lon"])
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
-            streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes, "tags": way['tags']})
-        
-        for way in street_2d_data["building"]:
-            nodes = []
-            for node in way["nodes"]:
                 
-                pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+
+            # add area only if it is partly inside the circle
+            if outside == False:
+                if self.clipdata:
+                    geom = shapely.LineString(nodes)
+                    cliped = shapely.clip_by_rect (geom, 
+                                        center[0] - self.radius, center[1] - self.radius, 
+                                        center[0] + self.radius, center[1] + self.radius
+                                        )
+                    nodes = []
+                    for point in shapely.get_coordinates(cliped) :
+                        nodes.append ( (float(point[0]), float(point[1]) ) )
+
+                if len(nodes)>1: # check that we have at least a line
+                    for position in nodes:
+                        self.area.AddPoint (float(position[0]), float(position[1]))
+                    streets.append ({"way_id": way.get("id", "??"), "street_width":swidth, "nodes":nodes, "tags": way['tags']})
                 
-                self.area.AddPoint (float(pos[0]), float(pos[1]))
-                self.area.AddLatLon (node["lat"], node["lon"])
+                
+        if building:
+            print ("include building in area")
+            for way in street_2d_data["building"]:
+                nodes = []
+                outside = True
+                for node in way["nodes"]:
+                    
+                    pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                    if OSMutils.square_dist (pos, center) < (self.radius * 1.1) * (self.radius * 1.1):
+                        outside = False
+                    
+                    self.area.AddLatLon (node["lat"], node["lon"])
+                    nodes.append ( (float(pos[0]), float(pos[1]) ) )
+                
+                # add area only if it is partly inside the circle
+                if outside == False:
+                    if self.clipdata:
+                        geom = shapely.LineString(nodes)
+                        cliped = shapely.clip_by_rect (geom, 
+                                            center[0] - self.radius, center[1] - self.radius, 
+                                            center[0] + self.radius, center[1] + self.radius
+                                            )
+                        nodes = []
+                        for point in shapely.get_coordinates(cliped):
+                            nodes.append ( (float(point[0]), float(point[1]) ) )
 
-                nodes.append ( (float(pos[0]), float(pos[1]) ) )
+                    if len(nodes)>3: # check that we have at least a triangle
+                        for position in nodes:
+                            self.area.AddPoint (float(position[0]), float(position[1]))
+                        buildings.append ({"way_id": way.get("id", "??"), "nodes":nodes})                        
+            
+        if water:
+            print ("include water in area")
+            for way in street_2d_data["water"]:
+                nodes = []
+                outside = True
+                for node in way["nodes"]:
+                    pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                    if OSMutils.square_dist (pos, center) < (self.radius *1.1) * (self.radius * 1.1):
+                        outside = False
+                    
+                    self.area.AddLatLon (node["lat"], node["lon"])
+                    nodes.append ( (float(pos[0]), float(pos[1]) ) )
+                
+                # add area only if it is partly inside the circle
+                if outside == False:    
+                    if self.clipdata:
+                        geom = shapely.LineString(nodes)
+                        cliped = shapely.clip_by_rect(geom, 
+                                            center[0] - self.radius, center[1] - self.radius, 
+                                            center[0] + self.radius, center[1] + self.radius
+                                            )
+                        nodes = []
+                        for point in shapely.get_coordinates(cliped):
+                            nodes.append ( (float(point[0]), float(point[1]) ) )
+                    
+                    if len(nodes)>3: # check that we have at least a triangle        
+                        for position in nodes:
+                            self.area.AddPoint (float(position[0]), float(position[1]))
+                    
+                        waters.append ({"way_id": way.get("id", "??"), "nodes":nodes})  
 
-            buildings.append ({"way_id": way.get("id", "??"), "nodes":nodes})                        
         
         for way in street_2d_data["unclassified"]:
             nodes = []
+            outside = True
             for node in way["nodes"]:
                 
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
+                if OSMutils.square_dist (pos, center) < self.radius*self.radius:
+                    outside = False
                 
-                self.area.AddPoint (float(pos[0]), float(pos[1]))
                 self.area.AddLatLon (node["lat"], node["lon"])
-
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
 
-            unclassified.append ({"way_id": way.get("id", "??"), "nodes":nodes})    
-            
-            
-
+            if outside == False:    
+                #for position in nodes:
+                #    self.area.AddPoint (float(position[0]), float(position[1]))
+                
+                unclassified.append ({"way_id": way.get("id", "??"), "nodes":nodes})    
+ 
         self.area.width = self.area.maxx - self.area.minx
         self.area.height = self.area.maxy - self.area.miny
         print ("min lat", self.area.min_lat, "max lat", self.area.max_lat, 
@@ -435,7 +499,7 @@ class OSMStreetDrawing:
         self.area.ratio = min ((width - 2 * marginx) / self.area.width, (height - 2 * marginy) / self.area.height)
         print ("ratio", self.area.ratio)
         
-        return {"streets": streets, "buildings": buildings, "unclassified": unclassified}
+        return {"streets": streets, "buildings": buildings, "unclassified": unclassified, "waters": waters}
     
     def draw_poly_ways (self, fsvg, waysnode, width, height, marginx, marginy):
         for way in waysnode:
@@ -549,13 +613,13 @@ class OSMStreetDrawing:
                 # ))
 
 
-    def build_projected_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50):
-        self.street2d_data = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy)
+    def build_projected_data (self, transport_2d_data, width=1000, height=1000, marginx= 50, marginy=50, building=False, water=False):
+        self.street2d_data = self.build_projected_area_data (transport_2d_data, width, height, marginx, marginy, building, water)
 
-    def DrawingStreetMap (self, fsvg, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50, building=True, footpath=False, polygon=False):
+    def DrawingStreetMap (self, fsvg, street_2d_data, width=1000, height=1000, marginx= 50, marginy=50, building=True, footpath=False, polygon=False, water=True):
         
         
-        waysnode = self.build_projected_area_data (street_2d_data, width, height, marginx, marginy)
+        waysnode = self.build_projected_area_data (street_2d_data, width, height, marginx, marginy, building, water)
         
         #print (waysnode)
         # Draw the ways using the fsvg, waysnode, width, height, marginx, and marginy parameters
@@ -563,10 +627,16 @@ class OSMStreetDrawing:
         print (len(waysnode["buildings"]), len(waysnode["streets"]), len(waysnode["unclassified"]))
         print ("building", building, "footpath", footpath, "polygon", polygon)
 
-        if building:
+        if water:
             self.color = "blue"
             self.stroke_width = 0.1
             self.fill = "lightblue"
+            self.draw_ways (fsvg, waysnode["waters"], width, height, marginx, marginy)
+
+        if building:
+            self.color = "darkgrey"
+            self.stroke_width = 0.1
+            self.fill = "grey"
             self.draw_ways (fsvg, waysnode["buildings"], width, height, marginx, marginy)
 
         self.color = "green"

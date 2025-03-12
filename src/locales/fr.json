@@ -63,6 +63,9 @@
     "citymap.latitude": "Latitude",
     "citymap.longitude": "Longitude",
     "citymap.radius": "Rayon (mètre)",
+    "citymap.water": "Inclure les zones d'eau",
+    "citymap.cliping": "Restreindre à la zone de carte",
+
     "preview.savesvg":"Enregistrer le SVG",
 
     "param.locale":"Langue de l'application",
