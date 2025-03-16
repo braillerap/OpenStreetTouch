@@ -12,7 +12,7 @@ Another exemple with the Askoria campus in Rennes - France
 ![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/askoria.jpg)
 
 ## Features
-- Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a3d printer or a BrailleRAP with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
+- Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a 3d printer or a [BrailleRAP](https://github.com/braillerap/BrailleRap) with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
 - Extract ordered station name from public transport data.
 - Extract small city map to help build accessible description of local area.
 
@@ -30,7 +30,9 @@ If you need the software in your locale language, we will be happy to add a new 
 Feel free to open issues or pull requests ! We will be happy to review and merge your changes. BTW we have a great focus on accessibility and user friendly design.
 
 ## Translations status
-
+<a href="https://translate.codeberg.org/engage/openstreettouch/">
+<img src="https://translate.codeberg.org/widget/openstreettouch/ihm/multi-green.svg" alt="État de la traduction" />
+</a>
 
 ## Funding
 
