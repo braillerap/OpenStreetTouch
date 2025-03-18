@@ -66,6 +66,7 @@
     "citymap.radius": "Rayon (mètre)",
     "citymap.water": "Inclure les zones d'eau",
     "citymap.cliping": "Restreindre à la zone de carte",
+    "citymap.mousegps":"Cliquer sur la carte pour obtenir une position",
 
     "preview.savesvg":"Enregistrer le SVG",
 

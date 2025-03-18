@@ -36,7 +36,11 @@ const CityMap = () => {
     
     const setLatitude = (elat) => {
         setEditLatitude(elat);
-
+        let zoom =14;
+        if (mapref)
+        {
+            zoom = mapref.current.getZoom();
+        }
         let lat = parseFloat(elat);
         if (lat)
         {
@@ -47,19 +51,22 @@ const CityMap = () => {
                     if (position.lng)
                     {
                         setPosition([lat, editLongitude]);
-                        mapref.setView([lat, editLongitude], mapref.getZoom())
+                        if (mapref)
+                            mapref.current.setView([lat, editLongitude], zoom)
                     }
                     else
                     {
                         setPosition([lat, editLongitude]);
-                        mapref.setView([lat,editLongitude], mapref.getZoom())
+                        if (mapref)
+                            mapref.current.setView([lat,editLongitude], zoom)
                     }
                         
                 }
                 else
                 {
                     setPosition([lat, editLongitude]);
-                    mapref.setView([lat, editLongitude], mapref.getZoom())
+                    if (mapref)
+                        mapref.current.setView([lat, editLongitude], zoom)
                 }
             }
         }
@@ -69,6 +76,11 @@ const CityMap = () => {
     const setLongitude = (elon) => {
         setEditLongitude(elon);
         let lon = parseFloat(elon);
+        let zoom =14;
+        if (mapref)
+        {
+            zoom = mapref.current.getZoom();
+        }
         if (lon)
         {
             if (lon > -180 && lon < 180)
@@ -78,21 +90,24 @@ const CityMap = () => {
                     if (position.lat){
                         console.log ("position.lat exist");
                         setPosition([editLatitude, lon]);
-                        mapref.setView([position.lat, lon], mapref.getZoom())
+                        if (mapref)
+                            mapref.current.setView([position.lat, lon], zoom)
                     }
                     else
                     {
                         console.log ("position.lat not exist");
                         console.log (position);
                         setPosition([editLatitude, lon]);
-                        mapref.setView([editLatitude, lon], mapref.getZoom());
+                        if (mapref)
+                            mapref.current.setView([editLatitude, lon], zoom);
                     }
                 }
                 else
                 {
                     console.log ("position  not exist");
                     setPosition([editLatitude, lon]);
-                    mapref.setView([editLatitude, lon], mapref.getZoom())
+                    if (mapref)
+                        mapref.current.setView([editLatitude, lon], zoom)
 
                 }
             }
@@ -124,10 +139,12 @@ const CityMap = () => {
         const renderPosition = () => {
             
             if (position)
-                return (
-                    <h2>{position.lat} {position.lng}</h2>
-                );    
-            
+                if (position.lat && position.lng)
+                    return (
+                        <h2>{position.lat} {position.lng}</h2>
+                    );    
+                else
+                    return (<></>);    
             
         }
         /*
@@ -146,19 +163,26 @@ const CityMap = () => {
                 console.log (editLatitude);
                 console.log (editLongitude);
                 setRequest(true);
-                let lat = editLatitude;
-                let lon = editLongitude;
+                let lat = Number.parseFloat(editLatitude);
+                let lon = Number.parseFloat(editLongitude);
                 if (position.lat && position.lng)
                 {
                     lat = position.lat;
                     lon = position.lng;
                 }
+                if (isNaN(lat))
+                    lat = 51;
+                if (isNaN(lon))
+                    lon = -0.09;
                 window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping).then ((svg) => {
                    
                     setImagePreview (svg);
                     setRequest(false);
                     
-                });
+                }).catch ((error) => {
+                    setRequest(false);
+                })
+                ;
             }
     
         }
@@ -278,7 +302,7 @@ const CityMap = () => {
                 <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
                 </label>
                 
-                <h2>Click on the map to get the position</h2>
+                <h2>{GetLocaleString("citymap.mousegps")}</h2>
             </div>
             <MapContainer center={position} zoom={2} scrollWheelZoom={true}
                 ref={mapref}

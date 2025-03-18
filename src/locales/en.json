@@ -64,7 +64,7 @@
     "citymap.radius": "Radius (meters)",
     "citymap.water": "Include water area",
     "citymap.cliping": "Clip map",
-
+    "citymap.mousegps":"Click on the map to get the position",
     "preview.savesvg":"Save as SVG",
 
     "param.locale":"Application language",

@@ -12,7 +12,7 @@ const Layout = () => {
     const {GetLocaleString, GetLocaleDir} = useContext(AppContext);
     
     const exitrequest = (e) => {
-        console.log ("askexit");
+        
         e.preventDefault();
         window.pywebview.api.quit();
 
@@ -51,7 +51,7 @@ const Layout = () => {
                     {/*<Toolbar />*/}
                 </div>
                 
-                <div className="App-function">
+                <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-function">
                     <Outlet />
                 </div>    
                 <div className="App-Work">
