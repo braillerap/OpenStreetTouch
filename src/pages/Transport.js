@@ -309,6 +309,7 @@ const Transport = () => {
                     }
                 </select>
                 <input type="text" 
+                    aria-description={place_id[placeid]}
                     name="city" 
                     value={cityName} 
                     onChange={(e)=>{setCityName(e.target.value);}}
