@@ -14,20 +14,27 @@
     "file.txtfile":"Fichier TXT",
 
     "menu.home":"Accueil",
+    "menu.home.shortcut":"A",
     "menu.transport":"Transport",
+    "menu.transport.shortcut":"T",
     "menu.citymap":"Carte",
+    "menu.citymap.shortcut":"C",
     "menu.param":"Paramètres",
+    "menu.param.shortcut":"P",
     "menu.exit":"Exit",
+    "menu.exit.shortcut":"x",
      
     "home.openstreetmap":"Ce logiciel utilise des données issue du project OpenStreetMap. Voir le site d'OpenStreetMap pour plus d'informations.",
 
     "transport.title":"Extraction ligne de transport",
     "transport.city":"Nom de ville",
+    "transport.city.edit.shortcut":"V",
     "transport.wikidata":"Id Wikidata",
     "transport.place_id":"Type Emplacement",
     "transport.renderimg":"Dessiner la/les ligne(s) de transport",
     "transport.renderstation":"Dessiner les stations",
     "transport.search":"Rechercher",
+    "transport.search.shortcut":"R",
     "transport.sectionplan":"Affichage des lignes de transports",
     "transport.strategyways":"Données de tracé OSM",
     "transport.strategywayscorreted":"Données OSM corrigées",
@@ -53,7 +60,9 @@
     "transport.type.light_rail":"Train interurbain",
     "transport.type.monorail":"Monorail",
     "transport.type.ferry":"Ferry",
-
+    "transport.sectionrequest":"Interroger OpenStreetMap pour la ville souhaitée",
+    "transport.sectiondata":"Exploitation des données de carte",
+    "transport.sectionline":"Sélection des lignes de transport",
 
     "citymap.sectionplan":"Construction de plan",
     "citymap.rendermap":"Extraction de la zone de carte",
@@ -67,6 +76,8 @@
     "citymap.water": "Inclure les zones d'eau",
     "citymap.cliping": "Restreindre à la zone de carte",
     "citymap.mousegps":"Cliquer sur la carte pour obtenir une position",
+    "citymap.sectionrender": "Extraction des données de la carte",
+    "citymap.sectionpos":"Position de la carte",
 
     "preview.savesvg":"Enregistrer le SVG",
 
@@ -74,7 +85,7 @@
     
     "param.formtitle":"Paramètres",
     "param.form_aria":"Paramètres de l'application",
-    
+    "param.focuspolicy": "Positionner le focus lors de la navigation",
     
     
     

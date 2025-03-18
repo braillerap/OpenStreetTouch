@@ -27,20 +27,35 @@ const Layout = () => {
                         <nav>
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">
-                                    <Link to="/" className="pure-menu-link">{GetLocaleString("menu.home")} </Link>
+                                    <Link to="/" className="pure-menu-link" 
+                                        accessKey={GetLocaleString("menu.home.shortcut")}>
+                                            {GetLocaleString("menu.home")} 
+                                    </Link>
                                 </li>
 
                                 <li className="pure-menu-item">
-                                    <Link to="/transport" className="pure-menu-link">{GetLocaleString("menu.transport")} </Link>
+                                    <Link to="/transport" className="pure-menu-link" 
+                                        accessKey={GetLocaleString("menu.transport.shortcut")}>
+                                            {GetLocaleString("menu.transport")} 
+                                    </Link>
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link to="/cmap" className="pure-menu-link">{GetLocaleString("menu.citymap")} </Link>
+                                    <Link to="/cmap" className="pure-menu-link" 
+                                        accessKey={GetLocaleString("menu.citymap.shortcut")}>
+                                            {GetLocaleString("menu.citymap")} 
+                                    </Link>
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link to="/parameter" className="pure-menu-link">{GetLocaleString("menu.param")}</Link>
+                                    <Link to="/parameter" className="pure-menu-link"
+                                        accessKey={GetLocaleString("menu.param.shortcut")}>
+                                            {GetLocaleString("menu.param")}
+                                    </Link>
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link onClick={exitrequest} className="pure-menu-link">{GetLocaleString("menu.exit")} </Link>
+                                    <Link onClick={exitrequest} className="pure-menu-link"
+                                        accessKey={GetLocaleString("menu.exit.shortcut")}>
+                                    
+                                        {GetLocaleString("menu.exit")} </Link>
                                 </li>
                             </ul>
                             {/*<button className="pure-menu-heading" onClick={() => {ForceResize()}}>FR</button>*/}
@@ -51,7 +66,7 @@ const Layout = () => {
                     {/*<Toolbar />*/}
                 </div>
                 
-                <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-function">
+                <div aria-live={"assertive"} aria-atomic={true} role={"log"} aria-relevant={"all"} className="App-function">
                     <Outlet />
                 </div>    
                 <div className="App-Work">

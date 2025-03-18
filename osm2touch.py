@@ -30,7 +30,8 @@ if getattr(sys, "frozen", False):
 app_options = {
     
     "lang": "en",
-    "osmiso639": "fr"
+    "osmiso639": "fr",
+    "focuspolicy":"false"
 }
 
 

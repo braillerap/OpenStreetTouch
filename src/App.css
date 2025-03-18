@@ -388,6 +388,12 @@ a.pure-button-secondary
   margin-left: 0.3rem;
   margin-right: 0.3rem;
  }
+ .TransportParam select
+ {
+  font-size: 1.1em;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+ }
  .CityMapParam input[type="number"]
  {
   width:7em;
@@ -402,3 +408,11 @@ a.pure-button-secondary
     width:100%;
     
  }
+
+ .ParamGroup
+{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  
+}

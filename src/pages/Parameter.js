@@ -15,7 +15,7 @@ class Parameters extends React.Component {
     this.handleChangeGeneral = this.handleChangeGeneral.bind(this);
     this.handleChangeNumeric = this.handleChangeNumeric.bind(this);
     this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
-
+    this.setFocusPolicy = this.setFocusPolicy.bind(this);
 
   }
 
@@ -61,7 +61,14 @@ class Parameters extends React.Component {
     this.context.SetOption(option);
   }
   
-  
+  setFocusPolicy (value) {
+      let option = {
+        ...this.context.Params,
+      }
+      option.focuspolicy = value;
+      this.context.SetOption(option);
+  }
+
   render() {
 
     
@@ -75,8 +82,8 @@ class Parameters extends React.Component {
 
           
           
-          <div className='pure-control-group'>
-            <fieldset>
+          <div className='ParamGroup'>
+            <fieldset className='ParamGroup'>
               <legend>Application</legend>
               <p>
               {this.context.GetLocaleString("param.locale")}&nbsp;
@@ -84,7 +91,7 @@ class Parameters extends React.Component {
               </p>
               <label htmlFor='langid' aria-label="param.language_aria" >
                 {this.context.GetLocaleString("param.locale")}
-              </label>
+             
 
 
               <select id="langid"
@@ -100,8 +107,15 @@ class Parameters extends React.Component {
                 })
                 }
 
+               
 
               </select>
+              </label>
+              <label>
+                    <input type='checkbox' checked={this.context.Params.focuspolicy}
+                    onChange={(e) => this.setFocusPolicy(e.target.checked)} />
+                    {this.context.GetLocaleString("param.focuspolicy")}
+              </label>
             </fieldset>
           </div>
         </div >

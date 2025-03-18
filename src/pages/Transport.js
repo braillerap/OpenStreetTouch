@@ -1,8 +1,9 @@
-import { useContext, useState, useEffect} from 'react'
+import { useContext, useState, useEffect, useRef} from 'react'
 import AppContext from "../components/AppContext";
 
 
 const Transport = () => {
+    const focusref = useRef (null);
     const {GetLocaleString, Params, SetOption} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
@@ -36,8 +37,14 @@ const Transport = () => {
             GetLocaleString("transport.strategystation")
         ];
         setTransportStrategyList(list);
+        
         setImagePreview ('');
         setTransportGuide('');
+
+        console.log ("Params");
+        console.log (Params);
+        if (focusref && Params.focuspolicy == true)
+            focusref.current.focus();
       }, []);
       
     const place_id = [
@@ -68,7 +75,7 @@ const Transport = () => {
     const renderIso639 = () => {
         
         return (
-            <label>{GetLocaleString("transport.iso639")}:
+            <label>{GetLocaleString("transport.iso639")}
             <select value={Params["osmiso639"]} onChange={(event) => {setOsmIso639Code(event.target.value)}} >
             {
                 iso639codeList.map((code) => {
@@ -83,7 +90,7 @@ const Transport = () => {
     }
     const renderTransportType =  () => {
         return (
-            <label>{GetLocaleString("transport.type")}:
+            <label>{GetLocaleString("transport.type")}
             <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
             {
                 
@@ -199,47 +206,50 @@ const Transport = () => {
         if (transportLines.length > 0  )
         {
             return (
-                <fieldset >
+                
+                    <fieldset >
 
-                <legend>{GetLocaleString("transport.sectionplan")}</legend>
-                    <div className='TransportAction'>
-                    <label>
-                        <input 
-                            type='checkbox' 
-                            id='stations' 
-                            name='stations' 
-                            checked={drawStation} 
-                            onChange={onSelectStations} />
-                        {GetLocaleString("transport.renderstation")}
+                        <legend>{GetLocaleString("transport.sectionplan")}</legend>
+                        <div className='TransportAction'>
+                            <label>
+                                <input
+                                    type='checkbox'
+                                    id='stations'
+                                    name='stations'
+                                    checked={drawStation}
+                                    onChange={onSelectStations} />
+                                {GetLocaleString("transport.renderstation")}
 
-                    </label>
-                    <label>
-                        <input 
-                            type='checkbox' 
-                            id='polygons' 
-                            name='polygons' 
-                            checked={drawPolygon} 
-                            onChange={(e)=>{setDrawPolygon(e.target.checked)}} />
-                        {GetLocaleString("transport.polygon")}
+                            </label>
+                            <label>
+                                <input
+                                    type='checkbox'
+                                    id='polygons'
+                                    name='polygons'
+                                    checked={drawPolygon}
+                                    onChange={(e) => { setDrawPolygon(e.target.checked) }} />
+                                {GetLocaleString("transport.polygon")}
 
-                    </label>
-                    <label>{GetLocaleString("transport.renderstrategy")}
-                    <select value={transportStrategy} onChange={(event) => {setTransportStrategy(event.target.value)}} >
-                    {
-                        transportStrategyList.map((trans, index) => {
-                                return (
-                                    <option value={index}>{trans}</option>
-                            )
-                        })
-                    }
-                    </select>
-                    </label>
-                    
-                    <button onClick={goRender}>
-                        {GetLocaleString("transport.renderimg")}
-                    </button>
-                    </div>
-                </fieldset>
+                            </label>
+                            <label>{GetLocaleString("transport.renderstrategy")}
+                                <select value={transportStrategy} onChange={(event) => { setTransportStrategy(event.target.value) }} >
+                                    {
+                                        transportStrategyList.map((trans, index) => {
+                                            return (
+                                                <option value={index}>{trans}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </label>
+
+                            <button onClick={goRender}>
+                                {GetLocaleString("transport.renderimg")}
+                            </button>
+                        </div>
+                    </fieldset>
+
+                
                 );
         }    
     }
@@ -294,46 +304,54 @@ const Transport = () => {
         );
     }
   return (
-    <div>
-        <div className='TransportParam'>
-            <h1>{GetLocaleString("transport.title")}</h1>
+      <div>
+        <section aria-label={GetLocaleString("transport.sectionrequest")}>
+          <div className='TransportParam' role="document">
+              <h1>{GetLocaleString("transport.title")}</h1>
 
-            <label>{GetLocaleString("transport.place_id")} :
-                    <select value={placeid} onChange={(event) => {setPlaceid(event.target.value)}} >
-                    {
-                        place_id.map((id, index) => {
-                                return (
-                                    <option value={index}>{id}</option>
-                            )
-                        })
-                    }
-                </select>
-                <input type="text" 
-                    aria-description={place_id[placeid]}
-                    name="city" 
-                    value={cityName} 
-                    onChange={(e)=>{setCityName(e.target.value);}}
-                    />
-            </label>
-        </div>    
-        <div className='TransportParam'>
-            {renderIso639()}
-            {renderTransportType()}
-            </div>
-            <div className='TransportParam'>    
-            <button onClick={goOsm} disabled={osmPending}>{GetLocaleString("transport.search")}</button>
-                    </div>
-        
+              <label >{GetLocaleString("transport.place_id") }
+                  <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
+                      {
+                          place_id.map((id, index) => {
+                              return (
+                                  <option value={index}>{id}</option>
+                              )
+                          })
+                      }
+                  </select>
+                  <input type="text"
+                      aria-description={place_id[placeid]}
+                      name="city"
+                      value={cityName}
+                      ref={focusref}
+                      onChange={(e) => { setCityName(e.target.value); }}
+                  />
+              </label>
+          </div>
+          <div className='TransportParam'>
+              {renderIso639()}
+              {renderTransportType()}
+          </div>
+          <div className='TransportParam'>
+              <button onClick={goOsm} disabled={osmPending}
+                  accessKey={GetLocaleString("transport.search.shortcut")}>
+                  {GetLocaleString("transport.search")}
+              </button>
+          </div>
+          </section>
 
-        <div className='CheckedList'>
-            
-            {renderTransportLines ()}
-            
-        </div>
+            <section aria-label={GetLocaleString("transport.sectionline") }>
+                <div className='CheckedList'>
 
-        {renderTransportAction ()}
-        {renderResultAction ()}
-    </div>
+                    {renderTransportLines()}
+
+                </div>
+            </section>
+            <section aria-label={GetLocaleString("transport.sectiondata") }>          
+            {renderTransportAction()}
+            {renderResultAction()}
+          </section>            
+      </div>
   );
 }
 

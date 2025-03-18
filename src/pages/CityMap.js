@@ -5,12 +5,14 @@ import "leaflet/dist/leaflet.css";
 
 const redOptions = { color: 'red' }
 const greenOptions = { color: 'green' }
+const maxzoom = 18;
 
 const CityMap = () => {
-    const {GetLocaleString} = useContext(AppContext);
+    const {GetLocaleString, Params} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const mapref = useRef (null);
+    const focusref = useRef (null);
     const [position, setPosition] = useState([51.505, -0.09]);
     const [radius, setRadius] = useState(200);
     const [building, setBuilding] = useState (true);
@@ -23,6 +25,7 @@ const CityMap = () => {
     const [pngavailable, setPngAvailable] = useState(false);
     const [includeWater, setIncludeWater] = useState(false);
     const [cliping, setCliping] = useState(false);
+    const [mapzoom, setMapZoom] = useState(2);
 
     useEffect(() => {
             window.pywebview.api.get_cairosvg_available().then ((enable) => {
@@ -31,6 +34,8 @@ const CityMap = () => {
 
             setImagePreview ('');
             setTransportGuide('');
+            if (focusref && Params.focuspolicy == true)
+                focusref.current.focus();
           }, []);
     
     
@@ -60,14 +65,16 @@ const CityMap = () => {
                         if (mapref)
                             mapref.current.setView([lat,editLongitude], zoom)
                     }
-                        
+                    
                 }
                 else
                 {
                     setPosition([lat, editLongitude]);
                     if (mapref)
                         mapref.current.setView([lat, editLongitude], zoom)
+                    
                 }
+                setMapZoom(maxzoom);
             }
         }
         
@@ -101,6 +108,7 @@ const CityMap = () => {
                         if (mapref)
                             mapref.current.setView([editLatitude, lon], zoom);
                     }
+                    
                 }
                 else
                 {
@@ -108,8 +116,9 @@ const CityMap = () => {
                     setPosition([editLatitude, lon]);
                     if (mapref)
                         mapref.current.setView([editLatitude, lon], zoom)
-
+                    
                 }
+                setMapZoom(maxzoom);
             }
         }
     }
@@ -287,28 +296,31 @@ const CityMap = () => {
         }
     return (
         <>
-            <div className='CityMapParam'>
-            <h1>{GetLocaleString("citymap.maptitle")}   </h1>
-                {renderPosition()}
-                <label>{GetLocaleString("citymap.latitude")}
-                <input type="number" value={editLatitude} step="0.0001" min="-90" max="90" 
-                onChange={(e) => setLatitude(e.target.value)} />
-                </label>
-                <label>{GetLocaleString("citymap.longitude")}
-                <input type="number" value={editLongitude} step="0.0001" min="-180" max="180"
-                onChange={(e) => setLongitude(e.target.value)} />
-                </label>
-                <label>{GetLocaleString("citymap.radius")}
-                <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
-                </label>
-                
-                <h2>{GetLocaleString("citymap.mousegps")}</h2>
+            <div className='CityMapParam' role="document">
+                <section aria-label={GetLocaleString("citymap.sectionpos")}>
+                    <h1 role="contentinfo"> {GetLocaleString("citymap.maptitle")}   </h1>
+                    {renderPosition()}
+                    <label>{GetLocaleString("citymap.latitude")}
+                        <input ref={focusref} type="number" value={editLatitude} step="0.0001" min="-90" max="90" 
+                        onChange={(e) => setLatitude(e.target.value)} />
+                    </label>
+                    <label>{GetLocaleString("citymap.longitude")}
+                        <input type="number" value={editLongitude} step="0.0001" min="-180" max="180"
+                        onChange={(e) => setLongitude(e.target.value)} />
+                    </label>
+                    <label>{GetLocaleString("citymap.radius")}
+                        <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
+                    </label>
+                    
+                    <h2 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h2>
+                </section>
             </div>
-            <MapContainer center={position} zoom={2} scrollWheelZoom={true}
+            <section aria-label="Map">
+            <MapContainer center={position} zoom={mapzoom} scrollWheelZoom={true}
                 ref={mapref}
                 style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
                 attributionControl={false}
-
+                aria-hidden={true}
                 >
 
                 <TileLayer
@@ -319,8 +331,11 @@ const CityMap = () => {
                  {renderMapRadius()}
                  
             </MapContainer>
-            {renderAction()}
-            {renderResultAction ()}
+            </section>
+            <section aria-label={GetLocaleString("citymap.sectionrender")}>
+                {renderAction()}
+                {renderResultAction ()}
+            </section>
         </>
     );
 }
