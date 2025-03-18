@@ -66,7 +66,7 @@ const Layout = () => {
                     {/*<Toolbar />*/}
                 </div>
                 
-                <div aria-live={"assertive"} aria-atomic={true} role={"log"} aria-relevant={"all"} className="App-function">
+                <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-function">
                     <Outlet />
                 </div>    
                 <div className="App-Work">
