@@ -83,6 +83,7 @@ class Parameters extends React.Component {
           
           
           <div className='ParamGroup'>
+            <section aria-label={this.context.GetLocaleString("param.general.section")}>
             <fieldset className='ParamGroup'>
               <legend>Application</legend>
               <p>
@@ -117,6 +118,7 @@ class Parameters extends React.Component {
                     {this.context.GetLocaleString("param.focuspolicy")}
               </label>
             </fieldset>
+            </section>
           </div>
         </div >
 
