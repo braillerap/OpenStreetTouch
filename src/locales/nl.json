@@ -75,6 +75,5 @@
     "transport.type.subway": "Metro",
     "transport.type.train": "Trein",
     "citymap.rendermap": "Geëxtraheerde kaart intekenen",
-    "param.locale": "Programmataal",
-    "toolbar.confirm.deleteall": "U staat op het punt om het bestand te verwijderen. Weet u het zeker?"
+    "param.locale": "Programmataal"
 }

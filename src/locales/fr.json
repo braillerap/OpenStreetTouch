@@ -75,6 +75,5 @@
     "param.formtitle": "Paramètres",
     "param.form_aria": "Paramètres de l'application",
     "param.focuspolicy": "Positionner le focus lors de la navigation",
-    "param.general.section": "Paramètres de l'application",
-    "toolbar.confirm.deleteall": "Voulez allez effacer le document. Etes vous sure ?"
+    "param.general.section": "Paramètres de l'application"
 }
