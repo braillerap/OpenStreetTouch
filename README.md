@@ -30,8 +30,10 @@ If you need the software in your locale language, we will be happy to add a new 
 Feel free to open issues or pull requests ! We will be happy to review and merge your changes. BTW we have a great focus on accessibility and user friendly design.
 
 ## Translations status
+
+</a>
 <a href="https://translate.codeberg.org/engage/openstreettouch/">
-<img src="https://translate.codeberg.org/widget/openstreettouch/ihm/multi-green.svg" alt="État de la traduction" />
+<img src="https://translate.codeberg.org/widget/openstreettouch/ihm_en/multi-green.svg" alt="Translation status" />
 </a>
 
 ## Funding
