@@ -1,20 +1,12 @@
-import { useContext, useState} from 'react'
+import { useContext} from 'react'
 import AppContext from "../components/AppContext";
 
 const Preview = () => {
     const { ImagePreview } = useContext(AppContext);
     const { TransportGuide } = useContext(AppContext);
-    const {GetLocaleString} = useContext(AppContext);
     
-    const saveImage = () => {
-      let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
-      let filter = [
-          GetLocaleString("file.svgfile"), //"Fichier svg",
-          GetLocaleString("file.all") //"Tous"
-      ]
-
-      window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
-    }
+    
+    
     const renderImage = () => {
         if (ImagePreview !== '') {
           return (

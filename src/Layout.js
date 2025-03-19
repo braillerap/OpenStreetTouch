@@ -3,7 +3,7 @@ import { Outlet, Link} from "react-router-dom";
 import Preview from './pages/Preview'
 import AppContext from "./components/AppContext";
 
-import Toolbar from "./pages/Toolbar";
+//import Toolbar from "./pages/Toolbar";
 
 
 

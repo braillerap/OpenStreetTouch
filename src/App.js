@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import Transport from './pages/Transport';
 import Parameter from './pages/Parameter';
 import CityMap from './pages/CityMap';
-import logo2 from './833.gif'
+
 import AppOption from "./components/AppOption";
 import AppContext from "./components/AppContext";
 

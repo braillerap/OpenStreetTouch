@@ -43,7 +43,7 @@ const Transport = () => {
 
         console.log ("Params");
         console.log (Params);
-        if (focusref && Params.focuspolicy == true)
+        if (focusref && Params.focuspolicy === true)
             focusref.current.focus();
       }, []);
       
@@ -290,7 +290,7 @@ const Transport = () => {
         return (<></>);
     }
     const renderResultAction = () => {
-        if (ImagePreview == '')
+        if (ImagePreview === '')
             return (<></>);
         return (
             <div className='TransportResultAction'>
@@ -320,7 +320,7 @@ const Transport = () => {
                       }
                   </select>
                   <input type="text"
-                      aria-description={place_id[placeid]}
+                      aria-label={place_id[placeid]}
                       name="city"
                       value={cityName}
                       ref={focusref}

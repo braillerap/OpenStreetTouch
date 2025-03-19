@@ -4,13 +4,13 @@ import { MapContainer , TileLayer, Circle,  useMapEvents} from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 
 const redOptions = { color: 'red' }
-const greenOptions = { color: 'green' }
+
 const maxzoom = 18;
 
 const CityMap = () => {
     const {GetLocaleString, Params} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
-    const { TransportGuide, setTransportGuide } = useContext(AppContext);
+    const { setTransportGuide } = useContext(AppContext);
     const mapref = useRef (null);
     const focusref = useRef (null);
     const [position, setPosition] = useState([51.505, -0.09]);
@@ -21,7 +21,6 @@ const CityMap = () => {
     const [request, setRequest] = useState (false);
     const [editLatitude, setEditLatitude] = useState (51);
     const [editLongitude, setEditLongitude] = useState (0);
-    const [mapClicked, setMapClicked] = useState (false);
     const [pngavailable, setPngAvailable] = useState(false);
     const [includeWater, setIncludeWater] = useState(false);
     const [cliping, setCliping] = useState(false);
@@ -34,7 +33,7 @@ const CityMap = () => {
 
             setImagePreview ('');
             setTransportGuide('');
-            if (focusref && Params.focuspolicy == true)
+            if (focusref && Params.focuspolicy === true)
                 focusref.current.focus();
           }, []);
     
@@ -133,7 +132,7 @@ const CityMap = () => {
                 
                 // center map on click position
                 map.setView(e.latlng, map.getZoom())
-                setMapClicked (true);
+                
                 // report value in edit
                 console.log ("typeof (e.latlng")
                 console.log (typeof (e.latlng));
@@ -238,7 +237,7 @@ const CityMap = () => {
             }
         }
         const renderResultAction = () => {
-            if (ImagePreview == '')
+            if (ImagePreview === '')
                 return (<></>);
             return (
                 <div className='TransportResultAction'>
