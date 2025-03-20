@@ -385,7 +385,7 @@ class OSMStreetDrawing:
             for node in way["nodes"]:
                 #print (node)
                 pos = proj.transform_point(node["lon"], node["lat"], data_proj)
-                if OSMutils.square_dist (pos, center ) < (self.radius*1.1) * (self.radius*1.1):
+                if OSMutils.square_dist (pos, center ) < (self.radius*1.2) * (self.radius*1.2):
                     outside = False
                     self.area.AddLatLon (node["lat"], node["lon"])
                 nodes.append ( (float(pos[0]), float(pos[1]) ) )
@@ -396,8 +396,8 @@ class OSMStreetDrawing:
                 if self.clipdata:
                     geom = shapely.LineString(nodes)
                     cliped = shapely.clip_by_rect (geom, 
-                                        center[0] - self.radius, center[1] - self.radius, 
-                                        center[0] + self.radius, center[1] + self.radius
+                                        center[0] - self.radius*1.3, center[1] - self.radius*1.3, 
+                                        center[0] + self.radius*1.3, center[1] + self.radius*1.3
                                         )
                     nodes = []
                     for point in shapely.get_coordinates(cliped) :
@@ -417,7 +417,7 @@ class OSMStreetDrawing:
                 for node in way["nodes"]:
                     
                     pos = proj.transform_point(node["lon"], node["lat"], data_proj)
-                    if OSMutils.square_dist (pos, center) < (self.radius * 1.1) * (self.radius * 1.1):
+                    if OSMutils.square_dist (pos, center) < (self.radius * 1.2) * (self.radius * 1.2):
                         outside = False
                     
                     self.area.AddLatLon (node["lat"], node["lon"])
@@ -428,8 +428,8 @@ class OSMStreetDrawing:
                     if self.clipdata:
                         geom = shapely.LineString(nodes)
                         cliped = shapely.clip_by_rect (geom, 
-                                            center[0] - self.radius, center[1] - self.radius, 
-                                            center[0] + self.radius, center[1] + self.radius
+                                            center[0] - self.radius*1.3, center[1] - self.radius*1.3, 
+                                            center[0] + self.radius*1.3, center[1] + self.radius*1.3
                                             )
                         nodes = []
                         for point in shapely.get_coordinates(cliped):
@@ -447,7 +447,7 @@ class OSMStreetDrawing:
                 outside = True
                 for node in way["nodes"]:
                     pos = proj.transform_point(node["lon"], node["lat"], data_proj)
-                    if OSMutils.square_dist (pos, center) < (self.radius *1.1) * (self.radius * 1.1):
+                    if OSMutils.square_dist (pos, center) < (self.radius *1.2) * (self.radius * 1.2):
                         outside = False
                     
                     self.area.AddLatLon (node["lat"], node["lon"])
@@ -458,8 +458,8 @@ class OSMStreetDrawing:
                     if self.clipdata:
                         geom = shapely.LineString(nodes)
                         cliped = shapely.clip_by_rect(geom, 
-                                            center[0] - self.radius, center[1] - self.radius, 
-                                            center[0] + self.radius, center[1] + self.radius
+                                            center[0] - self.radius*1.3, center[1] - self.radius*1.3, 
+                                            center[0] + self.radius*1.3, center[1] + self.radius*1.3
                                             )
                         nodes = []
                         for point in shapely.get_coordinates(cliped):
