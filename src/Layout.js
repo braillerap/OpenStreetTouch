@@ -9,7 +9,7 @@ import AppContext from "./components/AppContext";
 
 
 const Layout = () => {
-    const {GetLocaleString, GetLocaleDir} = useContext(AppContext);
+    const {GetLocaleString, GetLocaleDir, Params} = useContext(AppContext);
     
     const exitrequest = (e) => {
         
@@ -17,7 +17,23 @@ const Layout = () => {
         window.pywebview.api.quit();
 
     }
-   
+    
+    const getAccessKeyMenu = (menukey, accessKey) => {
+        console.log ("accesskey", Params.accesskey);
+        console.log (Params);
+        if (Params.accesskey === true)
+            return (<Link to="/" className="pure-menu-link"
+                accessKey={GetLocaleString(accessKey)}> 
+                    {GetLocaleString(menukey)}
+            </Link>
+            );
+
+        return (<Link to="/" className="pure-menu-link" 
+            >
+                {GetLocaleString(menukey)} 
+        </Link>);
+        
+    }
 
     return (
         <div className='AppContainer'>
@@ -25,12 +41,17 @@ const Layout = () => {
                 <div className='AppHeader'>
                     <div className="pure-menu pure-menu-horizontal menu_font" role={'presentation'} >
                         <nav>
+                            {/*accessKey={GetLocaleString("menu.home.shortcut")}*/ }
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">
-                                    <Link to="/" className="pure-menu-link" 
-                                        accessKey={GetLocaleString("menu.home.shortcut")}>
+                                    {/*<Link to="/" className="pure-menu-link" 
+                                        
+                                        accessKey={getAccessKey("menu.home.shortcut")}
+                                        >
                                             {GetLocaleString("menu.home")} 
                                     </Link>
+                                    */}
+                                    {getAccessKeyMenu("menu.home", "menu.home.shortcut")}
                                 </li>
 
                                 <li className="pure-menu-item">

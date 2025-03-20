@@ -75,5 +75,6 @@
     "transport.type.subway": "Metro",
     "transport.type.train": "Trein",
     "citymap.rendermap": "Geëxtraheerde kaart intekenen",
-    "param.locale": "Programmataal"
+    "param.locale": "Programmataal",
+    "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu"
 }

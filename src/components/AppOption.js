@@ -2,7 +2,8 @@ const AppOption = {
     
     lang:"fr",
     osmiso639:"fr",
-    focuspolicy:"false"
+    focuspolicy:"false",
+    acceskey:"false",
 }
 
 export default AppOption;

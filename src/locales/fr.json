@@ -73,6 +73,7 @@
     "preview.savesvg": "Enregistrer le SVG",
     "param.locale": "Langue de l'application",
     "param.formtitle": "Paramètres",
+    "param.accesskeypolicy": "Activer les raccourcis clavier dans le menu principal",
     "param.form_aria": "Paramètres de l'application",
     "param.focuspolicy": "Positionner le focus lors de la navigation",
     "param.general.section": "Paramètres de l'application"

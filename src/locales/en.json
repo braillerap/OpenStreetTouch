@@ -72,6 +72,7 @@
     "citymap.sectionpos": "Map position",
     "preview.savesvg": "Save as SVG",
     "param.locale": "Application language",
+    "param.accesskeypolicy": "Enable Access key in main menu",
     "param.formtitle": "Parameters",
     "param.form_aria": "Application parameters",
     "param.focuspolicy": "Set focus on navigate",

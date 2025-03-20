@@ -117,6 +117,11 @@ class Parameters extends React.Component {
                     onChange={(e) => this.setFocusPolicy(e.target.checked)} />
                     {this.context.GetLocaleString("param.focuspolicy")}
               </label>
+              <label>
+                    <input type='checkbox' checked={this.context.Params.accesskey}
+                    onChange={(e) => this.handleChangeGeneral("accesskey", e.target.checked)} />
+                    {this.context.GetLocaleString("param.accesskeypolicy")}
+              </label>
             </fieldset>
             </section>
           </div>
