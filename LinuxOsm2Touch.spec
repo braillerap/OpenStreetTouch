@@ -12,6 +12,7 @@ a = Analysis(
     runtime_hooks=[],
     excludes=[],
     noarchive=False,
+    optimize=0,
 )
 pyz = PYZ(a.pure)
 splash = Splash(
@@ -43,6 +44,6 @@ exe = EXE(
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
-    entitlements_file=None,
-    icon=['favicon-32x32.ico'],
+    entitlements_file=None
+    
 )

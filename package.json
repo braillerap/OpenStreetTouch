@@ -32,7 +32,7 @@
     "builddebian": "npm-run-all clean build packagedebian build-deb-debian",
     "buildubuntu": "npm-run-all clean build packageubuntu build-deb-ubuntu",
     "packagedebian": "pyinstaller DebianOsm2Touch.spec",
-    "packageubuntu": "pyinstaller LinuxOsm2Touch.spec",
+    "packageubuntu": "pyinstaller --log-level DEBUG LinuxOsm2Touch.spec",
     "build-deb-debian": "npm-run-all mkdirdebian cpdebian clogdebian dpkg-debian checkdebian",
     "build-deb-ubuntu": "npm-run-all mkdirubuntu cpubuntu clogubuntu dpkg-ubuntu checkubuntu",
     "mkdirdebian": "mkdir -p ./package/debian/openstreettouch-debian/usr/bin/",
