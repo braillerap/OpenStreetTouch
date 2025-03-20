@@ -4,12 +4,18 @@ A tool to extract geodata from openstreetmap and create suitable file for image2
 
 In many cities, public transport map are not available in Braille nor in suitable format to build accessible description. Most of the needed data is available in [openstreetmap](https://www.openstreetmap.org/) in open database licence. OpenStreetTouch aim to extract these data to build accessible transport map.
 
-Here is an exemple with DesktopBrailleRAP on a residential area in France.
+Here is an example of Subway map of Amsterdam.
+![OpenStreetTouch displaying subway lines in Amsterdam](./screenshot/amsterdamsubway.jpg)
 
-![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/petiteferme.jpg)
+An example of city map with ULB campus in Bruxelles.
+![OpenStreetTouch displaying Bruxelles ULB campus map](./screenshot/ulbmap.jpg)
 
-Another exemple with the Askoria campus in Rennes - France
-![DesktopBrailleRAP view translating the vector map in tangible map](./screenshot/askoria.jpg)
+Here is an usage exemple with DesktopBrailleRAP on a residential area in France.
+![DesktopBrailleRAP view translating a vector map in tangible map](./screenshot/petiteferme.jpg)
+
+Another usage exemple with the Askoria campus in Rennes - France
+![DesktopBrailleRAP view translating a vector map in tangible map](./screenshot/askoria.jpg)
+
 
 ## Features
 - Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a 3d printer or a [BrailleRAP](https://github.com/braillerap/BrailleRap) with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
@@ -33,7 +39,7 @@ Feel free to open issues or pull requests ! We will be happy to review and merge
 
 </a>
 <a href="https://translate.codeberg.org/engage/openstreettouch/">
-<img src="https://translate.codeberg.org/widget/openstreettouch/ihm_en/multi-green.svg" alt="Translation status" />
+<img src="https://translate.codeberg.org/widget/openstreettouch/ihm_en/multi-green.svg" alt="Translation status" width="75%"/>
 </a>
 
 ## Funding
