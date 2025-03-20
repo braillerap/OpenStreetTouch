@@ -44,21 +44,13 @@ const Layout = () => {
                             {/*accessKey={GetLocaleString("menu.home.shortcut")}*/ }
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">
-                                    {/*<Link to="/" className="pure-menu-link" 
-                                        
-                                        accessKey={getAccessKey("menu.home.shortcut")}
-                                        >
-                                            {GetLocaleString("menu.home")} 
-                                    </Link>
-                                    */}
+                                    
                                     {getAccessKeyMenu("menu.home", "menu.home.shortcut")}
                                 </li>
 
                                 <li className="pure-menu-item">
-                                    <Link to="/transport" className="pure-menu-link" 
-                                        accessKey={GetLocaleString("menu.transport.shortcut")}>
-                                            {GetLocaleString("menu.transport")} 
-                                    </Link>
+                                   
+                                    {getAccessKeyMenu("menu.transport", "menu.transport.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
                                     <Link to="/cmap" className="pure-menu-link" 
