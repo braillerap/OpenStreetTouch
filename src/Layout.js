@@ -18,17 +18,31 @@ const Layout = () => {
 
     }
     
-    const getAccessKeyMenu = (menukey, accessKey) => {
-        console.log ("accesskey", Params.accesskey);
-        console.log (Params);
+    const getAccessKeyMenuCallback = (menukey, accessKey, cb) => {
+        
         if (Params.accesskey === true)
-            return (<Link to="/" className="pure-menu-link"
+            return (<Link onClick={cb} className="pure-menu-link"
                 accessKey={GetLocaleString(accessKey)}> 
                     {GetLocaleString(menukey)}
             </Link>
             );
 
-        return (<Link to="/" className="pure-menu-link" 
+        return (<Link onClick={cb} className="pure-menu-link" 
+            >
+                {GetLocaleString(menukey)} 
+        </Link>);
+        
+    }
+    const getAccessKeyMenu = (url, menukey, accessKey) => {
+        
+        if (Params.accesskey === true)
+            return (<Link to={url} className="pure-menu-link"
+                accessKey={GetLocaleString(accessKey)}> 
+                    {GetLocaleString(menukey)}
+            </Link>
+            );
+
+        return (<Link to={url} className="pure-menu-link" 
             >
                 {GetLocaleString(menukey)} 
         </Link>);
@@ -45,30 +59,27 @@ const Layout = () => {
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">
                                     
-                                    {getAccessKeyMenu("menu.home", "menu.home.shortcut")}
+                                    {getAccessKeyMenu("/", "menu.home", "menu.home.shortcut")}
                                 </li>
 
                                 <li className="pure-menu-item">
                                    
-                                    {getAccessKeyMenu("menu.transport", "menu.transport.shortcut")}
+                                    {getAccessKeyMenu("/transport", "menu.transport", "menu.transport.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link to="/cmap" className="pure-menu-link" 
-                                        accessKey={GetLocaleString("menu.citymap.shortcut")}>
-                                            {GetLocaleString("menu.citymap")} 
-                                    </Link>
+                                   
+                                    {getAccessKeyMenu("/cmap", "menu.citymap", "menu.citymap.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link to="/parameter" className="pure-menu-link"
-                                        accessKey={GetLocaleString("menu.param.shortcut")}>
-                                            {GetLocaleString("menu.param")}
-                                    </Link>
+                                    
+                                    {getAccessKeyMenu("/parameter", "menu.param", "menu.param.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
-                                    <Link onClick={exitrequest} className="pure-menu-link"
+                                    {/*<Link onClick={exitrequest} className="pure-menu-link"
                                         accessKey={GetLocaleString("menu.exit.shortcut")}>
                                     
-                                        {GetLocaleString("menu.exit")} </Link>
+                                        {GetLocaleString("menu.exit")} </Link>*/}
+                                    {getAccessKeyMenuCallback("menu.exit", "menu.exit.shortcut", exitrequest)}
                                 </li>
                             </ul>
                             {/*<button className="pure-menu-heading" onClick={() => {ForceResize()}}>FR</button>*/}
