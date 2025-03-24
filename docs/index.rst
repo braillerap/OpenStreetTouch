@@ -6,8 +6,9 @@ Bienvenue sur la documentation DesktopBrailleRAP
   :align: center
 
  .. warning::
-    **Build in Progress** OpenStreetTouch documentation will be available soon.
-
+    **Build in Progress** 
+    OpenStreetTouch documentation will be available soon.
+    
 
 |
 .. toctree::
