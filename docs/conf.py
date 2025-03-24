@@ -32,7 +32,7 @@ source_suffix = ['.rst', '.md']
 myst_enable_extensions = ["attrs_inline", "html_image"]
 
 master_doc = 'index'
-project = u'DesktopBrailleRAP'
+project = u'OpenStreetTouch'
 copyright = 'GPL V3'
 
 version = '0.7.5'

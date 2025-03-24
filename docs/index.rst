@@ -1,11 +1,12 @@
-Bienvenue sur la documentation DesktopBrailleRAP 
-================================================
+Bienvenue sur la documentation OpenStreetTouch 
+==============================================
 
 .. image :: ./IMG/osm2touch.png 
   :width: 640px
   :align: center
 
 |
+
  .. warning::
     **Build in Progress** 
     OpenStreetTouch documentation will be available soon.
