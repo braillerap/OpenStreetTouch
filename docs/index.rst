@@ -5,7 +5,8 @@ Bienvenue sur la documentation DesktopBrailleRAP
   :width: 640px
   :align: center
 
- :warning: **Build in Progress** OpenStreetTouch documentation will be available soon.
+ .. warning::
+    **Build in Progress** OpenStreetTouch documentation will be available soon.
 
 
 |
