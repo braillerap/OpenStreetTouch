@@ -38,6 +38,7 @@
     "transport.iso639": "Taal van plaatsnaam",
     "transport.osmcityname": "Plaatsnaam op OSM",
     "transport.nodata": "Geen gegevens",
+    "transport.nblines":"Transportlijnen tellen mee",
     "transport.osmpending": "Bezig met zoeken…",
     "transport.polygon": "Lijnen intekenen als polygonen",
     "transport.downloadsvg": "Afbeelding opslaan als svg-bestand",

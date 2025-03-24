@@ -184,6 +184,7 @@ const Transport = () => {
         return (
                 <>
                 <p>{GetLocaleString("transport.osmcityname")} : {realCityName}</p>
+                <p>{GetLocaleString("transport.nblines")} : {transportLines.length}</p>
                 {transportLines.map((line) => {
                         return (
                             <label>
@@ -308,7 +309,7 @@ const Transport = () => {
         <section aria-label={GetLocaleString("transport.sectionrequest")}>
           <div className='TransportParam' role="document">
               <h1>{GetLocaleString("transport.title")}</h1>
-
+              <h2>Interroger Open street pour une ville </h2>
               <label >{GetLocaleString("transport.place_id") }
                   <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
                       {
@@ -341,13 +342,16 @@ const Transport = () => {
           </section>
 
             <section aria-label={GetLocaleString("transport.sectionline") }>
+            <h2>{GetLocaleString("transport.sectionline")}</h2>         
+                
                 <div className='CheckedList'>
 
                     {renderTransportLines()}
 
                 </div>
             </section>
-            <section aria-label={GetLocaleString("transport.sectiondata") }>          
+            <section aria-label={GetLocaleString("transport.sectiondata") }>     
+            <h2>{GetLocaleString("transport.sectiondata")}</h2>         
             {renderTransportAction()}
             {renderResultAction()}
           </section>            
