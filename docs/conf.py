@@ -35,8 +35,8 @@ master_doc = 'index'
 project = u'OpenStreetTouch'
 copyright = 'GPL V3'
 
-version = '0.7.5'
-release = '0.7.5'
+version = '0.2.3'
+release = '0.2.3-conf'
 exclude_patterns = ['_build']
 default_role = 'obj'
 pygments_style = 'sphinx'
