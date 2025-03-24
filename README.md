@@ -243,4 +243,12 @@ Check the ./dist folder for the openstreettouch-ubuntu executable. You can insta
     sudo dpkg -i openstreettouch-ubuntu-x.x.x.deb
 
 
+# Building for Linux using Docker
 
+You can use Docker configuration to build OpenStreetTouch for a Linux distribution. 
+
+Docker configuration to build OpenStreetTouch for Debian or Ubuntu are available here:
+
+[Debian](https://github.com/braillerap/BuildOpenStreetTouchDebian)
+
+[Ubuntu](https://github.com/braillerap/BuildOpenStreetTouchUbuntu)
