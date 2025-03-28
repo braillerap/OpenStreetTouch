@@ -24,9 +24,9 @@ Ce projet est financé grace à [NGI0 Entrust](https://nlnet.nl/entrust), un fon
 
 # Fonctionnalités
 
-- Créer une carte au format SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible avec une découpeuse laser, une imprimante 3D ou un BrailleRAP avec des logiciels comme Image2Touch ou DesktopBrailleRAP.
+- Créer une carte au format SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible.
 - Extraire les noms des stations à partir des données des transports public.
-- Extraire un petit plan de ville pour créer une représentation accessible du quartier.
+- Extraire une carte d'une petite zone pour créer une représentation accessible de l'endroit.
 
 
 # Présentation de l'interface
@@ -42,11 +42,13 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 ### Accueil : 
 
+La page d'accueil présente le numéro de version du programme , les logos des partenaires (My Human Kit et NLNET Foundation) et le lien vers la licence Open street Map, application source des données extraites par le programme Open street Touch
+
+
 ![Capture d'écran de la page d'accueil](IMG/home.jpg)
 *Capture d'écran de la page d'accueil*
 
 
-Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
 
 
 ### Transport
@@ -139,6 +141,12 @@ Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affic
 #### 6-Enregistrer les résultats
 **Enregistrer l’image en SVG**  : Cliquer sur le bouton pour enregistrer le rendu de la carte au format SVG. C'est le format vectoriel, idéal pour être exploité par la suite par des machines à commandes numériques. 
 
+Attention pour que ce bouton apparaisse il faut avoir généré le dessin en ayant cliqué sur "Dessiner la/les lignes de transport"
+
+![Bouton enregistrer l'image en svg](IMG/enregistrer_image_svg.png)
+*Bouton rnregistrer l'image en svg*
+
+
 **Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape par exemple)**
 
 ![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle](IMG/inkscape_contours.png)
@@ -223,6 +231,11 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 
 #### 3-Enregistrer les résultats
+
+![Enregistrer image sous le format voulu : svg ou png )](IMG/enregistrer_image_svg_carte.png)
+*enregistrer l'image au format souhaité : svg ou png
+
+
 - **Enregistrer l'image en SVG** : Cliquer sur le bouton pour générer le plan au format SVG
 - **Enregistrer l'image en PNG** : Cliquer sur le bouton pour générer le plan au format PNG
 
