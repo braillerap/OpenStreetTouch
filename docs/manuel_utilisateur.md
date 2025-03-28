@@ -1,12 +1,4 @@
-# OpenStreetTouch
-
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]((https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-
-## Introduction
+# Introduction
 OpenStreetTouch est un programme  pour extraire des données géographiques depuis OpenStreetMap. Il permet d'extraire à la fois des données sur les transports (carte des lignes et noms des stations) mais aussi d'extraire des cartes selon une zone définie par un rayon à partir d'un point central pour visualiser la position des routes et bâtiments.
 
 Les fichiers générés en SVG sont ainsi compatibles avec les programmes Image2Touch ou desktopBraillerap. L'objectif principal est d'extraire ces données pour créer des cartes tangibles, afin qu'elles soient accessibles aux malvoyants/non voyants.
@@ -17,14 +9,14 @@ Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 
 ![image](IMG/petiteferme.jpg)
 
-## Fonctionnalités
+# Fonctionnalités
 
 - Créer une carte SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible avec une découpeuse laser, une imprimante 3D ou un BrailleRAP avec des logiciels comme Image2Touch ou DesktopBrailleRAP.
 - Extraire les noms des stations à partir des données des transports public.
 - Extraire un petit plan de ville pour créer une représentation accessible du quartier.
 
 
-## Présentation de l'interface
+# Présentation de l'interface
 
 Interface composée d’un menu avec un écran divisé en deux parties (gauche et droite). 
 A gauche, le paramétrage et à droite la fenêtre de rendu.
@@ -33,8 +25,15 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 
 
-### Accueil
-La page d'accueil contient le numéro de version du programme , les logos et liens des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, application source des données extraites par le programme Open street Touch ainsi que le lien vers le site web de BrailleRap (machine open source pour embosser du braille)
+
+
+### Accueil : 
+
+![Capture d'écran de la page d'acceuil](IMG/home.jpg)
+
+
+Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
+
 
 ### Transport
 Cet onglet permet d'extraire les lignes de transport d'une ville selon les paramètres définis par l'utilisateur.
