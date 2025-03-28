@@ -43,7 +43,6 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 ### Accueil : 
 
 ![Capture d'écran de la page d'accueil](IMG/home.jpg)
-
 *Capture d'écran de la page d'accueil*
 
 
@@ -111,14 +110,18 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 **Dessiner la/les lignes de transport** : Cliquer sur le bouton pour générer le rendu dans la fenêtre de droite.
 
 
+![Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée](IMG/dessiner_ligne_transport.png)
+*Bouton dessiner la/les lignes de transports*
 
-![Rendu dans la fenêtre de droite avec option "dessiner les stations et polygone" pour tracer des lignes de transport](IMG/dessiner_les_stations.png)
-*Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, avec l'option "dessiner les stations" et "polygone"*
 
 
 #### 5-Visualiser le rendu dans la fenêtre de droite 
 
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
+
+
+![Rendu dans la fenêtre de droite avec option "dessiner les stations et polygone" pour tracer des lignes de transport](IMG/dessiner_les_stations.png)
+*Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, avec l'option "dessiner les stations" et "polygone"*
 
 
 ![Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée](IMG/polygone_segments_no_station.png)
@@ -160,7 +163,7 @@ Passer en mode d’affichage Contour: Menu : Affichage > Contours
 **Enregistrer les stations en TXT** :  Cliquer sur le bouton pour exporter l'ensemble des stations existantes sur les lignes sélectionnées pour le rendu (quand l'option "Dessiner les stations" a bien été coché dans les paramètres).
 
 
-![Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte )](IMG/fichier_texte_lignes_metros.png)
+![Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte )](IMG/texte_lignes_metros.png)
 *Fichier du nom des stations de la ligne de transport, ouvert avec un éditeur de texte*
 
 
