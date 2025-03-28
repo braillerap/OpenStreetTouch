@@ -26,7 +26,7 @@ Ce projet est financé grace à [NGI0 Entrust](https://nlnet.nl/entrust), un fon
 
 - Créer une carte au format SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible.
 - Extraire les noms des stations à partir des données des transports public.
-- Extraire une carte d'une petite zone pour créer une représentation accessible de l'endroit.
+- Extraire une carte d'une petite zone pour créer une représentation accessible de l'endroit. 
 
 
 # Présentation de l'interface
@@ -133,7 +133,7 @@ Le dessin des lignes de transport est généré dans la partie supérieure de la
 Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affiche avec sa direction et toutes ses stations.
 
 
-![Affichage du nom des stations sous le dessin des lignes de transports](IMG/dessin_affichage_nom_stations.png)
+![Affichage du nom des stations sous le dessin des lignes de transports](IMG/affichage_nom_stations.png)
 *Affichage du nom des stations sous le dessin des lignes de transports*
 
 
