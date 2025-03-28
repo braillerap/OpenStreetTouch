@@ -306,7 +306,8 @@ const Transport = () => {
     }
   return (
       <div>
-        <section aria-label={GetLocaleString("transport.sectionrequest")}>
+        {/*aria-label={GetLocaleString("transport.sectionrequest")} */}
+        <section >
           <div className='TransportParam' role="document">
               <h1>{GetLocaleString("transport.title")}</h1>
               <h2>Interroger Open street pour une ville </h2>
@@ -340,8 +341,8 @@ const Transport = () => {
               </button>
           </div>
           </section>
-
-            <section aria-label={GetLocaleString("transport.sectionline") }>
+                      {/*aria-label={GetLocaleString("transport.sectionline") }*/}
+            <section >
             <h2>{GetLocaleString("transport.sectionline")}</h2>         
                 
                 <div className='CheckedList'>
@@ -350,7 +351,8 @@ const Transport = () => {
 
                 </div>
             </section>
-            <section aria-label={GetLocaleString("transport.sectiondata") }>     
+            {/*aria-label={GetLocaleString("transport.sectiondata") }*/}
+            <section >     
             <h2>{GetLocaleString("transport.sectiondata")}</h2>         
             {renderTransportAction()}
             {renderResultAction()}
