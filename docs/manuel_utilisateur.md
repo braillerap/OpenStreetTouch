@@ -233,7 +233,7 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 #### 3-Enregistrer les résultats
 
 ![Enregistrer image sous le format voulu : svg ou png )](IMG/enregistrer_image_svg_carte.png)
-*enregistrer l'image au format souhaité : svg ou png
+*enregistrer l'image au format souhaité : svg ou png*
 
 
 - **Enregistrer l'image en SVG** : Cliquer sur le bouton pour générer le plan au format SVG
