@@ -1,12 +1,4 @@
-# OpenStreetTouch
-
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]((https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-
-## Introduction
+# Introduction
 OpenStreetTouch est un programme  pour extraire des données géographiques depuis OpenStreetMap. Il permet d'extraire à la fois des données sur les transports (carte des lignes et noms des stations) mais aussi d'extraire des cartes selon une zone définie par un rayon à partir d'un point central pour visualiser la position des routes et bâtiments.
 
 Les fichiers générés en SVG sont ainsi compatibles avec les programmes Image2Touch ou desktopBraillerap. L'objectif principal est d'extraire ces données pour créer des cartes tangibles, afin qu'elles soient accessibles aux malvoyants/non voyants.
@@ -17,14 +9,14 @@ Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 
 ![image](IMG/petiteferme.jpg)
 
-## Fonctionnalités
+# Fonctionnalités
 
 - Créer une carte SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible avec une découpeuse laser, une imprimante 3D ou un BrailleRAP avec des logiciels comme Image2Touch ou DesktopBrailleRAP.
 - Extraire les noms des stations à partir des données des transports public.
 - Extraire un petit plan de ville pour créer une représentation accessible du quartier.
 
 
-## Présentation de l'interface
+# Présentation de l'interface
 
 Interface composé d’un menu avec un écran divisé en deux parties (gauche et droite). 
 A gauche, le paramétrage et à droite la fenêtre de rendu
