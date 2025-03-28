@@ -26,6 +26,10 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 
 ### Accueil : 
+
+![Capture d'écran de la page d'acceuil](IMG/home.jpg)
+
+
 Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
 
 ### Transport
