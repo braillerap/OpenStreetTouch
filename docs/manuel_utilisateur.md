@@ -11,6 +11,17 @@ Voici un exemple avec [DesktopBrailleRAP](https://github.com/braillerap/DesktopB
 ![imUne capture d'écran du logiciel DesktopBrailleRAP avec une carte d'quartier résidentielage](IMG/petiteferme.jpg)
 *Exemple d'une carte extraite avec OpenStreetTouch exploité avec [DesktopBrailleRap](https://github.com/braillerap/DesktopBrailleRAP) afin d'embosser cette carte avec l'embosseuse open source [BrailleRap](https://www.braillerap.org)*
 
+# Financement
+
+Ce projet est financé grace à [NGI0 Entrust](https://nlnet.nl/entrust), un fond créé par [NLnet](https://nlnet.nl) avec le support du programme  [Next Generation Internet](https://ngi.eu) de la Commision Européene. Plus d'informations ici [NLnet project page](https://nlnet.nl/project/BrailleRAP).
+
+[ 
+    <img src="./IMG/nlnetbanner.png" alt="Le logo du programme NGI0" width="25%">
+](https://nlnet.nl) 
+[
+    <img src="./IMG/NGI0_tag.png" alt="Le logo du programme NGI0" width="25%">
+](https://nlnet.nl) 
+
 # Fonctionnalités
 
 - Créer une carte au format SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible avec une découpeuse laser, une imprimante 3D ou un BrailleRAP avec des logiciels comme Image2Touch ou DesktopBrailleRAP.
