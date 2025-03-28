@@ -17,7 +17,8 @@ Bienvenue sur la documentation OpenStreetTouch
    :maxdepth: 3
 
    manuel_utilisateur
-    
+   sourcecode
+   licence 
 
 .. index:: manuel_utilisateur,sourcecode, licence
 
