@@ -4,27 +4,8 @@
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]((https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-A gauche, le paramétrage et à droite la fenêtre de rendu
-
-Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
-
-### Accueil : 
-Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
-
-### Transport
-Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les paramètres définis par l'utilisateur.
-
-#### 1- Définir les paramètres de l’extraction
-
-![Interface des paramètres de l'extraction](IMG/rechercher_ville_type_transort.png)
 
 
-
-- **Type Emplacement :**
-        - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID 
-        - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
-
-- **Langue de la 
 ## Introduction
 OpenStreetTouch est un programme  pour extraire des données géographiques depuis OpenStreetMap. Il permet d'extraire à la fois des données sur les transports (carte des lignes et noms des stations) mais aussi d'extraire des cartes selon une zone définie par un rayon à partir d'un point central pour visualiser la position des routes et bâtiments.
 
@@ -46,10 +27,32 @@ Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 ## Présentation de l'interface
 
 Interface composé d’un menu avec un écran divisé en deux parties (gauche et droite). 
+A gauche, le paramétrage et à droite la fenêtre de rendu
 
-ville :** Menu déroulant pour définir la langue de la ville (La langue utilisée pour exprimer le nom de la ville (fr pour Londres et en pour London par exemple)
+Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
+
+
+
+### Accueil : 
+Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
+
+### Transport
+Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les paramètres définis par l'utilisateur.
+
+#### 1- Définir les paramètres de l’extraction
+
+![Interface des paramètres de l'extraction](IMG/rechercher_ville_type_transort.png)
+
+
+- **Type Emplacement :**
+        - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID 
+        - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
+
+- **Langue de la ville :** Menu déroulant pour définir la langue de la ville (La langue utilisée pour exprimer le nom de la ville (fr pour Londres et en pour London par exemple)
 
 - **Type de transport (OSM) :** Menu déroulant pour définir le type de transport Open Street Map à extraire (Métro, Funiculaire, Bus/Car, Tramway, train, Train interurbain, Monorail, Ferry)
+
+
 
 #### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
