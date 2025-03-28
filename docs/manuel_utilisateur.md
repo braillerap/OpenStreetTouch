@@ -15,7 +15,7 @@ Dans de nombreuses villes, les cartes de transports en commun ne sont pas dispon
 
 Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 
-![image](https://github.com/braillerap/OpenStreetTouch/blob/main/screenshot/petiteferme.jpg)
+![image](IMG/petiteferme.jpg)
 
 ## Fonctionnalités
 
