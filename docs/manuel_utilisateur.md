@@ -21,7 +21,7 @@ Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 Interface composée d’un menu avec un écran divisé en deux parties (gauche et droite). 
 A gauche, le paramétrage et à droite la fenêtre de rendu.
 
-Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
+Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit.
 
 
 
@@ -29,7 +29,9 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 ### Accueil : 
 
-![Capture d'écran de la page d'acceuil](IMG/home.jpg)
+![Capture d'écran de la page d'accueil](IMG/home.jpg)
+
+Capture d'écran de la page d'accueil.
 
 
 Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
@@ -38,15 +40,17 @@ Numéro de version du programme , logos des partenaires (My Human Kit et NLNET F
 ### Transport
 Cet onglet permet d'extraire les lignes de transport d'une ville selon les paramètres définis par l'utilisateur.
 
+
 #### 1- Définir les paramètres de l’extraction
 
 ![Interface des paramètres de l'extraction](IMG/rechercher_ville_type_transort.png)
+Interface des paramètres de l'extraction dans la partie gauche de la fenêtre
 
 
 - **Type Emplacement :**
 
-        - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID Wikidata (indispensable dans le cas où plusieurs villes ont le même nom)
-        - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
+  - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID Wikidata (indispensable dans le cas où plusieurs villes ont le même nom)
+  - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
 
 
 - **Langue de la ville :** Menu déroulant pour définir la langue de la ville (La langue utilisée pour exprimer le nom de la ville (fr pour Londres et en pour London par exemple)
@@ -58,7 +62,9 @@ Cet onglet permet d'extraire les lignes de transport d'une ville selon les param
 
 #### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
-![Interface du bouton Rechercher](IMG/rechercher_ville_type_transort.png)
+![Interface avec le bouton Rechercher](IMG/rechercher_ville_type_transort.png)
+Interface avec le bouton Rechercher
+
 
 
 #### 3-Paramétrage de l’affichage des lignes de transport
@@ -69,6 +75,7 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 ![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/polygone_segments_no_station.png)
+Interface pour choisir les différentes lignes de transports à extraire avec les cases à cocher
 
 
 
@@ -78,12 +85,15 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 - **Dessiner les stations :** cocher cette option pour que les stations soient visibles sur la carte
 
+
 - **Polygones pour tracés de lignes :** cocher cette option pour que les tracés soient dessinés avec des polygones ce qui revient à les dessiner avec des contours. Cette option est recommandée pour exploiter ce dessin avec une machine numérique, découpe laser par exemple.
+
 
 - **Stratégie de rendu de la ligne de transport :** Menu déroulant pour choisir le type de rendu :  
   - **Données de tracé OSM** : fidèles à la représentation telle qu'elles sont dans Open Street Map    
   - **Données OSM corrigées** : utile quand le rendu présente des interruptions sur les lignes de transport
   - **Position des stations** : simplifie les tracés en reliant les stations par des lignes droites au lieu de respecter les courbes 
+
 
 
 #### 4-Dessiner la/les lignes de transport 
@@ -92,21 +102,19 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 ![Rendu dans la fenêtre de droite avec option "dessiner les stations et polygone" pour tracer des lignes de transport](IMG/dessiner_les_stations.png)
-
+Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, avec l'option "dessiner les stations" et "polygone" .
 
 
 #### 5-Visualiser le rendu dans la fenêtre de droite 
 
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
 
-![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport](IMG/dessiner_les_stations.png)
-
-
 
 Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affiche avec sa direction et toutes ses stations.
 
 
-![Affichage du nom des stations sous le dessin des lignes de transports"](IMG/dessin_affichage_nom_stations.png)
+![Affichage du nom des stations sous le dessin des lignes de transports](IMG/dessin_affichage_nom_stations.png)
+Affichage du nom des stations sous le dessin des lignes de transports
 
 ![Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée](IMG/polygone_segments_no_station.png)
 
@@ -114,7 +122,7 @@ Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affic
 #### 6-Enregistrer les résultats
 **Enregistrer l’image en SVG**  : Cliquer sur le bouton pour enregistrer le rendu de la carte au format SVG. C'est le format vectoriel, idéal pour être exploité par la suite par des machines à commandes numériques. 
 
-**Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape par exemple) **
+**Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape par exemple)**
 
 ![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle](IMG/inkscape_contours.png)
 
