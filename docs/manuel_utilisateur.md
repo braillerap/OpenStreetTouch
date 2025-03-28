@@ -74,10 +74,8 @@ Cet onglet permet d'extraire les lignes de transport d'une ville selon les param
 ##### Sélection des lignes à extraire
 Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’extraction
 
-
-![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/polygone_segments_no_station.png)
+![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/cocher_lignes_a_extraire.png)
 *Interface pour choisir les différentes lignes de transports à extraire avec les cases à cocher*
-
 
 
 
