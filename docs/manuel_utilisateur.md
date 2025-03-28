@@ -1,5 +1,5 @@
 # OpenStreetTouch
-## _The Last Markdown Editor, Ever_
+
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
 
@@ -14,7 +14,7 @@ Dans de nombreuses villes, les cartes de transports en commun ne sont pas dispon
 
 Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 
-[image](https://github.com/braillerap/OpenStreetTouch/blob/main/screenshot/petiteferme.jpg)
+![image](https://github.com/braillerap/OpenStreetTouch/blob/main/screenshot/petiteferme.jpg)
 
 ## Fonctionnalités
 
@@ -39,49 +39,7 @@ Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les p
 
 #### 1- Définir les paramètres de l’extraction
 
-
-# OpenStreetTouch
-
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]((https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
-
-## Introduction
-OpenStreetTouch est un programme  pour extraire des données géographiques depuis OpenStreetMap. Il permet d'extraire à la fois des données sur les transports (carte des lignes et noms des stations) mais aussi d'extraire des cartes selon une zone définie par un rayon à partir d'un point central pour visualiser la position des routes et bâtiments.
-
-Les fichiers générés en SVG sont ainsi compatibles avec les programmes Image2Touch ou desktopBraillerap. L'objectif principal est d'extraire ces données pour créer des cartes tangibles, afin qu'elles soient accessibles aux malvoyants/non voyants.
-
-Dans de nombreuses villes, les cartes de transports en commun ne sont pas disponibles en braille ni dans un format adapté aux déficients visuels. La plupart des données nécessaires sont disponibles dans OpenStreetMap sous licence Open Database. OpenStreetTouch vise à extraire ces données pour créer une carte des transports accessible.
-
-Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
-
-[image](https://github.com/braillerap/OpenStreetTouch/blob/main/screenshot/petiteferme.jpg)
-
-## Fonctionnalités
-
-- Créer une carte SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible avec une découpeuse laser, une imprimante 3D ou un BrailleRAP avec des logiciels comme Image2Touch ou DesktopBrailleRAP.
-- Extraire les noms des stations à partir des données des transports public.
-- Extraire un petit plan de ville pour créer une représentation accessible du quartier.
-
-
-## Présentation de l'interface
-
-Interface composé d’un menu avec un écran divisé en deux parties (gauche et droite). 
-
-A gauche, le paramétrage et à droite la fenêtre de rendu
-
-Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
-
-### Accueil : 
-Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
-
-### Transport
-Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les paramètres définis par l'utilisateur.
-
-#### 1- Définir les paramètres de l’extraction
-
-[Screenshot from 2025-03-19 09-50-18_rechercher_ville_type_transort.png]
+![Interface des paramètres de l'extraction][IMG/rechercher_ville_type_transort.png]
 
 
 
@@ -95,7 +53,7 @@ Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les p
 
 #### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
-[Screenshot from 2025-03-19 09-50-18_rechercher_ville_type_transort.png]
+![Interface du bouton Rechercher][IMG/rechercher_ville_type_transort.png]
 
 
 #### 3-Paramétrage de l’affichage des lignes de transport :
@@ -103,9 +61,6 @@ Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les p
 
 ##### Sélection des lignes à extraire
 Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’extraction
-
-
-
 
 
 
@@ -127,21 +82,22 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 
-Screenshot from 2025-03-19 09-52-22_dessiner_les_stations.png (Rendu avec option "dessiner les stations et"polygone pour tracé de lignes)
-
-
-Screenshot from 2025-03-19 09-53-42_polygone_segments_no_station.png (rendu avec option "dessiner les stations non coché")
-
-
 
 #### 5-Visualiser le rendu dans la fenêtre de droite 
 
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
 
+![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport][IMG/dessiner_les_stations.png]
+
+![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"][IMG/polygone_segments_no_station.png]
+
+
 Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affiche avec sa direction et toutes ses stations.
 
+![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport][IMG/dessiner_les_stations.png]
 
-Screenshot from 2025-03-19 09-58-39_dessin_affichage_nom_stations.png (affichage du nom des stations sous le dessin des lignes de transports )
+![Affichage du nom des stations sous le dessin des lignes de transports"][IMG/dessin_affichage_nom_stations.png]
+
 
 
 
@@ -150,8 +106,9 @@ Screenshot from 2025-03-19 09-58-39_dessin_affichage_nom_stations.png (affichage
 
 **Ouvrir le svg pour voir le rendu avec logiciel vectoriel Inkscape**
 
+![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle][IMG/inkscape_contours.png]
 
-Screenshot from 2025-03-19 09-57-52inkscape_contours.png (fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle
+
 
 Passer en mode d’affichage Contour:Affichage>Contours
 Screenshot from 2025-03-19 09-58-05_polygone.png (visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser)
