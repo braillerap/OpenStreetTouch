@@ -4,7 +4,27 @@
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]((https://github.com/braillerap/OpenStreetTouch/releases/tag/v0.1.7)
+A gauche, le paramétrage et à droite la fenêtre de rendu
 
+Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
+
+### Accueil : 
+Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
+
+### Transport
+Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les paramètres définis par l'utilisateur.
+
+#### 1- Définir les paramètres de l’extraction
+
+![Interface des paramètres de l'extraction](IMG/rechercher_ville_type_transort.png)
+
+
+
+- **Type Emplacement :**
+        - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID 
+        - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
+
+- **Langue de la 
 ## Introduction
 OpenStreetTouch est un programme  pour extraire des données géographiques depuis OpenStreetMap. Il permet d'extraire à la fois des données sur les transports (carte des lignes et noms des stations) mais aussi d'extraire des cartes selon une zone définie par un rayon à partir d'un point central pour visualiser la position des routes et bâtiments.
 
@@ -27,33 +47,13 @@ Voici un exemple avec DesktopBrailleRAP sur un quartier résidentiel en France
 
 Interface composé d’un menu avec un écran divisé en deux parties (gauche et droite). 
 
-A gauche, le paramétrage et à droite la fenêtre de rendu
-
-Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/Carte/Paramètres/Exit
-
-### Accueil : 
-Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
-
-### Transport
-Cet onglet comme indiqué, permet d'extraire les lignes de transport selon les paramètres définis par l'utilisateur.
-
-#### 1- Définir les paramètres de l’extraction
-
-![Interface des paramètres de l'extraction][IMG/rechercher_ville_type_transort.png]
-
-
-
-- **Type Emplacement :**
-        - Menu déroulant pour choisir si la recherche se fait par Nom de ville ou ID 
-        - Champs texte vide pour écrire le nom  de ville ou l’ID correspondant.
-
-- **Langue de la ville :** Menu déroulant pour définir la langue de la ville (La langue utilisée pour exprimer le nom de la ville (fr pour Londres et en pour London par exemple)
+ville :** Menu déroulant pour définir la langue de la ville (La langue utilisée pour exprimer le nom de la ville (fr pour Londres et en pour London par exemple)
 
 - **Type de transport (OSM) :** Menu déroulant pour définir le type de transport Open Street Map à extraire (Métro, Funiculaire, Bus/Car, Tramway, train, Train interurbain, Monorail, Ferry)
 
 #### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
-![Interface du bouton Rechercher][IMG/rechercher_ville_type_transort.png]
+![Interface du bouton Rechercher](IMG/rechercher_ville_type_transort.png)
 
 
 #### 3-Paramétrage de l’affichage des lignes de transport :
@@ -87,16 +87,16 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
 
-![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport][IMG/dessiner_les_stations.png]
+![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport](IMG/dessiner_les_stations.png)
 
-![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"][IMG/polygone_segments_no_station.png]
+![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/polygone_segments_no_station.png)
 
 
 Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affiche avec sa direction et toutes ses stations.
 
-![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport][IMG/dessiner_les_stations.png]
+![Rendu dans la fenêtre de droite avec option "dessiner les stations et"polygone pour tracé des lignes de transport](IMG/dessiner_les_stations.png)
 
-![Affichage du nom des stations sous le dessin des lignes de transports"][IMG/dessin_affichage_nom_stations.png]
+![Affichage du nom des stations sous le dessin des lignes de transports"](IMG/dessin_affichage_nom_stations.png)
 
 
 
@@ -106,22 +106,24 @@ Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affic
 
 **Ouvrir le svg pour voir le rendu avec logiciel vectoriel Inkscape**
 
-![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle][IMG/inkscape_contours.png]
+![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle](IMG/inkscape_contours.png)
 
 
 
 Passer en mode d’affichage Contour:Affichage>Contours
-Screenshot from 2025-03-19 09-58-05_polygone.png (visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser)
+![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser](IMG/polygone.png)
 
 
-Screenshot from 2025-03-19 09-59-16_no_polygone.png (visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)
+![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)](IMG/no_polygone.png)
+
 
 **Enregistrer l’image en PNG** : Cliquer sur le bouton pour enregistrer le rendu de la carte au format PNG. C'est le format matriciel, prêt à être imprimé en couleurs.
+
 
 **Enregistrer les stations en TXT** :  Cliquer sur le bouton pour exporter l'ensemble des stations existantes sur les lignes sélectionnées pour le rendu (quand l'option "Dessiner les stations" a bien été coché dans les paramètres).
 
 
-Screenshot from 2025-03-19 09-56-34_fichier_text_lignes_metros.png / Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte 
+![Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte )](IMG/fichier_text_lignes_metros.png)
 
 
 
@@ -148,22 +150,30 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 - **Restreindre à la zone de carte** : respecter strictement la zone du rayon même si certains tracés sont coupés
 
 
+
+![Rendu en incluant les immeubles )](IMG/inclure_immeubles.png)
+
+
+![Rendu en incluant les immeubles et chemins piétons )](IMG/inclure_immeubles_pietons_seulement.png)
+
+
+![Rendu en incluant limmeubles, chemins piétons en mode polygone )](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins.png)
+
+
+![Rendu  avec toutes les options cochées )](IMG/tout_inclus.png)
+
+
+
+
+
+
 ##### Extraction du plan
 - **Extraction de la zone de carte:** Cliquer sur le bouton pour générer le plan et le visualiser dans la fenêtre de rendu à droite
 
-Screenshot from 2025-03-19 10-00-37_extraction_de_la_zone_de_la_carte.png
+
+![Interface avec bouton pour extraire la zone de la carte )](IMG/extraction_de_la_zone_de_la_carte.png)
 
 
-
-Screenshot from 2025-03-19 10-00-51_inclure_immeubles.png
-
-Screenshot from 2025-03-19 10-01-03_inclure_immeubles_pietons_seulement.png
-
-
-Screenshot from 2025-03-19 10-01-16_inclure_immeubles_pietons_seulement_polygone_route_chemins.png
-
-
-Screenshot from 2025-03-19 10-01-48_tout_inclus.png
 
 
 #### 3-Enregistrer les résultats
@@ -173,7 +183,10 @@ Screenshot from 2025-03-19 10-01-48_tout_inclus.png
 ### Paramètres
 **Langue de l'application :** Menu déroulant pour choisir la langue de l'application actuellement disponible en français ou en anglais
 
-Screenshot from 2025-03-19 10-03-07_Langue_application.png
+
+![Choix de la langue dans le menu Paramètres )](IMG/Langue_application.png)
+
+
 
 ### Exit 
 **Quitter l'application** : Cliquer sur l'onglet Exit pour fermer l'application
