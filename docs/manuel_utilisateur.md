@@ -31,7 +31,7 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 ![Capture d'écran de la page d'accueil](IMG/home.jpg)
 
-Capture d'écran de la page d'accueil.
+*Capture d'écran de la page d'accueil.
 
 
 Numéro de version du programme , logos des partenaires (My Human Kit et NLNET Foundation) et lien vers Open street Map, programme source des données extraites par le programme Open street Touch
@@ -63,7 +63,7 @@ Interface des paramètres de l'extraction dans la partie gauche de la fenêtre
 #### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
 ![Interface avec le bouton Rechercher](IMG/rechercher_ville_type_transort.png)
-Interface avec le bouton Rechercher
+*Interface avec le bouton Rechercher
 
 
 
@@ -75,7 +75,7 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 ![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/polygone_segments_no_station.png)
-Interface pour choisir les différentes lignes de transports à extraire avec les cases à cocher
+*Interface pour choisir les différentes lignes de transports à extraire avec les cases à cocher
 
 
 
@@ -102,7 +102,7 @@ Interface pour choisir les différentes lignes de transports à extraire avec le
 
 
 ![Rendu dans la fenêtre de droite avec option "dessiner les stations et polygone" pour tracer des lignes de transport](IMG/dessiner_les_stations.png)
-Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, avec l'option "dessiner les stations" et "polygone" .
+*Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, avec l'option "dessiner les stations" et "polygone" .
 
 
 #### 5-Visualiser le rendu dans la fenêtre de droite 
@@ -110,13 +110,16 @@ Rendu dans la fenêtre de droite du dessin des lignes de transports choisies, av
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
 
 
+![Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée](IMG/polygone_segments_no_station.png)
+*Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée
+
+
 Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affiche avec sa direction et toutes ses stations.
 
 
 ![Affichage du nom des stations sous le dessin des lignes de transports](IMG/dessin_affichage_nom_stations.png)
-Affichage du nom des stations sous le dessin des lignes de transports
+*Affichage du nom des stations sous le dessin des lignes de transports
 
-![Rendu dans la fenêtre de droite quand l'option "dessiner les stations" est non cochée](IMG/polygone_segments_no_station.png)
 
 
 #### 6-Enregistrer les résultats
@@ -125,14 +128,19 @@ Affichage du nom des stations sous le dessin des lignes de transports
 **Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape par exemple)**
 
 ![fichier svg ouvert dans Inkscape. En mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle](IMG/inkscape_contours.png)
+*Fichier svg ouvert dans Inkscape. Attention en mode Affichage>Normal on ne distingue pas les contours mais les couleurs comme sur une image matricielle.
 
 
+Passer en mode d’affichage Contour: Menu : Affichage > Contours
 
-Passer en mode d’affichage Contour:Affichage>Contours
+
 ![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser](IMG/polygone.png)
+*Visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser !
 
 
 ![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)](IMG/no_polygone.png)
+*Visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)
+
 
 
 **Enregistrer l’image en PNG** : Cliquer sur le bouton pour enregistrer le rendu de la carte au format PNG. C'est le format matriciel, prêt à être imprimé en couleurs.
@@ -141,21 +149,25 @@ Passer en mode d’affichage Contour:Affichage>Contours
 **Enregistrer les stations en TXT** :  Cliquer sur le bouton pour exporter l'ensemble des stations existantes sur les lignes sélectionnées pour le rendu (quand l'option "Dessiner les stations" a bien été coché dans les paramètres).
 
 
-![Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte )](IMG/fichier_text_lignes_metros.png)
-
+![Fichier du nom des stations de la ligne de transport ouvert avec éditeur de texte )](IMG/fichier_texte_lignes_metros.png)
+*Fichier du nom des stations de la ligne de transport, ouvert avec un éditeur de texte 
 
 
 
 ### Carte
 **Plan de ville**
+
 Cet onglet permet d'extraire une carte à partir d’un point central et d’un rayon. A noter que la carte extraite est au format rectangulaire (le cercle tracé à partir du rayon est transformé en rectangle pour la génération de la carte)
+
 
 #### 1-Déterminer le périmètre du plan souhaité
 **Le point central peut être défini de deux manières :**
 - En renseignant les deux champs Latitude et Longitude 
-- En zommant avec la molette de la souris et en cliquant directement sur la carte 
+- En cliquant directement sur la carte et zoomant avec la molette de la souris (ou avec les boutons + et - de l'interface) pour être précis sur la position souhaitée
 
 **Rayon (mètre)** : Préciser dans ce champs le rayon d'extraction de données pour générer la carte
+
+
 
 #### 2-Construction de plan 
 ##### Paramétrage de l'extraction des données
@@ -170,17 +182,19 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 
 ![Rendu en incluant les immeubles )](IMG/inclure_immeubles.png)
+*Exemple de rendu de carte en incluant les immeubles
 
 
 ![Rendu en incluant les immeubles et chemins piétons )](IMG/inclure_immeubles_pietons_seulement.png)
+*Exemple de rendu de carte en incluant les immeubles et chemins piétons
 
 
-![Rendu en incluant limmeubles, chemins piétons en mode polygone )](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins.png)
+![Rendu en incluant les immeubles, et chemins piétons en mode polygone )](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins.png)
+*Exemple de rendu de carte en incluant les immeubles et chemins piétons en mode polygone
 
 
-![Rendu  avec toutes les options cochées )](IMG/tout_inclus.png)
-
-
+![Rendu  avec toutes les options cochées : )](IMG/tout_inclus.png)
+*Exemple avec toutes les options cochées
 
 
 
@@ -189,14 +203,16 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 - **Extraction de la zone de carte:** Cliquer sur le bouton pour générer le plan et le visualiser dans la fenêtre de rendu à droite
 
 
-![Interface avec bouton pour extraire la zone de la carte )](IMG/extraction_de_la_zone_de_la_carte.png)
-
+![Vue du bouton dabns l'interface pour extraire la zone de la carte )](IMG/extraction_de_la_zone_de_la_carte.png)
+*Bouton pour extraire la zone de la carte
 
 
 
 #### 3-Enregistrer les résultats
 - **Enregistrer l'image en SVG** : Cliquer sur le bouton pour générer le plan au format SVG
 - **Enregistrer l'image en PNG** : Cliquer sur le bouton pour générer le plan au format PNG
+
+
 
 ### Paramètres
 **Langue de l'application :** Menu déroulant pour choisir la langue de l'application actuellement disponible en français ou en anglais
