@@ -4,7 +4,7 @@ essai avec delphine
 
 essai avec stéphane
 
-## Présentation
+# Présentation
 
 **OpenStreetTouch** est un outil d'extraction de données OpenStreetMap (OSM) pour construire des plans tactiles de réseau de transport publique ou de petite zone de villes.
 
