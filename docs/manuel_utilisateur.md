@@ -26,7 +26,7 @@ Ce projet est financé grace à [NGI0 Entrust](https://nlnet.nl/entrust), un fon
 
 - Créer une carte au format SVG à partir des données de transports publics. Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte tangible.
 - Extraire les noms des stations à partir des données des transports public.
-- Extraire une carte d'une petite zone pour créer une représentation accessible de l'endroit. 
+- Extraire une carte d'une petite zone pour créer une représentation accessible de l'endroit (rayon max de 2000m).
 
 
 # Présentation de l'interface
