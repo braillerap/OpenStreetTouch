@@ -144,7 +144,7 @@ Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affic
 Attention pour que ce bouton apparaisse il faut avoir généré le dessin en ayant cliqué sur "Dessiner la/les lignes de transport"
 
 ![Bouton enregistrer l'image en svg](IMG/enregistrer_image_svg.png)
-*Bouton rnregistrer l'image en svg*
+*Bouton enregistrer l'image en svg*
 
 
 **Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape par exemple)**
