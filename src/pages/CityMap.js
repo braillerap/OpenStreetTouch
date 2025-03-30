@@ -149,7 +149,7 @@ const CityMap = () => {
             if (position)
                 if (position.lat && position.lng)
                     return (
-                        <h2>{position.lat} {position.lng}</h2>
+                        <h2>Lat {position.lat} Lon {position.lng}</h2>
                     );    
                 else
                     return (<></>);    
@@ -294,10 +294,10 @@ const CityMap = () => {
             }    
         }
     return (
-        <>
-            <div className='CityMapParam' role="document">
-                <section aria-label={GetLocaleString("citymap.sectionpos")}>
-                    <h1 role="contentinfo"> {GetLocaleString("citymap.maptitle")}   </h1>
+        <main>
+            <div className='CityMapParam'>
+                
+                    <h1>{GetLocaleString("citymap.maptitle")}   </h1>
                     {renderPosition()}
                     <label>{GetLocaleString("citymap.latitude")}
                         <input ref={focusref} type="number" value={editLatitude} step="0.0001" min="-90" max="90" 
@@ -312,9 +312,9 @@ const CityMap = () => {
                     </label>
                     
                     <h2 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h2>
-                </section>
+                
             </div>
-            <section aria-label="Map">
+            <section aria-hidden="true">
             <MapContainer center={position} zoom={mapzoom} scrollWheelZoom={true}
                 ref={mapref}
                 style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
@@ -331,11 +331,11 @@ const CityMap = () => {
                  
             </MapContainer>
             </section>
-            <section aria-label={GetLocaleString("citymap.sectionrender")}>
+            
                 {renderAction()}
                 {renderResultAction ()}
-            </section>
-        </>
+            
+        </main>
     );
 }
 

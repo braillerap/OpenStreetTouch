@@ -183,8 +183,8 @@ const Transport = () => {
         
         return (
                 <>
-                <p>{GetLocaleString("transport.osmcityname")} : {realCityName}</p>
-                <p>{GetLocaleString("transport.nblines")} : {transportLines.length}</p>
+                
+                <h3>{GetLocaleString("transport.osmcityname")} : {realCityName} {GetLocaleString("transport.nblines")} : {transportLines.length}</h3>
                 {transportLines.map((line) => {
                         return (
                             <label>
@@ -305,11 +305,12 @@ const Transport = () => {
         );
     }
   return (
-      <div>
-        <section aria-label={GetLocaleString("transport.sectionrequest")}>
+    
+      <main>
+        
           <div className='TransportParam' role="document">
               <h1>{GetLocaleString("transport.title")}</h1>
-              <h2>Interroger Open street pour une ville </h2>
+              <h2>{GetLocaleString("transport.findosmcity")} </h2>
               <label >{GetLocaleString("transport.place_id") }
                   <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
                       {
@@ -325,6 +326,7 @@ const Transport = () => {
                       name="city"
                       value={cityName}
                       ref={focusref}
+                      onKeyDown={(e) => { if (e.key === "Enter" && osmPending===false) { goOsm(); } }}
                       onChange={(e) => { setCityName(e.target.value); }}
                   />
               </label>
@@ -339,9 +341,9 @@ const Transport = () => {
                   {GetLocaleString("transport.search")}
               </button>
           </div>
-          </section>
+          
 
-            <section aria-label={GetLocaleString("transport.sectionline") }>
+          
             <h2>{GetLocaleString("transport.sectionline")}</h2>         
                 
                 <div className='CheckedList'>
@@ -349,13 +351,14 @@ const Transport = () => {
                     {renderTransportLines()}
 
                 </div>
-            </section>
-            <section aria-label={GetLocaleString("transport.sectiondata") }>     
+           
+           
             <h2>{GetLocaleString("transport.sectiondata")}</h2>         
             {renderTransportAction()}
             {renderResultAction()}
-          </section>            
-      </div>
+          
+      </main>
+      
   );
 }
 

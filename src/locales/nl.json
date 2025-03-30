@@ -44,6 +44,7 @@
     "transport.downloadsvg": "Afbeelding opslaan als svg-bestand",
     "transport.downloadpng": "Afbeelding opslaan als png-bestand",
     "transport.titleresult": "Resultaten opslaan",
+    "transport.findosmcity": "Search a city in OSM",
     "transport.type.funicular": "Kabelspoorweg",
     "transport.type.bus": "Bus/Auto",
     "transport.type.tram": "Tram",
