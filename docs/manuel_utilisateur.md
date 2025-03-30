@@ -40,7 +40,7 @@ Le menu est composé de 5 onglets que nous allons détailler: Accueil/Transport/
 
 
 
-### Accueil : 
+## Accueil : 
 
 La page d'accueil présente le numéro de version du programme , les logos des partenaires (My Human Kit et NLNET Foundation) et le lien vers la licence Open street Map, application source des données extraites par le programme Open street Touch
 
@@ -51,11 +51,11 @@ La page d'accueil présente le numéro de version du programme , les logos des p
 
 
 
-### Transport
+## Transport
 Cet onglet permet d'extraire les lignes de transport d'une ville selon les paramètres définis par l'utilisateur.
 
 
-#### 1- Définir les paramètres de l’extraction
+### 1- Définir les paramètres de l’extraction
 
 ![Interface des paramètres de l'extraction](IMG/rechercher_ville_type_transort.png)
 *Interface des paramètres de l'extraction dans la partie gauche de la fenêtre*
@@ -74,17 +74,17 @@ Cet onglet permet d'extraire les lignes de transport d'une ville selon les param
 
 
 
-#### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
+### 2- Cliquer sur bouton Rechercher et attendre que les données demandées apparaissent
 
 ![Interface avec le bouton Rechercher](IMG/rechercher_ville_type_transort.png)
 *Interface avec le bouton Rechercher*
 
 
 
-#### 3-Paramétrage de l’affichage des lignes de transport
+### 3-Paramétrage de l’affichage des lignes de transport
 
 
-##### Sélection des lignes à extraire
+#### Sélection des lignes à extraire
 Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’extraction
 
 ![Rendu dans la fenêtre de droite avec option "rendu avec option "dessiner les stations non coché"](IMG/cocher_lignes_a_extraire.png)
@@ -92,7 +92,7 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 
-##### Configuration de l'affichage des lignes de transport
+#### Configuration de l'affichage des lignes de transport
 
 
 - **Dessiner les stations :** cocher cette option pour que les stations soient visibles sur la carte
@@ -108,7 +108,7 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 
-#### 4-Dessiner la/les lignes de transport 
+### 4-Dessiner la/les lignes de transport 
 **Dessiner la/les lignes de transport** : Cliquer sur le bouton pour générer le rendu dans la fenêtre de droite.
 
 
@@ -117,7 +117,7 @@ Une fois la recherche terminée, cocher chacune des lignes à intégrer à l’e
 
 
 
-#### 5-Visualiser le rendu dans la fenêtre de droite 
+### 5-Visualiser le rendu dans la fenêtre de droite 
 
 Le dessin des lignes de transport est généré dans la partie supérieure de la fenêtre de droite. 
 
@@ -138,7 +138,7 @@ Sous le dessin de la carte du rendu, le nom de chaque ligne de transport s'affic
 
 
 
-#### 6-Enregistrer les résultats
+### 6-Enregistrer les résultats
 **Enregistrer l’image en SVG**  : Cliquer sur le bouton pour enregistrer le rendu de la carte au format SVG. C'est le format vectoriel, idéal pour être exploité par la suite par des machines à commandes numériques. 
 
 Attention pour que ce bouton apparaisse il faut avoir généré le dessin en ayant cliqué sur "Dessiner la/les lignes de transport"
@@ -176,13 +176,13 @@ Passer en mode d’affichage Contour: Menu : Affichage > Contours
 
 
 
-### Carte
+## Carte
 **Plan de ville**
 
 Cet onglet permet d'extraire une carte à partir d’un point central et d’un rayon. A noter que la carte extraite est au format rectangulaire (le cercle tracé à partir du rayon est transformé en rectangle pour la génération de la carte)
 
 
-#### 1-Déterminer le périmètre du plan souhaité
+### 1-Déterminer le périmètre du plan souhaité
 **Le point central peut être défini de deux manières :**
 - En renseignant les deux champs Latitude et Longitude 
 - En cliquant directement sur la carte et zoomant avec la molette de la souris (ou avec les boutons + et - de l'interface) pour être précis sur la position souhaitée
@@ -191,8 +191,8 @@ Cet onglet permet d'extraire une carte à partir d’un point central et d’un 
 
 
 
-#### 2-Construction de plan 
-##### Paramétrage de l'extraction des données
+### 2-Construction de plan 
+#### Paramétrage de l'extraction des données
 Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 - **Inclure les immeubles** : Inclure les bâtiments au plan
@@ -221,7 +221,7 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 
 
-##### Extraction du plan
+#### Extraction du plan
 - **Extraction de la zone de carte:** Cliquer sur le bouton pour générer le plan et le visualiser dans la fenêtre de rendu à droite
 
 
@@ -230,7 +230,7 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 
 
-#### 3-Enregistrer les résultats
+### 3-Enregistrer les résultats
 
 ![Enregistrer image sous le format voulu : svg ou png )](IMG/enregistrer_image_svg_carte.png)
 *enregistrer l'image au format souhaité : svg ou png*
@@ -241,7 +241,7 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 
 
 
-### Paramètres
+## Paramètres
 **Langue de l'application :** Menu déroulant pour choisir la langue de l'application actuellement disponible en français ou en anglais
 
 
@@ -249,7 +249,7 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 *Choix de la langue dans le menu Paramètres*
 
 
-### Exit 
+## Quitter 
 **Quitter l'application** : Cliquer sur l'onglet Exit pour fermer l'application
 
 Attention, cette action ferme sans demander si vous souhaitez enregistrer avant de quitter !
