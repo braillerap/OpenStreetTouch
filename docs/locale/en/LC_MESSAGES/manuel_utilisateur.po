@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../manuel_utilisateur.md:1
 msgid "Introduction"
-msgstr ""
+msgstr "Introduction"
 
 #: ../../manuel_utilisateur.md:2
 msgid ""
@@ -33,6 +33,12 @@ msgid ""
 "définie par un rayon à partir d'un point central pour visualiser la "
 "position des routes et bâtiments."
 msgstr ""
+"OpenStreetTouch is a program to extract geographical data from "
+"[OpenStreetMap](https://www.openstreetmap.org/). It allows to extract "
+"both data on public transport (transport map and names of stations) but "
+"also to extract maps according to a defined zone by a radius from a "
+"central point to visualize the position of roads and buildings."
+" "
 
 #: ../../manuel_utilisateur.md:4
 msgid ""
@@ -42,6 +48,12 @@ msgid ""
 "L'objectif principal est d'extraire ces données pour créer des cartes "
 "tangibles, afin qu'elles soient accessibles aux malvoyants/non voyants."
 msgstr ""
+"The generated SVG files are therefore compatible with the programs "
+"[Image2Touch](https://github.com/myhumankit/Image2Touch) or "
+"[DesktopBraillerap](https://github.com/braillerap/DesktopBrailleRAP). "
+"The main objective is to extract these data to create tangible maps, so "
+"that they are accessible to unsighted people."
+
 
 #: ../../manuel_utilisateur.md:6
 msgid ""
@@ -51,6 +63,12 @@ msgid ""
 "sous licence Open Database. OpenStreetTouch vise à extraire ces données "
 "pour créer une carte des transports accessible."
 msgstr ""
+"In many cities, public transport maps are not available in braille or "
+"in a format adapted to visually impaired people. Most of the necessary "
+"data are available in OpenStreetMap under Open Database license. "
+"OpenStreetTouch aims to extract these data to create an accessible public "
+"transport map."
+
 
 #: ../../manuel_utilisateur.md:8
 msgid ""
@@ -58,6 +76,9 @@ msgid ""
 "[DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP) sur "
 "un quartier résidentiel en France"
 msgstr ""
+"Here is an example with "
+"[DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP) on a "
+"residential area in France"
 
 #: ../../manuel_utilisateur.md:11
 msgid ""

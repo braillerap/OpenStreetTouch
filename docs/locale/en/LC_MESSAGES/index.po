@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../index.rst:2
 msgid "Bienvenue sur la documentation OpenStreetTouch"
-msgstr ""
+msgstr "Welcome on OpenStreetTouch user manual"
 
 #: ../../index.rst:11
 msgid ""
@@ -32,5 +32,5 @@ msgstr ""
 
 #: ../../index.rst:25
 msgid "Mise à jour: |today|"
-msgstr ""
+msgstr "Update: |today|"
 
