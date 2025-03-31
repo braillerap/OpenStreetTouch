@@ -413,22 +413,32 @@ msgid ""
 "stations\" est non cochée](IMG/dessiner_ligne_transport.png) *Bouton "
 "dessiner la/les lignes de transports*"
 msgstr ""
+"![Rendering in the right panel when the option \"draw stations\" is"]
+" not checked](IMG/dessiner_ligne_transport.png) *Button draw"
+" transport line*"
+
 
 #: ../../manuel_utilisateur.md:115 ../../manuel_utilisateur.md:129
 msgid ""
 "Rendu dans la fenêtre de droite quand l'option \"dessiner les stations\" "
 "est non cochée"
 msgstr ""
+"Rendering in the right panel when the option \"draw stations\" is"
+" not checked"
+
 
 #: ../../manuel_utilisateur.md:120
 msgid "5-Visualiser le rendu dans la fenêtre de droite"
-msgstr ""
+msgstr "5-View the rendering in the right panel"
 
 #: ../../manuel_utilisateur.md:122
 msgid ""
 "Le dessin des lignes de transport est généré dans la partie supérieure de"
 " la fenêtre de droite."
 msgstr ""
+"The drawing of the transport lines is generated in the upper part"
+" of the right panel."
+
 
 #: ../../manuel_utilisateur.md:125
 msgid ""
@@ -438,12 +448,20 @@ msgid ""
 "droite du dessin des lignes de transports choisies, avec l'option "
 "\"dessiner les stations\" et \"polygone\"*"
 msgstr ""
+"![Rendering in the right panel with option \"draw stations and "
+"polygons\" to draw transport lines](IMG/dessiner_les_stations.png) *Rendering"
+" in the right panel of the chosen transport lines, with the option"
+" \"draw stations\" and \"polygons\"*"
+" "
+
 
 #: ../../manuel_utilisateur.md:125
 msgid ""
 "Rendu dans la fenêtre de droite avec option \"dessiner les stations et "
 "polygone\" pour tracer des lignes de transport"
 msgstr ""
+"Rendering in the right panel with option \"draw stations and "
+"polygons\" to draw transport lines"
 
 #: ../../manuel_utilisateur.md:129
 msgid ""
@@ -452,12 +470,18 @@ msgid ""
 "dans la fenêtre de droite quand l'option \"dessiner les stations\" est "
 "non cochée*"
 msgstr ""
+"![Rendering in the right panel when the option \"draw stations\" is"
+" not checked](IMG/polygone_segments_no_station.png) *Rendering in the"
+" right panel when the option \"draw stations\" is not checked*"
+
 
 #: ../../manuel_utilisateur.md:133
 msgid ""
 "Sous le dessin de la carte du rendu, le nom de chaque ligne de transport "
 "s'affiche avec sa direction et toutes ses stations."
 msgstr ""
+"Under the rendering map drawing, the name of each transport line"
+" is displayed with its direction and all its stations."
 
 #: ../../manuel_utilisateur.md:136
 msgid ""
@@ -465,14 +489,18 @@ msgid ""
 "transports](IMG/affichage_nom_stations.png) *Affichage du nom des "
 "stations sous le dessin des lignes de transports*"
 msgstr ""
+"![Display of the names of the stations under the drawing of the"
+" transport lines](IMG/affichage_nom_stations.png) *Display of the"
+" names of the stations under the drawing of the transport lines*"
+" "
 
 #: ../../manuel_utilisateur.md:136
 msgid "Affichage du nom des stations sous le dessin des lignes de transports"
-msgstr ""
+msgstr "Display of the names of the stations under the drawing of the transport lines"
 
 #: ../../manuel_utilisateur.md:141
 msgid "6-Enregistrer les résultats"
-msgstr ""
+msgstr "6-Save result"
 
 #: ../../manuel_utilisateur.md:142
 msgid ""
@@ -480,28 +508,39 @@ msgid ""
 "le rendu de la carte au format SVG. C'est le format vectoriel, idéal pour"
 " être exploité par la suite par des machines à commandes numériques."
 msgstr ""
+"**Save the image in SVG** : Click on the button to save the"
+" map rendering in SVG format. It is the vector format, ideal for"
+" being exploited later by numerical machines."
+
 
 #: ../../manuel_utilisateur.md:144
 msgid ""
 "Attention pour que ce bouton apparaisse il faut avoir généré le dessin en"
 " ayant cliqué sur \"Dessiner la/les lignes de transport\""
 msgstr ""
+"Note that for this button to appear, you must have generated the"
+" drawing by clicking on \"Draw the/transport lines\""
 
 #: ../../manuel_utilisateur.md:146
 msgid ""
 "![Bouton enregistrer l'image en svg](IMG/enregistrer_image_svg.png) "
 "*Bouton enregistrer l'image en svg*"
 msgstr ""
+"![Button to save the image in svg](IMG/enregistrer_image_svg.png) "
+"*Button to save the image in svg*"
+
 
 #: ../../manuel_utilisateur.md:146
 msgid "Bouton enregistrer l'image en svg"
-msgstr ""
+msgstr "Save image as SVG button"
 
 #: ../../manuel_utilisateur.md:150
 msgid ""
 "**Ouvrir le svg pour voir le rendu avec un logiciel vectoriel (Inkscape "
 "par exemple)**"
 msgstr ""
+"**Open the svg to see the rendering with a vector software (for example"
+" Inkscape)**"
 
 #: ../../manuel_utilisateur.md:152
 msgid ""
@@ -511,6 +550,12 @@ msgid ""
 "Inkscape. Attention en mode Affichage>Normal on ne distingue pas les "
 "contours mais les couleurs comme sur une image matricielle.*"
 msgstr ""
+"![file svg opened in Inkscape. In the Display>Normal mode, we do not"
+" distinguish the contours but the colors like in a raster image](IMG/inkscape_contours.png)"
+" *File svg opened in Inkscape. Note that in the Display>Normal mode, we"
+" do not distinguish the contours but the colors like in a raster image.*"
+" "
+
 
 #: ../../manuel_utilisateur.md:152
 msgid ""
@@ -518,10 +563,14 @@ msgid ""
 "distingue pas les contours mais les couleurs comme sur une image "
 "matricielle"
 msgstr ""
+"svg file opened in Inkscape. In the Display>Normal mode, we do not"
+" distinguish the contours but the colors like in a raster image"
+" "
+
 
 #: ../../manuel_utilisateur.md:156
 msgid "Passer en mode d’affichage Contour: Menu : Affichage > Contours"
-msgstr ""
+msgstr "Switch to outline display mode: Menu: Display mode > Outline"
 
 #: ../../manuel_utilisateur.md:159
 msgid ""
@@ -532,6 +581,10 @@ msgid ""
 "Attention à bien choisir le mode affichage des contours pour les "
 "visualiser !*"
 msgstr ""
+"![Transport line display in Inkscape software with "
+"outline option activated. Take attention to select Outline   "
+"display mode](IMG/polygone.png) *Visualization of transport lines" 
+"in **outline** display mode in Inkscape software.* "
 
 #: ../../manuel_utilisateur.md:159
 msgid ""
@@ -539,6 +592,10 @@ msgid ""
 " en mode polygone. Attention à bien choisir le mode affichage des "
 "contours pour les visualiser"
 msgstr ""
+"Visualization of transport lines in Inkscape software with "
+"**outline** option activated. Take attention to select Outline   "
+"display mode"
+
 
 #: ../../manuel_utilisateur.md:163
 msgid ""
@@ -547,12 +604,18 @@ msgid ""
 "*Visualisation dans le logiciel vectoriel Inkscape des lignes de "
 "transport en mode normal (mode polygone décoché)*"
 msgstr ""
+"![Transport line display in Inkscape software with "
+"normal option activated](IMG/no_polygone.png) "
+"*Visualization of transport lines in Inkscape software with "
+"**normal** option deactivated*"
 
 #: ../../manuel_utilisateur.md:163
 msgid ""
 "visualisation dans le logiciel vectoriel Inkscape des lignes de transport"
 " en mode normal (mode polygone décoché)"
 msgstr ""
+"Visualization of transport lines in Inkscape software with "
+"**normal** display option activated"
 
 #: ../../manuel_utilisateur.md:168
 msgid ""
@@ -560,6 +623,10 @@ msgid ""
 "le rendu de la carte au format PNG. C'est le format matriciel, prêt à "
 "être imprimé en couleurs."
 msgstr ""
+"**Save the image as PNG** : Click on the button to save the rendering"
+" of the map in PNG format. This is the raster format, ready to be printed"
+" in color."
+
 
 #: ../../manuel_utilisateur.md:171
 msgid ""
@@ -568,6 +635,10 @@ msgid ""
 "pour le rendu (quand l'option \"Dessiner les stations\" a bien été coché "
 "dans les paramètres)."
 msgstr ""
+""**Save the stations as TXT** : Click on the button to export the"
+" entire set of existing stations on the selected lines for the rendering."
+" "
+" "
 
 #: ../../manuel_utilisateur.md:174
 msgid ""
@@ -575,6 +646,9 @@ msgid ""
 "éditeur de texte )](IMG/texte_lignes_metros.png) *Fichier du nom des "
 "stations de la ligne de transport, ouvert avec un éditeur de texte*"
 msgstr ""
+""![File of the names of the transport line stations, opened with a text editor](IMG/texte_lignes_metros.png)"
+" *File of the names of the transport line stations, opened with a text editor*"
+
 
 #: ../../manuel_utilisateur.md:174
 msgid ""
@@ -584,11 +658,11 @@ msgstr ""
 
 #: ../../manuel_utilisateur.md:179
 msgid "Carte"
-msgstr ""
+msgstr "Map"
 
 #: ../../manuel_utilisateur.md:180
 msgid "**Plan de ville**"
-msgstr ""
+msgstr "**City map**"
 
 #: ../../manuel_utilisateur.md:182
 msgid ""
@@ -597,18 +671,22 @@ msgid ""
 " cercle tracé à partir du rayon est transformé en rectangle pour la "
 "génération de la carte)"
 msgstr ""
+"This tab allows you to extract a map from a central point and a radius."
+" Note that the extracted map is rectangular (the circle traced from the"
+" radius is transformed into a rectangle for the map generation)"
+" "
 
 #: ../../manuel_utilisateur.md:185
 msgid "1-Déterminer le périmètre du plan souhaité"
-msgstr ""
+msgstr "1-Set the perimeter of the desired plan"
 
 #: ../../manuel_utilisateur.md:186
 msgid "**Le point central peut être défini de deux manières :**"
-msgstr ""
+msgstr "**The central point can be defined in two ways :**"
 
 #: ../../manuel_utilisateur.md:187
 msgid "En renseignant les deux champs Latitude et Longitude"
-msgstr ""
+msgstr "By filling in the Latitude and Longitude fields"
 
 #: ../../manuel_utilisateur.md:188
 msgid ""
@@ -616,32 +694,37 @@ msgid ""
 "souris (ou avec les boutons + et - de l'interface) pour être précis sur "
 "la position souhaitée"
 msgstr ""
+"By clicking directly on the map and zooming with the mouse wheel (or"
+" with the + and - buttons of the interface) to be precise on the "
+"wanted position"
 
 #: ../../manuel_utilisateur.md:190
 msgid ""
 "**Rayon (mètre)** : Préciser dans ce champs le rayon d'extraction de "
 "données pour générer la carte"
 msgstr ""
+"**Radius (meter)** : Specify in this field the radius of data extraction"
+" to generate the map"
 
 #: ../../manuel_utilisateur.md:194
 msgid "2-Construction de plan"
-msgstr ""
+msgstr "2-Draw extracted map"
 
 #: ../../manuel_utilisateur.md:195
 msgid "Paramétrage de l'extraction des données"
-msgstr ""
+msgstr "Data extraction settings"
 
 #: ../../manuel_utilisateur.md:196
 msgid "Cocher les options suivantes pour qu'elles soient inclues sur le plan."
-msgstr ""
+msgstr "Check the following options to include them on the map."
 
 #: ../../manuel_utilisateur.md:198
 msgid "**Inclure les immeubles** : Inclure les bâtiments au plan"
-msgstr ""
+msgstr "**Include buildings** : Include buildings on the map"
 
 #: ../../manuel_utilisateur.md:199
 msgid "**Piétons seulement** : générer uniquement les voies piétonnes"
-msgstr ""
+msgstr "**Pedestrians only** : generate only pedestrian roads"
 
 #: ../../manuel_utilisateur.md:200
 msgid ""
@@ -649,26 +732,33 @@ msgid ""
 " les contours plus adaptés à l'exploitation de ce plan avec une machine à"
 " commandes numériques"
 msgstr ""
+"**Polygons for roads/paths**: the polygon mode allows to generate"
+" outline more adapted to the use with a digital control"
+" machine"
 
 #: ../../manuel_utilisateur.md:201
 msgid "**Inclure les zones d'eau** : inclure les zones d'eau"
-msgstr ""
+msgstr "**Include water area**: include water area"
 
 #: ../../manuel_utilisateur.md:202
 msgid ""
 "**Restreindre à la zone de carte** : respecter strictement la zone du "
 "rayon même si certains tracés sont coupés"
 msgstr ""
+"**Clip map**: strictly respect the area of the radius even if some"
+" traces are cut"
 
 #: ../../manuel_utilisateur.md:206
 msgid ""
 "![Rendu en incluant les immeubles )](IMG/inclure_immeubles.png) *Exemple "
 "de rendu de carte en incluant les immeubles*"
 msgstr ""
+"![Render including buildings](IMG/inclure_immeubles.png) *Example of"
+" map rendering including buildings*"
 
 #: ../../manuel_utilisateur.md:206
 msgid "Rendu en incluant les immeubles )"
-msgstr ""
+msgstr "Render including buildings )"
 
 #: ../../manuel_utilisateur.md:210
 msgid ""
@@ -676,10 +766,13 @@ msgid ""
 ")](IMG/inclure_immeubles_pietons_seulement.png) *Exemple de rendu de "
 "carte en incluant les immeubles et chemins piétons*"
 msgstr ""
+"![Render including buildings and pedestrian roads only](IMG/inclure_immeubles_pietons_seulement.png)"
+" *Example of map rendering including buildings and pedestrian roads only*"
+" "
 
 #: ../../manuel_utilisateur.md:210
 msgid "Rendu en incluant les immeubles et chemins piétons )"
-msgstr ""
+msgstr "Render including buildings and pedestrian roads only )"
 
 #: ../../manuel_utilisateur.md:214
 msgid ""
@@ -688,30 +781,38 @@ msgid ""
 "*Exemple de rendu de carte en incluant les immeubles et chemins piétons "
 "en mode polygone*"
 msgstr ""
+"![Render including buildings and pedestrian roads only in polygon mode"
+" for roads/paths](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins.png)"
+" *Example of map rendering including buildings and pedestrian roads only"
+" in polygon mode for roads/paths*
 
 #: ../../manuel_utilisateur.md:214
 msgid "Rendu en incluant les immeubles, et chemins piétons en mode polygone )"
-msgstr ""
+msgstr "Render including buildings and pedestrian roads only in polygon mode for roads/paths )"
 
 #: ../../manuel_utilisateur.md:218
 msgid ""
 "![Rendu  avec toutes les options cochées : )](IMG/tout_inclus.png) "
 "*Exemple avec toutes les options cochées*"
 msgstr ""
+"![Render  with all options checked : )](IMG/tout_inclus.png) *Example"
+" with all options checked*"
 
 #: ../../manuel_utilisateur.md:218
 msgid "Rendu  avec toutes les options cochées : )"
-msgstr ""
+msgstr "Render  with all options checked : )"
 
 #: ../../manuel_utilisateur.md:224
 msgid "Extraction du plan"
-msgstr ""
+msgstr "Draw extracted map"
 
 #: ../../manuel_utilisateur.md:225
 msgid ""
 "**Extraction de la zone de carte:** Cliquer sur le bouton pour générer le"
 " plan et le visualiser dans la fenêtre de rendu à droite"
 msgstr ""
+"**Draw extracted map:** Click on the button to generate the map and"
+" view it in the rendering window on the right"
 
 #: ../../manuel_utilisateur.md:228
 msgid ""
@@ -719,14 +820,17 @@ msgid ""
 ")](IMG/extraction_de_la_zone_de_la_carte.png) *Bouton pour extraire la "
 "zone de la carte*"
 msgstr ""
+"![View of the button in the interface to extract the area of the map"
+" )](IMG/extraction_de_la_zone_de_la_carte.png) *Button to extract the"
+" area of the map*"
 
 #: ../../manuel_utilisateur.md:228
 msgid "Vue du bouton dabns l'interface pour extraire la zone de la carte )"
-msgstr ""
+msgstr "View of the button in the interface to extract the area of the map )"
 
 #: ../../manuel_utilisateur.md:233
 msgid "3-Enregistrer les résultats"
-msgstr ""
+msgstr "3-Save result"
 
 #: ../../manuel_utilisateur.md:235
 msgid ""
@@ -734,32 +838,41 @@ msgid ""
 ")](IMG/enregistrer_image_svg_carte.png) *enregistrer l'image au format "
 "souhaité : svg ou png*"
 msgstr ""
+"![Save image in the desired format : svg or png "
+")](IMG/enregistrer_image_svg_carte.png) *Save image in the desired"
+" format : svg or png*"
 
 #: ../../manuel_utilisateur.md:235
 msgid "Enregistrer image sous le format voulu : svg ou png )"
-msgstr ""
+msgstr "Save image in the desired format : svg or png )"
 
 #: ../../manuel_utilisateur.md:239
 msgid ""
 "**Enregistrer l'image en SVG** : Cliquer sur le bouton pour générer le "
 "plan au format SVG"
 msgstr ""
+"**Save image as SVG** : Click on the button to generate the"
+" map in SVG format"
 
 #: ../../manuel_utilisateur.md:240
 msgid ""
 "**Enregistrer l'image en PNG** : Cliquer sur le bouton pour générer le "
 "plan au format PNG"
 msgstr ""
+"**Save image as PNG** : Click on the button to generate the"
+" map in PNG format"
 
 #: ../../manuel_utilisateur.md:244
 msgid "Paramètres"
-msgstr ""
+msgstr "Parameters"
 
 #: ../../manuel_utilisateur.md:245
 msgid ""
 "**Langue de l'application :** Menu déroulant pour choisir la langue de "
 "l'application actuellement disponible en français ou en anglais"
 msgstr ""
+"**Application language :** Dropdown menu to choose the application"
+" language"
 
 #: ../../manuel_utilisateur.md:248
 msgid ""
@@ -767,26 +880,32 @@ msgid ""
 ")](IMG/Langue_application.png) *Choix de la langue dans le menu "
 "Paramètres*"
 msgstr ""
+"![Language selection in the Parameters tab"
+" )](IMG/Langue_application.png) *Language selection in the Parameters tab*"
 
 #: ../../manuel_utilisateur.md:248
 msgid "Choix de la langue dans le menu Paramètres )"
-msgstr ""
+msgstr "Language selection in the Parameters tab )"
 
 #: ../../manuel_utilisateur.md:252
 msgid "Quitter"
-msgstr ""
+msgstr "Exit"
 
 #: ../../manuel_utilisateur.md:253
 msgid ""
 "**Quitter l'application** : Cliquer sur l'onglet Exit pour fermer "
 "l'application"
 msgstr ""
+"**Exit the application** : Click on the Exit tab to close the"
+" application"
 
 #: ../../manuel_utilisateur.md:255
 msgid ""
 "Attention, cette action ferme sans demander si vous souhaitez enregistrer"
 " avant de quitter !"
 msgstr ""
+"Warning, this action closes without asking if you want to save"
+" before exiting !"
 
 #~ msgid ""
 #~ "![imUne capture d'écran du logiciel "
