@@ -8,7 +8,7 @@ Dans de nombreuses villes, les cartes de transports en commun ne sont pas dispon
 Voici un exemple avec [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP) sur un quartier résidentiel en France
 
 
-![imUne capture d'écran du logiciel DesktopBrailleRAP avec une carte d'quartier résidentielage](IMG/petiteferme.jpg)
+![Une capture d'écran du logiciel DesktopBrailleRAP avec une carte de quartier résidentiel](IMG/petiteferme.jpg)
 *Exemple d'une carte extraite avec OpenStreetTouch exploité avec [DesktopBrailleRap](https://github.com/braillerap/DesktopBrailleRAP) afin d'embosser cette carte avec l'embosseuse open source [BrailleRap](https://www.braillerap.org)*
 
 # Financement
