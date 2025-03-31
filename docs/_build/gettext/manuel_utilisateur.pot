@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenStreetTouch 0.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-30 19:26+0000\n"
+"POT-Creation-Date: 2025-03-31 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,11 +37,11 @@ msgid "Voici un exemple avec [DesktopBrailleRAP](https://github.com/braillerap/D
 msgstr ""
 
 #: ../../manuel_utilisateur.md:11
-msgid "![imUne capture d'écran du logiciel DesktopBrailleRAP avec une carte d'quartier résidentielage](IMG/petiteferme.jpg) *Exemple d'une carte extraite avec OpenStreetTouch exploité avec [DesktopBrailleRap](https://github.com/braillerap/DesktopBrailleRAP) afin d'embosser cette carte avec l'embosseuse open source [BrailleRap](https://www.braillerap.org)*"
+msgid "![Une capture d'écran du logiciel DesktopBrailleRAP avec une carte de quartier résidentiel](IMG/petiteferme.jpg) *Exemple d'une carte extraite avec OpenStreetTouch exploité avec [DesktopBrailleRap](https://github.com/braillerap/DesktopBrailleRAP) afin d'embosser cette carte avec l'embosseuse open source [BrailleRap](https://www.braillerap.org)*"
 msgstr ""
 
 #: ../../manuel_utilisateur.md:11
-msgid "imUne capture d'écran du logiciel DesktopBrailleRAP avec une carte d'quartier résidentielage"
+msgid "Une capture d'écran du logiciel DesktopBrailleRAP avec une carte de quartier résidentiel"
 msgstr ""
 
 #: ../../manuel_utilisateur.md:14
