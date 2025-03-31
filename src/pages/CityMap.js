@@ -298,7 +298,7 @@ const CityMap = () => {
             <div className='CityMapParam'>
                 
                     <h1>{GetLocaleString("citymap.maptitle")}   </h1>
-                    {renderPosition()}
+                    <h2>Paramètres de la zone d'extraction</h2>
                     <fieldset >
                     <legend>{GetLocaleString("citymap.extractposition")}</legend>
                     <label>{GetLocaleString("citymap.latitude")}
@@ -319,7 +319,7 @@ const CityMap = () => {
             
             <MapContainer center={position} zoom={mapzoom} scrollWheelZoom={true}
                 ref={mapref}
-                style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
+                style={{ width: '99%', position: 'relative', zIndex: '9', height: '30vh' }}
                 attributionControl={false}
                 aria-hidden={true}
                 tabindex="-1"

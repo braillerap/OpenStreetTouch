@@ -31,8 +31,8 @@ app_options = {
     
     "lang": "en",
     "osmiso639": "fr",
-    "focuspolicy":"false",
-    "accesskey":"false"
+    "focuspolicy":False,
+    "accesskey":False
 }
 
 
