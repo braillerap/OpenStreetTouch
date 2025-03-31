@@ -86,16 +86,24 @@ msgid ""
 " d'embosser cette carte avec l'embosseuse open source "
 "[BrailleRap](https://www.braillerap.org)*"
 msgstr ""
+"![a screenshot of DesktopBrailleRAP software with a residential area map"]"
+"(IMG/petiteferme.jpg) *Example of a map extracted with "
+"OpenStreetTouch exploited with "
+"[DesktopBrailleRap](https://github.com/braillerap/DesktopBrailleRAP) in "
+"order to emboss this map with the open source embosser "
+"[BrailleRap](https://www.braillerap.org)*"
 
 #: ../../manuel_utilisateur.md:11
 msgid ""
 "Une capture d'écran du logiciel DesktopBrailleRAP avec une carte de "
 "quartier résidentiel"
 msgstr ""
+"A screenshot of the DesktopBrailleRAP software with a residential area "
+"map"
 
 #: ../../manuel_utilisateur.md:14
 msgid "Financement"
-msgstr ""
+msgstr "Funding"
 
 #: ../../manuel_utilisateur.md:16
 msgid ""
@@ -105,6 +113,13 @@ msgid ""
 "Plus d'informations ici [NLnet project "
 "page](https://nlnet.nl/project/BrailleRAP)."
 msgstr ""
+"This project is funded through [NGI0 Entrust](https://nlnet.nl/entrust), "
+"a fund established by [NLnet](https://nlnet.nl) with financial support "
+"from the European Commission's [Next Generation Internet](https://ngi.eu) "
+"program. Learn more at the "
+"[NLnet project page](https://nlnet.nl/project/BrailleRAP)."
+
+
 
 #: ../../manuel_utilisateur.md:18
 msgid ""
@@ -113,14 +128,18 @@ msgid ""
 "src=\"./IMG/NGI0_tag.png\" alt=\"Le logo du programme NGI0\" "
 "width=\"25%\"> ](https://nlnet.nl)"
 msgstr ""
+"[      <img src=\"./IMG/nlnetbanner.png\" alt=\"NLNet foundation "
+"logo\" width=\"25%\"> ](https://nlnet.nl)  [     <img "
+"src=\"./IMG/NGI0_tag.png\" alt=\"NGI0 program logo\" "
+"width=\"25%\"> ](https://nlnet.nl)"
 
 #: ../../manuel_utilisateur.md:18
 msgid "Le logo du programme NGI0"
-msgstr ""
+msgstr "NGI0 program logo"
 
 #: ../../manuel_utilisateur.md:25
 msgid "Fonctionnalités"
-msgstr ""
+msgstr "Features"
 
 #: ../../manuel_utilisateur.md:27
 msgid ""
@@ -128,36 +147,47 @@ msgid ""
 " Ces fichiers SVG peuvent ensuite être utilisés pour créer une carte "
 "tangible."
 msgstr ""
+"Create an SVG map from public transport data. These SVG files can then"
+" be used to create a tangible map."
+" "
+
 
 #: ../../manuel_utilisateur.md:28
 msgid "Extraire les noms des stations à partir des données des transports public."
-msgstr ""
+msgstr "Extract stations names from public transport data.."
 
 #: ../../manuel_utilisateur.md:29
 msgid ""
 "Extraire une carte d'une petite zone pour créer une représentation "
 "accessible de l'endroit (rayon max de 2000m)."
 msgstr ""
+"Extract a map of a small area to create an accessible representation of"
+" the place (max radius of 2000m)."
 
 #: ../../manuel_utilisateur.md:32
 msgid "Présentation de l'interface"
-msgstr ""
+msgstr "Graphical interface presentation"
 
 #: ../../manuel_utilisateur.md:34
 msgid ""
 "Interface composée d’un menu avec un écran divisé en deux parties (gauche"
 " et droite).  A gauche, le paramétrage et à droite la fenêtre de rendu."
 msgstr ""
+"Interface composed of a menu with a screen divided into two parts "
+"(left and right). On the left, the parameter settings and on the right, "
+"the rendering window."
 
 #: ../../manuel_utilisateur.md:37
 msgid ""
 "Le menu est composé de 5 onglets que nous allons détailler: "
 "Accueil/Transport/Carte/Paramètres/Exit."
 msgstr ""
+"The main menu is composed of 5 tabs that we will detail: Home/Transport/Map"
+"/Settings/Exit."
 
 #: ../../manuel_utilisateur.md:43
 msgid "Accueil :"
-msgstr ""
+msgstr "Home"
 
 #: ../../manuel_utilisateur.md:45
 msgid ""
@@ -166,30 +196,38 @@ msgid ""
 "licence Open street Map, application source des données extraites par le "
 "programme Open street Touch"
 msgstr ""
+"The home page presents the version number of the program, the logos of"
+" the partners (My Human Kit and NLNET Foundation), and the link to the "
+"OpenStreetMap license, the source of the data extracted by the OpenStreetTouch program."
+" "
 
 #: ../../manuel_utilisateur.md:48
 msgid ""
 "![Capture d'écran de la page d'accueil](IMG/home.jpg) *Capture d'écran de"
 " la page d'accueil*"
 msgstr ""
+"![Capture d'écran de la page d'accueil](IMG/home.jpg) *Capture d'écran de"
+" la page d'accueil*"
 
 #: ../../manuel_utilisateur.md:48
 msgid "Capture d'écran de la page d'accueil"
-msgstr ""
+msgstr "screenshot of the home page"
 
 #: ../../manuel_utilisateur.md:54
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #: ../../manuel_utilisateur.md:55
 msgid ""
 "Cet onglet permet d'extraire les lignes de transport d'une ville selon "
 "les paramètres définis par l'utilisateur."
 msgstr ""
+"This tab allows you to extract the transport lines of a city according"
+" according the parameters defined by the user."
 
 #: ../../manuel_utilisateur.md:58
 msgid "1- Définir les paramètres de l’extraction"
-msgstr ""
+msgstr "1- Define the extraction parameters"
 
 #: ../../manuel_utilisateur.md:60
 msgid ""
@@ -197,14 +235,18 @@ msgid ""
 "l'extraction](IMG/rechercher_ville_type_transort.png) *Interface des "
 "paramètres de l'extraction dans la partie gauche de la fenêtre*"
 msgstr ""
+"![Extraction data "
+"parameters](IMG/rechercher_ville_type_transort.png) *On the left, "
+"the extraction data parameters*"
+
 
 #: ../../manuel_utilisateur.md:60
 msgid "Interface des paramètres de l'extraction"
-msgstr ""
+msgstr "Extraction data parameters"
 
 #: ../../manuel_utilisateur.md:64
 msgid "**Type Emplacement :**"
-msgstr ""
+msgstr "**Place ID**"
 
 #: ../../manuel_utilisateur.md:66
 msgid ""
@@ -212,10 +254,13 @@ msgid ""
 "ID Wikidata (indispensable dans le cas où plusieurs villes ont le même "
 "nom)"
 msgstr ""
+"Dropdown menu to choose whether the search is by city name or Wikidata"
+" ID (needed in the case where several cities have the same name)"
+" "
 
 #: ../../manuel_utilisateur.md:67
 msgid "Champs texte vide pour écrire le nom  de ville ou l’ID correspondant."
-msgstr ""
+msgstr "Empty text field to write the city name or the corresponding ID."
 
 #: ../../manuel_utilisateur.md:70
 msgid ""
@@ -223,6 +268,9 @@ msgid ""
 "ville (La langue utilisée pour exprimer le nom de la ville (fr pour "
 "Londres et en pour London par exemple)"
 msgstr ""
+"**City language :** Dropdown menu to define the city language (The"
+" language used to express the name of the city (**fr** for **Londres** and **en** for"
+" **London** for example)"
 
 #: ../../manuel_utilisateur.md:73
 msgid ""
@@ -230,12 +278,17 @@ msgid ""
 "transport Open Street Map à extraire (Métro, Funiculaire, Bus/Car, "
 "Tramway, train, Train interurbain, Monorail, Ferry)"
 msgstr ""
+"**Transport type (OSM) :** Dropdown menu to define the type of "
+"transport Open Street Map to extract (Metro, Funicular, Bus/Car, "
+"Tramway, Train, Light train, Monorail, Ferry)"
 
 #: ../../manuel_utilisateur.md:77
 msgid ""
 "2- Cliquer sur bouton Rechercher et attendre que les données demandées "
 "apparaissent"
 msgstr ""
+"2- Click on the Search button and wait for the requested data to appear"
+" "
 
 #: ../../manuel_utilisateur.md:79
 msgid ""
@@ -243,24 +296,28 @@ msgid ""
 "Rechercher](IMG/rechercher_ville_type_transort.png) *Interface avec le "
 "bouton Rechercher*"
 msgstr ""
+"![Interface with the Search button](IMG/rechercher_ville_type_transort.png) *Interface with the Search button*"
+" "
 
 #: ../../manuel_utilisateur.md:79
 msgid "Interface avec le bouton Rechercher"
-msgstr ""
+msgstr "Interface with the Search button"
 
 #: ../../manuel_utilisateur.md:84
 msgid "3-Paramétrage de l’affichage des lignes de transport"
-msgstr ""
+msgstr "3-Transport line display settings"
 
 #: ../../manuel_utilisateur.md:87
 msgid "Sélection des lignes à extraire"
-msgstr ""
+msgstr "Extracting lines selection"
 
 #: ../../manuel_utilisateur.md:88
 msgid ""
 "Une fois la recherche terminée, cocher chacune des lignes à intégrer à "
 "l’extraction"
 msgstr ""
+"Once the search is complete, check each of the lines to be included in"
+" the extraction"
 
 #: ../../manuel_utilisateur.md:90
 msgid ""
@@ -269,22 +326,30 @@ msgid ""
 "*Interface pour choisir les différentes lignes de transports à extraire "
 "avec les cases à cocher*"
 msgstr ""
+"![Rendering int the right panel with option \"render with option "
+"\"draw stations not checked\"](IMG/cocher_lignes_a_extraire.png)"
+" *Interface to choose the different transport lines to extract with the check boxes*"
+" "
 
 #: ../../manuel_utilisateur.md:90
 msgid ""
 "Rendu dans la fenêtre de droite avec option \"rendu avec option "
 "\"dessiner les stations non coché\""
 msgstr ""
+"Rendering int the right panel with option \"render with option "
+"\"draw stations not checked\""
 
 #: ../../manuel_utilisateur.md:95
 msgid "Configuration de l'affichage des lignes de transport"
-msgstr ""
+msgstr "Transport line rendering setup"
 
 #: ../../manuel_utilisateur.md:98
 msgid ""
 "**Dessiner les stations :** cocher cette option pour que les stations "
 "soient visibles sur la carte"
 msgstr ""
+"**Draw stations :** check this option to make the stations visible on"
+" the map"
 
 #: ../../manuel_utilisateur.md:101
 msgid ""
@@ -293,40 +358,54 @@ msgid ""
 "avec des contours. Cette option est recommandée pour exploiter ce dessin "
 "avec une machine numérique, découpe laser par exemple."
 msgstr ""
+"**Line paths as polygons :** check this option to draw the lines "
+"with polygons, which is equivalent to drawing them with outlines. This "
+"option is recommended to exploit this drawing with a digital machine, "
+"laser cutting for example."
 
 #: ../../manuel_utilisateur.md:104
 msgid ""
 "**Stratégie de rendu de la ligne de transport :** Menu déroulant pour "
 "choisir le type de rendu :"
 msgstr ""
+"**Transport line drawing strategy :** Dropdown menu to choose the"
+" type of rendering :"
 
 #: ../../manuel_utilisateur.md:105
 msgid ""
 "**Données de tracé OSM** : fidèles à la représentation telle qu'elles "
 "sont dans Open Street Map"
 msgstr ""
+"**path from OSM data** : faithful to the representation as it is in Open"
+" Street Map"
 
 #: ../../manuel_utilisateur.md:106
 msgid ""
 "**Données OSM corrigées** : utile quand le rendu présente des "
 "interruptions sur les lignes de transport"
 msgstr ""
+"**OSM data corrected** : useful when the rendering presents "
+"interruptions on the transport lines"
 
 #: ../../manuel_utilisateur.md:107
 msgid ""
 "**Position des stations** : simplifie les tracés en reliant les stations "
 "par des lignes droites au lieu de respecter les courbes"
 msgstr ""
+"**Station positions** : simplifies the drawings by connecting the"
+" stations with straight lines instead of respecting the curves"
 
 #: ../../manuel_utilisateur.md:111
 msgid "4-Dessiner la/les lignes de transport"
-msgstr ""
+msgstr "4-Draw the transport line"
 
 #: ../../manuel_utilisateur.md:112
 msgid ""
 "**Dessiner la/les lignes de transport** : Cliquer sur le bouton pour "
 "générer le rendu dans la fenêtre de droite."
 msgstr ""
+"**Draw the transport line** : Click on the button to generate the"
+" rendering in the right panel."
 
 #: ../../manuel_utilisateur.md:115
 msgid ""
