@@ -54,7 +54,7 @@ const Layout = () => {
             <div className="App" dir={GetLocaleDir()}>
                 <div className='AppHeader'>
                     <div className="pure-menu pure-menu-horizontal menu_font" role={'presentation'} >
-                        <nav>
+                        <nav aria-live={"polite"}>
                             {/*accessKey={GetLocaleString("menu.home.shortcut")}*/ }
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">

@@ -58,12 +58,13 @@
     "transport.sectionrequest": "Interroger OpenStreetMap pour la ville souhaitée",
     "transport.sectiondata": "Exploitation des données de carte",
     "transport.sectionline": "Sélection des lignes de transport",
+    "citymap.extractposition":"Position de la zone de carte à extraire",
     "citymap.sectionplan": "Construction de plan",
     "citymap.rendermap": "Extraction de la zone de carte",
     "citymap.building": "Inclure les immeubles",
     "citymap.streetpolygon": "Polygones pour les routes et chemins",
     "citymap.footpathonly": "Pieton seulement",
-    "citymap.maptitle": "Plan de ville",
+    "citymap.maptitle": "Extraction de carte",
     "citymap.latitude": "Latitude",
     "citymap.longitude": "Longitude",
     "citymap.radius": "Rayon (mètre)",
@@ -78,5 +79,6 @@
     "param.accesskeypolicy": "Activer les raccourcis clavier dans le menu principal",
     "param.form_aria": "Paramètres de l'application",
     "param.focuspolicy": "Positionner le focus lors de la navigation",
-    "param.general.section": "Paramètres de l'application"
+    "param.general.section": "Paramètres de l'application",
+    "param.accesibility.section":"Paramètres d'accéssibilité"
 }

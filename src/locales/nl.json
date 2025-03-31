@@ -1,5 +1,5 @@
 {
-    "citymap.radius": "Straal (in meters)",
+    
     "app.loading": "Bezig met laden…",
     "app.wait": "Bezig met wachten…",
     "file.open": "Openen",
@@ -55,6 +55,7 @@
     "transport.sectionline": "OV-lijnkeuze",
     "citymap.sectionplan": "Stratenkaartweergave",
     "citymap.building": "Gebouwen tonen",
+    "citymap.radius": "Straal (in meters)",
     "citymap.streetpolygon": "Wegen en straten als polygonen tonen",
     "citymap.footpathonly": "Alleen voetpaden tonen",
     "citymap.maptitle": "Stadskaart",
@@ -65,6 +66,8 @@
     "citymap.mousegps": "Druk op kaart om de locatie op te vragen",
     "citymap.sectionrender": "Kaartgegevens extraheren",
     "citymap.sectionpos": "Kaartpositie",
+    "citymap.rendermap": "Geëxtraheerde kaart intekenen",
+    "citymap.extractposition":"Positie van het kaartgebied dat moet worden geëxtraheerd",
     "preview.savesvg": "Opslaan als svg-bestand",
     "param.focuspolicy": "Focussen op navigatie",
     "param.general.section": "Algemene opties",
@@ -76,7 +79,7 @@
     "transport.downloadtxt": "Haltes/Stations opslaan als txt-bestand",
     "transport.type.subway": "Metro",
     "transport.type.train": "Trein",
-    "citymap.rendermap": "Geëxtraheerde kaart intekenen",
+    
     "param.locale": "Programmataal",
     "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu"
 }

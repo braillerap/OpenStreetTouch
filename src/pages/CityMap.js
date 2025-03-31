@@ -299,6 +299,8 @@ const CityMap = () => {
                 
                     <h1>{GetLocaleString("citymap.maptitle")}   </h1>
                     {renderPosition()}
+                    <fieldset >
+                    <legend>{GetLocaleString("citymap.extractposition")}</legend>
                     <label>{GetLocaleString("citymap.latitude")}
                         <input ref={focusref} type="number" value={editLatitude} step="0.0001" min="-90" max="90" 
                         onChange={(e) => setLatitude(e.target.value)} />
@@ -311,15 +313,16 @@ const CityMap = () => {
                         <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
                     </label>
                     
-                    <h2 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h2>
-                
+                    <h3 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h3>
+                    </fieldset>
             </div>
-            <section aria-hidden="true">
+            
             <MapContainer center={position} zoom={mapzoom} scrollWheelZoom={true}
                 ref={mapref}
                 style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
                 attributionControl={false}
                 aria-hidden={true}
+                tabindex="-1"
                 >
 
                 <TileLayer
@@ -330,8 +333,8 @@ const CityMap = () => {
                  {renderMapRadius()}
                  
             </MapContainer>
-            </section>
             
+                <h2>{GetLocaleString("transport.sectiondata")}</h2>  
                 {renderAction()}
                 {renderResultAction ()}
             
