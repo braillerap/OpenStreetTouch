@@ -34,10 +34,13 @@ msgid ""
 "l'adresse suivante : "
 "[https://github.com/braillerap/OpenStreetTouch](https://github.com/braillerap/OpenStreetTouch)"
 msgstr ""
+"The entire source code of OpenStreetTouch is available on GitHub "
+"at the following url: "
+"[https://github.com/braillerap/OpenStreetTouch](https://github.com/braillerap/OpenStreetTouch)"
 
 #: ../../sourcecode.md:6
 msgid "Mises à jour"
-msgstr ""
+msgstr "Updates"
 
 #: ../../sourcecode.md:7
 msgid ""
@@ -45,4 +48,7 @@ msgid ""
 "dans la catégories **releases**: "
 "[https://github.com/braillerap/OpenStreetTouch/releases](https://github.com/braillerap/OpenStreetTouch/releases)"
 msgstr ""
+"Also on github you can find software updates "
+"in the **releases** category: "
+"[https://github.com/braillerap/OpenStreetTouch/releases](https://github.com/braillerap/OpenStreetTouch/releases)"
 
