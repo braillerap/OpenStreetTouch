@@ -81,5 +81,8 @@
     "transport.type.train": "Trein",
     
     "param.locale": "Programmataal",
-    "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu"
+    "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu",
+    "param.accesibility.section":"Toegankelijkheidsinstellingen"
+
+    
 }
