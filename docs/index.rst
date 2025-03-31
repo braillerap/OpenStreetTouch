@@ -16,14 +16,11 @@ Bienvenue sur la documentation OpenStreetTouch
 .. toctree::
    :maxdepth: 3
 
-   introduction
-   features
-   basicfeatures
+   manuel_utilisateur
    sourcecode
-   licence
-    
+   licence 
 
-.. index:: introduction,features,basicfeatures,sourcecode, licence
+.. index:: manuel_utilisateur,sourcecode, licence
 
 Mise à jour: |today|
 
