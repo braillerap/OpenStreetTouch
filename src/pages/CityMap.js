@@ -297,8 +297,8 @@ const CityMap = () => {
         <main>
             <div className='CityMapParam'>
                 
-                    <h1>{GetLocaleString("citymap.maptitle")}   </h1>
-                    <h2>Paramètres de la zone d'extraction</h2>
+                    <h1>{GetLocaleString("citymap.maptitle")}</h1>
+                    <h2>{GetLocaleString("citymap.mapparam")}</h2>
                     <fieldset >
                     <legend>{GetLocaleString("citymap.extractposition")}</legend>
                     <label>{GetLocaleString("citymap.latitude")}

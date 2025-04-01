@@ -348,9 +348,9 @@ a.pure-button-secondary
 .CheckedList 
 {
   display: block;
-  max-height: 25rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  max-height: 23rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   overflow:auto
 }
 

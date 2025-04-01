@@ -68,6 +68,7 @@
     "citymap.sectionpos": "Kaartpositie",
     "citymap.rendermap": "Geëxtraheerde kaart intekenen",
     "citymap.extractposition":"Positie van het kaartgebied dat moet worden geëxtraheerd",
+    "citymap.mapparam":"Instellingen extractiezone",
     "preview.savesvg": "Opslaan als svg-bestand",
     "param.focuspolicy": "Focussen op navigatie",
     "param.general.section": "Algemene opties",

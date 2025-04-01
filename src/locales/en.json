@@ -59,6 +59,7 @@
     "transport.sectionline": "Transport line selection",
     "transport.findosmcity": "Search a city in OSM",
     "citymap.extractposition":"Map area position",
+    "citymap.mapparam":"Extraction area settings",
     "citymap.sectionplan": "Street Map rendering",
     "citymap.rendermap": "Draw extracted Map",
     "citymap.building": "Include buildings",

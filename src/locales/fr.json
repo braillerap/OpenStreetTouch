@@ -73,6 +73,7 @@
     "citymap.mousegps": "Cliquer sur la carte pour obtenir une position",
     "citymap.sectionrender": "Extraction des données de la carte",
     "citymap.sectionpos": "Position de la carte",
+    "citymap.mapparam":"Paramètres de la zone d'extraction",
     "preview.savesvg": "Enregistrer le SVG",
     "param.locale": "Langue de l'application",
     "param.formtitle": "Paramètres",

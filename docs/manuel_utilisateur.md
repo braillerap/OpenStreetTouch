@@ -54,6 +54,8 @@ La page d'accueil présente le numéro de version du programme , les logos des p
 ## Transport
 Cet onglet permet d'extraire les lignes de transport d'une ville selon les paramètres définis par l'utilisateur.
 
+![Capture d'écran de l'onglet Transport](IMG/transport.png)
+*Utilisation e l'onglet Transport avec le métro Parisien*
 
 ### 1- Définir les paramètres de l’extraction
 
@@ -156,11 +158,11 @@ Attention pour que ce bouton apparaisse il faut avoir généré le dessin en aya
 Passer en mode d’affichage Contour: Menu : Affichage > Contours
 
 
-![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser](IMG/polygone.png)
+![visualisation dans le logiciel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser](IMG/polygone.png)
 *Visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode polygone. Attention à bien choisir le mode affichage des contours pour les visualiser !*
 
 
-![visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)](IMG/no_polygone.png)
+![visualisation dans le logiciel Inkscape des lignes de transport en mode normal](IMG/no_polygone.png)
 *Visualisation dans le logiciel vectoriel Inkscape des lignes de transport en mode normal (mode polygone décoché)*
 
 
@@ -181,6 +183,8 @@ Passer en mode d’affichage Contour: Menu : Affichage > Contours
 
 Cet onglet permet d'extraire une carte à partir d’un point central et d’un rayon. A noter que la carte extraite est au format rectangulaire (le cercle tracé à partir du rayon est transformé en rectangle pour la génération de la carte)
 
+![Vue de l'interface de l'onglet carte](IMG/map.png)
+*Vue de l'interface de l'onglet carte*
 
 ### 1-Déterminer le périmètre du plan souhaité
 **Le point central peut être défini de deux manières :**
@@ -236,18 +240,27 @@ Cocher les options suivantes pour qu'elles soient inclues sur le plan.
 *enregistrer l'image au format souhaité : svg ou png*
 
 
-- **Enregistrer l'image en SVG** : Cliquer sur le bouton pour générer le plan au format SVG
-- **Enregistrer l'image en PNG** : Cliquer sur le bouton pour générer le plan au format PNG
+- **Enregistrer l'image en SVG** : Cliquer sur le bouton pour enregistrer le plan au format SVG
+- **Enregistrer l'image en PNG** : Cliquer sur le bouton pour enregistrer le plan au format PNG
 
 
 
 ## Paramètres
-**Langue de l'application :** Menu déroulant pour choisir la langue de l'application actuellement disponible en français ou en anglais
+
+### Paramètres de l'application
+
+**Langue de l'application :** Menu déroulant pour choisir la langue de l'application.
 
 
 ![Choix de la langue dans le menu Paramètres )](IMG/Langue_application.png)
 *Choix de la langue dans le menu Paramètres*
 
+### Paramètres d'accessibilité
+
+**Positionner le focus lors de la navigation :** Cocher cette option pour que le focus soit positionné sur les éléments les plus utilisés lors de la navigation dans l'application.
+
+**Activer les raccourcis clavier dans le menu principal :** Les raccourcis clavier sont très utiles pour permettre une navigation rapide. Cependant ils sont compliqués a représenter dans certaine langue et sont parfois
+incompatible avec les lecteurs d'écran. Vous pouvez utiliser cette option pour activer ou désactiver les raccourcis clavier dans le menu principal.
 
 ## Quitter 
 **Quitter l'application** : Cliquer sur l'onglet Exit pour fermer l'application
