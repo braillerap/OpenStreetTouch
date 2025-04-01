@@ -327,7 +327,7 @@ msgid ""
 "avec les cases à cocher*"
 msgstr ""
 "![Rendering int the right panel with option \"render with option "
-"\"draw stations not checked\"](IMG/cocher_lignes_a_extraire.png)"
+"\"draw stations not checked\"](IMG/cocher_lignes_a_extraire_en.png)"
 " *Interface to choose the different transport lines to extract with the check boxes*"
 " "
 
