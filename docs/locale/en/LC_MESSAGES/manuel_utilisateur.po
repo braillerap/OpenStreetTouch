@@ -925,7 +925,7 @@ msgstr "**Exit the application** : Click on the Exit tab to close the applicatio
 
 #: ../../manuel_utilisateur.md:268
 msgid "Une confirmation vous sera demandée avant de quitter l'application."
-msgstr ""
+msgstr "You will be asked for confirmation before exiting the application."
 
 #~ msgid ""
 #~ "![imUne capture d'écran du logiciel "
