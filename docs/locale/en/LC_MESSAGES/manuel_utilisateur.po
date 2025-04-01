@@ -236,7 +236,7 @@ msgid ""
 "paramètres de l'extraction dans la partie gauche de la fenêtre*"
 msgstr ""
 "![Extraction data "
-"parameters](IMG/rechercher_ville_type_transort.png) *On the left, "
+"parameters](IMG/rechercher_ville_type_transort_en.png) *On the left, "
 "the extraction data parameters*"
 
 
@@ -296,7 +296,7 @@ msgid ""
 "Rechercher](IMG/rechercher_ville_type_transort.png) *Interface avec le "
 "bouton Rechercher*"
 msgstr ""
-"![Interface with the Search button](IMG/rechercher_ville_type_transort.png) *Interface with the Search button*"
+"![Interface with the Search button](IMG/rechercher_ville_type_transort_en.png) *Interface with the Search button*"
 " "
 
 #: ../../manuel_utilisateur.md:79
