@@ -22,9 +22,11 @@ Another usage exemple with the Askoria campus in Rennes - France
 - Extract ordered station name from public transport data.
 - Extract small city map to help build accessible description of local area.
 
-# Releases
+## Releases
 We provide pre-built binaries for Windows, Debian 12, Ubuntu 24.04 .
 
+## User manual
+The user manual is available [https://openstreettouch.readthedocs.io/en/main/](https://openstreettouch.readthedocs.io/en/main/)
 
 ## Contributing
 
