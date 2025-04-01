@@ -402,8 +402,10 @@ if __name__ == "__main__":
 
     # redirect stdout to file for debug purpose
     #f = open("output.log", 'w')
-    #f = open(os.devnull, 'w', encoding='utf-8')
-    #sys.stdout = f
+    # redirect stdout to null with utf8 support in pyinstaller bundle
+    if getattr(sys, 'frozen', False):
+        f = open(os.devnull, 'w', encoding='utf-8')
+        sys.stdout = f
 
     #print(sys.argv)
     dir, script = os.path.splitext(sys.argv[0])
