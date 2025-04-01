@@ -1,6 +1,7 @@
 {
     "app.loading": "Chargement en cours…",
     "app.wait": "Patientez…",
+    "app.confirquit":"Voulez-vous vraiment quitter l'application ?",
     "file.open": "Ouvrir",
     "file.save": "Enregistrer",
     "file.saveas": "Enregistrer sous",

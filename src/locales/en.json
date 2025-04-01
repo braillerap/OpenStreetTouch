@@ -1,6 +1,7 @@
 {
     "app.loading": "Loading in progress…",
     "app.wait": "Wait…",
+    "app.confirquit":"Are you sure you want to exit the application ?",
     "file.open": "Open",
     "file.save": "Save",
     "file.saveas": "Save as",
