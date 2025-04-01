@@ -265,4 +265,4 @@ incompatible avec les lecteurs d'écran. Vous pouvez utiliser cette option pour 
 ## Quitter 
 **Quitter l'application** : Cliquer sur l'onglet Exit pour fermer l'application
 
-Attention, cette action ferme sans demander si vous souhaitez enregistrer avant de quitter !
+Une confirmation vous sera demandée avant de quitter l'application.
