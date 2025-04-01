@@ -643,9 +643,8 @@ msgid "Carte"
 msgstr "Map"
 
 #: ../../manuel_utilisateur.md:182
-#, fuzzy
 msgid "**Extraction de carte**"
-msgstr "Draw extracted map"
+msgstr "**Map extraction**"
 
 #: ../../manuel_utilisateur.md:184
 msgid ""
