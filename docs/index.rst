@@ -7,9 +7,6 @@ Bienvenue sur la documentation OpenStreetTouch
 
 |
 
-  
-
-|
 .. toctree::
    :maxdepth: 3
 
