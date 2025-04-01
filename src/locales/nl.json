@@ -57,7 +57,7 @@
     "citymap.radius": "Straal (in meters)",
     "citymap.streetpolygon": "Wegen en straten als polygonen tonen",
     "citymap.footpathonly": "Alleen voetpaden tonen",
-    "citymap.maptitle": "Stadskaart",
+    "citymap.maptitle": "Kaartextrahering",
     "citymap.latitude": "Breedtegraad",
     "citymap.longitude": "Lengtegraad",
     "citymap.water": "Wateroppervlakken tonen",
