@@ -1,5 +1,4 @@
 {
-    
     "app.loading": "Bezig met laden…",
     "app.wait": "Bezig met wachten…",
     "file.open": "Openen",
@@ -38,7 +37,7 @@
     "transport.iso639": "Taal van plaatsnaam",
     "transport.osmcityname": "Plaatsnaam op OSM",
     "transport.nodata": "Geen gegevens",
-    "transport.nblines":"Transportlijnen tellen mee",
+    "transport.nblines": "Transportlijnen tellen mee",
     "transport.osmpending": "Bezig met zoeken…",
     "transport.polygon": "Lijnen intekenen als polygonen",
     "transport.downloadsvg": "Afbeelding opslaan als svg-bestand",
@@ -67,7 +66,7 @@
     "citymap.sectionrender": "Kaartgegevens extraheren",
     "citymap.sectionpos": "Kaartpositie",
     "citymap.rendermap": "Geëxtraheerde kaart intekenen",
-    "citymap.extractposition":"Positie van het kaartgebied dat moet worden geëxtraheerd",
+    "citymap.extractposition": "Positie van het kaartgebied dat moet worden geëxtraheerd",
     "preview.savesvg": "Opslaan als svg-bestand",
     "param.focuspolicy": "Focussen op navigatie",
     "param.general.section": "Algemene opties",
@@ -79,10 +78,7 @@
     "transport.downloadtxt": "Haltes/Stations opslaan als txt-bestand",
     "transport.type.subway": "Metro",
     "transport.type.train": "Trein",
-    
     "param.locale": "Programmataal",
     "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu",
-    "param.accesibility.section":"Toegankelijkheidsinstellingen"
-
-    
+    "param.accesibility.section": "Toegankelijkheidsinstellingen"
 }
