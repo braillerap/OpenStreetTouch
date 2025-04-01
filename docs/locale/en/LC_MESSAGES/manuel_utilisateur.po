@@ -199,8 +199,8 @@ msgid ""
 "![Capture d'écran de la page d'accueil](IMG/home.jpg) *Capture d'écran de"
 " la page d'accueil*"
 msgstr ""
-"![Capture d'écran de la page d'accueil](IMG/home.jpg) *Capture d'écran de"
-" la page d'accueil*"
+"![Home page screenshot with software version, partners logo and main menu](IMG/home.jpg) "
+"*Home screenshot*"
 
 #: ../../manuel_utilisateur.md:48
 msgid "Capture d'écran de la page d'accueil"
@@ -223,15 +223,16 @@ msgid ""
 "![Capture d'écran de l'onglet Transport](IMG/transport.png) *Utilisation "
 "e l'onglet Transport avec le métro Parisien*"
 msgstr ""
+"![Transport tab screenshot](IMG/transport_en.png) *Using the"
+" Transport tab with the Paris Metro*"
 
 #: ../../manuel_utilisateur.md:57
-#, fuzzy
 msgid "Capture d'écran de l'onglet Transport"
-msgstr "screenshot of the home page"
+msgstr "Transport tab screenshot"
 
 #: ../../manuel_utilisateur.md:60
 msgid "1- Définir les paramètres de l’extraction"
-msgstr "1- Define the extraction parameters"
+msgstr "1- Define the extraction settings"
 
 #: ../../manuel_utilisateur.md:62
 msgid ""
@@ -244,11 +245,11 @@ msgstr ""
 
 #: ../../manuel_utilisateur.md:62
 msgid "Interface des paramètres de l'extraction"
-msgstr "Extraction data parameters"
+msgstr "Extraction data parameters interface"
 
 #: ../../manuel_utilisateur.md:66
 msgid "**Type Emplacement :**"
-msgstr "**Place ID**"
+msgstr "**Place ID :**"
 
 #: ../../manuel_utilisateur.md:68
 msgid ""
@@ -257,7 +258,7 @@ msgid ""
 "nom)"
 msgstr ""
 "Dropdown menu to choose whether the search is by city name or Wikidata ID"
-" (needed in the case where several cities have the same name) "
+" (useful in the case where several cities have the same name) "
 
 #: ../../manuel_utilisateur.md:69
 msgid "Champs texte vide pour écrire le nom  de ville ou l’ID correspondant."
@@ -326,7 +327,7 @@ msgid ""
 "*Interface pour choisir les différentes lignes de transports à extraire "
 "avec les cases à cocher*"
 msgstr ""
-"![Rendering int the right panel with option \"render with option \"draw "
+"![Rendering in the right panel with option \"render with option \"draw "
 "stations not checked\"](IMG/cocher_lignes_a_extraire_en.png) *Interface "
 "to choose the different transport lines to extract with the check boxes* "
 
@@ -347,7 +348,7 @@ msgid ""
 "**Dessiner les stations :** cocher cette option pour que les stations "
 "soient visibles sur la carte"
 msgstr ""
-"**Draw stations :** check this option to make the stations visible on the"
+"**Draw stations :** check this option to make the stations displayed on the"
 " map"
 
 #: ../../manuel_utilisateur.md:103
@@ -360,7 +361,7 @@ msgstr ""
 "**Line paths as polygons :** check this option to draw the lines with "
 "polygons, which is equivalent to drawing them with outlines. This option "
 "is recommended to exploit this drawing with a digital machine, laser "
-"cutting for example."
+"cutter for example."
 
 #: ../../manuel_utilisateur.md:106
 msgid ""
@@ -413,7 +414,7 @@ msgid ""
 "dessiner la/les lignes de transports*"
 msgstr ""
 "![Rendering in the right panel when the option \"draw stations\" is\" not"
-" checked](IMG/dessiner_ligne_transport.png) *Button draw transport line*"
+" checked](IMG/dessiner_ligne_transport_en.png) *Button draw transport line*"
 
 #: ../../manuel_utilisateur.md:117 ../../manuel_utilisateur.md:131
 msgid ""
@@ -444,7 +445,7 @@ msgid ""
 "\"dessiner les stations\" et \"polygone\"*"
 msgstr ""
 "![Rendering in the right panel with option \"draw stations and polygons\""
-" to draw transport lines](IMG/dessiner_les_stations.png) *Rendering in "
+" to draw transport lines](IMG/dessiner_les_stations_en.png) *Rendering in "
 "the right panel of the chosen transport lines, with the option \"draw "
 "stations\" and \"polygons\"* "
 
@@ -464,7 +465,7 @@ msgid ""
 "non cochée*"
 msgstr ""
 "![Rendering in the right panel when the option \"draw stations\" is not "
-"checked](IMG/polygone_segments_no_station.png) *Rendering in the right "
+"checked](IMG/polygone_segments_no_station_en.png) *Rendering in the right "
 "panel when the option \"draw stations\" is not checked*"
 
 #: ../../manuel_utilisateur.md:135
@@ -482,7 +483,7 @@ msgid ""
 "stations sous le dessin des lignes de transports*"
 msgstr ""
 "![Display of the names of the stations under the drawing of the transport"
-" lines](IMG/affichage_nom_stations.png) *Display of the names of the "
+" lines](IMG/affichage_nom_stations_en.png) *Display of the names of the "
 "stations under the drawing of the transport lines* "
 
 #: ../../manuel_utilisateur.md:138
@@ -561,7 +562,6 @@ msgid "Passer en mode d’affichage Contour: Menu : Affichage > Contours"
 msgstr "Switch to outline display mode: Menu: Display mode > Outline"
 
 #: ../../manuel_utilisateur.md:161
-#, fuzzy
 msgid ""
 "![visualisation dans le logiciel Inkscape des lignes de transport en mode"
 " polygone. Attention à bien choisir le mode affichage des contours pour "
@@ -575,7 +575,6 @@ msgstr ""
 "display mode in Inkscape software.* "
 
 #: ../../manuel_utilisateur.md:161
-#, fuzzy
 msgid ""
 "visualisation dans le logiciel Inkscape des lignes de transport en mode "
 "polygone. Attention à bien choisir le mode affichage des contours pour "
@@ -585,7 +584,6 @@ msgstr ""
 "option activated. Take attention to select Outline   display mode"
 
 #: ../../manuel_utilisateur.md:165
-#, fuzzy
 msgid ""
 "![visualisation dans le logiciel Inkscape des lignes de transport en mode"
 " normal](IMG/no_polygone.png) *Visualisation dans le logiciel vectoriel "
@@ -596,7 +594,6 @@ msgstr ""
 "Inkscape software with **normal** option deactivated*"
 
 #: ../../manuel_utilisateur.md:165
-#, fuzzy
 msgid ""
 "visualisation dans le logiciel Inkscape des lignes de transport en mode "
 "normal"
@@ -664,10 +661,13 @@ msgid ""
 "![Vue de l'interface de l'onglet carte](IMG/map.png) *Vue de l'interface "
 "de l'onglet carte*"
 msgstr ""
+"![Map tab screenshot](IMG/map_en.png) "
+"*Map tab screenshot* "
+
 
 #: ../../manuel_utilisateur.md:186
 msgid "Vue de l'interface de l'onglet carte"
-msgstr ""
+msgstr "Map tab screenshot"
 
 #: ../../manuel_utilisateur.md:189
 msgid "1-Déterminer le périmètre du plan souhaité"
@@ -745,7 +745,7 @@ msgid ""
 "![Rendu en incluant les immeubles )](IMG/inclure_immeubles.png) *Exemple "
 "de rendu de carte en incluant les immeubles*"
 msgstr ""
-"![Render including buildings](IMG/inclure_immeubles.png) *Example of map "
+"![Render including buildings](IMG/inclure_immeubles_en.png) *Example of map "
 "rendering including buildings*"
 
 #: ../../manuel_utilisateur.md:210
@@ -759,7 +759,7 @@ msgid ""
 "carte en incluant les immeubles et chemins piétons*"
 msgstr ""
 "![Render including buildings and pedestrian roads "
-"only](IMG/inclure_immeubles_pietons_seulement.png) *Example of map "
+"only](IMG/inclure_immeubles_pietons_seulement_en.png) *Example of map "
 "rendering including buildings and pedestrian roads only* "
 
 #: ../../manuel_utilisateur.md:214
@@ -775,7 +775,7 @@ msgid ""
 msgstr ""
 "![Render including buildings and pedestrian roads only in polygon mode "
 "for "
-"roads/paths](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins.png)"
+"roads/paths](IMG/inclure_immeubles_pietons_seulement_polygone_route_chemins_en.png)"
 " *Example of map rendering including buildings and pedestrian roads only "
 "in polygon mode for roads/paths"
 
@@ -790,7 +790,7 @@ msgid ""
 "![Rendu  avec toutes les options cochées : )](IMG/tout_inclus.png) "
 "*Exemple avec toutes les options cochées*"
 msgstr ""
-"![Render  with all options checked : )](IMG/tout_inclus.png) *Example "
+"![Render  with all options checked : )](IMG/tout_inclus_en.png) *Example "
 "with all options checked*"
 
 #: ../../manuel_utilisateur.md:222
@@ -816,7 +816,7 @@ msgid ""
 "zone de la carte*"
 msgstr ""
 "![View of the button in the interface to extract the area of the map "
-")](IMG/extraction_de_la_zone_de_la_carte.png) *Button to extract the area"
+")](IMG/extraction_de_la_zone_de_la_carte_en.png) *Button to extract the area"
 " of the map*"
 
 #: ../../manuel_utilisateur.md:232
@@ -834,7 +834,7 @@ msgid ""
 "souhaité : svg ou png*"
 msgstr ""
 "![Save image in the desired format : svg or png "
-")](IMG/enregistrer_image_svg_carte.png) *Save image in the desired format"
+")](IMG/enregistrer_image_svg_carte_en.png) *Save image in the desired format"
 " : svg or png*"
 
 #: ../../manuel_utilisateur.md:239
@@ -842,7 +842,6 @@ msgid "Enregistrer image sous le format voulu : svg ou png )"
 msgstr "Save image in the desired format : svg or png )"
 
 #: ../../manuel_utilisateur.md:243
-#, fuzzy
 msgid ""
 "**Enregistrer l'image en SVG** : Cliquer sur le bouton pour enregistrer "
 "le plan au format SVG"
@@ -851,7 +850,6 @@ msgstr ""
 "format"
 
 #: ../../manuel_utilisateur.md:244
-#, fuzzy
 msgid ""
 "**Enregistrer l'image en PNG** : Cliquer sur le bouton pour enregistrer "
 "le plan au format PNG"
@@ -864,12 +862,10 @@ msgid "Paramètres"
 msgstr "Parameters"
 
 #: ../../manuel_utilisateur.md:250
-#, fuzzy
 msgid "Paramètres de l'application"
-msgstr "Extraction data parameters"
+msgstr "General parameters"
 
 #: ../../manuel_utilisateur.md:252
-#, fuzzy
 msgid ""
 "**Langue de l'application :** Menu déroulant pour choisir la langue de "
 "l'application."
@@ -883,7 +879,7 @@ msgid ""
 ")](IMG/Langue_application.png) *Choix de la langue dans le menu "
 "Paramètres*"
 msgstr ""
-"![Language selection in the Parameters tab )](IMG/Langue_application.png)"
+"![Language selection in the Parameters tab )](IMG/Langue_application_en.png)"
 " *Language selection in the Parameters tab*"
 
 #: ../../manuel_utilisateur.md:255
@@ -892,7 +888,7 @@ msgstr "Language selection in the Parameters tab )"
 
 #: ../../manuel_utilisateur.md:258
 msgid "Paramètres d'accessibilité"
-msgstr ""
+msgstr "Accessibility parameters"
 
 #: ../../manuel_utilisateur.md:260
 msgid ""
@@ -900,6 +896,9 @@ msgid ""
 " que le focus soit positionné sur les éléments les plus utilisés lors de "
 "la navigation dans l'application."
 msgstr ""
+"**Set focus on navigate :** Check this option to set"
+" the focus on the most used elements when navigating in the application."
+" "
 
 #: ../../manuel_utilisateur.md:262
 msgid ""
@@ -910,7 +909,11 @@ msgid ""
 "cette option pour activer ou désactiver les raccourcis clavier dans le "
 "menu principal."
 msgstr ""
-
+"**Enable Access key in main menu :** Keyboard shortcuts are very useful to allow a fast navigation."
+" However they are difficult to translate in some languages and are sometimes incompatible with screen readers."
+" You can use this option to enable or disable keyboard shortcuts in the main menu."
+" "
+    
 #: ../../manuel_utilisateur.md:265
 msgid "Quitter"
 msgstr "Exit"
