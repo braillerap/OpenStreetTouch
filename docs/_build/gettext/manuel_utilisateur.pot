@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenStreetTouch 0.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-01 21:45+0000\n"
+"POT-Creation-Date: 2025-04-01 22:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -510,5 +510,5 @@ msgid "**Quitter l'application** : Cliquer sur l'onglet Exit pour fermer l'appli
 msgstr ""
 
 #: ../../manuel_utilisateur.md:268
-msgid "Attention, cette action ferme sans demander si vous souhaitez enregistrer avant de quitter !"
+msgid "Une confirmation vous sera demandée avant de quitter l'application."
 msgstr ""
