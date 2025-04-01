@@ -18,15 +18,15 @@ class Osmprocess:
         self.transport_graph_data_filtered = None
         self.streetmap_data = None
 
-    def ReadTransportData (self, city, transport_type, iso639_code = "fr", place_id=0):
+    def ReadTransportData (self, city, transport_type, iso639_code = "fr", place_id=0, direct=False):
         self.CityName = city.title()
         self.transport_type = transport_type
         self.iso639_code = iso639_code
         
         # extract osm data with overpass request
-        self.osm_data = application_OSM_extraction.overpass_request(self.CityName, transport_type, iso639_code, place_id)
+        self.osm_data = application_OSM_extraction.overpass_request(self.CityName, transport_type, iso639_code, place_id, direct)
         #json.dump (self.osm_data, open("osm_request.json", "w"), indent=4, sort_keys=False)
-        
+        print ("OSM data extracted" , len(self.osm_data))
         # data structuration for future usage
         self.transport_data = application_OSM_extraction.osm_extraction (self.osm_data, self.CityName, self.transport_type)
         #json.dump (self.transport_data, open("osm_extraction.json", "w"), indent=4, sort_keys=False)

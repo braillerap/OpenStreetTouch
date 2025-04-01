@@ -313,6 +313,9 @@ class Api:
     def ReadTransportData (self, city, transport_type, iso639_city_code, place_id):
         ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code, place_id)
         print ("ReadTransportData", ret)
+        if ret == 0:
+            ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code, place_id, direct=True)
+        
         return ret
     
 
