@@ -483,7 +483,7 @@ msgid ""
 "stations sous le dessin des lignes de transports*"
 msgstr ""
 "![Display of the names of the stations under the drawing of the transport"
-" lines](IMG/affichage_nom_stations_en.png) *Display of the names of the "
+" lines](IMG/affichage_nom_stations.png) *Display of the names of the "
 "stations under the drawing of the transport lines* "
 
 #: ../../manuel_utilisateur.md:138
@@ -519,8 +519,8 @@ msgid ""
 "![Bouton enregistrer l'image en svg](IMG/enregistrer_image_svg.png) "
 "*Bouton enregistrer l'image en svg*"
 msgstr ""
-"![Button to save the image in svg](IMG/enregistrer_image_svg.png) *Button"
-" to save the image in svg*"
+"![Button to save the image in svg](IMG/enregistrer_image_svg_en.png) "
+"*Button to save the image in svg*"
 
 #: ../../manuel_utilisateur.md:148
 msgid "Bouton enregistrer l'image en svg"

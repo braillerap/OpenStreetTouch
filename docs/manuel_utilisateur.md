@@ -179,7 +179,7 @@ Passer en mode d’affichage Contour: Menu : Affichage > Contours
 
 
 ## Carte
-**Plan de ville**
+**Extraction de carte**
 
 Cet onglet permet d'extraire une carte à partir d’un point central et d’un rayon. A noter que la carte extraite est au format rectangulaire (le cercle tracé à partir du rayon est transformé en rectangle pour la génération de la carte)
 

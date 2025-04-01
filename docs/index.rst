@@ -7,10 +7,7 @@ Bienvenue sur la documentation OpenStreetTouch
 
 |
 
- .. warning::
-    **Build in Progress** 
-    OpenStreetTouch documentation will be available soon.
-    
+  
 
 |
 .. toctree::
