@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenStreetTouch 0.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-30 17:29+0000\n"
+"POT-Creation-Date: 2025-04-01 21:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -24,13 +24,12 @@ msgstr ""
 msgid "Bienvenue sur la documentation OpenStreetTouch"
 msgstr "Welcome on OpenStreetTouch user manual"
 
-#: ../../index.rst:11
-msgid ""
-"**Build in Progress** OpenStreetTouch documentation will be available "
-"soon."
-msgstr ""
-
-#: ../../index.rst:25
+#: ../../index.rst:19
 msgid "Mise à jour: |today|"
 msgstr "Update: |today|"
+
+#~ msgid ""
+#~ "**Build in Progress** OpenStreetTouch "
+#~ "documentation will be available soon."
+#~ msgstr ""
 
