@@ -23,10 +23,21 @@ Another usage exemple with the Askoria campus in Rennes - France
 - Extract small city map to help build accessible description of local area.
 
 ## Releases
-We provide pre-built binaries for Windows, Debian 12, Ubuntu 24.04 .
+We provide pre-built binaries for Windows, Debian 12, Ubuntu 24.04. See [releases](https://github.com/braillerap/OpenStreetTouch/releases) for more information.
+
+OpenStreetTouch depends on glibc version. Unfortunately recent Debian and Ubuntu distribution are not using exactly the same. If your are using Debian 12 or a derivate distribution, use desktopbraillerap-debian. If you are using Ubuntu 24.04 or a derivate distribution, use desktopbraillerap-ubuntu
+
+[![auto_build_for_ubuntu](https://github.com/braillerap/OpenStreetTouch/actions/workflows/auto_build_for_ubuntu.yml/badge.svg?event=release)](https://github.com/braillerap/OpenStreetTouch/actions/workflows/auto_build_for_ubuntu.yml)
+
+[![auto_build_for_debian](https://github.com/braillerap/OpenStreetTouch/actions/workflows/auto_build_for_debian.yml/badge.svg?event=release)](https://github.com/braillerap/OpenStreetTouch/actions/workflows/auto_build_for_debian.yml)
 
 ## User manual
 The user manual is available [https://openstreettouch.readthedocs.io/en/main/](https://openstreettouch.readthedocs.io/en/main/)
+
+**en** [![Documentation Status](https://readthedocs.org/projects/openstreettouch_en/badge/?version=main&style=plastic)](https://openstreettouch.readthedocs.io/en/main/)
+
+**fr** [![Documentation Status](https://readthedocs.org/projects/openstreettouch/badge/?version=main&style=plastic)](https://openstreettouch.readthedocs.io/fr/main/)
+
 
 ## Contributing
 
