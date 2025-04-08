@@ -1,6 +1,7 @@
 {
     "file.txtfile": "文本文件",
     "menu.exit.shortcut": "x",
+    "app.confirquit":"您确实要退出该应用程序吗？",
     "app.loading": "正在加载…",
     "app.wait": "等待…",
     "file.open": "打开",
@@ -60,6 +61,8 @@
     "citymap.streetpolygon": "将道路和街道渲染为多边形",
     "citymap.footpathonly": "仅包括人行道",
     "citymap.maptitle": "地图提取",
+    "citymap.mapparam":"提取区域设置",
+    
     "citymap.latitude": "纬度",
     "citymap.longitude": "经度",
     "citymap.radius": "半径（米）",

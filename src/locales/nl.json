@@ -59,6 +59,7 @@
     "citymap.streetpolygon": "Wegen en straten als polygonen tonen",
     "citymap.footpathonly": "Alleen voetpaden tonen",
     "citymap.maptitle": "Kaartextrahering",
+    "citymap.mapparam":"Instellingen extractiegebied",
     "citymap.latitude": "Breedtegraad",
     "citymap.longitude": "Lengtegraad",
     "citymap.water": "Wateroppervlakken tonen",
