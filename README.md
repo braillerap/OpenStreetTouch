@@ -16,6 +16,9 @@ Here is an usage exemple with DesktopBrailleRAP on a residential area in France.
 Another usage exemple with the Askoria campus in Rennes - France
 ![DesktopBrailleRAP view translating a vector map in tangible map](./screenshot/askoria.jpg)
 
+Using a BrailleRAP to emboss cultural center access map at Tech Inn'Vitre
+![A BrailleRAP embossing a city map in France](./screenshot/bra_vitre.jpg)
+
 
 ## Features
 - Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a 3d printer or a [BrailleRAP](https://github.com/braillerap/BrailleRap) with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
