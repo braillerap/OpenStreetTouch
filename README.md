@@ -17,7 +17,7 @@ Another usage exemple with the Askoria campus in Rennes - France
 ![DesktopBrailleRAP view translating a vector map in tangible map](./screenshot/askoria.jpg)
 
 Using a BrailleRAP to emboss cultural center access map at Tech Inn'Vitre
-![A BrailleRAP embossing a city map in France](./screenshot/bra_vitre.jpg)
+![A BrailleRAP embossing a city map in France](./screenshot/brap_vitre.jpg)
 
 
 ## Features
