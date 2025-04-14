@@ -45,7 +45,7 @@ The user manual is available [https://openstreettouch.readthedocs.io/en/main/](h
 ## Contributing
 
 ### Translation
-If you need the software in your locale language, we will be happy to add a new translation. Translation files will be hosted on codeberg community translation platform and can be updated by anyone [weblate host on codeberg] for more information.
+If you need the software or the user manual in your locale language, we will be happy to add a new translation. Translation files will be hosted on codeberg community translation platform and can be updated by anyone [weblate host on codeberg] for more information.
 
 
 ### Code and features
