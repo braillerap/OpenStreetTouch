@@ -57,7 +57,7 @@ Feel free to open issues or pull requests ! We will be happy to review and merge
 
 GUI translation files are available on [codeberg weblate host](https://translate.codeberg.org/engage/openstreettouch/) . Some languages are partialy translated , we are looking for contributors to complete and check them.
 
-</a>
+
 <a href="https://translate.codeberg.org/engage/openstreettouch/">
 <img src="https://translate.codeberg.org/widget/openstreettouch/ihm/multi-green.svg" alt="Translation status" width="75%"/>
 </a>
