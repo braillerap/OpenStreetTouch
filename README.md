@@ -16,6 +16,9 @@ Here is an usage exemple with DesktopBrailleRAP on a residential area in France.
 Another usage exemple with the Askoria campus in Rennes - France
 ![DesktopBrailleRAP view translating a vector map in tangible map](./screenshot/askoria.jpg)
 
+Using a BrailleRAP to emboss cultural center access map at [Tech Inn'Vitre](https://techinn.vitrecommunaute.bzh/)
+![A BrailleRAP embossing a city map in France](./screenshot/brap_vitre.jpg)
+
 
 ## Features
 - Build SVG map from public transport data. These SVG can then be use to build tangible map with a laser cutter, a 3d printer or a [BrailleRAP](https://github.com/braillerap/BrailleRap) with software like [image2touch](https://github.com/myhumankit/Image2Touch) or [DesktopBrailleRAP](https://github.com/braillerap/DesktopBrailleRAP).
@@ -42,7 +45,7 @@ The user manual is available [https://openstreettouch.readthedocs.io/en/main/](h
 ## Contributing
 
 ### Translation
-If you need the software in your locale language, we will be happy to add a new translation. Translation files will be hosted on codeberg community translation platform and can be updated by anyone [weblate host on codeberg] for more information.
+If you need the software or the user manual in your locale language, we will be happy to add a new translation. Translation files will be hosted on codeberg community translation platform and can be updated by anyone [weblate host on codeberg] for more information.
 
 
 ### Code and features
@@ -50,9 +53,21 @@ Feel free to open issues or pull requests ! We will be happy to review and merge
 
 ## Translations status
 
-</a>
+### Software GUI
+
+GUI translation files are available on [codeberg weblate host](https://translate.codeberg.org/engage/openstreettouch/) . Some languages are partialy translated , we are looking for contributors to complete and check them.
+
+
 <a href="https://translate.codeberg.org/engage/openstreettouch/">
 <img src="https://translate.codeberg.org/widget/openstreettouch/ihm/multi-green.svg" alt="Translation status" width="75%"/>
+</a>
+
+### User Manual
+
+User manual translation files are available on [codeberg weblate host](https://translate.codeberg.org/engage/openstreettouch_usermanual/) . Some languages are partialy translated , we are looking for contributors to complete and check them.
+
+<a href="https://translate.codeberg.org/engage/openstreettouch_usermanual/">
+<img src="https://translate.codeberg.org/widget/openstreettouch_usermanual/multi-auto.svg" alt="Translation status" width="75%" />
 </a>
 
 ## Funding

@@ -31,7 +31,7 @@
     "transport.renderstation": "Draw stations",
     "transport.search": "Search",
     "transport.search.shortcut": "S",
-    "transport.sectionplan": "Transport Line(s) rendering",
+    "transport.sectionplan": "Transport line rendering",
     "transport.strategyways": "Path from OSM data",
     "transport.strategywayscorreted": "OSM data corrected",
     "transport.strategystation": "Stations position",
