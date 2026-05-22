@@ -31,8 +31,8 @@ app_options = {
     
     "lang": "en",
     "osmiso639": "fr",
-    "focuspolicy":"false",
-    "accesskey":"false"
+    "focuspolicy":False,
+    "accesskey":False
 }
 
 
@@ -313,6 +313,9 @@ class Api:
     def ReadTransportData (self, city, transport_type, iso639_city_code, place_id):
         ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code, place_id)
         print ("ReadTransportData", ret)
+        if ret == 0:
+            ret = self.osmt.ReadTransportData (city, transport_type, iso639_city_code, place_id, direct=True)
+        
         return ret
     
 
@@ -402,8 +405,10 @@ if __name__ == "__main__":
 
     # redirect stdout to file for debug purpose
     #f = open("output.log", 'w')
-    f = open(os.devnull, 'w', encoding='utf-8')
-    sys.stdout = f
+    # redirect stdout to null with utf8 support in pyinstaller bundle
+    if getattr(sys, 'frozen', False):
+        f = open(os.devnull, 'w', encoding='utf-8')
+        sys.stdout = f
 
     #print(sys.argv)
     dir, script = os.path.splitext(sys.argv[0])

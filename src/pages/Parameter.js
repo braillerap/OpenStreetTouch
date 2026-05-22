@@ -73,9 +73,9 @@ class Parameters extends React.Component {
 
     
     return (
-      <div >
+      <main >
 
-        <h2>{this.context.GetLocaleString("param.formtitle")}</h2>
+        <h1>{this.context.GetLocaleString("param.formtitle")}</h1>
 
         <div className="pure-form pure-form-aligned">
           
@@ -83,9 +83,9 @@ class Parameters extends React.Component {
           
           
           <div className='ParamGroup'>
-            <section aria-label={this.context.GetLocaleString("param.general.section")}>
+            
             <fieldset className='ParamGroup'>
-              <legend>Application</legend>
+              <legend>{this.context.GetLocaleString("param.general.section")}</legend>
               <p>
               {this.context.GetLocaleString("param.locale")}&nbsp;
                 <b>{this.context.Params.lang}</b>
@@ -112,6 +112,9 @@ class Parameters extends React.Component {
 
               </select>
               </label>
+              </fieldset>
+              <fieldset className='ParamGroup'>
+              <legend>{this.context.GetLocaleString("param.accesibility.section")}</legend>
               <label>
                     <input type='checkbox' checked={this.context.Params.focuspolicy}
                     onChange={(e) => this.setFocusPolicy(e.target.checked)} />
@@ -122,12 +125,12 @@ class Parameters extends React.Component {
                     onChange={(e) => this.handleChangeGeneral("accesskey", e.target.checked)} />
                     {this.context.GetLocaleString("param.accesskeypolicy")}
               </label>
-            </fieldset>
-            </section>
+              </fieldset>
+            
           </div>
         </div >
 
-      </div >
+      </main >
     );
   }
 };

@@ -14,7 +14,11 @@ const Layout = () => {
     const exitrequest = (e) => {
         
         e.preventDefault();
-        window.pywebview.api.quit();
+        window.pywebview.api.confirm_dialog("OpenStreetTouch", GetLocaleString("app.confirquit")).then ((ret) => {
+            if (ret === true)
+                window.pywebview.api.quit();
+        });
+        
 
     }
     
@@ -54,7 +58,7 @@ const Layout = () => {
             <div className="App" dir={GetLocaleDir()}>
                 <div className='AppHeader'>
                     <div className="pure-menu pure-menu-horizontal menu_font" role={'presentation'} >
-                        <nav>
+                        <nav aria-live={"polite"}>
                             {/*accessKey={GetLocaleString("menu.home.shortcut")}*/ }
                             <ul className="pure-menu-list">
                                 <li className="pure-menu-item">

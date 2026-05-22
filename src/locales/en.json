@@ -1,6 +1,7 @@
 {
     "app.loading": "Loading in progress…",
     "app.wait": "Wait…",
+    "app.confirquit":"Are you sure you want to exit the application ?",
     "file.open": "Open",
     "file.save": "Save",
     "file.saveas": "Save as",
@@ -57,12 +58,15 @@
     "transport.sectionrequest": "OpenStreetMap request for city",
     "transport.sectiondata": "Map data handling",
     "transport.sectionline": "Transport line selection",
+    "transport.findosmcity": "Search a city in OSM",
+    "citymap.extractposition":"Map area position",
+    "citymap.mapparam":"Extraction area settings",
     "citymap.sectionplan": "Street Map rendering",
     "citymap.rendermap": "Draw extracted Map",
     "citymap.building": "Include buildings",
-    "citymap.streetpolygon": "Render road/streets as polygons",
+    "citymap.streetpolygon": "Render road and streets as polygons",
     "citymap.footpathonly": "Include only footpath",
-    "citymap.maptitle": "City Map",
+    "citymap.maptitle": "Map extraction",
     "citymap.latitude": "Latitude",
     "citymap.longitude": "Longitude",
     "citymap.radius": "Radius (meters)",
@@ -77,5 +81,6 @@
     "param.formtitle": "Parameters",
     "param.form_aria": "Application parameters",
     "param.focuspolicy": "Set focus on navigate",
-    "param.general.section": "General parameters"
+    "param.general.section": "General parameters",
+    "param.accesibility.section":"Accessibility parameters"
 }

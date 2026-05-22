@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) GPL V3
+# This file is distributed under the same license as the OpenStreetTouch
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenStreetTouch 0.2.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-01 21:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../licence.md:1
+msgid "License d'utilisation"
+msgstr "End user licence"
+
+#: ../../licence.md:3
+#, fuzzy
+msgid ""
+"OpenStreetTouch est un logiciel libre distribué sous licence GPL V3. Vous"
+" trouverez le texte complet de cette license dans le fichier `LICENSE` du"
+" projet sur Github : "
+"[https://github.com/braillerap/DesktopBrailleRAP/blob/main/LICENSE](https://github.com/braillerap/DesktopBrailleRAP/blob/main/LICENSE)"
+msgstr ""
+"OpenStreetTouch is a free software distributed under the GPL V3 license. "
+"You can find the full text of this license in the `LICENSE` file of the "
+"project on Github: "
+"[https://github.com/braillerap/OpenStreetTouch/blob/main/LICENSE](https://github.com/braillerap/OpenStreetTouch/blob/main/LICENSE)"
+

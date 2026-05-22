@@ -149,7 +149,7 @@ const CityMap = () => {
             if (position)
                 if (position.lat && position.lng)
                     return (
-                        <h2>{position.lat} {position.lng}</h2>
+                        <h2>Lat {position.lat} Lon {position.lng}</h2>
                     );    
                 else
                     return (<></>);    
@@ -294,11 +294,13 @@ const CityMap = () => {
             }    
         }
     return (
-        <>
-            <div className='CityMapParam' role="document">
-                <section aria-label={GetLocaleString("citymap.sectionpos")}>
-                    <h1 role="contentinfo"> {GetLocaleString("citymap.maptitle")}   </h1>
-                    {renderPosition()}
+        <main>
+            <div className='CityMapParam'>
+                
+                    <h1>{GetLocaleString("citymap.maptitle")}</h1>
+                    <h2>{GetLocaleString("citymap.mapparam")}</h2>
+                    <fieldset >
+                    <legend>{GetLocaleString("citymap.extractposition")}</legend>
                     <label>{GetLocaleString("citymap.latitude")}
                         <input ref={focusref} type="number" value={editLatitude} step="0.0001" min="-90" max="90" 
                         onChange={(e) => setLatitude(e.target.value)} />
@@ -311,15 +313,16 @@ const CityMap = () => {
                         <input type="number" value={radius} onChange={(e) => setRadius(e.target.value)} min={40} max={1500}/>
                     </label>
                     
-                    <h2 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h2>
-                </section>
+                    <h3 aria-hidden={true}>{GetLocaleString("citymap.mousegps")}</h3>
+                    </fieldset>
             </div>
-            <section aria-label="Map">
+            
             <MapContainer center={position} zoom={mapzoom} scrollWheelZoom={true}
                 ref={mapref}
-                style={{ width: '99%', position: 'relative', zIndex: '9', height: '40vh' }}
+                style={{ width: '99%', position: 'relative', zIndex: '9', height: '30vh' }}
                 attributionControl={false}
                 aria-hidden={true}
+                tabindex="-1"
                 >
 
                 <TileLayer
@@ -330,12 +333,12 @@ const CityMap = () => {
                  {renderMapRadius()}
                  
             </MapContainer>
-            </section>
-            <section aria-label={GetLocaleString("citymap.sectionrender")}>
+            
+                <h2>{GetLocaleString("transport.sectiondata")}</h2>  
                 {renderAction()}
                 {renderResultAction ()}
-            </section>
-        </>
+            
+        </main>
     );
 }
 

@@ -67,7 +67,7 @@ def read_configuration_file(input_config_file):
     return config_dict 
     
 # function for overpas request on Open Street Map database 
-def overpass_request(place_name, transportation_type = "subway", place_iso639_code = "fr", place_id=0): 
+def overpass_request(place_name, transportation_type = "subway", place_iso639_code = "fr", place_id=0, direct=False): 
     """Fonction : overpass request data 
     
     Parameters :
@@ -93,6 +93,17 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     
     
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
+    overpass_query_direct = f"""
+    [out:json][timeout:30];
+    /* recherche des données avec .searcharea */ 
+    area["name"="{place_name}"]->.searcharea;
+    (
+      relation["type"="route"]["route"="{transportation_type}"](area.searcharea);  
+    );
+    out ;
+    >;
+    out body qt ;
+    """
     overpass_query = f"""
     [out:json][timeout:30];
     /* recherche des données avec .searcharea */ 
@@ -115,12 +126,13 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     >;
     out body qt ;
     """
-    # print("Requête pour la ville {}".format(place_name))
     
-    # response = requests.get(overpass_url, params={'data': overpass_query})
     query = overpass_query
     if place_id != 0:
         query = overpass_query_wikidata
+    elif direct:
+        query = overpass_query_direct
+        
     print (query)
     try:
         response = requests.post(overpass_url, data={'data': query})
