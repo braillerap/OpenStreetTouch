@@ -66,8 +66,14 @@ def overpass_request(latitude, longitude, radius):
     print(query) 
     print("")
     
+    headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'text/plain',
+    'User-Agent': 'OpenStreetTouch (braillerap.org)',  
+    'Referer': 'https://www.braillerap.org' 
+    }
     # Récupération des données via Overpass API
-    response = requests.get(overpass_url, params={"data": query})
+    response = requests.get(overpass_url, params={"data": query}, headers=headers)
 
     if response.status_code != 200:
         raise Exception(f"Erreur lors de la requête : {response.status_code}")

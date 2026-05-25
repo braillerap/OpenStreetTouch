@@ -91,6 +91,13 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
     # ajout d'une majuscule sur la première lettre de place_name 
     place_name = place_name.title()
     
+    #default header for osm policy
+    headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'text/plain',
+    'User-Agent': 'OpenStreetTouch (braillerap.org)',  
+    'Referer': 'https://www.braillerap.org' 
+    }
     
     # Modifier l'overpass_query pour récupérer les données des arrêts de métro.
     overpass_query_direct = f"""
@@ -135,7 +142,7 @@ def overpass_request(place_name, transportation_type = "subway", place_iso639_co
         
     print (query)
     try:
-        response = requests.post(overpass_url, data={'data': query})
+        response = requests.post(overpass_url, data={'data': query}, headers=headers)
     except Exception as e:
         print("Request error")
         print(e) 
