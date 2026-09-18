@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import AppContext from './AppContext';
 import AppOption from './AppOption.js';
 import LocaleString from './localestring.js';
+import Backend from './backend.js';
 
 let params = AppOption;
-let pywebviewready = false;
+
 let locale = "fr";
 let localedata = new LocaleString();
+let backend = new Backend();
 
 const AppContextWrapper = (props) => {
     const [Params, setParams] = useState(params);
-    const [PyWebViewReady, setPyWebViewReady] = useState(pywebviewready);
     const [Locale, setLocale] = useState(locale);
     const [ImagePreview, setImagePreview] = useState('');
     const [TransportGuide, setTransportGuide] = useState('');
@@ -30,8 +31,8 @@ const AppContextWrapper = (props) => {
    
     function setOption(opt) {
         setParams(opt);
-        if (window.pywebview)
-            window.pywebview.api.gcode_set_parameters(opt);
+        if (backend)
+            backend.set_parameters(opt);
 
     }
    
@@ -45,7 +46,9 @@ const AppContextWrapper = (props) => {
         return localedata.getLocaleDir();
     }
     
-     
+    function getBackend() {
+        return backend;
+    }
     
     return (
         <AppContext.Provider value={{
@@ -54,9 +57,8 @@ const AppContextWrapper = (props) => {
             SetAppLocale: setAppLocale,
             GetLocaleString: getLocaleString,
             GetLocaleDir: getLocaleDir,
-            
+            GetBackend: getBackend,
             Params, setParams,
-            PyWebViewReady, setPyWebViewReady,
             Locale, setLocale,
             ImagePreview, setImagePreview,
             TransportGuide, setTransportGuide

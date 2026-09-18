@@ -8,7 +8,7 @@ const redOptions = { color: 'red' }
 const maxzoom = 18;
 
 const CityMap = () => {
-    const {GetLocaleString, Params} = useContext(AppContext);
+    const {GetLocaleString, Params, GetBackend} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { setTransportGuide } = useContext(AppContext);
     const mapref = useRef (null);
@@ -27,7 +27,7 @@ const CityMap = () => {
     const [mapzoom, setMapZoom] = useState(2);
 
     useEffect(() => {
-            window.pywebview.api.get_cairosvg_available().then ((enable) => {
+            GetBackend().get_cairosvg_available().then ((enable) => {
                 setPngAvailable(enable);
             });
 
@@ -182,7 +182,7 @@ const CityMap = () => {
                     lat = 51;
                 if (isNaN(lon))
                     lon = -0.09;
-                window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping).then ((svg) => {
+                GetBackend().ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping).then ((svg) => {
                    
                     setImagePreview (svg);
                     setRequest(false);
@@ -216,7 +216,7 @@ const CityMap = () => {
                 GetLocaleString("file.all") //"Tous"
             ]
     
-            window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
+            GetBackend().saveas_svgfile(ImagePreview, dialogtitle, filter);
         }
         const renderPNGcommand = () => {
             if (pngavailable)
@@ -232,7 +232,7 @@ const CityMap = () => {
                     GetLocaleString("file.all") //"Tous"
                 ]
     
-                window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
+                GetBackend().saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
                 
             }
         }

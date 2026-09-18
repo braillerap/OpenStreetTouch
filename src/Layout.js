@@ -3,23 +3,17 @@ import { Outlet, Link} from "react-router-dom";
 import Preview from './pages/Preview'
 import AppContext from "./components/AppContext";
 
-//import Toolbar from "./pages/Toolbar";
-
-
-
-
 const Layout = () => {
     const {GetLocaleString, GetLocaleDir, Params} = useContext(AppContext);
     
     const exitrequest = (e) => {
         
         e.preventDefault();
-        window.pywebview.api.confirm_dialog("OpenStreetTouch", GetLocaleString("app.confirquit")).then ((ret) => {
-            if (ret === true)
-                window.pywebview.api.quit();
-        });
-        
 
+        GetBackend().confirm_dialog("OpenStreetTouch", GetLocaleString("app.confirquit")).then ((ret) => {
+            if (ret === true)
+                GetBackend().quit(); // exit appication
+        });
     }
     
     const getAccessKeyMenuCallback = (menukey, accessKey, cb) => {
@@ -40,13 +34,13 @@ const Layout = () => {
     const getAccessKeyMenu = (url, menukey, accessKey) => {
         
         if (Params.accesskey === true)
-            return (<Link to={url} className="pure-menu-link"
+            return (<Link to={process.env.PUBLIC_URL + url} className="pure-menu-link"
                 accessKey={GetLocaleString(accessKey)}> 
                     {GetLocaleString(menukey)}
             </Link>
             );
 
-        return (<Link to={url} className="pure-menu-link" 
+        return (<Link to={process.env.PUBLIC_URL + url} className="pure-menu-link" 
             >
                 {GetLocaleString(menukey)} 
         </Link>);
@@ -68,26 +62,21 @@ const Layout = () => {
 
                                 <li className="pure-menu-item">
                                    
-                                    {getAccessKeyMenu("/transport", "menu.transport", "menu.transport.shortcut")}
+                                    {getAccessKeyMenu( "/transport", "menu.transport", "menu.transport.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
                                    
-                                    {getAccessKeyMenu("/cmap", "menu.citymap", "menu.citymap.shortcut")}
+                                    {getAccessKeyMenu( "/cmap", "menu.citymap", "menu.citymap.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
                                     
-                                    {getAccessKeyMenu("/parameter", "menu.param", "menu.param.shortcut")}
+                                    { getAccessKeyMenu("/parameter", "menu.param", "menu.param.shortcut")}
                                 </li>
                                 <li className="pure-menu-item">
-                                    {/*<Link onClick={exitrequest} className="pure-menu-link"
-                                        accessKey={GetLocaleString("menu.exit.shortcut")}>
-                                    
-                                        {GetLocaleString("menu.exit")} </Link>*/}
                                     {getAccessKeyMenuCallback("menu.exit", "menu.exit.shortcut", exitrequest)}
                                 </li>
                             </ul>
-                            {/*<button className="pure-menu-heading" onClick={() => {ForceResize()}}>FR</button>*/}
-
+                            
                         </nav>
 
                     </div>

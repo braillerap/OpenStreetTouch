@@ -18,9 +18,6 @@ class Home extends React.Component {
       this.context.setParams(this.props.params);
     }
     
-    //if (this.props.webviewready)
-    //  this.context.setPyWebViewReady(this.props.webviewready);
-    
   }
 
   render() {

@@ -4,7 +4,7 @@ import AppContext from "../components/AppContext";
 
 const Transport = () => {
     const focusref = useRef (null);
-    const {GetLocaleString, Params, SetOption} = useContext(AppContext);
+    const {GetLocaleString, Params, SetOption, GetBackend} = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
@@ -22,10 +22,10 @@ const Transport = () => {
     const [osmPending, setOsmPending] = useState(false);
 
     useEffect(() => {
-        window.pywebview.api.GetISO639_country_code().then ((isolist) => {
+        GetBackend().GetISO639_country_code().then ((isolist) => {
            setIso639CodeList(isolist);
         });
-        window.pywebview.api.get_cairosvg_available().then ((enable) => {
+        GetBackend().get_cairosvg_available().then ((enable) => {
             
             setPngAvailable(enable);
          });
@@ -120,7 +120,7 @@ const Transport = () => {
             console.log ("jslines error")
             //console.log (transportLines);
         }
-        window.pywebview.api.GetTransportData(jslines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
+        GetBackend().GetTransportData(jslines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
             console.log (datastr);
             let data = JSON.parse(datastr);
             console.log (data);
@@ -139,9 +139,9 @@ const Transport = () => {
         console.log (transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
-        window.pywebview.api.ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then ((size) => {
+        GetBackend().ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then ((size) => {
             
-            window.pywebview.api.GetTransportLines().then ((jsondata) => {
+            GetBackend().GetTransportLines().then ((jsondata) => {
                 let datadic = JSON.parse(jsondata);
                 setRealCityName (datadic.city);
 
@@ -263,7 +263,7 @@ const Transport = () => {
                 GetLocaleString("file.all") //"Tous"
             ]
 
-            window.pywebview.api.saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
+            GetBackend().saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
             
         }
     }
@@ -274,7 +274,7 @@ const Transport = () => {
             GetLocaleString("file.all") //"Tous"
         ]
 
-        window.pywebview.api.saveas_svgfile(ImagePreview, dialogtitle, filter);
+        GetBackend().saveas_svgfile(ImagePreview, dialogtitle, filter);
     }
     const goDownloadTXT = () => {
         let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
@@ -283,7 +283,7 @@ const Transport = () => {
             GetLocaleString("file.all") //"Tous"
         ]
 
-        window.pywebview.api.saveas_file(TransportGuide, dialogtitle, filter);
+        GetBackend().saveas_file(TransportGuide, dialogtitle, filter);
     }
     const renderPNGcommand = () => {
         if (pngavailable)
