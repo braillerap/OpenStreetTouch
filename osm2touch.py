@@ -99,13 +99,13 @@ class Api:
         print ("quit request")
         self._window.destroy()
     
-    def gcode_get_parameters(self):
+    def get_parameters(self):
         """Get parameters value"""
         js = json.dumps(app_options)
         print ("backend get parameters: ", js)
         return js
 
-    def gcode_set_parameters(self, opt):
+    def set_parameters(self, opt):
         """Set parameters value"""
         print("parameters", opt, type(opt))
         try:

@@ -72,7 +72,7 @@ class BackendWebLocal {
         return await window.pywebview.api.get_parameters();
     }
 
-    async gcode_set_parameters (appparam) {
+    async set_parameters (appparam) {
         let param = {"service":this.service, "options":appparam};
         const request = new Request("/local/gcode_set_parameters", {
             method: "POST",
@@ -139,6 +139,32 @@ class BackendWebLocal {
         console.log("request for exit");
         window.location.assign('/');
     }
+
+    GetISO639_country_code () {
+        return window.pywebview.api.GetISO639_country_code();
+    }
+    get_cairosvg_available () {
+        return window.pywebview.api.get_cairosvg_available ();
+    }
+
+    ReadTransportData(cityName, transportType, iso639_city_code, placeid)
+    {
+
+    }
+
+    GetTransportLines ()
+    {
+
+    }
+    GetTransportData (linelist, drawstation, linestrategy, polygon)
+    {
+
+    }
+    GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
+    {
+
+    }
+    
     
 }
 class BackendPyWebview {
@@ -229,8 +255,8 @@ class BackendPyWebview {
         return ret;
     }
 
-    async gcode_set_parameters(options) {
-        await window.pywebview.api.gcode_set_parameters(options);
+    async set_parameters(options) {
+        await window.pywebview.api.set_parameters(options);
     }
 
     AsyncPrintGcode(gcode, comport) {
@@ -239,16 +265,42 @@ class BackendPyWebview {
     CancelPrint() {
         window.pywebview.api.CancelPrint();
     }
+    GetISO639_country_code () {
+        return window.pywebview.api.GetISO639_country_code();
+    }
+    get_cairosvg_available () {
+        return window.pywebview.api.get_cairosvg_available ();
+    }
+
+    ReadTransportData(cityName, transportType, iso639_city_code, placeid)
+    {
+        return window.pywebview.api.ReadTransportData(cityName, transportType, iso639_city_code, placeid);
+    } 
+    GetTransportLines ()
+    {
+        return window.pywebview.api.GetTransportLines ();
+    }
+    GetTransportData (linelist, drawstation, linestrategy, polygon)
+    {
+        return window.pywebview.api.GetTransportData (linelist, drawstation, linestrategy, polygon);
+    }
+    
+    GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
+    {
+        return window.pywebview.api.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon);
+    }
 };
 
 class Backend {
     constructor() {
         this.backendready = false;
 
-        if (process.env.REACT_APP_LOCALWEB)
+        if (process.env.REACT_APP_LOCALWEB === true || process.env.REACT_APP_LOCALWEB === "true")
             this.backend = new BackendWebLocal();
-        else
+        else if (process.env.REACT_APP_PYWEBVIEW === true || process.env.REACT_APP_PYWEBVIEW === "true")
             this.backend = new BackendPyWebview();
+        else
+            console.log ("Error: no backend configuration");
     }
 
     isbackendready() {
@@ -274,12 +326,22 @@ class Backend {
             return ret;
 
         }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
     async import_file(dialogtitle, filter, types) {
         if (this.backendready) {
             let ret = await this.backend.import_file(dialogtitle, filter, types);
 
             return ret;
+        }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
         }
     }
 
@@ -289,12 +351,22 @@ class Backend {
 
             return ret;
         }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
     async saveas_file(data, dialogtitle, filter, types) {
         if (this.backendready) {
             let ret = await this.backend.saveas_file(data, dialogtitle, filter, types);
 
             return ret;
+        }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
         }
     }
 
@@ -304,6 +376,11 @@ class Backend {
 
             return ret;
         }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
 
     async read_file(filename) {
@@ -312,11 +389,20 @@ class Backend {
 
             return ret;
         }
-        return "";
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
     async quit() {
         if (this.backendready)
             this.backend.quit();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
 
     async download_file(gcode, dialogtitle, filter, types) {
@@ -324,7 +410,11 @@ class Backend {
             let ret = await this.backend.download_file(gcode, dialogtitle, filter, types);
             return ret;
         }
-        return "";
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
     async gcode_get_serial() {
         if (this.backendready) {
@@ -334,17 +424,24 @@ class Backend {
             return ret;
 
         }
-        else {
-            console.log("backend is not ready");
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
         }
         return [];
     }
 
-    async gcode_set_parameters(options) {
+    async set_parameters(options) {
         console.log ("backend set parameters ", options);
         if (this.backend) {
             console.log ("calling instantiate backend to set parameters ", options)
-            await this.backend.gcode_set_parameters(options);
+            await this.backend.set_parameters(options);
+        }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
         }
     }
     AsyncPrintGcode(gcode, comport) {
@@ -369,15 +466,92 @@ class Backend {
         if (this.backendready) {
             this.backend.CancelPrint();
         }
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
 
     async get_parameters() {
         if (this.backendready)
             return await this.backend.get_parameters();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
     async get_runtime_options() {
         if (this.backendready)
             return await this.backend.get_runtime_options();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+
+    GetISO639_country_code() {
+        if (this.backendready)
+            return this.backend.GetISO639_country_code();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+
+    get_cairosvg_available() {
+        if (this.backendready)
+            return this.backend.get_cairosvg_available();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+    ReadTransportData(cityName, transportType, iso639_city_code, placeid)
+    {
+        if (this.backendready)
+            return this.backend.ReadTransportData(cityName, transportType, iso639_city_code, placeid);
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+    GetTransportLines ()
+    {
+        if (this.backendready)
+            return this.backend.GetTransportLines();
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+
+    GetTransportData (linelist, drawstation, linestrategy, polygon)
+    {
+         if (this.backendready)
+            return this.backend.GetTransportData (linelist, drawstation, linestrategy, polygon);
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
+    }
+
+    GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
+    {
+        if (this.backendready)
+            return this.backend.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon);
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }
     }
 }
 

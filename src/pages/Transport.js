@@ -22,9 +22,11 @@ const Transport = () => {
     const [osmPending, setOsmPending] = useState(false);
 
     useEffect(() => {
+        console.log ("call GetISO639_country_code");
         GetBackend().GetISO639_country_code().then ((isolist) => {
            setIso639CodeList(isolist);
         });
+        console.log ("call get_cairosvg_available");
         GetBackend().get_cairosvg_available().then ((enable) => {
             
             setPngAvailable(enable);
