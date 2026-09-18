@@ -4,7 +4,7 @@ import Preview from './pages/Preview'
 import AppContext from "./components/AppContext";
 
 const Layout = () => {
-    const {GetLocaleString, GetLocaleDir, Params} = useContext(AppContext);
+    const {GetLocaleString, GetLocaleDir, Params, GetBackend} = useContext(AppContext);
     
     const exitrequest = (e) => {
         
