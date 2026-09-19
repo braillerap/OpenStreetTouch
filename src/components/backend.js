@@ -64,7 +64,7 @@ class BackendWebLocal {
     }
     async get_parameters() {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "/desktopbrap/local/get_parameters", false); // false for synchronous request
+        xmlHttp.open("GET", "/openstreet/local/get_parameters", false); // false for synchronous request
         xmlHttp.send(null);
         console.log("parameters", xmlHttp.responseText);
         return xmlHttp.responseText;
@@ -87,7 +87,7 @@ class BackendWebLocal {
     }
     async get_runtime_options() {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "/desktopbrap/local/get_runtime_options", false); // false for synchronous request
+        xmlHttp.open("GET", "/openstreet/local/get_runtime_options", false); // false for synchronous request
         xmlHttp.send(null);
         console.log("parameters", xmlHttp.responseText);
         return xmlHttp.responseText;
