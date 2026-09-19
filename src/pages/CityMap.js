@@ -28,6 +28,7 @@ const CityMap = () => {
 
     useEffect(() => {
             GetBackend().get_cairosvg_available().then ((enable) => {
+                console.log ("cairo available:", enable);
                 setPngAvailable(enable);
             });
 
@@ -183,7 +184,7 @@ const CityMap = () => {
                 if (isNaN(lon))
                     lon = -0.09;
                 GetBackend().ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping).then ((svg) => {
-                   
+                    console.log ("ReadStreetMapData svg:", svg);
                     setImagePreview (svg);
                     setRequest(false);
                     

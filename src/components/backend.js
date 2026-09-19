@@ -538,7 +538,9 @@ class Backend {
 
     get_cairosvg_available() {
         if (this.backendready)
+        {
             return this.backend.get_cairosvg_available();
+        }
         else
         {
             console.log ("ERROR: backend not ready");

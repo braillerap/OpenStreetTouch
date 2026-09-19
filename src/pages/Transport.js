@@ -28,7 +28,7 @@ const Transport = () => {
         });
         console.log ("call get_cairosvg_available");
         GetBackend().get_cairosvg_available().then ((enable) => {
-            
+            console.log ("cairo available:", enable);
             setPngAvailable(enable);
          });
 
