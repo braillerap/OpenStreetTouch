@@ -69,7 +69,7 @@ class BackendWebLocal {
         console.log("parameters", xmlHttp.responseText);
         return xmlHttp.responseText;
 
-        return await window.pywebview.api.get_parameters();
+        
     }
 
     async set_parameters (appparam) {
@@ -166,7 +166,18 @@ class BackendWebLocal {
     }
      ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
     {
-        
+        param = {'latitude':lat, 'longitude':lon, 'radius':radius, 
+            'building':building, 'footpath':footpath, 'polygon':polygon,
+            'includeWater': includeWater, 'clipping':clipping};
+        pjs = json.stringify(param);
+        const request = new Request("/local/readstreetmapdata", {
+            method: "POST",
+            body: pjs,
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                }
+            });
+        return fetch(request).then((response)=> (response.body));
     }
     
     
