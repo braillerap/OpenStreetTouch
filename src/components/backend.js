@@ -164,12 +164,12 @@ class BackendWebLocal {
     {
 
     }
-     ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
+    async ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
     {
-        param = {'latitude':lat, 'longitude':lon, 'radius':radius, 
+        let param = {'latitude':lat, 'longitude':lon, 'radius':radius, 
             'building':building, 'footpath':footpath, 'polygon':polygon,
-            'includeWater': includeWater, 'clipping':clipping};
-        pjs = json.stringify(param);
+            'includeWater': includeWater, 'clipping':cliping};
+        let pjs = JSON.stringify(param);
         const request = new Request("/local/readstreetmapdata", {
             method: "POST",
             body: pjs,
