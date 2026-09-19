@@ -343,9 +343,9 @@ class Api:
         str = json.dumps({"svg": svg, "stations": liststation}, ensure_ascii=False)
         return str
     
-    def GetTransportSVGbase64 (self):
-        svg = self.osmt.get_svg ()
-        return svg
+#    def GetTransportSVGbase64 (self):
+#        svg = self.osmt.get_svg ()
+#        return svg
 
     
 

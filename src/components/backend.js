@@ -147,7 +147,7 @@ class BackendWebLocal {
         return fetch(request).then((response)=> (response.json()));
     }
     get_cairosvg_available () {
-       const request = new Request("/local/ISO639_country_code", {
+       const request = new Request("/local/cairosvg", {
             method: "GET"}
             );
         return fetch(request).then((response)=> {
