@@ -47,7 +47,7 @@
     "dpkg-ubuntu": "dpkg-deb -v --root-owner-group --build ./package/ubuntu/openstreettouch-ubuntu ./dist/openstreettouch-ubuntu-${npm_package_version}.deb",
     "checkubuntu": "lintian ./dist/openstreettouch-ubuntu-${npm_package_version}.deb",
     "debugview": "cross-env REACT_APP_FEATURES_FOR_DEBUG=true npm-run-all  tailwindbuildlocal builddev webview",
-    "buildportal": "cross-env REACT_APP_FEATURES_FOR_DEBUG=false  cross-env GENERATE_SOURCEMAP=true cross-env REACT_APP_LOCALWEB=true REACT_APP_PYWEBVIEW=false cross-env PUBLIC_URL=/desktopbrap npm-run-all tailwindbuildlocal build",
+    "buildportal": "cross-env REACT_APP_FEATURES_FOR_DEBUG=false  cross-env GENERATE_SOURCEMAP=true cross-env REACT_APP_LOCALWEB=true REACT_APP_PYWEBVIEW=false cross-env PUBLIC_URL=/openstreet npm-run-all tailwindbuildlocal build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf build dist",
