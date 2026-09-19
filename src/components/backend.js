@@ -141,10 +141,20 @@ class BackendWebLocal {
     }
 
     GetISO639_country_code () {
-        return window.pywebview.api.GetISO639_country_code();
+        const request = new Request("/local/ISO639_country_code", {
+            method: "GET"}
+            );
+        return fetch(request).then((response)=> (response.json()));
     }
     get_cairosvg_available () {
-        return window.pywebview.api.get_cairosvg_available ();
+       const request = new Request("/local/ISO639_country_code", {
+            method: "GET"}
+            );
+        return fetch(request).then((response)=> {
+            let ret = response.json();
+            console.log (ret);
+            return ret;
+        });
     }
 
     ReadTransportData(cityName, transportType, iso639_city_code, placeid)
