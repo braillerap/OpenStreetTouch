@@ -164,6 +164,10 @@ class BackendWebLocal {
     {
 
     }
+     ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
+    {
+        
+    }
     
     
 }
@@ -289,18 +293,27 @@ class BackendPyWebview {
     {
         return window.pywebview.api.GetTransportDataSvg (linelist, drawstation, linestrategy, polygon);
     }
+
+    ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
+    {
+        return window.pywebview.api.ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping);
+    }
 };
 
 class Backend {
     constructor() {
         this.backendready = false;
-
+        
         if (process.env.REACT_APP_LOCALWEB === true || process.env.REACT_APP_LOCALWEB === "true")
             this.backend = new BackendWebLocal();
         else if (process.env.REACT_APP_PYWEBVIEW === true || process.env.REACT_APP_PYWEBVIEW === "true")
             this.backend = new BackendPyWebview();
         else
+        {
             console.log ("Error: no backend configuration");
+            throw new TypeError("Error: no backend configuration");
+
+        }
     }
 
     isbackendready() {
@@ -552,6 +565,17 @@ class Backend {
             console.log ("ERROR: backend not ready");
             throw new TypeError("ERROR: backend not ready");
         }
+    }
+
+    ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
+    {
+     if (this.backendready)
+            return this.backend.ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping);
+        else
+        {
+            console.log ("ERROR: backend not ready");
+            throw new TypeError("ERROR: backend not ready");
+        }   
     }
 }
 
