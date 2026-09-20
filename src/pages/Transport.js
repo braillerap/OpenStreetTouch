@@ -144,6 +144,7 @@ const Transport = () => {
         GetBackend().ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then ((size) => {
             
             GetBackend().GetTransportLines().then ((jsondata) => {
+                console.log ("GetTransportLines json", jsondata)
                 let datadic = JSON.parse(jsondata);
                 setRealCityName (datadic.city);
 

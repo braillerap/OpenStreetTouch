@@ -180,7 +180,11 @@ class BackendWebLocal {
         const request = new Request("/local/gettransportline", {
             method: "GET"}
             );
-        return fetch(request).then((response)=> (response.json()));
+        return fetch(request).then((response)=> {
+            let js = response.json();
+            console.log ("/local/gettransportline", js);
+            return js;
+        });
 
     }
     GetTransportData (linelist, drawstation, linestrategy, polygon)
