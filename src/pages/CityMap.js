@@ -221,7 +221,7 @@ const CityMap = () => {
         }
         const renderPNGcommand = () => {
             if (pngavailable)
-                return (<button onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
+                return (<button className='btn btn-blue' onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
             return (<></>);
         }
         const goDownloadPNG = () => {
@@ -244,7 +244,7 @@ const CityMap = () => {
                 <div className='TransportResultAction'>
                     <fieldset>
                         <legend>{GetLocaleString("transport.titleresult")}</legend>
-                        <button onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                        <button className='btn btn-blue' onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
                         {renderPNGcommand()}
                         
                     </fieldset>
@@ -286,7 +286,7 @@ const CityMap = () => {
                                 onChange={(e) => setCliping(e.target.checked)} />
                                 {GetLocaleString("citymap.cliping")}
                                 </label>
-                            <button disabled={request} onClick={goRender}>
+                            <button className='btn btn-blue' disabled={request} onClick={goRender}>
                                 {GetLocaleString("citymap.rendermap")}
                             </button>
                         </div>

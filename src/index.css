@@ -241,11 +241,17 @@
   .float-right {
     float: right;
   }
+  .mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
+  }
   .block {
     display: block;
   }
   .contents {
     display: contents;
+  }
+  .flex {
+    display: flex;
   }
   .hidden {
     display: none;
@@ -264,6 +270,21 @@
   }
   .resize {
     resize: both;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
   .border {
     border-style: var(--tw-border-style);
@@ -341,14 +362,58 @@
   }
 }
 .AppContain {
+  max-height: 100dvh;
   min-height: 100dvh;
   max-width: 100dvw;
-  overflow-x: clip;
-  overflow-y: auto;
+  min-width: 100dvw;
+  overflow: clip;
   background-color: var(--color-backgnd);
   font-size: var(--text-base);
   line-height: var(--tw-leading, var(--text-base--line-height));
   color: var(--color-apptxt);
+}
+.AppTail {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  max-height: fit-content;
+  max-width: fit-content;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 2);
+}
+.AppHeaderTail {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 100%;
+  margin: 0;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  position: relative;
+}
+.App-functionTail {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  position: relative;
+}
+.App-WorkTail {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  position: relative;
+}
+.App-WorkTail img {
+  width: 80%;
+  max-width: 80%;
+  max-height: 80%;
 }
 .btn {
   margin-inline: var(--spacing);

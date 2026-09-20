@@ -86,7 +86,61 @@
 }
 
 .AppContain {
-  @apply text-base bg-backgnd text-apptxt min-h-dvh max-w-dvw overflow-y-auto overflow-x-clip;
+  @apply text-base bg-backgnd text-apptxt min-h-dvh max-h-dvh min-w-dvw max-w-dvw overflow-clip;
+}
+
+.AppTail
+{
+@apply grid grid-cols-2 gap-2 max-h-fit max-w-fit relative box-border;
+}
+.AppHeaderTail
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  width:100%;
+ 
+  
+  margin:0;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  position:relative;
+}
+
+.App-functionTail
+{
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  
+  
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  overflow-y:scroll;
+  box-sizing: border-box;
+  position:relative;
+  
+}
+
+.App-WorkTail
+{
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  position:relative;
+}
+
+.App-WorkTail img
+{
+  width:80%;
+  
+  max-width:80%;
+  max-height:80%;
+  
 }
 
 .btn {

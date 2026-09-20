@@ -98,7 +98,7 @@ class Parameters extends React.Component {
               <select id="langid"
                 value={this.context.Locale}
                 onChange={this.handleChangeLanguage}
-                className='select_param'
+                className='select'
               >
                 {this.state.localedata.map((item, index) => {
                   if (this.context.Locale === item.lang)

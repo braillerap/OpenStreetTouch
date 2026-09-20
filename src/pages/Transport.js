@@ -254,7 +254,7 @@ const Transport = () => {
                                 </select>
                             </label>
 
-                            <button onClick={goRender}>
+                            <button onClick={goRender} className='btn btn-blue'>
                                 {GetLocaleString("transport.renderimg")}
                             </button>
                         </div>
@@ -297,7 +297,7 @@ const Transport = () => {
     }
     const renderPNGcommand = () => {
         if (pngavailable)
-            return (<button disabled={osmPending} onClick={goDownloadPNG}>{GetLocaleString("transport.downloadpng")}</button>);
+            return (<button disabled={osmPending} onClick={goDownloadPNG} className='btn btn-blue'>{GetLocaleString("transport.downloadpng")}</button>);
         return (<></>);
     }
     const renderResultAction = () => {
@@ -307,9 +307,9 @@ const Transport = () => {
             <div className='TransportResultAction'>
                 <fieldset>
                     <legend>{GetLocaleString("transport.titleresult")}</legend>
-                    <button disabled={osmPending} onClick={goDownloadSVG}>{GetLocaleString("transport.downloadsvg")}</button>
+                    <button disabled={osmPending} onClick={goDownloadSVG} className='btn btn-blue'>{GetLocaleString("transport.downloadsvg")}</button>
                     {renderPNGcommand()}
-                    <button disabled={osmPending} onClick={goDownloadTXT}>{GetLocaleString("transport.downloadtxt")}</button>
+                    <button disabled={osmPending} onClick={goDownloadTXT} className='btn btn-blue'>{GetLocaleString("transport.downloadtxt")}</button>
                 </fieldset>
             </div>
         );
@@ -337,6 +337,7 @@ const Transport = () => {
                       ref={focusref}
                       onKeyDown={(e) => { if (e.key === "Enter" && osmPending===false) { goOsm(); } }}
                       onChange={(e) => { setCityName(e.target.value); }}
+                      className='textedit'
                   />
               </label>
           </div>
@@ -346,7 +347,7 @@ const Transport = () => {
           </div>
           <div className='TransportParam'>
               <p>{Message}</p>
-              <button onClick={goOsm} disabled={osmPending}
+              <button onClick={goOsm} disabled={osmPending} className='btn btn-blue'
                   accessKey={GetLocaleString("transport.search.shortcut")}>
                   {GetLocaleString("transport.search")}
               </button>

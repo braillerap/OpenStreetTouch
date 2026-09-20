@@ -140,13 +140,13 @@ class BackendWebLocal {
         window.location.assign('/');
     }
 
-    GetISO639_country_code () {
+    async GetISO639_country_code () {
         const request = new Request("/local/ISO639_country_code", {
             method: "GET"}
             );
         return fetch(request).then((response)=> (response.json()));
     }
-    get_cairosvg_available () {
+    async get_cairosvg_available () {
        const request = new Request("/local/cairosvg", {
             method: "GET"}
             );
@@ -157,7 +157,7 @@ class BackendWebLocal {
         });
     }
 
-    ReadTransportData(cityName, transportType, iso639_city_code, placeid)
+    async ReadTransportData(cityName, transportType, iso639_city_code, placeid)
     {
         let param = {'cityName':cityName, 'transportType':transportType, 'iso639_city_code':iso639_city_code, 
             'placeid':placeid};
@@ -175,19 +175,19 @@ class BackendWebLocal {
         });
     }
 
-    GetTransportLines ()
+    async GetTransportLines ()
     {
         const request = new Request("/local/gettransportline", {
             method: "GET"}
             );
         return fetch(request).then((response)=> {
-            let js = response.text();
-            console.log ("/local/gettransportline", js);
+            let js = response.text(); // json will be parsed later
+            console.log ("/local/gettransportline", js); 
             return js;
         });
 
     }
-    GetTransportData (linelist, drawstation, linestrategy, polygon)
+    async GetTransportData (linelist, drawstation, linestrategy, polygon)
     {
         let param = {'linelist':linelist, 'drawstation':drawstation, 'linestrategy':linestrategy, 
             'polygon':polygon};
@@ -206,7 +206,7 @@ class BackendWebLocal {
             return res;
         });
     }
-    GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
+    async GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
     {
         let param = {'linelist':linelist, 'drawstation':drawstation, 'linestrategy':linestrategy, 
             'polygon':polygon};

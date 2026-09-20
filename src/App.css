@@ -1,21 +1,5 @@
 
-.App-loading
-{
-  height:100vh;
-  width:100vw;
-  background-color: black;
-  color: white;
-  text-align: center;
-  
-}
-.AppContainer
-{
-  height:100vh;
-  width:100vw;
-  
-  color: Black;
-  overflow:hidden
-}
+
 .App
 {
   display:grid;
@@ -35,7 +19,7 @@
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-end: 2;
 
   width:100%;
   

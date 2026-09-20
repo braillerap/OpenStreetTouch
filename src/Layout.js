@@ -19,13 +19,13 @@ const Layout = () => {
     const getAccessKeyMenuCallback = (menukey, accessKey, cb) => {
         
         if (Params.accesskey === true)
-            return (<Link onClick={cb} className="pure-menu-link"
+            return (<Link onClick={cb} className="MenuLink"
                 accessKey={GetLocaleString(accessKey)}> 
                     {GetLocaleString(menukey)}
             </Link>
             );
 
-        return (<Link onClick={cb} className="pure-menu-link" 
+        return (<Link onClick={cb} className="MenuLink" 
             >
                 {GetLocaleString(menukey)} 
         </Link>);
@@ -34,13 +34,13 @@ const Layout = () => {
     const getAccessKeyMenu = (url, menukey, accessKey) => {
         
         if (Params.accesskey === true)
-            return (<Link to={process.env.PUBLIC_URL + url} className="pure-menu-link"
+            return (<Link to={process.env.PUBLIC_URL + url} className="MenuLink"
                 accessKey={GetLocaleString(accessKey)}> 
                     {GetLocaleString(menukey)}
             </Link>
             );
 
-        return (<Link to={process.env.PUBLIC_URL + url} className="pure-menu-link" 
+        return (<Link to={process.env.PUBLIC_URL + url} className="MenuLink" 
             >
                 {GetLocaleString(menukey)} 
         </Link>);
@@ -48,31 +48,31 @@ const Layout = () => {
     }
 
     return (
-        <div className='AppContainer'>
-            <div className="App" dir={GetLocaleDir()}>
-                <div className='AppHeader'>
-                    <div className="pure-menu pure-menu-horizontal menu_font" role={'presentation'} >
+        <div className={'AppTheme' + ' AppContain'}>
+            <div className="AppTail" dir={GetLocaleDir()}>
+                <div className='AppHeaderTail'>
+                    <div className="" role={'presentation'} >
                         <nav aria-live={"polite"}>
                             {/*accessKey={GetLocaleString("menu.home.shortcut")}*/ }
-                            <ul className="pure-menu-list">
-                                <li className="pure-menu-item">
+                            <ul className="flex flex-row justify-start gap-2">
+                                <li className="relative">
                                     
                                     {getAccessKeyMenu("/", "menu.home", "menu.home.shortcut")}
                                 </li>
 
-                                <li className="pure-menu-item">
+                                <li className="relative">
                                    
                                     {getAccessKeyMenu( "/transport", "menu.transport", "menu.transport.shortcut")}
                                 </li>
-                                <li className="pure-menu-item">
+                                <li className="relative">
                                    
                                     {getAccessKeyMenu( "/cmap", "menu.citymap", "menu.citymap.shortcut")}
                                 </li>
-                                <li className="pure-menu-item">
+                                <li className="relative">
                                     
                                     { getAccessKeyMenu("/parameter", "menu.param", "menu.param.shortcut")}
                                 </li>
-                                <li className="pure-menu-item">
+                                <li className="relative">
                                     {getAccessKeyMenuCallback("menu.exit", "menu.exit.shortcut", exitrequest)}
                                 </li>
                             </ul>
@@ -83,10 +83,10 @@ const Layout = () => {
                     {/*<Toolbar />*/}
                 </div>
                 
-                <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-function">
+                <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-functionTail">
                     <Outlet />
                 </div>    
-                <div className="App-Work">
+                <div className="App-WorkTail">
                     <Preview/>
                     
                 </div>
