@@ -187,7 +187,11 @@ class BackendWebLocal {
                 "Content-Type": "application/json;charset=UTF-8",
                 }
             });
-        return fetch(request).then((response)=> (response.body));
+        return fetch(request).then((response)=> {
+            let res = response.text();
+            console.log (res);
+            return res;
+        });
     }
     
     
