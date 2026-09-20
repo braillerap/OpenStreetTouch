@@ -200,7 +200,7 @@ class BackendWebLocal {
                 }
             });
         return fetch(request).then((response)=> {
-            let res = response.json();
+            let res = response.text (); // result will be parsed in json later
             return res;
         });
     }
