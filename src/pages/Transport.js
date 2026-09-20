@@ -20,6 +20,7 @@ const Transport = () => {
     const [placeid, setPlaceid] = useState(0);
     const [pngavailable, setPngAvailable] = useState(false);
     const [osmPending, setOsmPending] = useState(false);
+    const [Message, setMessage] = useState("");
 
     useEffect(() => {
         console.log ("call GetISO639_country_code");
@@ -138,6 +139,7 @@ const Transport = () => {
         setTransportGuide ('');
         setTransportLines([]);
         setOsmPending(true);
+        setMessage ("");
         console.log (transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
@@ -161,6 +163,11 @@ const Transport = () => {
                     }
                 }  
                 setTransportLines(sline);
+                setOsmPending(false);
+            },
+            (error)=>{
+                console.log ("error", error.toString());
+                setMessage(error);
                 setOsmPending(false);
             });
         });
@@ -338,6 +345,7 @@ const Transport = () => {
               {renderTransportType()}
           </div>
           <div className='TransportParam'>
+              <p>{Message}</p>
               <button onClick={goOsm} disabled={osmPending}
                   accessKey={GetLocaleString("transport.search.shortcut")}>
                   {GetLocaleString("transport.search")}
