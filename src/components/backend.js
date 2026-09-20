@@ -200,7 +200,9 @@ class BackendWebLocal {
                 }
             });
         return fetch(request).then((response)=> {
+
             let res = response.text (); // result will be parsed in json later
+            console.log ("gettransportdata ", res, typeof(res));
             return res;
         });
     }
