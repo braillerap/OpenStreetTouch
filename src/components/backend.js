@@ -181,7 +181,7 @@ class BackendWebLocal {
             method: "GET"}
             );
         return fetch(request).then((response)=> {
-            let js = response.json();
+            let js = response.text();
             console.log ("/local/gettransportline", js);
             return js;
         });
