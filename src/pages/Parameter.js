@@ -169,7 +169,7 @@ class Parameters extends React.Component {
                 </label>
                 </div>
                 <div className='flex flex-row gap-2'>
-                  <input type='checkbox' checked={this.context.Params.accesskey} className='mx-24'
+                  <input type='checkbox' checked={this.context.Params.accesskey}
                     onChange={(e) => this.handleChangeGeneral("accesskey", e.target.checked)} />
                 <label>
                   {this.context.GetLocaleString("param.accesskeypolicy")}

@@ -79,7 +79,7 @@ const Transport = () => {
 
         return (
             <label>{GetLocaleString("transport.iso639")}
-                <select value={Params["osmiso639"]} onChange={(event) => { setOsmIso639Code(event.target.value) }} >
+                <select classname='select' value={Params["osmiso639"]} onChange={(event) => { setOsmIso639Code(event.target.value) }} >
                     {
                         iso639codeList.map((code) => {
                             return (
@@ -94,7 +94,7 @@ const Transport = () => {
     const renderTransportType = () => {
         return (
             <label>{GetLocaleString("transport.type")}
-                <select value={transportType} onChange={(event) => { setTransportType(event.target.value) }} >
+                <select className='select' value={transportType} onChange={(event) => { setTransportType(event.target.value) }} >
                     {
 
                         Object.entries(transport_type_dic).map((key) => {
@@ -313,7 +313,7 @@ const Transport = () => {
                     <h1>{GetLocaleString("transport.title")}</h1>
                     <h2>{GetLocaleString("transport.findosmcity")} </h2>
                     <label >{GetLocaleString("transport.place_id")}
-                        <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
+                        <select className='select' value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
                             {
                                 place_id.map((id, index) => {
                                     return (
