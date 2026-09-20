@@ -189,7 +189,6 @@ class BackendWebLocal {
             });
         return fetch(request).then((response)=> {
             let res = response.text();
-            console.log (res);
             return res;
         });
     }
