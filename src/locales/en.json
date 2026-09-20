@@ -82,5 +82,10 @@
     "param.form_aria": "Application parameters",
     "param.focuspolicy": "Set focus on navigate",
     "param.general.section": "General parameters",
-    "param.accesibility.section":"Accessibility parameters"
+    "param.accesibility.section":"Accessibility parameters",
+    "param.themeselect": "Theme",
+    "param.theme-normal":"Normal",
+    "param.theme-wb":"White on black",
+    "param.theme-bw":"Black on white",
+    "param.theme_aria":"Application display theme selection"
 }

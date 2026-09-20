@@ -21,7 +21,7 @@
     "menu.param.shortcut": "P",
     "menu.exit": "Quitter",
     "menu.exit.shortcut": "x",
-    "home.openstreetmap": "Ce logiciel utilise des données issue du project OpenStreetMap. Voir le site d'OpenStreetMap pour plus d'informations.",
+    "home.openstreetmap": "Ce logiciel utilise des données issue du project OpenStreetMap. Ces données sont soumises à une licence d'utilisation. Voir le site d'OpenStreetMap pour plus d'informations.",
     "transport.title": "Rendu des lignes de transport",
     "transport.city": "Nom de ville",
     "transport.city.edit.shortcut": "V",
@@ -82,5 +82,10 @@
     "param.form_aria": "Paramètres de l'application",
     "param.focuspolicy": "Positionner le focus lors de la navigation",
     "param.general.section": "Paramètres de l'application",
-    "param.accesibility.section":"Paramètres d'accéssibilité"
+    "param.accesibility.section":"Paramètres d’accessibilité",
+    "param.themeselect": "Thème",
+    "param.theme-normal":"Normal",
+    "param.theme-wb":"Blanc sur Noir",
+    "param.theme-bw":"Noir sur Blanc",
+    "param.theme_aria":"Sélection du thème d'affichage de l'application"
 }

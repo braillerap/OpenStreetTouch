@@ -4,6 +4,7 @@ const AppOption = {
     osmiso639:"fr",
     focuspolicy:"false",
     acceskey:"false",
+    theme:"normal"
 }
 
 export default AppOption;

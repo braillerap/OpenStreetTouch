@@ -9,13 +9,14 @@ let params = AppOption;
 let locale = "fr";
 let localedata = new LocaleString();
 let backend = new Backend();
+let theme ='normal';
 
 const AppContextWrapper = (props) => {
     const [Params, setParams] = useState(params);
     const [Locale, setLocale] = useState(locale);
     const [ImagePreview, setImagePreview] = useState('');
     const [TransportGuide, setTransportGuide] = useState('');
-    
+    const [AppTheme, setAppTheme] = useState (theme);
     function getLocaleData ()
     {
         console.log ("localedata in context:" + localedata);
@@ -61,7 +62,8 @@ const AppContextWrapper = (props) => {
             Params, setParams,
             Locale, setLocale,
             ImagePreview, setImagePreview,
-            TransportGuide, setTransportGuide
+            TransportGuide, setTransportGuide,
+            AppTheme, setAppTheme
         }} >
             {props.children}
         </AppContext.Provider>

@@ -4,7 +4,7 @@ import Preview from './pages/Preview'
 import AppContext from "./components/AppContext";
 
 const Layout = () => {
-    const {GetLocaleString, GetLocaleDir, Params, GetBackend} = useContext(AppContext);
+    const {GetLocaleString, GetLocaleDir, Params, GetBackend, AppTheme} = useContext(AppContext);
     
     const exitrequest = (e) => {
         
@@ -48,7 +48,7 @@ const Layout = () => {
     }
 
     return (
-        <div className={'AppTheme' + ' AppContain'}>
+        <div className={AppTheme + ' AppContain'}>
             <div className="AppTail" dir={GetLocaleDir()}>
                 <div className='AppHeaderTail'>
                     <div className="" role={'presentation'} >
@@ -80,7 +80,7 @@ const Layout = () => {
                         </nav>
 
                     </div>
-                    {/*<Toolbar />*/}
+                    
                 </div>
                 
                 <div aria-live={"polite"} aria-atomic={false} role={"log"} aria-relevant={"all"} className="App-functionTail">

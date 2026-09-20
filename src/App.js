@@ -36,7 +36,7 @@
  * SPDX-License-Identifier: GPL-3.0 
  */
 
-import './App.css';
+
 
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -66,9 +66,6 @@ class App extends Component {
     this.handleResize = this.handleResize.bind(this);
   }
 
-  
-  
-
   handleResize ()
   {
     
@@ -94,7 +91,7 @@ class App extends Component {
     console.log ("set data in context");
     this.context.setParams (params);
     this.context.SetAppLocale (params.lang);
-    
+    this.context.setAppTheme(params.theme);
     console.log ("webviewloaded end");
   }
 

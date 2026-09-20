@@ -1,17 +1,17 @@
-import { useContext, useState, useEffect, useRef} from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import AppContext from "../components/AppContext";
 
 
 const Transport = () => {
-    const focusref = useRef (null);
-    const {GetLocaleString, Params, SetOption, GetBackend} = useContext(AppContext);
+    const focusref = useRef(null);
+    const { GetLocaleString, Params, SetOption, GetBackend } = useContext(AppContext);
     const { ImagePreview, setImagePreview } = useContext(AppContext);
     const { TransportGuide, setTransportGuide } = useContext(AppContext);
     const [cityName, setCityName] = useState('');
     const [drawStation, setDrawStation] = useState(true);
     const [transportLines, setTransportLines] = useState([]);
     const [iso639codeList, setIso639CodeList] = useState([]);
-    
+
     const [realCityName, setRealCityName] = useState('');
     const [transportType, setTransportType] = useState('subway');
     const [transportStrategyList, setTransportStrategyList] = useState([]);
@@ -23,157 +23,153 @@ const Transport = () => {
     const [Message, setMessage] = useState("");
 
     useEffect(() => {
-        console.log ("call GetISO639_country_code");
-        GetBackend().GetISO639_country_code().then ((isolist) => {
-           setIso639CodeList(isolist);
+        console.log("call GetISO639_country_code");
+        GetBackend().GetISO639_country_code().then((isolist) => {
+            setIso639CodeList(isolist);
         });
-        console.log ("call get_cairosvg_available");
-        GetBackend().get_cairosvg_available().then ((enable) => {
-            console.log ("cairo available:", enable);
+        console.log("call get_cairosvg_available");
+        GetBackend().get_cairosvg_available().then((enable) => {
+            console.log("cairo available:", enable);
             setPngAvailable(enable);
-         });
+        });
 
-        
+
         let list = [
             GetLocaleString("transport.strategyways"),
             GetLocaleString("transport.strategywayscorreted"),
             GetLocaleString("transport.strategystation")
         ];
         setTransportStrategyList(list);
-        
-        setImagePreview ('');
+
+        setImagePreview('');
         setTransportGuide('');
 
-        console.log ("Params");
-        console.log (Params);
+        console.log("Params");
+        console.log(Params);
         if (focusref && Params.focuspolicy === true)
             focusref.current.focus();
-      }, []);
-      
+    }, []);
+
     const place_id = [
         GetLocaleString("transport.city"),
         GetLocaleString("transport.wikidata")
     ];
     const transport_type_dic = {
-        "subway":GetLocaleString("transport.type.subway"),
-        "funicular":GetLocaleString("transport.type.funicular"),
-        "bus":GetLocaleString("transport.type.bus"),
-        "tram":GetLocaleString("transport.type.tram"),
-        "train":GetLocaleString("transport.type.train"),
-        "light_rail":GetLocaleString("transport.type.light_rail"),
-        "monorail":GetLocaleString("transport.type.monorail"),
-        "ferry":GetLocaleString("transport.type.ferry"),
-    
+        "subway": GetLocaleString("transport.type.subway"),
+        "funicular": GetLocaleString("transport.type.funicular"),
+        "bus": GetLocaleString("transport.type.bus"),
+        "tram": GetLocaleString("transport.type.tram"),
+        "train": GetLocaleString("transport.type.train"),
+        "light_rail": GetLocaleString("transport.type.light_rail"),
+        "monorail": GetLocaleString("transport.type.monorail"),
+        "ferry": GetLocaleString("transport.type.ferry"),
+
     }
     const setOsmIso639Code = (code) => {
-        
+
         let option = {
             ...Params
-            
-          };
+
+        };
         option["osmiso639"] = code;
         SetOption(option);
-        console.log ("context set option");
+        console.log("context set option");
     }
     const renderIso639 = () => {
-        
+
         return (
             <label>{GetLocaleString("transport.iso639")}
-            <select value={Params["osmiso639"]} onChange={(event) => {setOsmIso639Code(event.target.value)}} >
-            {
-                iso639codeList.map((code) => {
-                    return (
-                    <option value={code}>{code}</option>
-                    );
-                })
-            }
-            </select>
+                <select value={Params["osmiso639"]} onChange={(event) => { setOsmIso639Code(event.target.value) }} >
+                    {
+                        iso639codeList.map((code) => {
+                            return (
+                                <option value={code}>{code}</option>
+                            );
+                        })
+                    }
+                </select>
             </label>
         );
     }
-    const renderTransportType =  () => {
+    const renderTransportType = () => {
         return (
             <label>{GetLocaleString("transport.type")}
-            <select value={transportType} onChange={(event) => {setTransportType(event.target.value)}} >
-            {
-                
-                Object.entries(transport_type_dic).map ((key) => {
-                    
-                    return (
-                            <option value={key[0]}>{key[1]}</option>
-                        );
+                <select value={transportType} onChange={(event) => { setTransportType(event.target.value) }} >
+                    {
+
+                        Object.entries(transport_type_dic).map((key) => {
+
+                            return (
+                                <option value={key[0]}>{key[1]}</option>
+                            );
+                        }
+                        )
                     }
-                )   
-            }
-            </select>
+                </select>
             </label>
         )
     }
     const goRender = () => {
-        console.log ("call GetTransportData" + transportLines);
+        console.log("call GetTransportData" + transportLines);
         let jslines = '';
-        try
-        {
+        try {
             jslines = JSON.stringify(transportLines);
-            console.log ("json encoded");
+            console.log("json encoded");
         }
-        catch (e)
-        {
-            console.log (e);
-            console.log ("jslines error")
+        catch (e) {
+            console.log(e);
+            console.log("jslines error")
             //console.log (transportLines);
         }
-        GetBackend().GetTransportData(jslines, drawStation, transportStrategy, drawPolygon).then ((datastr) => {
-            console.log (datastr);
+        GetBackend().GetTransportData(jslines, drawStation, transportStrategy, drawPolygon).then((datastr) => {
+            console.log(datastr);
             let data = JSON.parse(datastr);
-            console.log (data);
-            setImagePreview (data.svg);
-            console.log (data.stations);
-            setTransportGuide (data.stations);
+            console.log(data);
+            setImagePreview(data.svg);
+            console.log(data.stations);
+            setTransportGuide(data.stations);
         });
     }
 
     const goOsm = () => {
-        
+
         setImagePreview('');
-        setTransportGuide ('');
+        setTransportGuide('');
         setTransportLines([]);
         setOsmPending(true);
-        setMessage ("");
-        console.log (transportType);
+        setMessage("");
+        console.log(transportType);
         // read OSM data for city and transport type
         // iso639code is used to specified the language name of the city for OSM
-        GetBackend().ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then ((size) => {
-            
-            GetBackend().GetTransportLines().then ((jsondata) => {
-                console.log ("GetTransportLines json", jsondata)
+        GetBackend().ReadTransportData(cityName, transportType, Params["osmiso639"], placeid).then((size) => {
+
+            GetBackend().GetTransportLines().then((jsondata) => {
+                console.log("GetTransportLines json", jsondata)
                 let datadic = JSON.parse(jsondata);
-                setRealCityName (datadic.city);
+                setRealCityName(datadic.city);
 
                 // update result for suitable checkbox display
                 let sline = [];
-                if ("lines" in datadic)
-                {
-                    for (let line in datadic.lines) 
-                    {
-                        console.log ("line " +line);
+                if ("lines" in datadic) {
+                    for (let line in datadic.lines) {
+                        console.log("line " + line);
                         {
-                            sline.push ({id:line, name:datadic.lines[line], select:false});
+                            sline.push({ id: line, name: datadic.lines[line], select: false });
                         }
                     }
-                }  
+                }
                 setTransportLines(sline);
                 setOsmPending(false);
             },
-            (error)=>{
-                console.log ("error", error.toString());
-                setMessage(error);
-                setOsmPending(false);
-            });
+                (error) => {
+                    console.log("error", error.toString());
+                    setMessage(error);
+                    setOsmPending(false);
+                });
         });
     }
     const onSelectLine = (e) => {
-        
+
         let lines = transportLines;
         lines[e.target.id].select = e.target.checked;
         setTransportLines(lines);
@@ -183,90 +179,86 @@ const Transport = () => {
         console.log(e.target.checked);
         setDrawStation(e.target.checked);
     }
-        
+
     const renderTransportLines = () => {
         if (osmPending)
             return (<>{GetLocaleString("transport.osmpending")}</>);
 
-        if (transportLines.length === 0  )
+        if (transportLines.length === 0)
             return (<>{GetLocaleString("transport.nodata")}</>);
-        
+
         return (
-                <>
-                
+            <div className='flex flex-col'>
+
                 <h3>{GetLocaleString("transport.osmcityname")} : {realCityName} {GetLocaleString("transport.nblines")} : {transportLines.length}</h3>
                 {transportLines.map((line) => {
-                        return (
-                            <label>
-                                <input type="checkbox" 
-                                    id={line.id} 
-                                    name={line.name} 
-                                    onChange={onSelectLine}/>
-                                {line.name} 
-                            </label>
-                        )
-                    })}
-                </>
-            
-            
+                    return (
+                        <label>
+                            <input type="checkbox"
+                                id={line.id}
+                                name={line.name}
+                                onChange={onSelectLine} />
+                            {line.name}
+                        </label>
+                    )
+                })}
+            </div>
         );
     }
-    
+
 
     const renderTransportAction = () => {
-        if (transportLines.length > 0  )
-        {
+        if (transportLines.length > 0) {
             return (
-                
-                    <fieldset >
 
-                        <legend>{GetLocaleString("transport.sectionplan")}</legend>
-                        <div className='TransportAction'>
-                            <label>
-                                <input
-                                    type='checkbox'
-                                    id='stations'
-                                    name='stations'
-                                    checked={drawStation}
-                                    onChange={onSelectStations} />
-                                {GetLocaleString("transport.renderstation")}
+                <fieldset className='flex flex-col'>
 
-                            </label>
-                            <label>
-                                <input
-                                    type='checkbox'
-                                    id='polygons'
-                                    name='polygons'
-                                    checked={drawPolygon}
-                                    onChange={(e) => { setDrawPolygon(e.target.checked) }} />
-                                {GetLocaleString("transport.polygon")}
+                    <legend>{GetLocaleString("transport.sectionplan")}</legend>
 
-                            </label>
-                            <label>{GetLocaleString("transport.renderstrategy")}
-                                <select value={transportStrategy} onChange={(event) => { setTransportStrategy(event.target.value) }} >
-                                    {
-                                        transportStrategyList.map((trans, index) => {
-                                            return (
-                                                <option value={index}>{trans}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </label>
+                    <label>
+                        <input
+                            type='checkbox'
+                            id='stations'
+                            name='stations'
+                            checked={drawStation}
+                            onChange={onSelectStations} />
+                        {GetLocaleString("transport.renderstation")}
 
-                            <button onClick={goRender} className='btn btn-blue'>
-                                {GetLocaleString("transport.renderimg")}
-                            </button>
-                        </div>
-                    </fieldset>
+                    </label>
+                    <label>
+                        <input
+                            type='checkbox'
+                            id='polygons'
+                            name='polygons'
+                            checked={drawPolygon}
+                            onChange={(e) => { setDrawPolygon(e.target.checked) }} />
+                        {GetLocaleString("transport.polygon")}
 
-                
-                );
-        }    
+                    </label>
+                    <label>{GetLocaleString("transport.renderstrategy")}
+                        <select className='select' value={transportStrategy} onChange={(event) => { setTransportStrategy(event.target.value) }} >
+                            {
+                                transportStrategyList.map((trans, index) => {
+                                    return (
+                                        <option value={index}>{trans}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </label>
+
+                    <button onClick={goRender} className='btn btn-blue'>
+                        {GetLocaleString("transport.renderimg")}
+                    </button>
+
+                </fieldset>
+
+
+            );
+        }
     }
     const goDownloadPNG = () => {
-        if (pngavailable)
-        {
+        if (pngavailable) {
             let dialogtitle = GetLocaleString("file.saveas"); //"Enregistrer sous...";
             let filter = [
                 GetLocaleString("file.pngfile"), //"Fichier svg",
@@ -274,7 +266,7 @@ const Transport = () => {
             ]
 
             GetBackend().saveas_svg_aspngfile(ImagePreview, dialogtitle, filter);
-            
+
         }
     }
     const goDownloadSVG = () => {
@@ -314,64 +306,64 @@ const Transport = () => {
             </div>
         );
     }
-  return (
-      <div>
-        <section aria-label={GetLocaleString("transport.sectionrequest")}>
-          <div className='TransportParam' role="document">
-              <h1>{GetLocaleString("transport.title")}</h1>
-              <h2>{GetLocaleString("transport.findosmcity")} </h2>
-              <label >{GetLocaleString("transport.place_id") }
-                  <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
-                      {
-                          place_id.map((id, index) => {
-                              return (
-                                  <option value={index}>{id}</option>
-                              )
-                          })
-                      }
-                  </select>
-                  <input type="text"
-                      aria-label={place_id[placeid]}
-                      name="city"
-                      value={cityName}
-                      ref={focusref}
-                      onKeyDown={(e) => { if (e.key === "Enter" && osmPending===false) { goOsm(); } }}
-                      onChange={(e) => { setCityName(e.target.value); }}
-                      className='textedit'
-                  />
-              </label>
-          </div>
-          <div className='TransportParam'>
-              {renderIso639()}
-              {renderTransportType()}
-          </div>
-          <div className='TransportParam'>
-              <p>{Message}</p>
-              <button onClick={goOsm} disabled={osmPending} className='btn btn-blue'
-                  accessKey={GetLocaleString("transport.search.shortcut")}>
-                  {GetLocaleString("transport.search")}
-              </button>
-          </div>
-          </section>
+    return (
+        <div>
+            <section aria-label={GetLocaleString("transport.sectionrequest")}>
+                <div className='TransportParam' role="document">
+                    <h1>{GetLocaleString("transport.title")}</h1>
+                    <h2>{GetLocaleString("transport.findosmcity")} </h2>
+                    <label >{GetLocaleString("transport.place_id")}
+                        <select value={placeid} onChange={(event) => { setPlaceid(event.target.value) }} >
+                            {
+                                place_id.map((id, index) => {
+                                    return (
+                                        <option value={index}>{id}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                        <input type="text"
+                            aria-label={place_id[placeid]}
+                            name="city"
+                            value={cityName}
+                            ref={focusref}
+                            onKeyDown={(e) => { if (e.key === "Enter" && osmPending === false) { goOsm(); } }}
+                            onChange={(e) => { setCityName(e.target.value); }}
+                            className='textedit'
+                        />
+                    </label>
+                </div>
+                <div className='TransportParam'>
+                    {renderIso639()}
+                    {renderTransportType()}
+                </div>
+                <div className='TransportParam'>
+                    <p>{Message}</p>
+                    <button onClick={goOsm} disabled={osmPending} className='btn btn-blue'
+                        accessKey={GetLocaleString("transport.search.shortcut")}>
+                        {GetLocaleString("transport.search")}
+                    </button>
+                </div>
+            </section>
 
-            <section aria-label={GetLocaleString("transport.sectionline") }>
-            <h2>{GetLocaleString("transport.sectionline")}</h2>         
-                
+            <section aria-label={GetLocaleString("transport.sectionline")}>
+                <h2>{GetLocaleString("transport.sectionline")}</h2>
+
                 <div className='CheckedList'>
 
                     {renderTransportLines()}
 
                 </div>
             </section>
-            <section aria-label={GetLocaleString("transport.sectiondata") }>     
-            <h2>{GetLocaleString("transport.sectiondata")}</h2>         
-            {renderTransportAction()}
-            {renderResultAction()}
+            <section aria-label={GetLocaleString("transport.sectiondata")}>
+                <h2>{GetLocaleString("transport.sectiondata")}</h2>
+                {renderTransportAction()}
+                {renderResultAction()}
             </section>
-          
-      </div>
-      
-  );
+
+        </div>
+
+    );
 }
 
 export default Transport;
