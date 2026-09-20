@@ -159,20 +159,63 @@ class BackendWebLocal {
 
     ReadTransportData(cityName, transportType, iso639_city_code, placeid)
     {
-
+        let param = {'cityName':cityName, 'transportType':transportType, 'iso639_city_code':iso639_city_code, 
+            'placeid':placeid};
+        let pjs = JSON.stringify(param);
+        const request = new Request("/local/readtransportdata", {
+            method: "POST",
+            body: pjs,
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                }
+            });
+        return fetch(request).then((response)=> {
+            let res = response.json();
+            return res;
+        });
     }
 
     GetTransportLines ()
     {
+        const request = new Request("/local/gettransportline", {
+            method: "GET"}
+            );
+        return fetch(request).then((response)=> (response.json()));
 
     }
     GetTransportData (linelist, drawstation, linestrategy, polygon)
     {
-
+        let param = {'linelist':linelist, 'drawstation':drawstation, 'linestrategy':linestrategy, 
+            'polygon':polygon};
+        let pjs = JSON.stringify(param);
+        const request = new Request("/local/gettransportdata", {
+            method: "POST",
+            body: pjs,
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                }
+            });
+        return fetch(request).then((response)=> {
+            let res = response.json();
+            return res;
+        });
     }
     GetTransportDataSvg (linelist, drawstation, linestrategy, polygon)
     {
-
+        let param = {'linelist':linelist, 'drawstation':drawstation, 'linestrategy':linestrategy, 
+            'polygon':polygon};
+        let pjs = JSON.stringify(param);
+        const request = new Request("/local/gettransportdatasvg", {
+            method: "POST",
+            body: pjs,
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                }
+            });
+        return fetch(request).then((response)=> {
+            let res = response.json();
+            return res;
+        });
     }
     async ReadStreetMapData(lat, lon, radius, building, footpath, polygon, includeWater, cliping)
     {
