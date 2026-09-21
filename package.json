@@ -26,7 +26,7 @@
     "build": "react-scripts build ",
     "builddev": "cross-env GENERATE_SOURCEMAP=true react-scripts build",
     "webview": "python osm2touch.py --debug",
-    "startview": "cross-env  npm-run-all build webview",
+    "startview": "cross-env  npm-run-all tailwindbuildmini build webview",
     "package": "pyinstaller Osm2Touch.spec",
     "buildview": "npm-run-all clean build package",
     "builddebian": "npm-run-all clean build packagedebian build-deb-debian",

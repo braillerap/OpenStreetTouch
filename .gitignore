@@ -87,3 +87,4 @@ nsis/OpenStreetTouch.exe
 output.log
 package/debian/openstreettouch-debian/usr/share/doc/openstreettouch-debian/changelog.gz
 package/debian/openstreettouch-debian/usr/bin/openstreettouch-debian
+src/index.css
