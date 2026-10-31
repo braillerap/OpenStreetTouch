@@ -75,5 +75,10 @@
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.23.4",
     "cross-env": "^7.0.3"
+  },
+  "allowScripts": {
+    "core-js-pure@3.37.1": true,
+    "core-js@3.37.1": true,
+    "@parcel/watcher@2.5.1": true
   }
 }
