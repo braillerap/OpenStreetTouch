@@ -1,7 +1,7 @@
 {
     "app.loading": "Bezig met laden…",
     "app.wait": "Bezig met wachten…",
-    "app.confirquit":"Weet u zeker dat u de app wilt afsluiten ?",
+    "app.confirquit": "Weet u zeker dat u de app wilt afsluiten ?",
     "file.open": "Openen",
     "file.save": "Opslaan",
     "file.saveas": "Opslaan als",
@@ -59,7 +59,7 @@
     "citymap.streetpolygon": "Wegen en straten als polygonen tonen",
     "citymap.footpathonly": "Alleen voetpaden tonen",
     "citymap.maptitle": "Kaartextrahering",
-    "citymap.mapparam":"Instellingen extractiegebied",
+    "citymap.mapparam": "Instellingen extractiegebied",
     "citymap.latitude": "Breedtegraad",
     "citymap.longitude": "Lengtegraad",
     "citymap.water": "Wateroppervlakken tonen",
@@ -82,5 +82,10 @@
     "transport.type.train": "Trein",
     "param.locale": "Programmataal",
     "param.accesskeypolicy": "Toegangstoets inschakelen in hoofdmenu",
-    "param.accesibility.section": "Toegankelijkheidsinstellingen"
+    "param.accesibility.section": "Toegankelijkheidsinstellingen",
+    "param.themeselect": "Thema",
+    "param.theme-normal": "Normaal",
+    "param.theme-wb": "Wit op zwart",
+    "param.theme-bw": "Zwart op wit",
+    "param.theme_aria": "Selectie van het weergavethema voor de applicatie"
 }
