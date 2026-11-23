@@ -2,11 +2,11 @@ name: check_node_module
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev_sgn ]
     paths:
       - 'package.json'
   pull_request:
-    branches: [ main ]
+    branches: [ main , dev_sgn]
     paths:
       - 'package.json'
   workflow_dispatch:
