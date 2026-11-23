@@ -14,7 +14,7 @@ const CityMap = () => {
     const mapref = useRef(null);
     const focusref = useRef(null);
     const [position, setPosition] = useState([51.505, -0.09]);
-    const [radius, setRadius] = useState(200);
+    const [radius, setRadius] = useState(100);
     const [building, setBuilding] = useState(true);
     const [footpath, setFootpath] = useState(false);
     const [polygon, setPolygon] = useState(false);
