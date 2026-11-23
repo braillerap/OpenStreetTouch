@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build ",
-    "builddev": "cross-env GENERATE_SOURCEMAP=true tailwindbuildmini react-scripts build",
+    "builddev": "cross-env GENERATE_SOURCEMAP=true npm-run-all tailwindbuildmini  build",
     "webview": "python osm2touch.py --debug",
     "startview": "cross-env GENERATE_SOURCEMAP=true npm-run-all tailwindbuildmini build webview",
     "package": "pyinstaller Osm2Touch.spec",
