@@ -1,6 +1,6 @@
 {
   "name": "openstreettouch",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "dependencies": {
     "@tailwindcss/cli": "^4.3.2",
@@ -29,8 +29,8 @@
     "startview": "cross-env GENERATE_SOURCEMAP=true npm-run-all tailwindbuildmini build webview",
     "package": "pyinstaller Osm2Touch.spec",
     "buildview": "npm-run-all clean tailwindbuildmini build package",
-    "builddebian": "npm-run-all clean build packagedebian build-deb-debian",
-    "buildubuntu": "npm-run-all clean build packageubuntu build-deb-ubuntu",
+    "builddebian": "npm-run-all clean tailwindbuildmini build packagedebian build-deb-debian",
+    "buildubuntu": "npm-run-all clean tailwindbuildmini build packageubuntu build-deb-ubuntu",
     "packagedebian": "pyinstaller DebianOsm2Touch.spec",
     "packageubuntu": "pyinstaller --log-level DEBUG LinuxOsm2Touch.spec",
     "build-deb-debian": "npm-run-all mkdirdebian cpdebian clogdebian dpkg-debian checkdebian",
