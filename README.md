@@ -83,7 +83,7 @@ This project is funded through [NGI0 Entrust](https://nlnet.nl/entrust), a fund 
 ## Prerequisites
 
 * Python 3.6 or later
-* NodeJS 20.12 or later
+* NodeJS 24.x or later
 
 ## Create a python virtual environment
 
